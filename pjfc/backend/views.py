@@ -31,3 +31,8 @@ class Test():
 
         print(response)
         return JsonResponse(response)
+
+def test(request):
+    print(request.headers)
+    print(request.body.decode('utf-8'))
+    return JsonResponse({'foo': 'bar'})
