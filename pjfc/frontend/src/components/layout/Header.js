@@ -20,7 +20,7 @@ export class Header extends Component {
             PJFC
           </a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li><a href="#"><input type="button" value="Click Me!" /></a></li>
+            <li><a href="test/"><input type="button" value="Click Me!" /></a></li>
           </ul>
         </div>
       </nav>
