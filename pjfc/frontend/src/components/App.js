@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+import Header from "./layout/Header";
 
 export class App extends Component {
-    render() {
-        return (
-            <h1>React App</h1>
-        )
-    }
+  render() {
+    return (
+      <Header />
+    );
+  }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));
