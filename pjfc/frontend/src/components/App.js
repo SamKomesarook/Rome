@@ -9,10 +9,11 @@ export class App extends Component {
     return (
       <Fragment>
         <div>
-        <Header />
+          <Header />
         </div>
         <div className="container">
-        <Form />
+          <Form method={"GET"} />
+          <Form method={"POST"} />
         </div>
       </Fragment>
     );
