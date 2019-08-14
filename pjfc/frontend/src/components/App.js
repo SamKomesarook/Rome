@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import Header from "./layout/Header";
 import {Memory, USBMemory, NetMemory} from "./elements/Memory";
+import {SignalIcon, USBIcon} from "./elements/Icon";
 
 export class App extends Component {
   render() {
@@ -31,8 +32,14 @@ export class App extends Component {
       </div>
       <div>
         <Memory selected={false}/>
-        <USBMemory selected={false}/>
+        <div>
+            <USBIcon />
+            <USBMemory selected={false}/>
+         </div>
+         <div>
+         <SignalIcon />
         <NetMemory selected={false}/>
+         </div>
       </div>
       </Fragment>
     );
