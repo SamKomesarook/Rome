@@ -8,9 +8,7 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <div>
-          <Header />
-        </div>
+        <Header />
         <div className="container">
           <Form method={"GET"} />
           <Form method={"POST"} />

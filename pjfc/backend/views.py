@@ -58,7 +58,8 @@ def test(request):
         # print(resJson)
 
         print("=======================")
-        return JsonResponse(resJson, safe=False)
+        # return JsonResponse(resJson, safe=False)
+        return JsonResponse({"foo": "bar"})
     else:
         print("=======================")
         print(request.headers)
@@ -72,5 +73,5 @@ def test(request):
         resJson = json.dumps(response) # json str format
 
         print("=======================")
-        return JsonResponse(resJson, safe=False)
-
+        # return JsonResponse(resJson, safe=False)
+        return JsonResponse({"foo": "bar"})

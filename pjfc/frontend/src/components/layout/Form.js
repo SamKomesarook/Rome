@@ -15,8 +15,23 @@ export class Form extends Component {
       buttonText = "POST REQUEST";
     }
 
+    var test = () => {
+      fetch("http://localhost:8000/test")
+        .then(function(response) {
+          console.log(response);
+          return response.json();
+        })
+        .then(function(myJson) {
+          console.log("I AM HERE");
+          console.log(JSON.stringify(myJson));
+        });
+    };
+
+    var p = test();
+    // console.log("response: " + p);
+
     return (
-      <form action='test/' method={this.props.method}>
+      <form action="test/" method={this.props.method}>
         Title: <input type="text" name="title" />
         <br />
         Content: <input type="text" name="content" />
