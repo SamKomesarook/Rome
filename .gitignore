@@ -1,2 +1,4 @@
 node_modules
 .vscode
+old/
+pjfc/frontend/static/frontend/main.js
