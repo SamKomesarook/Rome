@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-export class User_Input_Window extends Component {
+export class UserInputWindow extends Component {
 
     constructor(props) {
         super(props);
@@ -37,4 +37,4 @@ export class User_Input_Window extends Component {
     }
 }
 
-export default User_Input_Window;
+export default UserInputWindow;
