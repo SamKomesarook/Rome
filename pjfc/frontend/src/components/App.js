@@ -5,71 +5,67 @@ import Header from "./layout/Header";
 import Form from "./layout/Form";
 import { Memory, USBMemory, NetMemory } from "./elements/Memory";
 import { SignalIcon, USBIcon } from "./elements/Icon";
-import RunButton from "./input-components/RunButton";
-import StopButton from "./input-components/StopButton";
-import TextArea from "./input-components/TextArea";
-import Slider from "./input-components/Slider";
-import User_Input_Window from './layout/User_Input_Window';
+import TextArea from "./elements/TextArea";
+import Slider from "./elements/Slider";
+import Button from "./elements/Button";
+
 export class App extends Component {
-  
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            showWindowPortal: false
-        };
+    this.state = {
+      showWindowPortal: false
+    };
 
-        this.toggleWindow = this.toggleWindowPortal.bind(this);
-        this.closeWindow = this.closeWindowPortal.bind(this);
-    }
+    this.toggleWindow = this.toggleWindowPortal.bind(this);
+    this.closeWindow = this.closeWindowPortal.bind(this);
+  }
 
-    componentDidMount() {
-        window.addEventListener('beforeunload', () => {
-            this.closeWindowPortal();
-        });
-    }
+  componentDidMount() {
+    window.addEventListener("beforeunload", () => {
+      this.closeWindowPortal();
+    });
+  }
 
-    toggleWindowPortal() {
-        this.setState(state => ({
-            ...state,
-            showWindowPortal: !state.showWindowPortal,
-        }))
-    }
+  toggleWindowPortal() {
+    this.setState(state => ({
+      ...state,
+      showWindowPortal: !state.showWindowPortal
+    }));
+  }
 
-    closeWindowPortal() {
-        this.setState({ showWindowPortal: false})
-    }
+  closeWindowPortal() {
+    this.setState({ showWindowPortal: false });
+  }
 
   render() {
     return (
       <Fragment>
         <Header />
 
-		  <div class = "row">
-            
-		  </div>
-	
-        <div className="container">
+        <div className="row" />
 
+        <div className="container">
           <div className="row">
             <div className="col-sm">
+             
+              <TextArea />
+              <div className="row slider-container">
+                <div className="col-sm-8">
+                  <Slider />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-2">
+                  <Button name="Run" />
+                </div>
+                <div className="col-sm-2">
+                  <Button name="Stop" />
+                </div>
+              </div>
               <Form method={"GET"} />
               <Form method={"POST"} />
-		      <TextArea />
-		      <div class = "row slider-container">
-		        <div class="col-sm-8">
-		          <Slider />
-		        </div>
-		      </div>
-		      <div class = "row">
-		        <div class = "col-sm-2">
-		         <RunButton/>
-		        </div>
-		        <div class = "col-sm-2">
-		          <StopButton/>
-		        </div>
-		      </div>
-		    </div>
+            </div>
             <div className="col-sm">
               <div className="row">
                 <Memory selected={true} />

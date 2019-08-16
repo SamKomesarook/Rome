@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Button from "../element/Button";
+import Button from "../elements/Button";
 
 export class Form extends Component {
   render() {
@@ -35,7 +35,7 @@ export class Form extends Component {
         Title: <input type="text" name="title" />
         <br />
         Content: <input type="text" name="content" />
-        <Button buttonText={buttonText} />
+        <Button name={buttonText} type="submit"/>
       </form>
     );
   }
