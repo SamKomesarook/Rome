@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Spring} from "react-spring";
 
 export class Button extends Component {
   state = { class: "btn btn-primary" };
@@ -29,7 +30,7 @@ export class Button extends Component {
     } else {
       return (
         <div className="form-group shadow-textarea">
-          <button type="button" className={this.state.class}>
+          <button type="button" className={this.state.class} onClick={this.props.toggle}>
             {this.props.name}
           </button>
         </div>
