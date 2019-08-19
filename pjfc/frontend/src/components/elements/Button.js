@@ -29,7 +29,7 @@ export class Button extends Component {
     } else {
       return (
         <div className="form-group shadow-textarea">
-          <button type="button" className={this.state.class}>
+          <button type="button" className={this.state.class} data-tip data-for="ButtonTips">
             {this.props.name}
           </button>
         </div>
