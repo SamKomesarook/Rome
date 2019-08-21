@@ -2,7 +2,13 @@ from django.db import models
 
 from .constant import command
 
+from .lang.RomeListener import RomeListener
+
 # Create your models here.
+
+rome = RomeListener()
+print("="*20)
+print("ROME: ", rome)
 
 
 def getCommand():
@@ -34,7 +40,3 @@ class Interpreter():
                     return cmd
                 else:
                     return Interpreter(nodeType)
-
-
-getCommand()
-print(checkMatch("move"))
