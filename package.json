@@ -30,5 +30,11 @@
     "react-dom": "^16.9.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
-  }
+  },
+  "dependencies": {
+    "react-tooltip": "^3.10.0"
+  },
+  "bundleDependencies": [
+    "react-tooltip"
+  ]
 }

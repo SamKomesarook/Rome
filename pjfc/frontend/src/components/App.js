@@ -8,6 +8,7 @@ import { SignalIcon, USBIcon } from "./elements/Icon";
 import TextArea from "./elements/TextArea";
 import Slider from "./elements/Slider";
 import Button from "./elements/Button";
+import Tooltips from "./elements/Tooltips";
 import BinaryString from "./elements/BinaryString";
 
 export class App extends Component {
@@ -139,7 +140,8 @@ export class App extends Component {
             </div>
           </div>
         </div>
-      </Fragment>
+        <Tooltips/>
+,      </Fragment>
     );
   }
 }
