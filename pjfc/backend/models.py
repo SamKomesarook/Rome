@@ -2,13 +2,46 @@ from django.db import models
 
 from .constant import command
 
-from .lang.RomeListener import RomeListener
+from .lang.RomeListener import *
 
 # Create your models here.
 
+#
+# ONLY FOR TESTING PURPPOSE
+#
+print("="*100)
+
 rome = RomeListener()
-print("="*20)
 print("ROME: ", rome)
+
+expListener = ExpressionListener()
+print("EXP: ", expListener)
+
+setListener = SetListener()
+print("SET: ", setListener)
+
+freeListener = FreeListener()
+print("FREE: ", freeListener)
+
+readListener = ReadListener()
+print("READ: ", readListener)
+
+moveListener = MoveListener()
+print("MOVE: ", moveListener)
+
+ifListener = IfListener()
+print("IF: ", ifListener)
+
+loopListener = LoopListener()
+print("LOOP: ", loopListener)
+
+writeListener = WriteListener()
+print("WRITE: ", writeListener)
+
+print("="*100)
+#
+# ONLY FOR TESTING PURPPOSE
+#
 
 
 def getCommand():
