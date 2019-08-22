@@ -5,6 +5,7 @@ export class Slider extends Component {
     return (
       <div className="form-group shadow-textarea">
         <input
+          data-tip data-for="SliderTips"
           type="range"
           className="Slider"
           min="0"
