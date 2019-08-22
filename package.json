@@ -26,8 +26,15 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
+    "react-spring": "^8.0.27",
     "react-dom": "^16.9.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
-  }
+  },
+  "dependencies": {
+    "react-tooltip": "^3.10.0"
+  },
+  "bundleDependencies": [
+    "react-tooltip"
+  ]
 }
