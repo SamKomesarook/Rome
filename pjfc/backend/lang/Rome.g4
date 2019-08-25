@@ -29,6 +29,8 @@ MOVE:'move';
 RIGHT:'right';
 LEFT:'left';
 
+LOOP:'loop';
+ELOOP:'end_loop';
 LPAR:'(';
 RPAR:')';
 LSQ:'[';
@@ -57,7 +59,7 @@ expression
 	| READ # Read
 	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
 	| IF LPAR (IS|NOT) (LESS|GRE|EQL) (intargs|STRLIT) RPAR LSQ NEWLINE expressions* RSQ # If //((AND|OR) (IS|NOT) (LESS|GRE|EQL) (intargs|STRLIT))*
-	| LSQ NEWLINE expressions+ RSQ LSQ intargs RSQ # Loop
+	| LOOP LPAR intargs RPAR NEWLINE expressions+ ELOOP # Loop
 	| WRITE LPAR (intargs|STRLIT) RPAR # Write
 	;
 
