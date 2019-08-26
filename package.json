@@ -32,6 +32,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "react-tooltip": "^3.10.0"
   },
   "bundleDependencies": [

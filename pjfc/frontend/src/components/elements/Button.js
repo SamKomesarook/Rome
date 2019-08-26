@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {Spring} from "react-spring";
+import { Spring } from "react-spring";
+const axios = require("axios");
 
 export class Button extends Component {
   state = { class: "btn btn-primary" };
@@ -16,6 +17,19 @@ export class Button extends Component {
     }
   }
 
+  /* example code for front-end back-end communication */
+  runCode = () => {
+    console.log("RUN CODE FUNCTION");
+    axios
+      .post("/run/")
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   render() {
     if (this.props.type === "submit") {
       return (
@@ -30,7 +44,13 @@ export class Button extends Component {
     } else {
       return (
         <div className="form-group shadow-textarea">
-          <button type="button" className={this.state.class} onClick={this.props.toggle} data-tip data-for="ButtonTips">
+          <button
+            type="button"
+            className={this.state.class}
+            onClick={this.runCode}
+            data-tip
+            data-for="ButtonTips"
+          >
             {this.props.name}
           </button>
         </div>

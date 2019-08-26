@@ -40,7 +40,10 @@ import json
         # }
 
 #         return JsonResponse(response)
-
+def run(request):
+    print(request)
+    print("RUN FUNCTION AT BACKEND!")
+    return JsonResponse({"foo" : "bar"}) 
 
 def test(request):
     if request.method == "GET": 
