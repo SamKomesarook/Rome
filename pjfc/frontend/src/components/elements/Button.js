@@ -3,19 +3,26 @@ import { Spring } from "react-spring";
 const axios = require("axios");
 
 export class Button extends Component {
-  state = { class: "btn btn-primary" };
+  state = { class: "btn btn-primary", clickFunc: null };
 
   componentDidMount() {
     if (this.props.name === "Run") {
       this.setState({
-        class: "btn btn-primary"
+        class: "btn btn-primary",
+        clickFunc: this.runCode
       });
     } else if (this.props.name === "Stop") {
       this.setState({
-        class: "btn btn-danger"
+        class: "btn btn-danger",
+        clickFunc: this.stopCode
       });
     }
   }
+
+  // TODO: stop button function
+  stopCode = () => {
+    console.log("STOP Clicked!");
+  };
 
   /* example code for front-end back-end communication */
   runCode = () => {
@@ -49,7 +56,7 @@ export class Button extends Component {
           <button
             type="button"
             className={this.state.class}
-            onClick={this.runCode}
+            onClick={this.state.clickFunc}
             data-tip
             data-for="ButtonTips"
           >
