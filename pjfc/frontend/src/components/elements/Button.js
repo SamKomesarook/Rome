@@ -19,11 +19,13 @@ export class Button extends Component {
 
   /* example code for front-end back-end communication */
   runCode = () => {
-    console.log("RUN CODE FUNCTION");
+    var codeContent = document.getElementById("codingArea").value;
     axios
-      .post("/run/")
+      .post("/run/", {
+        code: codeContent
+      })
       .then(function(response) {
-        console.log(response);
+        console.log(response.data);
       })
       .catch(function(error) {
         console.log(error);
