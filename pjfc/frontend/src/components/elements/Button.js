@@ -27,16 +27,20 @@ export class Button extends Component {
   /* example code for front-end back-end communication */
   runCode = () => {
     var codeContent = document.getElementById("codingArea").value;
-    axios
-      .post("/run/", {
-        code: codeContent
-      })
-      .then(function(response) {
-        console.log(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    if (codeContent == "") {
+      alert("Please write your code!");
+    } else {
+      axios
+        .post("/run/", {
+          code: codeContent
+        })
+        .then(function(response) {
+          console.log(response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   };
 
   render() {
