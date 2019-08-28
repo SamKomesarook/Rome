@@ -8,35 +8,35 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\36")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34")
         buf.write("S\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2\3\2")
         buf.write("\3\2\5\2\21\n\2\3\3\3\3\3\3\7\3\26\n\3\f\3\16\3\31\13")
         buf.write("\3\3\3\3\3\5\3\35\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5")
         buf.write("\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\62\n")
         buf.write("\5\3\5\3\5\3\5\3\5\7\58\n\5\f\5\16\5;\13\5\3\5\3\5\3\5")
-        buf.write("\3\5\3\5\3\5\3\5\6\5D\n\5\r\5\16\5E\3\5\3\5\3\5\3\5\3")
+        buf.write("\3\5\6\5A\n\5\r\5\16\5B\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
         buf.write("\5\3\5\5\5N\n\5\3\5\5\5Q\n\5\3\5\2\2\6\2\4\6\b\2\6\3\2")
         buf.write("\6\7\3\2\23\24\3\2\r\16\3\2\17\21\2[\2\20\3\2\2\2\4\22")
-        buf.write("\3\2\2\2\6\36\3\2\2\2\bP\3\2\2\2\n\21\7\34\2\2\13\f\7")
-        buf.write("\t\2\2\f\r\7\27\2\2\r\16\5\2\2\2\16\17\7\30\2\2\17\21")
+        buf.write("\3\2\2\2\6\36\3\2\2\2\bP\3\2\2\2\n\21\7\32\2\2\13\f\7")
+        buf.write("\t\2\2\f\r\7\25\2\2\r\16\5\2\2\2\16\17\7\26\2\2\17\21")
         buf.write("\3\2\2\2\20\n\3\2\2\2\20\13\3\2\2\2\21\3\3\2\2\2\22\23")
-        buf.write("\7\3\2\2\23\27\7\33\2\2\24\26\5\6\4\2\25\24\3\2\2\2\26")
+        buf.write("\7\3\2\2\23\27\7\31\2\2\24\26\5\6\4\2\25\24\3\2\2\2\26")
         buf.write("\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32\3\2\2\2")
-        buf.write("\31\27\3\2\2\2\32\34\7\4\2\2\33\35\7\33\2\2\34\33\3\2")
-        buf.write("\2\2\34\35\3\2\2\2\35\5\3\2\2\2\36\37\5\b\5\2\37 \7\33")
-        buf.write("\2\2 \7\3\2\2\2!\"\7\5\2\2\"#\7\27\2\2#$\t\2\2\2$Q\7\30")
-        buf.write("\2\2%Q\7\b\2\2&Q\7\n\2\2\'(\7\22\2\2()\7\27\2\2)*\t\3")
-        buf.write("\2\2*Q\7\30\2\2+,\7\f\2\2,-\7\27\2\2-.\t\4\2\2.\61\t\5")
-        buf.write("\2\2/\62\5\2\2\2\60\62\7\35\2\2\61/\3\2\2\2\61\60\3\2")
-        buf.write("\2\2\62\63\3\2\2\2\63\64\7\30\2\2\64\65\7\31\2\2\659\7")
-        buf.write("\33\2\2\668\5\6\4\2\67\66\3\2\2\28;\3\2\2\29\67\3\2\2")
-        buf.write("\29:\3\2\2\2:<\3\2\2\2;9\3\2\2\2<Q\7\32\2\2=>\7\25\2\2")
-        buf.write(">?\7\27\2\2?@\5\2\2\2@A\7\30\2\2AC\7\33\2\2BD\5\6\4\2")
-        buf.write("CB\3\2\2\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2FG\3\2\2\2GH\7")
-        buf.write("\26\2\2HQ\3\2\2\2IJ\7\13\2\2JM\7\27\2\2KN\5\2\2\2LN\7")
-        buf.write("\35\2\2MK\3\2\2\2ML\3\2\2\2NO\3\2\2\2OQ\7\30\2\2P!\3\2")
+        buf.write("\31\27\3\2\2\2\32\34\7\4\2\2\33\35\7\31\2\2\34\33\3\2")
+        buf.write("\2\2\34\35\3\2\2\2\35\5\3\2\2\2\36\37\5\b\5\2\37 \7\31")
+        buf.write("\2\2 \7\3\2\2\2!\"\7\5\2\2\"#\7\25\2\2#$\t\2\2\2$Q\7\26")
+        buf.write("\2\2%Q\7\b\2\2&Q\7\n\2\2\'(\7\22\2\2()\7\25\2\2)*\t\3")
+        buf.write("\2\2*Q\7\26\2\2+,\7\f\2\2,-\7\25\2\2-.\t\4\2\2.\61\t\5")
+        buf.write("\2\2/\62\5\2\2\2\60\62\7\33\2\2\61/\3\2\2\2\61\60\3\2")
+        buf.write("\2\2\62\63\3\2\2\2\63\64\7\26\2\2\64\65\7\27\2\2\659\7")
+        buf.write("\31\2\2\668\5\6\4\2\67\66\3\2\2\28;\3\2\2\29\67\3\2\2")
+        buf.write("\29:\3\2\2\2:<\3\2\2\2;9\3\2\2\2<Q\7\30\2\2=>\7\27\2\2")
+        buf.write(">@\7\31\2\2?A\5\6\4\2@?\3\2\2\2AB\3\2\2\2B@\3\2\2\2BC")
+        buf.write("\3\2\2\2CD\3\2\2\2DE\7\30\2\2EF\7\27\2\2FG\5\2\2\2GH\7")
+        buf.write("\30\2\2HQ\3\2\2\2IJ\7\13\2\2JM\7\25\2\2KN\5\2\2\2LN\7")
+        buf.write("\33\2\2MK\3\2\2\2ML\3\2\2\2NO\3\2\2\2OQ\7\26\2\2P!\3\2")
         buf.write("\2\2P%\3\2\2\2P&\3\2\2\2P\'\3\2\2\2P+\3\2\2\2P=\3\2\2")
-        buf.write("\2PI\3\2\2\2Q\t\3\2\2\2\n\20\27\34\619EMP")
+        buf.write("\2PI\3\2\2\2Q\t\3\2\2\2\n\20\27\34\619BMP")
         return buf.getvalue()
 
 
@@ -53,14 +53,14 @@ class RomeParser ( Parser ):
     literalNames = [ "<INVALID>", "'start'", "'end'", "'set'", "'numbers'", 
                      "'letters'", "'free'", "'memory'", "'read'", "'write'", 
                      "'if'", "'is'", "'not'", "'equal'", "'less'", "'greater'", 
-                     "'move'", "'right'", "'left'", "'loop'", "'end_loop'", 
-                     "'('", "')'", "'['", "']'", "'\n'" ]
+                     "'move'", "'right'", "'left'", "'('", "')'", "'['", 
+                     "']'", "'\n'" ]
 
     symbolicNames = [ "<INVALID>", "START", "END", "SET", "NUM", "LET", 
                       "FREE", "MEM", "READ", "WRITE", "IF", "IS", "NOT", 
-                      "EQL", "LESS", "GRE", "MOVE", "RIGHT", "LEFT", "LOOP", 
-                      "ELOOP", "LPAR", "RPAR", "LSQ", "RSQ", "NEWLINE", 
-                      "NUMBER", "STRLIT", "IDENTIFIER" ]
+                      "EQL", "LESS", "GRE", "MOVE", "RIGHT", "LEFT", "LPAR", 
+                      "RPAR", "LSQ", "RSQ", "NEWLINE", "NUMBER", "STRLIT", 
+                      "IDENTIFIER" ]
 
     RULE_intargs = 0
     RULE_r = 1
@@ -88,16 +88,14 @@ class RomeParser ( Parser ):
     MOVE=16
     RIGHT=17
     LEFT=18
-    LOOP=19
-    ELOOP=20
-    LPAR=21
-    RPAR=22
-    LSQ=23
-    RSQ=24
-    NEWLINE=25
-    NUMBER=26
-    STRLIT=27
-    IDENTIFIER=28
+    LPAR=19
+    RPAR=20
+    LSQ=21
+    RSQ=22
+    NEWLINE=23
+    NUMBER=24
+    STRLIT=25
+    IDENTIFIER=26
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -233,7 +231,7 @@ class RomeParser ( Parser ):
             self.state = 21
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LSQ))) != 0):
                 self.state = 18
                 self.expressions()
                 self.state = 23
@@ -345,19 +343,21 @@ class RomeParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def LOOP(self):
-            return self.getToken(RomeParser.LOOP, 0)
-        def LPAR(self):
-            return self.getToken(RomeParser.LPAR, 0)
+        def LSQ(self, i:int=None):
+            if i is None:
+                return self.getTokens(RomeParser.LSQ)
+            else:
+                return self.getToken(RomeParser.LSQ, i)
+        def NEWLINE(self):
+            return self.getToken(RomeParser.NEWLINE, 0)
+        def RSQ(self, i:int=None):
+            if i is None:
+                return self.getTokens(RomeParser.RSQ)
+            else:
+                return self.getToken(RomeParser.RSQ, i)
         def intargs(self):
             return self.getTypedRuleContext(RomeParser.IntargsContext,0)
 
-        def RPAR(self):
-            return self.getToken(RomeParser.RPAR, 0)
-        def NEWLINE(self):
-            return self.getToken(RomeParser.NEWLINE, 0)
-        def ELOOP(self):
-            return self.getToken(RomeParser.ELOOP, 0)
         def expressions(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(RomeParser.ExpressionsContext)
@@ -620,7 +620,7 @@ class RomeParser ( Parser ):
                 self.state = 55
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) != 0):
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LSQ))) != 0):
                     self.state = 52
                     self.expressions()
                     self.state = 57
@@ -630,33 +630,33 @@ class RomeParser ( Parser ):
                 self.state = 58
                 self.match(RomeParser.RSQ)
                 pass
-            elif token in [RomeParser.LOOP]:
+            elif token in [RomeParser.LSQ]:
                 localctx = RomeParser.LoopContext(self, localctx)
                 self.enterOuterAlt(localctx, 6)
                 self.state = 59
-                self.match(RomeParser.LOOP)
+                self.match(RomeParser.LSQ)
                 self.state = 60
-                self.match(RomeParser.LPAR)
-                self.state = 61
-                self.intargs()
-                self.state = 62
-                self.match(RomeParser.RPAR)
-                self.state = 63
                 self.match(RomeParser.NEWLINE)
-                self.state = 65 
+                self.state = 62 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 64
+                    self.state = 61
                     self.expressions()
-                    self.state = 67 
+                    self.state = 64 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) != 0)):
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LSQ))) != 0)):
                         break
 
+                self.state = 66
+                self.match(RomeParser.RSQ)
+                self.state = 67
+                self.match(RomeParser.LSQ)
+                self.state = 68
+                self.intargs()
                 self.state = 69
-                self.match(RomeParser.ELOOP)
+                self.match(RomeParser.RSQ)
                 pass
             elif token in [RomeParser.WRITE]:
                 localctx = RomeParser.WriteContext(self, localctx)
