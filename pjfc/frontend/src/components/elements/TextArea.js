@@ -73,7 +73,7 @@ export class TextArea extends Component {
             placeholder="Coding area"
             style = {textAreaStyle}
           />
-          <button style={buttonStyle} onClick={this.toggleLineNumber}>toggle</button>
+          <button className="btn btn-light" style={buttonStyle} onClick={this.toggleLineNumber}>toggle</button>
         </div>
       </div>
     );
