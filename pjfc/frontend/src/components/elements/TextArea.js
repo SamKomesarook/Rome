@@ -40,7 +40,6 @@ export class TextArea extends Component {
 
     const defaultStyle = {
       display:"block",
-      paddingLeft:"35px",
       paddingTop:"12px",
       lineHeight:"16px"
     }
@@ -70,7 +69,7 @@ export class TextArea extends Component {
             
             cols="50"
             id="codingArea"
-            rows="25"
+            rows="28"
             placeholder="Coding area"
             style = {textAreaStyle}
           />
