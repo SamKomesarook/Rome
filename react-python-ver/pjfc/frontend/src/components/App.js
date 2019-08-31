@@ -10,6 +10,7 @@ import Slider from "./elements/Slider";
 import Button from "./elements/Button";
 import Tooltips from "./elements/Tooltips";
 import BinaryString from "./elements/BinaryString";
+import HelpButton from "./elements/HelpButton";
 
 export class App extends Component {
   constructor(props) {
@@ -76,6 +77,9 @@ export class App extends Component {
                 </div>
                 <div className="col-sm-6">
                   <Button name="Stop" toggle={this.initiliazeBinaryStrinzg} />
+                </div>
+                <div className="col-sm-2">
+                  <HelpButton name="Help"/>
                 </div>
               </div>
               <Form method={"GET"} />
