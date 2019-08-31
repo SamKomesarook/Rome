@@ -4,7 +4,8 @@ export class Button extends Component {
   state = {
     name: this.props.name,
     class: "btn btn-primary",
-    clickFunc: null
+    clickFunc: null,
+    dataFor: "ButtonTips"
   };
 
   componentDidMount() {
