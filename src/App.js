@@ -8,6 +8,8 @@ import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
+import HelpButton from "./components/elements/HelpButton";
+
 
 export class App extends Component {
   constructor(props) {
@@ -78,31 +80,34 @@ export class App extends Component {
                 <div className="col-sm-6">
                   <Button name="Stop" toggle={this.initiliazeBinaryString}/>
                 </div>
+                <div className="col-sm-2">
+                  <HelpButton name="Help"/>
+                </div>
               </div>
               <Form method={"GET"} />
               <Form method={"POST"} />
             </div>
-			<div className="col-sm-3"  align="center">
-              <div className="row">
-				  <i className="fas fa-microchip fa-4x float-right"/>
-				  <Transition
-					native
-					items={this.state.showBinaryString}
-					from={{ opacity: 1, marginLeft: 0 }}
-					enter={{ opacity: 1, marginLeft: 150}}
-					leave={{ opacity: 0 }}
-				  >
-					{show =>
-					 show &&
-					(props => (
-					<animated.div style={props}>
-					  1011101
-					</animated.div>
-					))
-					}
-				  </Transition>
-			  </div>
-			</div>
+            <div className="col-sm-3"  align="center">
+                <div className="row">
+                  <i className="fas fa-microchip fa-4x float-right"/>
+                  <Transition
+                  native
+                  items={this.state.showBinaryString}
+                  from={{ opacity: 1, marginLeft: 0 }}
+                  enter={{ opacity: 1, marginLeft: 150}}
+                  leave={{ opacity: 0 }}
+                  >
+                  {show =>
+                  show &&
+                  (props => (
+                  <animated.div style={props}>
+                    1011101
+                  </animated.div>
+                  ))
+                  }
+                  </Transition>
+              </div>
+            </div>
             <div className="col-sm-5">
               <div className="row">
                 <Memory selected={true} />
