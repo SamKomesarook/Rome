@@ -46,7 +46,7 @@ export class Button extends Component {
             type="button"
             className={this.state.class}
             onClick={this.state.clickFunc}
-            // onClick={this.props.toggle}
+            //onClick={this.props.toggle}
             data-tip
             data-for="ButtonTips"
           >

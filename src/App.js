@@ -8,6 +8,8 @@ import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
+import HelpButton from "./components/elements/HelpButton";
+
 
 export class App extends Component {
   constructor(props) {
@@ -15,9 +17,9 @@ export class App extends Component {
 
     this.state = {
       showWindowPortal: false,
-      showBinaryString: false
+	  showBinaryString:false
     };
-    this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
+	this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
@@ -35,15 +37,15 @@ export class App extends Component {
       showWindowPortal: !state.showWindowPortal
     }));
   }
-
+  
   toggleBinaryString() {
     this.setState(state => ({
       ...state,
       showBinaryString: true
     }));
   }
-
-  initiliazeBinaryString() {
+  
+    initiliazeBinaryString() {
     this.setState(state => ({
       ...state,
       showBinaryString: false
@@ -58,10 +60,13 @@ export class App extends Component {
     return (
       <Fragment>
         <Header />
+
         <div className="row" />
+
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
+             
               <TextArea />
               <div className="row slider-container">
                 <div className="col-sm-8">
@@ -73,29 +78,34 @@ export class App extends Component {
                   <Button name="Run" toggle={this.toggleBinaryString} />
                 </div>
                 <div className="col-sm-6">
-                  <Button name="Stop" toggle={this.initiliazeBinaryStrinzg} />
+                  <Button name="Stop" toggle={this.initiliazeBinaryString}/>
+                </div>
+                <div className="col-sm-2">
+                  <HelpButton name="Help"/>
                 </div>
               </div>
               <Form method={"GET"} />
               <Form method={"POST"} />
             </div>
-            <div className="col-sm-3" align="center">
-              <div className="row">
-                <i className="fas fa-microchip fa-4x float-right" />
-                <Transition
+            <div className="col-sm-3"  align="center">
+                <div className="row">
+                  <i className="fas fa-microchip fa-4x float-right"/>
+                  <Transition
                   native
                   items={this.state.showBinaryString}
                   from={{ opacity: 1, marginLeft: 0 }}
-                  enter={{ opacity: 1, marginLeft: 150 }}
+                  enter={{ opacity: 1, marginLeft: 150}}
                   leave={{ opacity: 0 }}
-                >
+                  >
                   {show =>
-                    show &&
-                    (props => (
-                      <animated.div style={props}>1011101</animated.div>
-                    ))
+                  show &&
+                  (props => (
+                  <animated.div style={props}>
+                    1011101
+                  </animated.div>
+                  ))
                   }
-                </Transition>
+                  </Transition>
               </div>
             </div>
             <div className="col-sm-5">
@@ -133,10 +143,11 @@ export class App extends Component {
             </div>
           </div>
         </div>
-        <Tooltips />,{" "}
-      </Fragment>
+        <Tooltips/>
+,      </Fragment>
     );
   }
 }
+
 
 export default App;
