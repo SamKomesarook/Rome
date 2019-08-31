@@ -1,18 +1,31 @@
 import React, { Component } from "react";
 
 export class Button extends Component {
-  state = { class: "btn btn-primary", clickFunc: null };
+  state = {
+    name: this.props.name,
+    class: "btn btn-primary",
+    clickFunc: null
+  };
 
   componentDidMount() {
     if (this.props.name === "Run") {
       this.setState({
         class: "btn btn-primary",
-        clickFunc: this.runCode
+        clickFunc: this.runCode,
+        dataFor: "ButtonTips"
       });
     } else if (this.props.name === "Stop") {
       this.setState({
         class: "btn btn-danger",
-        clickFunc: this.stopCode
+        clickFunc: this.stopCode,
+        dataFor: "ButtonTips"
+      });
+    } else if (this.props.name === "Help") {
+      this.setState({
+        class: "btn btn-info",
+        dataFor: "clickForHelp",
+        dataEven: "click",
+        dataEvenOff: "blur"
       });
     }
   }
@@ -24,9 +37,11 @@ export class Button extends Component {
 
   runCode = () => {
     console.log("RUN Clicked!");
-  }
+  };
 
   render() {
+    console.log(this.props.name);
+    console.log(this.state);
     if (this.props.type === "submit") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -46,11 +61,12 @@ export class Button extends Component {
             type="button"
             className={this.state.class}
             onClick={this.state.clickFunc}
-            //onClick={this.props.toggle}
             data-tip
-            data-for="ButtonTips"
+            data-for={this.state.dataFor}
+            data-event={this.state.dataEvent}
+            data-event-off={this.state.dataEvenOff}
           >
-            {this.props.name}
+            {this.state.name}
           </button>
         </div>
       );

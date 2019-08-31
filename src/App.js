@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import Header from "./components/layout/Header";
-import Form from "./components/layout/Form";
+// import Form from "./components/layout/Form";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
-import HelpButton from "./components/elements/HelpButton";
 
 
 export class App extends Component {
@@ -81,11 +80,11 @@ export class App extends Component {
                   <Button name="Stop" toggle={this.initiliazeBinaryString}/>
                 </div>
                 <div className="col-sm-2">
-                  <HelpButton name="Help"/>
+                  <Button name="Help"/>
                 </div>
               </div>
-              <Form method={"GET"} />
-              <Form method={"POST"} />
+              {/* <Form method={"GET"} />
+              <Form method={"POST"} /> */}
             </div>
             <div className="col-sm-3"  align="center">
                 <div className="row">
