@@ -1,7 +1,7 @@
 grammar Rome;
 
 options {
-	language = Python;
+	language = JavaScript;
 }
 
 START:'start';
