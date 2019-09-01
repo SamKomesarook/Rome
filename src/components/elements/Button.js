@@ -8,7 +8,7 @@ export class Button extends Component {
     dataFor: "ButtonTips"
   };
 
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.name === "Run") {
       this.setState({
         class: "btn btn-primary",
@@ -25,8 +25,8 @@ export class Button extends Component {
       this.setState({
         class: "btn btn-info",
         dataFor: "clickForHelp",
-        dataEven: "click",
-        dataEvenOff: "blur"
+        dataEvent: "click",
+        dataEventOff: "blur"
       });
     }
   }
@@ -65,7 +65,7 @@ export class Button extends Component {
             data-tip
             data-for={this.state.dataFor}
             data-event={this.state.dataEvent}
-            data-event-off={this.state.dataEvenOff}
+            data-event-off={this.state.dataEventOff}
           >
             {this.state.name}
           </button>
