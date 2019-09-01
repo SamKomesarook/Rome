@@ -16,9 +16,11 @@ export class App extends Component {
 
     this.state = {
       showWindowPortal: false,
-	  showBinaryString:false
+	    showBinaryString:false,
+      showAnimationArea:false
     };
-	this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
+    this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
+	  this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
@@ -28,6 +30,13 @@ export class App extends Component {
     window.addEventListener("beforeunload", () => {
       this.closeWindowPortal();
     });
+  }
+
+  toggleAnimationArea(){
+    this.setState(state => ({
+      ...state,
+      showAnimationArea: !state.showAnimationArea
+    }));
   }
 
   toggleWindowPortal() {
@@ -65,48 +74,53 @@ export class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-             
+              <Button name="Hide/Show" toggle={this.toggleAnimationArea}/>  
+            </div>
+          </div> 
+          <div className="row">
+            <div className={this.state.showAnimationArea ?"col-sm-4" :"col-sm-12"}>
               <TextArea />
               <div className="row slider-container">
-                <div className="col-sm-8">
                   <Slider />
-                </div>
               </div>
               <div className="row">
-                <div className="col-sm-4">
+                <div className={this.state.showAnimationArea ?"col-sm-4" :"col-sm-2"}>
                   <Button name="Run" toggle={this.toggleBinaryString} />
                 </div>
-                <div className="col-sm-6">
+                <div className={this.state.showAnimationArea ?"col-sm-4" :"col-sm-2"}>
                   <Button name="Stop" toggle={this.initiliazeBinaryString}/>
                 </div>
-                <div className="col-sm-2">
+                <div className={this.state.showAnimationArea ?"col-sm-4" :"col-sm-2"}>
                   <Button name="Help"/>
                 </div>
               </div>
               {/* <Form method={"GET"} />
               <Form method={"POST"} /> */}
             </div>
+            {this.state.showAnimationArea &&
             <div className="col-sm-3"  align="center">
-                <div className="row">
-                  <i className="fas fa-microchip fa-4x float-right"/>
-                  <Transition
-                  native
-                  items={this.state.showBinaryString}
-                  from={{ opacity: 1, marginLeft: 0 }}
-                  enter={{ opacity: 1, marginLeft: 150}}
-                  leave={{ opacity: 0 }}
-                  >
-                  {show =>
-                  show &&
-                  (props => (
-                  <animated.div style={props}>
-                    1011101
-                  </animated.div>
-                  ))
-                  }
-                  </Transition>
+              <div className="row">
+                <i className="fas fa-microchip fa-4x float-right"/>
+                <Transition
+                native
+                items={this.state.showBinaryString}
+                from={{ opacity: 1, marginLeft: 0 }}
+                enter={{ opacity: 1, marginLeft: 150}}
+                leave={{ opacity: 0 }}
+                >
+                {show =>
+                show &&
+                (props => (
+                <animated.div style={props}>
+                  1011101
+                </animated.div>
+                ))
+                }
+                </Transition>
               </div>
             </div>
+            }
+            {this.state.showAnimationArea &&
             <div className="col-sm-5">
               <div className="row">
                 <Memory selected={true} />
@@ -140,6 +154,7 @@ export class App extends Component {
                 </div>
               </div>
             </div>
+            }
           </div>
         </div>
         <Tooltips/>
