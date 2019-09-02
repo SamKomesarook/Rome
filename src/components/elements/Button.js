@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Interpreter } from "../../interpreter/main";
 
 export class Button extends Component {
   state = {
@@ -32,8 +33,7 @@ export class Button extends Component {
     else if (this.props.name ==="Hide/Show"){
       this.setState({
         class: "btn btn-info",
-        clickFunc:this.props.toggle,
-        dataFor:"ButtonTips"
+        clickFunc:this.props.toggle
       });
     }
   }
@@ -44,6 +44,8 @@ export class Button extends Component {
   };
 
   runCode = () => {
+    var interpreter = new Interpreter('hello');
+    console.log(interpreter);
     console.log("RUN Clicked!");
   };
 

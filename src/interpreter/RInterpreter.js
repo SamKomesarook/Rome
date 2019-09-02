@@ -18,6 +18,3 @@ class RPrinter extends RomeListener {
 
 RPrinter.prototype = Object.create(RomeListener.prototype);
 RPrinter.prototype.constructor = RPrinter;
-
-
-
