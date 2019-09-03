@@ -327,7 +327,7 @@ RomeParser.prototype.r = function() {
 
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
+            localctx.exception = re;
 	        this._errHandler.reportError(this, re);
 	        this._errHandler.recover(this, re);
 	    } else {

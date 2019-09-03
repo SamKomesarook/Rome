@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Interpreter } from "../../interpreter/main";
+import Interpreter from '../../interpreter/main';
 
 export class Button extends Component {
   state = {
@@ -44,8 +44,9 @@ export class Button extends Component {
   };
 
   runCode = () => {
-    var interpreter = new Interpreter('hello');
-    console.log(interpreter);
+    var input = document.getElementById('codingArea').value;
+    var interpreter = new Interpreter(input);
+    console.log("Interpreter: ", interpreter);
     console.log("RUN Clicked!");
   };
 

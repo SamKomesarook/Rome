@@ -1,20 +1,19 @@
-import RomeListener from "../lang/RomeListener";
+import { RomeListener } from "../lang/RomeListener";
 
-class RPrinter extends RomeListener {
-  constructor() {
-    super();
-    RomeListener.call(this); // inherit default listener
-    return this;
-  }
-  enterR(ctx) {
-    console.log("Enter R!");
-    console.log(ctx);
-  }
-  exitR(ctx) {
-    console.log("Exit R!");
-    console.log(ctx);
-  }
-}
+var RInterpreter = function() {
+  RomeListener.call(this);
+  return this;
+};
 
-RPrinter.prototype = Object.create(RomeListener.prototype);
-RPrinter.prototype.constructor = RPrinter;
+RInterpreter.prototype = Object.create(RomeListener.prototype);
+RInterpreter.prototype.constructor = RInterpreter;
+
+RInterpreter.prototype.enterR = function(ctx) {
+  console.log("ENTER R!");
+};
+
+RInterpreter.prototype.exitR = function(ctx) {
+  console.log("EXIT R!");
+};
+
+export default RInterpreter;
