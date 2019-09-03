@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Interpreter from '../../interpreter/main';
+import Interpreter from "../../interpreter/main";
 
 export class Button extends Component {
   state = {
@@ -29,11 +29,10 @@ export class Button extends Component {
         dataEvent: "click",
         dataEventOff: "blur"
       });
-    }
-    else if (this.props.name ==="Hide/Show"){
+    } else if (this.props.name === "Hide/Show") {
       this.setState({
         class: "btn btn-info",
-        clickFunc:this.props.toggle
+        clickFunc: this.props.toggle
       });
     }
   }
@@ -44,15 +43,15 @@ export class Button extends Component {
   };
 
   runCode = () => {
-    var input = document.getElementById('codingArea').value;
+    var input = document.getElementById("codingArea").value;
     var interpreter = new Interpreter(input);
     console.log("Interpreter: ", interpreter);
     console.log("RUN Clicked!");
   };
 
   render() {
-    console.log(this.props.name);
-    console.log(this.state);
+    // console.log(this.props.name);
+    // console.log(this.state);
     if (this.props.type === "submit") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
