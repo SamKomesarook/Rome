@@ -12,7 +12,7 @@ export class Button extends Component {
     if (this.props.name === "Run") {
       this.setState({
         class: "btn btn-primary",
-        clickFunc: this.runCode,
+        clickFunc: this.runHighlight,
         dataFor: "ButtonTips"
       });
     } else if (this.props.name === "Stop") {
@@ -43,9 +43,7 @@ export class Button extends Component {
     console.log("STOP Clicked!");
   };
 
-  runCode = () => {
-    console.log("RUN Clicked!");
-  };
+  
 
   
 
@@ -72,6 +70,10 @@ export class Button extends Component {
 
   };
 
+  runCode = () => {
+    console.log("RUN Clicked!");
+  };
+
   render() {
     console.log(this.props.name);
     console.log(this.state);
@@ -93,8 +95,7 @@ export class Button extends Component {
           <button
             type="button"
             className={this.state.class}
-            //onClick={this.state.clickFunc}
-            onClick={this.runHighlight}
+            onClick={this.state.clickFunc}
             data-tip
             data-for={this.state.dataFor}
             data-event={this.state.dataEvent}
