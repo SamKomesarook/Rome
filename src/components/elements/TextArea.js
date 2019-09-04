@@ -74,8 +74,7 @@ export class TextArea extends Component {
           >
             <textarea
               data-tip data-for='TextAreaTips'
-              className="form-control rounded-0 z-depth-1"
-              
+              className="form-control rounded-0 z-depth-1"    
               cols="50"
               id="codingArea"
               rows="28"
