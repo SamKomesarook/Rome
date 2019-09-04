@@ -47,6 +47,31 @@ export class Button extends Component {
     console.log("RUN Clicked!");
   };
 
+  
+
+  //Highlight section loop through the text area ,delays every 2 seconds
+  runHighlight = () => {    
+    var textArea = document.getElementById("codingArea");
+    var textValue = textArea.value;
+    var textLines = textValue.split('\n');
+    for(var i = 0; i < textLines.length ; i++){
+      (function(i){
+        setTimeout(function(){
+          var lines = textLines;
+          var index = textValue.indexOf(lines[i]);
+          textArea.focus();
+          textArea.selectionStart = index;
+          textArea.selectionEnd = index + lines[i].length;
+          //if(i > 0){
+          //  lines[i-1] = lines[i-1].replace();
+          //}
+      }, 2000 * i)
+     })(i);
+      
+    } 
+
+  };
+
   render() {
     console.log(this.props.name);
     console.log(this.state);
@@ -68,7 +93,8 @@ export class Button extends Component {
           <button
             type="button"
             className={this.state.class}
-            onClick={this.state.clickFunc}
+            //onClick={this.state.clickFunc}
+            onClick={this.runHighlight}
             data-tip
             data-for={this.state.dataFor}
             data-event={this.state.dataEvent}
