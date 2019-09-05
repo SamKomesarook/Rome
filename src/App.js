@@ -23,6 +23,15 @@ export class App extends Component {
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
+	this.memArr = [];
+	  this.memLen = 15;
+	  this.memArr.push(<Memory selected={true} />);
+	  
+	  for(var i=0; i<this.memLen-3; i++){
+		this.memArr.push(<Memory selected={false} />);
+	  }
+		this.memArr.push( <USBMemory selected={false} />);
+	  this.memArr.push( <NetMemory selected={false} />);
   }
 
   componentDidMount() {
@@ -131,41 +140,35 @@ export class App extends Component {
                 </div>
               </div>
             )}
-            {this.state.showAnimationArea && (
-              <div className="col-sm-5">
-                <div className="row">
-                  <Memory selected={true} />
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                </div>
-                <div className="row">
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                </div>
-                <div className="row">
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                </div>
-                <div className="row">
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                  <Memory selected={false} />
-                </div>
-                <div className="row">
-                  <Memory selected={false} />
-                  <div>
-                    <USBIcon />
-                    <USBMemory selected={false} />
-                  </div>
-                  <div>
-                    <SignalIcon />
-                    <NetMemory selected={false} />
-                  </div>
-                </div>
-              </div>
-            )}
+            {this.state.showAnimationArea &&
+            <div className="col-sm-5">
+              <div className="row">
+		 {this.memArr[0]}
+                 {this.memArr[1]} 
+		    {this.memArr[2]}
+			    </div>
+              <div className="row">{this.memArr[3]}
+                 {this.memArr[4]} 
+		    {this.memArr[5]}
+
+                             </div>
+              <div className="row">{this.memArr[6]}
+                 {this.memArr[7]} 
+		    {this.memArr[8]}
+
+                              </div>
+              <div className="row">{this.memArr[9]}
+                 {this.memArr[10]} 
+		    {this.memArr[11]}
+
+                            </div>
+              <div className="row">{this.memArr[12]}
+                 {this.memArr[13]} 
+		    {this.memArr[14]}
+
+                              </div>
+            </div>
+            }
           </div>
         </div>
         <Tooltips />,{" "}
