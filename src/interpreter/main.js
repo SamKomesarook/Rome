@@ -1,12 +1,14 @@
 import RInterpreter from "./RInterpreter";
+import ReadInterpreter from "./ReadInterpreter";
 
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
 
 class Interpreter {
-  constructor(input) {
+  constructor(input, memArr) {
     this.input = input;
+    this.memArr = memArr;
     this.start(input);
   }
 
@@ -21,6 +23,9 @@ class Interpreter {
       const tree = parser.r();
       var rInterpreter = new RInterpreter();
       antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
+
+      var readInterpreter = new ReadInterpreter(this.memArr);
+      antlr4.tree.ParseTreeWalker.DEFAULT.walk(readInterpreter, tree);
     } catch (re) {
       console.log(re);
     }

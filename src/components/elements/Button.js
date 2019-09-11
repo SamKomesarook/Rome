@@ -6,7 +6,8 @@ export class Button extends Component {
     name: this.props.name,
     class: "btn btn-primary",
     clickFunc: null,
-    dataFor: "ButtonTips"
+    dataFor: "ButtonTips",
+    memArr: null
   };
 
   componentWillMount() {
@@ -14,7 +15,8 @@ export class Button extends Component {
       this.setState({
         class: "btn btn-primary",
         clickFunc: this.runCode,
-        dataFor: "ButtonTips"
+        dataFor: "ButtonTips",
+        memArr: this.props.memArr
       });
     } else if (this.props.name === "Stop") {
       this.setState({
@@ -44,8 +46,8 @@ export class Button extends Component {
 
   runCode = () => {
     var input = document.getElementById("codingArea").value;
-    var interpreter = new Interpreter(input);
-    console.log("Interpreter: ", interpreter);
+    var interpreter = new Interpreter(input, this.state.memArr);
+    // console.log("Interpreter: ", interpreter);
     console.log("RUN Clicked!");
   };
 
