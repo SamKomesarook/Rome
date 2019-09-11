@@ -13,20 +13,10 @@ RInterpreter.prototype.enterR = function(ctx) {
   console.log("ENTER R!");
   // console.log(ctx.expressions());
   // // get name of tokens
-  // for (var i = 0; i < ctx.expressions().length; i++) {
-  //   var tokenName = ctx.expressions()[i].getText();
-  //   var tempInterpreter = createInterpreter(tokenName);
-  // }
+  for (var i = 0; i < ctx.expressions().length; i++) {
+    console.log("Next Token: ", ctx.expressions()[i].getText());
+  }
 };
-
-// var createInterpreter = (name) => {
-//   name = name.replace(/\s/g, "");
-//   if (name === "read") {
-//     return new ReadInterpreter();
-//   } else {
-//     return null
-//   }
-// };
 
 RInterpreter.prototype.exitR = function(ctx) {
   console.log("EXIT R!");
