@@ -3,6 +3,7 @@ import RInterpreter from "./RInterpreter";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
+var RomeErrorListener = require("./ErrorListener").RomeErrorListener;
 
 class Interpreter {
   constructor(input) {
@@ -11,6 +12,7 @@ class Interpreter {
   }
 
   start(input) {
+	  //console.log("TESTING");
     var chars = new antlr4.InputStream(input);
     var lexer = new RomeLexer(chars);
     var tokens = new antlr4.CommonTokenStream(lexer);
@@ -22,9 +24,12 @@ class Interpreter {
       var rInterpreter = new RInterpreter();
       antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
     } catch (re) {
-      console.log(re);
+	    console.log("ERROR");
+      //console.log(re);
     }
   }
 }
+
+
 
 export default Interpreter;
