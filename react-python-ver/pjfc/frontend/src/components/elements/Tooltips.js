@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactToolTip from 'react-tooltip'
+import HelpSection from './HelpSection';
 
 export class Tooltips extends Component {
     render() {
@@ -11,6 +12,9 @@ export class Tooltips extends Component {
                 <ReactToolTip id='NetMemoryTips' effect='solid'/>
                 <ReactToolTip id='USBMemoryTips' effect='solid'/>
                 <ReactToolTip id='ButtonTips' effect='solid'/>
+                <ReactToolTip id="clickForHelp" place="right" effect="solid">
+                    <HelpSection/>
+                </ReactToolTip>
             </div>
         )
     }

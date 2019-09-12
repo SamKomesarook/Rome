@@ -1,12 +1,7 @@
 {
-  "name": "PJFC",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "webpack --mode development --watch ./pjfc/frontend/src/index.js --output ./pjfc/frontend/static/frontend/main.js",
-    "build": "webpack --mode production ./pjfc/frontend/src/index.js --output ./pjfc/frontend/static/main.js"
-  },
+  "name": "pjfc",
+  "version": "0.1.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BaharuHarris/PJFC.git"
@@ -18,23 +13,34 @@
     "url": "https://github.com/BaharuHarris/PJFC/issues"
   },
   "homepage": "https://github.com/BaharuHarris/PJFC#readme",
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-spring": "^8.0.27",
-    "react-dom": "^16.9.0",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
-  },
   "dependencies": {
-    "react-tooltip": "^3.10.0"
+    "antlr4": "^4.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "react-spring": "^8.0.27",
+    "react-tooltip": "^3.11.0",
+    "react-typed": "^1.2.0"
   },
-  "bundleDependencies": [
-    "react-tooltip"
-  ]
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
