@@ -16,8 +16,10 @@ export class App extends Component {
     this.state = {
       showWindowPortal: false,
       showBinaryString: false,
-      showAnimationArea: false
+      showAnimationArea: false,
+      showTextArea:true
     };
+    this.toggleTextArea = this.toggleTextArea.bind(this);
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
@@ -70,6 +72,13 @@ export class App extends Component {
     }));
   }
 
+  toggleTextArea() {
+    this.setState(state => ({
+      ...state,
+      showTextArea: !state.showTextArea
+    }));
+  }
+
   toggleWindowPortal() {
     this.setState(state => ({
       ...state,
@@ -103,13 +112,19 @@ export class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <Button name="Hide/Show" toggle={this.toggleAnimationArea} />
+              <Button name="Coding Area" toggle={this.toggleTextArea} />
             </div>
           </div>
           <div className="row">
+            <div className="col-sm-4">
+              <Button name="Animation Area" toggle={this.toggleAnimationArea} />
+            </div>
+          </div>
+          <div className="row">
+            {this.state.showTextArea ? null :
             <div
               className={
-                this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
+                 this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
               }
             >
               <TextArea />
@@ -135,6 +150,7 @@ export class App extends Component {
                 >
                   <Button name="Stop" toggle={this.initiliazeBinaryString} />
                 </div>
+                
                 <div
                   className={
                     this.state.showAnimationArea ? "col-sm-4" : "col-sm-2"
@@ -142,10 +158,12 @@ export class App extends Component {
                 >
                   <Button name="Help" />
                 </div>
+                
               </div>
               {/* <Form method={"GET"} />
               <Form method={"POST"} /> */}
             </div>
+            }
             {this.state.showAnimationArea && (
               <div className="col-sm-3" align="center">
                 <div className="row">
