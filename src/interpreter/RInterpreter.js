@@ -22,4 +22,8 @@ RInterpreter.prototype.exitR = function(ctx) {
   //console.log("EXIT R!");
 };
 
+RInterpreter.prototype.enterRead = function(ctx) {
+  console.log("Enter Read");
+}
+
 export default RInterpreter;

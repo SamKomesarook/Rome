@@ -17,13 +17,6 @@ export class TextArea extends Component {
     }));
   }
 
-  
-  render() {
-
-    const wrapperStyle = {
-      display:"inline-block",
-      position:"relative"
-
 
   render() {
     const wrapperStyle = {
@@ -65,8 +58,7 @@ export class TextArea extends Component {
     return (
       <div className="wrapper">
         <div className="form-group shadow-textarea" style={wrapperStyle}>
-/*
-          <textarea
+          {/* <textarea
             data-tip
             data-for="TextAreaTips"
             className="form-control rounded-0 z-depth-1"
@@ -83,8 +75,7 @@ export class TextArea extends Component {
             onClick={this.toggleLineNumber}
           >
             toggle
-          </button>
-          */
+          </button> */}
 
           <Typed
             strings={[
