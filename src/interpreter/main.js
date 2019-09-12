@@ -4,6 +4,7 @@ import ReadInterpreter from "./ReadInterpreter";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
+var RomeErrorListener = require("./ErrorListener").RomeErrorListener;
 
 class Interpreter {
   constructor(code, memArr) {
@@ -11,7 +12,7 @@ class Interpreter {
     this.memArr = memArr;
     this.start(code);
   }
-
+  
   start(code) {
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
@@ -28,9 +29,12 @@ class Interpreter {
         console.log("Exception: ", tree.exception);
       }
     } catch (re) {
-      console.log(re);
+	    console.log("ERROR");
+      //console.log(re);
     }
   }
 }
+
+
 
 export default Interpreter;

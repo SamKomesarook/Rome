@@ -19,7 +19,7 @@ RInterpreter.prototype.enterR = function(ctx) {
 };
 
 RInterpreter.prototype.exitR = function(ctx) {
-  console.log("EXIT R!");
+  //console.log("EXIT R!");
 };
 
 export default RInterpreter;
