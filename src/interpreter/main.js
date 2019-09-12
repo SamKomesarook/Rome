@@ -6,14 +6,14 @@ var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
 
 class Interpreter {
-  constructor(input, memArr) {
-    this.input = input;
+  constructor(code, memArr) {
+    this.code = code;
     this.memArr = memArr;
-    this.start(input);
+    this.start(code);
   }
 
-  start(input) {
-    var chars = new antlr4.InputStream(input);
+  start(code) {
+    var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
@@ -21,11 +21,12 @@ class Interpreter {
 
     try {
       const tree = parser.r();
-      var rInterpreter = new RInterpreter();
-      antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
-
-      var readInterpreter = new ReadInterpreter(this.memArr);
-      antlr4.tree.ParseTreeWalker.DEFAULT.walk(readInterpreter, tree);
+      if (tree.exception === null) {
+        var rInterpreter = new RInterpreter();
+        antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
+      } else {
+        console.log("Exception: ", tree.exception);
+      }
     } catch (re) {
       console.log(re);
     }

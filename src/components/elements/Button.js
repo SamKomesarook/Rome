@@ -45,8 +45,8 @@ export class Button extends Component {
   };
 
   runCode = () => {
-    var input = document.getElementById("codingArea").value;
-    new Interpreter(input, this.state.memArr);
+    var code = document.getElementById("codingArea").value;
+    new Interpreter(code, this.state.memArr);
     console.log("RUN Clicked!");
   };
 
