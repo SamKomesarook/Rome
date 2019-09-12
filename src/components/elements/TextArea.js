@@ -70,7 +70,7 @@ export class TextArea extends Component {
             rows="28"
             placeholder="Coding area"
             style={textAreaStyle}
-            onChange={this.checkCode}
+            // onChange={this.checkCode}
           />
           <button
             className="btn btn-light"
