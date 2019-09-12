@@ -121,7 +121,7 @@ export class App extends Component {
             </div>
           </div>
           <div className="row">
-            {this.state.showTextArea ? null :
+            {this.state.showTextArea ? 
             <div
               className={
                  this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
@@ -163,6 +163,7 @@ export class App extends Component {
               {/* <Form method={"GET"} />
               <Form method={"POST"} /> */}
             </div>
+            : null
             }
             {this.state.showAnimationArea && (
               <div className="col-sm-3" align="center">
@@ -216,7 +217,7 @@ export class App extends Component {
             )}
           </div>
         </div>
-        <Tooltips />,{" "}
+        <Tooltips />{" "}
       </Fragment>
     );
   }
