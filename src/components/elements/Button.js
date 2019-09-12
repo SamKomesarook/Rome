@@ -14,9 +14,11 @@ export class Button extends Component {
     if (this.props.name === "Run") {
       this.setState({
         class: "btn btn-primary",
+
         clickFunc: this.runCode,
         dataFor: "ButtonTips",
         memArr: this.props.memArr
+
       });
     } else if (this.props.name === "Stop") {
       this.setState({
@@ -42,6 +44,33 @@ export class Button extends Component {
   // TODO: stop button function
   stopCode = () => {
     console.log("STOP Clicked!");
+  };
+
+  
+
+  
+
+  //Highlight section loop through the text area ,delays every 2 seconds
+  runHighlight = () => {    
+    var textArea = document.getElementById("codingArea");
+    var textValue = textArea.value;
+    var textLines = textValue.split('\n');
+    for(var i = 0; i < textLines.length ; i++){
+      (function(i){
+        setTimeout(function(){
+          var lines = textLines;
+          var index = textValue.indexOf(lines[i]);
+          textArea.focus();
+          textArea.selectionStart = index;
+          textArea.selectionEnd = index + lines[i].length;
+          //if(i > 0){
+          //  lines[i-1] = lines[i-1].replace();
+          //}
+      }, 2000 * i)
+     })(i);
+      
+    } 
+
   };
 
   runCode = () => {
