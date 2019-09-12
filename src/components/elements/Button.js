@@ -1,19 +1,24 @@
 import React, { Component } from "react";
+import Interpreter from "../../interpreter/main";
 
 export class Button extends Component {
   state = {
     name: this.props.name,
     class: "btn btn-primary",
     clickFunc: null,
-    dataFor: "ButtonTips"
+    dataFor: "ButtonTips",
+    memArr: null
   };
 
   componentWillMount() {
     if (this.props.name === "Run") {
       this.setState({
         class: "btn btn-primary",
-        clickFunc: this.runHighlight,
-        dataFor: "ButtonTips"
+
+        clickFunc: this.runCode,
+        dataFor: "ButtonTips",
+        memArr: this.props.memArr
+
       });
     } else if (this.props.name === "Stop") {
       this.setState({
@@ -28,12 +33,10 @@ export class Button extends Component {
         dataEvent: "click",
         dataEventOff: "blur"
       });
-    }
-    else if (this.props.name ==="Hide/Show"){
+    } else if (this.props.name === "Hide/Show") {
       this.setState({
         class: "btn btn-info",
-        clickFunc:this.props.toggle,
-        dataFor:"ButtonTips"
+        clickFunc: this.props.toggle
       });
     }
   }
@@ -71,12 +74,14 @@ export class Button extends Component {
   };
 
   runCode = () => {
+    var code = document.getElementById("codingArea").value;
+    new Interpreter(code, this.state.memArr);
     console.log("RUN Clicked!");
   };
 
   render() {
-    console.log(this.props.name);
-    console.log(this.state);
+    // console.log(this.props.name);
+    // console.log(this.state);
     if (this.props.type === "submit") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
