@@ -4,6 +4,8 @@ options {
 	language = JavaScript;
 }
 
+// Tokens
+
 START:'start';
 END:'end';
 
@@ -36,9 +38,13 @@ RSQ:']';
 
 NEWLINE:'\n';
 
+IDENTIFIER : [a-zA-Z]+;
+
 NUMBER
    : ('0' .. '9') +
    ;
+
+// Rules
 
 intargs
 	: NUMBER
@@ -60,5 +66,3 @@ expression
 	| LSQ NEWLINE expressions+ RSQ LSQ intargs RSQ # Loop
 	| WRITE LPAR (intargs|STRLIT) RPAR # Write
 	;
-
-IDENTIFIER : [a-zA-Z]+;
