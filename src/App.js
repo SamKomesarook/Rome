@@ -8,6 +8,7 @@ import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
+import InputOutputArea from "./components/elements/InputOutputArea";
 
 export class App extends Component {
   constructor(props) {
@@ -198,6 +199,15 @@ export class App extends Component {
             )}
           </div>
         </div>
+        
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <InputOutputArea/>
+            </div>
+          </div>
+        </div>
+
         <Tooltips />,{" "}
       </Fragment>
     );
