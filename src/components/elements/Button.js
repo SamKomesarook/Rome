@@ -33,7 +33,7 @@ export class Button extends Component {
         dataEvent: "click",
         dataEventOff: "blur"
       });
-    } else if (this.props.name === "Hide/Show") {
+    } else {
       this.setState({
         class: "btn btn-info",
         clickFunc: this.props.toggle
