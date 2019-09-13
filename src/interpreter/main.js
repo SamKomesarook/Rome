@@ -20,7 +20,6 @@ class Interpreter {
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
 
-    try {
       const tree = parser.r();
       if (tree.exception === null) {
         var rInterpreter = new RInterpreter();
@@ -28,10 +27,6 @@ class Interpreter {
       } else {
         console.log("Exception: ", tree.exception);
       }
-    } catch (re) {
-	    console.log("ERROR");
-      //console.log(re);
-    }
   }
 }
 
