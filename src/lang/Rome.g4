@@ -47,8 +47,8 @@ NUMBER
 // Rules
 
 intargs
-	: NUMBER # Number
-	| MEM LPAR intargs RPAR # Memory
+	: NUMBER
+	| MEM LPAR intargs RPAR
 	;
 
 STRLIT : '"' ~ ["\r\n]* '"';
