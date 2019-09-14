@@ -3,11 +3,15 @@ import { Transition, animated } from "react-spring/renderprops";
 import Header from "./components/layout/Header";
 // import Form from "./components/layout/Form";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
-import { SignalIcon, USBIcon } from "./components/elements/Icon";
+// import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
+
+// import MemoryBlock from "./entity/MemoryBlock";
+
+// const memArr = [15];
 
 export class App extends Component {
   constructor(props) {
@@ -17,6 +21,7 @@ export class App extends Component {
       showWindowPortal: false,
       showBinaryString: false,
       showAnimationArea: false
+      // memState: memArr
     };
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
@@ -24,17 +29,33 @@ export class App extends Component {
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
 
-    // this.memArr = [];
-    // this.memLen = 15;
-    // this.memArr.push(<Memory selected={true} />);
-
-    // for (var i = 0; i < this.memLen - 3; i++) {
-    //   this.memArr.push(<Memory selected={false} />);
-    // }
-    // this.memArr.push(<USBMemory selected={false} />);
-    // this.memArr.push(<NetMemory selected={false} />);
     this.memArr = this.constructMem();
+    console.log("Memory Array: ", this.memArr);
+    // this.memObjArr = this.constructMemObj();
+    // console.log("Memory Object Array: ", this.memObjArr);
   }
+
+  // constructMemObj() {
+  //   var memObjArr = [];
+  //   var memNum = 15;
+  //   for (var i = 0; i < memNum; i++) {
+  //     var tempMem;
+  //     if (i === 13) {
+  //       tempMem = new MemoryBlock(i, "USBMemory", false);
+  //       memObjArr.push(tempMem);
+  //     } else if (i === 14) {
+  //       tempMem = new MemoryBlock(i, "NetMemory", false);
+  //       memObjArr.push(tempMem);
+  //     } else {
+  //       tempMem = new MemoryBlock(i, "Memory", i === 0 ? true : false);
+  //       memObjArr.push(tempMem);
+  //     }
+  //   }
+  //   // this.setState({
+  //   //   memObjArr: memObjArr
+  //   // });
+  //   return memObjArr;
+  // }
 
   constructMem() {
     var memArr = [];
@@ -42,19 +63,72 @@ export class App extends Component {
     for (var i = 0; i < memLen; i++) {
       if (i === 13) {
         memArr.push(
-          <USBMemory selected={false} id={i} content={"USBMemory"} />
+          <USBMemory
+            selected={false}
+            id={i}
+            content={"USBMemory"}
+            contentType={"letters"}
+          />
         );
       } else if (i === 14) {
         memArr.push(
-          <NetMemory selected={false} id={i} content={"NetMemory"} />
+          <NetMemory
+            selected={false}
+            id={i}
+            content={"NetMemory"}
+            contentType={"letters"}
+          />
         );
       } else {
         memArr.push(
-          <Memory selected={i === 0 ? true : false} id={i} content={"Memory"} />
+          <Memory
+            selected={i === 0 ? true : false}
+            id={i}
+            content={"Memory"}
+            contentType={"letters"}
+          />
         );
       }
     }
     return memArr;
+  }
+
+  updateContentType(id, newMem) {
+    console.log("Before Update: ", this.memArr[id].props);
+    switch (newMem.type) {
+      case "Memory":
+        this.memArr[id] = (
+          <Memory
+            selected={newMem.selected}
+            id={id}
+            content={newMem.content}
+            contentType={newMem.contentType}
+          />
+        );
+        break;
+      case "NetMemory":
+        this.memArr[id] = (
+          <NetMemory
+            selected={newMem.selected}
+            id={id}
+            content={newMem.content}
+            contentType={newMem.contentType}
+          />
+        );
+        break;
+      case "USBMemory":
+        this.memArr[id] = (
+          <USBMemory
+            selected={newMem.selected}
+            id={id}
+            content={newMem.content}
+            contentType={newMem.contentType}
+          />
+        );
+        break;
+      default:
+    }
+    console.log("Afte update: ", this.memArr[id].props);
   }
 
   componentDidMount() {
@@ -126,6 +200,7 @@ export class App extends Component {
                     name="Run"
                     toggle={this.toggleBinaryString}
                     memArr={this.memArr}
+                    updateContentType={this.updateContentType}
                   />
                 </div>
                 <div
