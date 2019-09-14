@@ -5,7 +5,8 @@ export class TextArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLineNumber: true
+      showLineNumber: true,
+      ref: this.props.compRef
     };
     this.toggleLineNumber = this.toggleLineNumber.bind(this);
   }
@@ -16,7 +17,6 @@ export class TextArea extends Component {
       showLineNumber: !state.showLineNumber
     }));
   }
-
 
   render() {
     const wrapperStyle = {
@@ -56,8 +56,8 @@ export class TextArea extends Component {
     }
 
     return (
-      <div className="wrapper">
-        <div className="form-group shadow-textarea" style={wrapperStyle}>
+      <div className="wrapper" data-tip data-for='TextAreaTips' ref={this.state.ref}>
+        <div className="form-group shadow-textarea" style={wrapperStyle} >
           {/* <textarea
             data-tip
             data-for="TextAreaTips"
@@ -90,7 +90,6 @@ export class TextArea extends Component {
             showCursor={false}
           >
             <textarea
-              data-tip data-for='TextAreaTips'
               className="form-control rounded-0 z-depth-1"    
               cols="50"
               id="codingArea"
@@ -99,7 +98,6 @@ export class TextArea extends Component {
             />
           </Typed>
           <button className="btn btn-light" style={buttonStyle} onClick={this.toggleLineNumber}>toggle</button>
-
         </div>
       </div>
     );

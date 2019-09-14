@@ -6,38 +6,47 @@ export class Button extends Component {
     name: this.props.name,
     class: "btn btn-primary",
     clickFunc: null,
-    dataFor: "ButtonTips",
-    memArr: null
+    dataFor: null,
+    memArr: null,
+    ref: this.props.compRef
   };
 
   componentWillMount() {
-    if (this.props.name === "Run") {
-      this.setState({
-        class: "btn btn-primary",
-
-        clickFunc: this.runCode,
-        dataFor: "ButtonTips",
-        memArr: this.props.memArr
-
-      });
-    } else if (this.props.name === "Stop") {
-      this.setState({
-        class: "btn btn-danger",
-        clickFunc: this.stopCode,
-        dataFor: "ButtonTips"
-      });
-    } else if (this.props.name === "Help") {
-      this.setState({
-        class: "btn btn-info",
-        dataFor: "clickForHelp",
-        dataEvent: "click",
-        dataEventOff: "blur"
-      });
-    } else {
-      this.setState({
-        class: "btn btn-info",
-        clickFunc: this.props.toggle
-      });
+    switch(this.props.name) {
+      case "Run":
+          this.setState({
+            class: "btn btn-primary",
+            clickFunc: this.runCode,
+            dataFor: "ButtonRun",
+            memArr: this.props.memArr
+          });
+          break;
+      case "Stop":
+          this.setState({
+            class: "btn btn-danger",
+            clickFunc: this.stopCode,
+            dataFor: "ButtonStop"
+          });
+          break;
+      case "Help":
+          this.setState({
+            class: "btn btn-info",
+            dataFor: "ButtonHelp",
+            dataEvent: "click",
+            dataEventOff: "blur"
+          });
+          break;
+      case "Info":
+          this.setState({
+            class: "btn btn-warning",
+            dataFor: "ButtonInfo"
+          })
+      default:
+          this.setState({
+            class: "btn btn-info",
+            clickFunc: this.props.toggle,
+            dataFor: "ButtonHideShow"
+          });
     }
   }
 
@@ -105,6 +114,7 @@ export class Button extends Component {
             data-for={this.state.dataFor}
             data-event={this.state.dataEvent}
             data-event-off={this.state.dataEventOff}
+            ref={this.state.ref}
           >
             {this.state.name}
           </button>
