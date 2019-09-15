@@ -55,18 +55,14 @@ export class Button extends Component {
     console.log("STOP Clicked!");
   };
 
-  
-
-  
-
   //Highlight section loop through the text area ,delays every 2 seconds
-  runHighlight = () => {    
+  runHighlight = () => {
     var textArea = document.getElementById("codingArea");
     var textValue = textArea.value;
-    var textLines = textValue.split('\n');
-    for(var i = 0; i < textLines.length ; i++){
-      (function(i){
-        setTimeout(function(){
+    var textLines = textValue.split("\n");
+    for (var i = 0; i < textLines.length; i++) {
+      (function(i) {
+        setTimeout(function() {
           var lines = textLines;
           var index = textValue.indexOf(lines[i]);
           textArea.focus();
@@ -75,16 +71,14 @@ export class Button extends Component {
           //if(i > 0){
           //  lines[i-1] = lines[i-1].replace();
           //}
-      }, 2000 * i)
-     })(i);
-      
-    } 
-
+        }, 2000 * i);
+      })(i);
+    }
   };
 
   runCode = () => {
     var code = document.getElementById("codingArea").value;
-    new Interpreter(code, this.state.memArr);
+    new Interpreter(code, this.state.memArr, this.props.updateContentType);
     console.log("RUN Clicked!");
   };
 
