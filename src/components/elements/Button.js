@@ -6,38 +6,47 @@ export class Button extends Component {
     name: this.props.name,
     class: "btn btn-primary",
     clickFunc: null,
-    dataFor: "ButtonTips",
-    memArr: null
+    dataFor: null,
+    memArr: null,
+    ref: this.props.compRef
   };
 
   componentWillMount() {
-    if (this.props.name === "Run") {
-      this.setState({
-        class: "btn btn-primary",
-
-        clickFunc: this.runCode,
-        dataFor: "ButtonTips",
-        memArr: this.props.memArr
-
-      });
-    } else if (this.props.name === "Stop") {
-      this.setState({
-        class: "btn btn-danger",
-        clickFunc: this.stopCode,
-        dataFor: "ButtonTips"
-      });
-    } else if (this.props.name === "Help") {
-      this.setState({
-        class: "btn btn-info",
-        dataFor: "clickForHelp",
-        dataEvent: "click",
-        dataEventOff: "blur"
-      });
-    } else if (this.props.name === "Hide/Show") {
-      this.setState({
-        class: "btn btn-info",
-        clickFunc: this.props.toggle
-      });
+    switch(this.props.name) {
+      case "Run":
+          this.setState({
+            class: "btn btn-primary",
+            clickFunc: this.runCode,
+            dataFor: "ButtonRun",
+            memArr: this.props.memArr
+          });
+          break;
+      case "Stop":
+          this.setState({
+            class: "btn btn-danger",
+            clickFunc: this.stopCode,
+            dataFor: "ButtonStop"
+          });
+          break;
+      case "Help":
+          this.setState({
+            class: "btn btn-info",
+            dataFor: "ButtonHelp",
+            dataEvent: "click",
+            dataEventOff: "blur"
+          });
+          break;
+      case "Info":
+          this.setState({
+            class: "btn btn-warning",
+            dataFor: "ButtonInfo"
+          })
+      default:
+          this.setState({
+            class: "btn btn-info",
+            clickFunc: this.props.toggle,
+            dataFor: "ButtonHideShow"
+          });
     }
   }
 
@@ -46,18 +55,14 @@ export class Button extends Component {
     console.log("STOP Clicked!");
   };
 
-  
-
-  
-
   //Highlight section loop through the text area ,delays every 2 seconds
-  runHighlight = () => {    
+  runHighlight = () => {
     var textArea = document.getElementById("codingArea");
     var textValue = textArea.value;
-    var textLines = textValue.split('\n');
-    for(var i = 0; i < textLines.length ; i++){
-      (function(i){
-        setTimeout(function(){
+    var textLines = textValue.split("\n");
+    for (var i = 0; i < textLines.length; i++) {
+      (function(i) {
+        setTimeout(function() {
           var lines = textLines;
           var index = textValue.indexOf(lines[i]);
           textArea.focus();
@@ -66,16 +71,14 @@ export class Button extends Component {
           //if(i > 0){
           //  lines[i-1] = lines[i-1].replace();
           //}
-      }, 2000 * i)
-     })(i);
-      
-    } 
-
+        }, 2000 * i);
+      })(i);
+    }
   };
 
   runCode = () => {
     var code = document.getElementById("codingArea").value;
-    new Interpreter(code, this.state.memArr);
+    new Interpreter(code, this.state.memArr, this.props.updateContentType);
     console.log("RUN Clicked!");
   };
 
@@ -105,6 +108,7 @@ export class Button extends Component {
             data-for={this.state.dataFor}
             data-event={this.state.dataEvent}
             data-event-off={this.state.dataEventOff}
+            ref={this.state.ref}
           >
             {this.state.name}
           </button>

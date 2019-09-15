@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 export class Memory extends Component {
-  state = {
-    content: this.props.content,
-  }
+  // state = {
+  //   content: this.props.content,
+  // }
   render() {
     if (this.props.selected) {
       return (
@@ -13,7 +13,7 @@ export class Memory extends Component {
           data-tip
           data-for="MemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     } else {
@@ -24,7 +24,7 @@ export class Memory extends Component {
           data-tip
           data-for="MemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     }
@@ -32,9 +32,9 @@ export class Memory extends Component {
 }
 
 export class NetMemory extends Component {
-  state = {
-    content: this.props.content
-  }
+  // state = {
+  //   content: this.props.content
+  // }
   render() {
     if (this.props.selected) {
       return (
@@ -44,7 +44,7 @@ export class NetMemory extends Component {
           data-tip
           data-for="NetMemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     } else {
@@ -55,7 +55,7 @@ export class NetMemory extends Component {
           data-tip
           data-for="NetMemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     }
@@ -63,9 +63,9 @@ export class NetMemory extends Component {
 }
 
 export class USBMemory extends Component {
-  state = {
-    content: this.props.content
-  }
+  // state = {
+  //   content: this.props.content
+  // }
   render() {
     if (this.props.selected) {
       return (
@@ -75,7 +75,7 @@ export class USBMemory extends Component {
           data-tip
           data-for="USBMemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     } else {
@@ -86,7 +86,7 @@ export class USBMemory extends Component {
           data-tip
           data-for="USBMemoryTips"
         >
-          {this.state.content}
+          {this.props.content}
         </div>
       );
     }
