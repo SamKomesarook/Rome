@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
+import ReactTooltip from 'react-tooltip'
 import Header from "./components/layout/Header";
 // import Form from "./components/layout/Form";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
@@ -9,6 +10,7 @@ import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
+
 
 export class App extends Component {
   constructor(props) {
@@ -39,6 +41,7 @@ export class App extends Component {
     // this.memArr.push(<USBMemory selected={false} />);
     // this.memArr.push(<NetMemory selected={false} />);
     this.memArr = this.constructMem();
+    this.ref = [];
   }
 
   constructMem() {
@@ -114,6 +117,16 @@ export class App extends Component {
     this.setState({ showWindowPortal: false });
   }
 
+  toggleRef = () => {
+    console.log(this.ref);
+    for(var i=0; i < this.ref.length; i++) {
+      // console.log(this.testRef[i]);
+      ReactTooltip.show(this.ref[i]);
+    }
+
+    setTimeout(() => ReactTooltip.hide(), 1000);
+  }
+
   render() {
     return (
       <Fragment>
@@ -121,20 +134,20 @@ export class App extends Component {
         
         <div className="container-fluid">
           <div className = "row">
-            <div className="col-sm-2">
+            <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
               <div className="row">
                 <div className="col">
-                  <Button name="Coding Area" toggle={this.toggleTextArea} />
+                  <Button name="Coding Area" toggle={this.toggleTextArea}/>
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button name="Animation Area" toggle={this.toggleAnimationArea} />
+                  <Button name="Animation Area" toggle={this.toggleAnimationArea}/>
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button name="IO Window" toggle={this.toggleIOWindow} />
+                  <Button name="IO Window" toggle={this.toggleIOWindow}/>
                 </div>
               </div>
             </div>
@@ -146,33 +159,42 @@ export class App extends Component {
                     this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
                   }
                 >
-                  <TextArea />
+                  <TextArea compRef={ el => this.ref.push(el)}/>
                   <div className="row slider-container">
-                    <Slider />
+                    <Slider compRef={ el => this.ref.push(el)}/>
                   </div>
                   <div className="row">
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-4" : "col-sm-2"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
                       }
                     >
                       <Button
                         name="Run"
                         toggle={this.toggleBinaryString}
                         memArr={this.memArr}
+                        compRef={ el => this.ref.push(el)}
                       />
                     </div>
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-4" : "col-sm-2"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
                       }
                     >
-                      <Button name="Stop" toggle={this.initiliazeBinaryString} />
+                      <Button name="Stop" toggle={this.initiliazeBinaryString} compRef={ el => this.ref.push(el)}/>
                     </div>
                     
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-4" : "col-sm-2"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                      }
+                    >
+                      <Button name="Info" toggle={this.toggleRef}/>
+                    </div>
+
+                    <div
+                      className={
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
                       }
                     >
                       <Button name="Help" />
@@ -206,7 +228,7 @@ export class App extends Component {
                   </div>
                 )}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-5" id="memory">
+                  <div className="col-sm-5" id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
                     <div className="row">
                       <div className="col">{this.memArr[0]}</div>
                       <div className="col">{this.memArr[1]}</div>
@@ -242,7 +264,9 @@ export class App extends Component {
         <div className="container-fluid">	
           <div className="row">	
             <div className="col-sm-12">	
-              <InputOutputArea/>	
+              <InputOutputArea 
+                compRef={ el => this.ref.push(el)}
+              />	
             </div>	
           </div>	
         </div>
