@@ -2,42 +2,6 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 
-export function constructMem() {
-  var memArr = [];
-  var memLen = 15;
-  for (var i = 0; i < memLen; i++) {
-    if (i === 13) {
-      memArr.push(
-        <USBMemory
-          selected={false}
-          id={i}
-          content={"USBMemory"}
-          contentType={"letters"}
-        />
-      );
-    } else if (i === 14) {
-      memArr.push(
-        <NetMemory
-          selected={false}
-          id={i}
-          content={"NetMemory"}
-          contentType={"letters"}
-        />
-      );
-    } else {
-      memArr.push(
-        <Memory
-          selected={i === 0 ? true : false}
-          id={i}
-          content={"Memory"}
-          contentType={"letters"}
-        />
-      );
-    }
-  }
-  return memArr;
-}
-
 // map memory block object to react jsx
 export function memObjToSymbol(mem) {
   var type = mem.type;
@@ -98,5 +62,5 @@ export function moveMem(oldMemObj, newMemObj, direction) {
     this.updateMem(oldMemObj.getId(), oldMem);
     this.updateMem(newMemObj.getId(), newMem);
   }
-  console.log(this.memArr);
+//   console.log(this.memArr);
 }
