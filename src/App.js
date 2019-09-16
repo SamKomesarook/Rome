@@ -13,12 +13,12 @@ import InputOutputArea from "./components/elements/InputOutputArea";
 
 // import MemoryBlock from "./entity/MemoryBlock";
 
-import {
-  memObjToSymbol,
-  updateMem,
-  updateContentType,
-  moveMem
-} from "./MemFunc";
+// import {
+//   memObjToSymbol,
+//   updateMem,
+//   updateContentType,
+//   moveMem
+// } from "./MemFunc";
 
 const memArr = [15];
 
@@ -84,67 +84,67 @@ export class App extends Component {
     return memArr;
   }
 
-  // // map memory block object to react jsx
-  // memObjToSymbol(mem) {
-  //   var type = mem.type;
-  //   switch (type) {
-  //     case "Memory":
-  //       return (
-  //         <Memory
-  //           selected={mem.selected}
-  //           id={mem.id}
-  //           content={mem.content}
-  //           contentType={mem.contentType}
-  //         />
-  //       );
-  //     case "NetMemory":
-  //       return (
-  //         <NetMemory
-  //           selected={mem.selected}
-  //           id={mem.id}
-  //           content={mem.content}
-  //           contentType={mem.contentType}
-  //         />
-  //       );
-  //     case "USBMemory":
-  //       return (
-  //         <USBMemory
-  //           selected={mem.selected}
-  //           id={mem.id}
-  //           content={mem.content}
-  //           contentType={mem.contentType}
-  //         />
-  //       );
-  //     default:
-  //       break;
-  //   }
-  // }
+  // map memory block object to react jsx
+  memObjToSymbol(mem) {
+    var type = mem.type;
+    switch (type) {
+      case "Memory":
+        return (
+          <Memory
+            selected={mem.selected}
+            id={mem.id}
+            content={mem.content}
+            contentType={mem.contentType}
+          />
+        );
+      case "NetMemory":
+        return (
+          <NetMemory
+            selected={mem.selected}
+            id={mem.id}
+            content={mem.content}
+            contentType={mem.contentType}
+          />
+        );
+      case "USBMemory":
+        return (
+          <USBMemory
+            selected={mem.selected}
+            id={mem.id}
+            content={mem.content}
+            contentType={mem.contentType}
+          />
+        );
+      default:
+        break;
+    }
+  }
 
-  // updateMem(id, mem) {
-  //   this.memArr[id] = mem;
-  // }
+  updateMem(id, mem) {
+    this.memArr[id] = mem;
+  }
 
-  // updateContentType(id, memObj) {
-  //   // console.log("Before Update: ", this.memArr[id].props);
-  //   var newMem = this.memObjToSymbol(memObj);
-  //   this.updateMem(id, newMem);
-  //   // console.log("Afte update: ", this.memArr[id].props);
-  // }
+  updateContentType(id, memObj) {
+    // console.log("Before Update: ", this.memArr[id].props);
+    var newMem = this.memObjToSymbol(memObj);
+    this.updateMem(id, newMem);
+    // console.log("Afte update: ", this.memArr[id].props);
+  }
 
-  // moveMem(oldMemObj, newMemObj, direction) {
-  //   var currId = oldMemObj.id;
-  //   if (
-  //     (currId === 0 && direction === "left") ||
-  //     (currId === 14 && direction === "right")
-  //   ) {
-  //     alert("Invalide Move command!");
-  //   } else {
-  //     var oldMem = this.memObjToSymbol(oldMemObj);
-  //     var newMem = this.memObjToSymbol(newMemObj);
-  //     this.updateMem(oldMemObj.getId(), oldMem);
-  //     this.updateMem(newMemObj.getId(), newMem);
-  //   }
-  // }
+  moveMem(oldMemObj, newMemObj, direction) {
+    var currId = oldMemObj.id;
+    if (
+      (currId === 0 && direction === "left") ||
+      (currId === 14 && direction === "right")
+    ) {
+      alert("Invalide Move command!");
+    } else {
+      var oldMem = this.memObjToSymbol(oldMemObj);
+      var newMem = this.memObjToSymbol(newMemObj);
+      this.updateMem(oldMemObj.getId(), oldMem);
+      this.updateMem(newMemObj.getId(), newMem);
+    }
+  }
 
   // set state before render
   componentWillMount() {
@@ -274,10 +274,10 @@ export class App extends Component {
                           toggle={this.toggleBinaryString}
                           memArr={this.memArr}
                           compRef={el => this.ref.push(el)}
-                          memObjToSymbol={memObjToSymbol}
-                          updateMem={updateMem}
-                          updateContentType={updateContentType}
-                          moveMem={moveMem}
+                          memObjToSymbol={this.memObjToSymbol}
+                          updateMem={this.updateMem}
+                          updateContentType={this.updateContentType}
+                          moveMem={this.moveMem}
                         />
                       </div>
                       <div
