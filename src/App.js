@@ -141,69 +141,76 @@ export class App extends Component {
 
   moveRight(){
     var error = false;
-    var selected = 0;
+    var selectedFound = false;
     for (var i = 0; i < this.memArr.length; i++) {
       if (this.memArr[i].props.selected == true) {
-        selected = i;
+        var selected = i;
+        selectedFound = true;
       }
     }
-    if(selected == 14){
-      error = true;
-      console.log("Error:This is the last memory!");
-      //call error animation since can't move right anymore
-
-    }
-    else if(selected == 13){
-      this.memArr[selected] = (
-        <USBMemory
-          selected={false}
-          id={selected}
-          content={this.memArr[selected].props.content}
-          contentType={this.memArr[selected].props.contentType}
-        />
-      );
+    if(!selectedFound){
+      console.log("Error:No memory is selected!");
+      //call error animation since no memory is selected
     }
     else{
-      this.memArr[selected] = (
-        <Memory
-          selected={false}
-          id={selected}
-          content={this.memArr[selected].props.content}
-          contentType={this.memArr[selected].props.contentType}
-        />
-      );
-    }
-    
-    if(!error){
-      if(selected+1 == 14){
-        this.memArr[selected+1] = (
-          <NetMemory
-            selected={true}
-            id={selected}
-            content={this.memArr[selected+1].props.content}
-            contentType={this.memArr[selected+1].props.contentType}
-          />
-        );
+      if(selected == 14){
+        error = true;
+        console.log("Error:This is the last memory!");
+        //call error animation since can't move right anymore
+
       }
-      else if(selected+1 == 13){
-        this.memArr[selected+1] = (
+      else if(selected == 13){
+        this.memArr[selected] = (
           <USBMemory
-            selected={true}
+            selected={false}
             id={selected}
-            content={this.memArr[selected+1].props.content}
-            contentType={this.memArr[selected+1].props.contentType}
+            content={this.memArr[selected].props.content}
+            contentType={this.memArr[selected].props.contentType}
           />
         );
       }
       else{
-        this.memArr[selected+1] = (
+        this.memArr[selected] = (
           <Memory
-            selected={true}
+            selected={false}
             id={selected}
-            content={this.memArr[selected+1].props.content}
-            contentType={this.memArr[selected+1].props.contentType}
+            content={this.memArr[selected].props.content}
+            contentType={this.memArr[selected].props.contentType}
           />
         );
+      }
+      
+      if(!error){
+        if(selected+1 == 14){
+          this.memArr[selected+1] = (
+            <NetMemory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected+1].props.content}
+              contentType={this.memArr[selected+1].props.contentType}
+            />
+          );
+        }
+        else if(selected+1 == 13){
+          this.memArr[selected+1] = (
+            <USBMemory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected+1].props.content}
+              contentType={this.memArr[selected+1].props.contentType}
+            />
+          );
+        }
+        else{
+          this.memArr[selected+1] = (
+            <Memory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected+1].props.content}
+              contentType={this.memArr[selected+1].props.contentType}
+            />
+          );
+        }
       }
     }
     this.forceUpdate();
