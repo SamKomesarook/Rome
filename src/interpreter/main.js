@@ -6,13 +6,23 @@ var RomeParser = require("../lang/RomeParser").RomeParser;
 var RomeErrorListener = require("./ErrorListener").RomeErrorListener;
 
 class Interpreter {
-  constructor(code, memArr, updateContentType) {
+  constructor(
+    code,
+    memArr,
+    memObjToSymbol,
+    updateMem,
+    updateContentType,
+    moveMem
+  ) {
     this.code = code;
     this.memArr = memArr;
+    this.memObjToSymbol = memObjToSymbol;
+    this.updateMem = updateMem;
     this.updateContentType = updateContentType;
+    this.moveMem = moveMem;
     this.start(code);
   }
-  
+
   start(code) {
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
@@ -23,17 +33,21 @@ class Interpreter {
     try {
       const tree = parser.r();
       if (tree.exception === null) {
-        var rInterpreter = new RInterpreter(this.memArr, this.updateContentType);
+        var rInterpreter = new RInterpreter(
+          this.memArr,
+          this.memObjToSymbol,
+          this.updateMem,
+          this.updateContentType,
+          this.moveMem
+        );
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
       } else {
         console.log("Exception: ", tree.exception);
       }
     } catch (re) {
-	    console.log(re);
+      console.log(re);
     }
   }
 }
-
-
 
 export default Interpreter;
