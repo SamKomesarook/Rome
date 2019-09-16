@@ -42,6 +42,10 @@ export class App extends Component {
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
 
+
+    // bind function in order to reach callback
+    this.updateMem = this.updateMem.bind(this);
+
     // this.memArr = this.constructMem();
     this.memArr = this.constructMem();
     // console.log("Memory Array: ", this.memArr);
@@ -122,6 +126,9 @@ export class App extends Component {
 
   updateMem(id, mem) {
     this.memArr[id] = mem;
+    this.setState({
+      memState: this.memArr
+    })
   }
 
   updateContentType(id, memObj) {
