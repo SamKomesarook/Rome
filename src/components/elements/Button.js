@@ -12,41 +12,42 @@ export class Button extends Component {
   };
 
   componentWillMount() {
-    switch(this.props.name) {
+    switch (this.props.name) {
       case "Run":
-          this.setState({
-            class: "btn btn-primary",
-            clickFunc: this.runCode,
-            dataFor: "ButtonRun",
-            memArr: this.props.memArr
-          });
-          break;
+        this.setState({
+          class: "btn btn-primary",
+          clickFunc: this.runCode,
+          dataFor: "ButtonRun",
+          memArr: this.props.memArr
+        });
+        break;
       case "Stop":
-          this.setState({
-            class: "btn btn-danger",
-            clickFunc: this.stopCode,
-            dataFor: "ButtonStop"
-          });
-          break;
+        this.setState({
+          class: "btn btn-danger",
+          clickFunc: this.stopCode,
+          dataFor: "ButtonStop"
+        });
+        break;
       case "Help":
-          this.setState({
-            class: "btn btn-info",
-            dataFor: "ButtonHelp",
-            dataEvent: "click",
-            dataEventOff: "blur"
-          });
-          break;
+        this.setState({
+          class: "btn btn-info",
+          dataFor: "ButtonHelp",
+          dataEvent: "click",
+          dataEventOff: "blur"
+        });
+        break;
       case "Info":
-          this.setState({
-            class: "btn btn-warning",
-            dataFor: "ButtonInfo"
-          })
+        this.setState({
+          class: "btn btn-warning",
+          dataFor: "ButtonInfo"
+        });
+        break;
       default:
-          this.setState({
-            class: "btn btn-info",
-            clickFunc: this.props.toggle,
-            dataFor: "ButtonHideShow"
-          });
+        this.setState({
+          class: "btn btn-info",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonHideShow"
+        });
     }
   }
 
@@ -78,13 +79,18 @@ export class Button extends Component {
 
   runCode = () => {
     var code = document.getElementById("codingArea").value;
-    new Interpreter(code, this.state.memArr, this.props.updateContentType);
+    new Interpreter(
+      code,
+      this.state.memArr,
+      this.props.memObjToSymbol,
+      this.props.updateMem,
+      this.props.updateContentType,
+      this.props.moveMem
+    );
     console.log("RUN Clicked!");
   };
 
   render() {
-    // console.log(this.props.name);
-    // console.log(this.state);
     if (this.props.type === "submit") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
