@@ -139,6 +139,13 @@ export class App extends Component {
     console.log("Afte update: ", this.memArr[id].props);
   }
 
+  errorAnimatioin(errMessage){
+     var errMessageDiv = "<span style='color:red'>"+errMessage+"</span><br/>";
+     var oldMessage = document.getElementById("outputArea").innerHTML;
+     oldMessage += errMessageDiv;
+     document.getElementById("outputArea").innerHTML=oldMessage;
+  }
+
   moveRight(){
     var error = false;
     var selectedFound = false;
@@ -357,7 +364,7 @@ export class App extends Component {
                         this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
                       }
                     >
-                      <Button name="Animation test" toggle={this.moveRight}/>
+                      <Button name="Animation test" toggle={this.errorAnimatioin.bind(this,"error message")}/>
                     </div>
                     
                   </div>
