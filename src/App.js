@@ -42,7 +42,6 @@ export class App extends Component {
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
 
-
     // bind function in order to reach callback
     this.updateMem = this.updateMem.bind(this);
 
@@ -128,7 +127,7 @@ export class App extends Component {
     this.memArr[id] = mem;
     this.setState({
       memState: this.memArr
-    })
+    });
   }
 
   updateContentType(id, memObj) {
@@ -163,7 +162,7 @@ export class App extends Component {
   componentWillMount() {
     this.setState({
       memState: this.memArr
-    })
+    });
   }
 
   componentDidMount() {

@@ -64,7 +64,12 @@ RInterpreter.prototype.enterSet = function(ctx) {
     arg
   );
 
-  this.updateContentType(selectedMem, tempMemObj);
+  // only allow set content type when memory is empty
+  if (tempMemObj.getContent() !== "") {
+    alert("Memory isn't empty!");
+  } else {
+    this.updateContentType(selectedMem, tempMemObj);
+  }
 };
 
 RInterpreter.prototype.exitSet = function(ctx) {
