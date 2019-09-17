@@ -134,30 +134,38 @@ RInterpreter.prototype.enterWrite = function(ctx) {
   );
 
   // check content type and if arguments is match to specific contentType
-  if (newMemObj.contentType === "letters") {
-    if (isNaN(arg)) {
-      this.writeContent(newMemObj);
-    } else {
-      alert("Content Type is not valid!");
-    }
-  } else if (newMemObj.contentType === "numbers") {
-    if (isNaN(arg)) {
-      alert("Content Type is not valid!");
+  var matchedType = contentTypeMatch(newMemObj.contentType, arg);
+  if (!matchedType) {
+    alert("Wrond content type!");
+  } else {
+    var contentAvail = memAvailability(tempMem.props.content);
+    if (!contentAvail) {
+      alert("Memory is not available!");
     } else {
       this.writeContent(newMemObj);
     }
   }
+
+  // this.writeContent(newMemObj);
 };
 
 RInterpreter.prototype.exitWrite = function(ctx) {};
 //End Write
 
-//get command
+/**
+ * get command and arguments
+ * @return {string} command and arguments
+ */
 function getCommand(ctx) {
   return ctx.getText();
 }
 
-//get command argument
+/**
+ * strip argument out from command
+ * @param {int} index
+ * @param {string} command
+ * @return {string | int} arguments that inside the command
+ */
 function getCommandArg(index, command) {
   const affix = ")";
   var arg = command.substring(index, command.indexOf(affix));
@@ -168,7 +176,11 @@ function getCommandArg(index, command) {
   return arg;
 }
 
-// get id of current focued memory block
+/**
+ * get selected memory from memory array
+ * @param {array} memArr
+ * @return {int} selected memory ID
+ */
 function getSelectedMemId(memArr) {
   for (var i = 0; i < memArr.length; i++) {
     if (memArr[i].props.selected === true) {
@@ -177,12 +189,49 @@ function getSelectedMemId(memArr) {
   }
 }
 
-// create memory block object
+/**
+ * create memory block object
+ * @param {int} memory object id
+ * @param {string} type of the memory
+ * @param {boolean} if the memory is selected
+ * @param {string | int} memory content
+ * @param {string} type of the memory block
+ * @return {MemoryBlock} a memory block object
+ */
 function createMemObj(id, type, selected, content, contentType) {
   var mem = new MemoryBlock(id, type, selected);
   mem.setContent(content);
   mem.setContentType(contentType);
   return mem;
+}
+
+/**
+ * check if argument type match with memory content type
+ * @param {string} content type that the memory is for
+ * @param {*} command argument
+ * @return {boolean} true if type matches, false otherwise
+ */
+function contentTypeMatch(contentType, arg) {
+  if (contentType === "letters") {
+    if (!isNaN(arg)) {
+      return false;
+    }
+  } else if (contentType === "numbers") {
+    if (isNaN(arg)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * check if memory content is empty
+ * @param {string} memContent
+ * @return {boolean} true is the memory content is empty
+ */
+function memAvailability(memContent) {
+  // console.log("Memory Content: ", memContent);
+  return memContent === "";
 }
 
 // function getNextMem(id) {
