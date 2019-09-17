@@ -12,7 +12,8 @@ class Interpreter {
     memObjToSymbol,
     updateMem,
     updateContentType,
-    moveMem
+    moveMem,
+    writeContent
   ) {
     this.code = code;
     this.memArr = memArr;
@@ -20,6 +21,7 @@ class Interpreter {
     this.updateMem = updateMem;
     this.updateContentType = updateContentType;
     this.moveMem = moveMem;
+    this.writeContent = writeContent;
     this.start(code);
   }
 
@@ -38,7 +40,8 @@ class Interpreter {
           this.memObjToSymbol,
           this.updateMem,
           this.updateContentType,
-          this.moveMem
+          this.moveMem,
+          this.writeContent
         );
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
       } else {

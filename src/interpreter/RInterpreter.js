@@ -6,7 +6,8 @@ var RInterpreter = function(
   memObjToSymbol,
   updateMem,
   updateContentType,
-  moveMem
+  moveMem,
+  writeContent
 ) {
   RomeListener.call(this);
   this.memArr = memArr;
@@ -14,6 +15,7 @@ var RInterpreter = function(
   this.updateMem = updateMem;
   this.updateContentType = updateContentType;
   this.moveMem = moveMem;
+  this.writeContent = writeContent;
   return this;
 };
 
@@ -24,9 +26,9 @@ RInterpreter.prototype.enterR = function(ctx) {
   console.log("ENTER R!");
   // console.log(ctx.expressions());
   // // get name of tokens
-  for (var i = 0; i < ctx.expressions().length; i++) {
-    console.log("Next Token: ", ctx.expressions()[i].getText());
-  }
+  // for (var i = 0; i < ctx.expressions().length; i++) {
+  //   console.log("Next Token: ", ctx.expressions()[i].getText());
+  // }
 };
 
 RInterpreter.prototype.exitR = function(ctx) {
@@ -44,10 +46,9 @@ RInterpreter.prototype.exitRead = function(ctx) {};
 // Start set
 RInterpreter.prototype.enterSet = function(ctx) {
   console.log("ENTER SET!");
-  const affix = ")";
   // fetch the argument out from command
-  var command = ctx.getText();
-  var arg = command.substring(4, command.indexOf(affix));
+  var command = getCommand(ctx);
+  var arg = getCommandArg("set".length + 1, command);
   var selectedMem = getSelectedMemId(this.memArr);
   // console.log("Arg: ", arg);
   // console.log("Mem: ", selectedMem);
@@ -63,23 +64,27 @@ RInterpreter.prototype.enterSet = function(ctx) {
     arg
   );
 
-  this.updateContentType(selectedMem, tempMemObj);
+  // only allow set content type when memory is empty
+  if (tempMemObj.getContent() !== "") {
+    alert("Memory isn't empty!");
+  } else {
+    this.updateContentType(selectedMem, tempMemObj);
+  }
 };
 
 RInterpreter.prototype.exitSet = function(ctx) {
-  console.log("EXIT SET!");
+  // console.log("EXIT SET!");
 };
 // End set
 
 // Start move
 RInterpreter.prototype.enterMove = function(ctx) {
   console.log("ENTER Move!");
-  const affix = ")";
-  var command = ctx.getText();
-  var arg = command.substring(5, command.indexOf(affix));
+  var command = getCommand(ctx);
+  var arg = getCommandArg("move".length + 1, command);
   var selectedMem = getSelectedMemId(this.memArr);
-  console.log("Arg: ", arg);
-  console.log("Mem: ", selectedMem);
+  // console.log("Arg: ", arg);
+  // console.log("Mem: ", selectedMem);
 
   var tempOldMem = this.memArr[selectedMem];
   var tempNewMem =
@@ -107,11 +112,75 @@ RInterpreter.prototype.enterMove = function(ctx) {
 };
 
 RInterpreter.prototype.exitMove = function(ctx) {
-  console.log("EXIT Move!");
+  // console.log("EXIT Move!");
 };
 //End Move
 
-// get id of current focued memory block
+//Start Write
+RInterpreter.prototype.enterWrite = function(ctx) {
+  console.log("Enter write");
+  var command = getCommand(ctx);
+  var arg = getCommandArg("write".length + 1, command);
+  var selectedMem = getSelectedMemId(this.memArr);
+
+  var tempMem = this.memArr[selectedMem];
+
+  var newMemObj = createMemObj(
+    tempMem.props.id,
+    tempMem.type.name,
+    tempMem.props.selected,
+    arg,
+    tempMem.props.contentType
+  );
+
+  // check content type and if arguments is match to specific contentType
+  var matchedType = contentTypeMatch(newMemObj.contentType, arg);
+  if (!matchedType) {
+    alert("Wrond content type!");
+  } else {
+    var contentAvail = memAvailability(tempMem.props.content);
+    if (!contentAvail) {
+      alert("Memory is not available!");
+    } else {
+      this.writeContent(newMemObj);
+    }
+  }
+
+  // this.writeContent(newMemObj);
+};
+
+RInterpreter.prototype.exitWrite = function(ctx) {};
+//End Write
+
+/**
+ * get command and arguments
+ * @return {string} command and arguments
+ */
+function getCommand(ctx) {
+  return ctx.getText();
+}
+
+/**
+ * strip argument out from command
+ * @param {int} index
+ * @param {string} command
+ * @return {string | int} arguments that inside the command
+ */
+function getCommandArg(index, command) {
+  const affix = ")";
+  var arg = command.substring(index, command.indexOf(affix));
+  // remove double-quote/single quote
+  if (arg.indexOf("'") >= 0 || arg.indexOf('"') >= 0) {
+    arg = arg.replace(/['"]+/g, "");
+  }
+  return arg;
+}
+
+/**
+ * get selected memory from memory array
+ * @param {array} memArr
+ * @return {int} selected memory ID
+ */
 function getSelectedMemId(memArr) {
   for (var i = 0; i < memArr.length; i++) {
     if (memArr[i].props.selected === true) {
@@ -120,12 +189,49 @@ function getSelectedMemId(memArr) {
   }
 }
 
-// create memory block object
+/**
+ * create memory block object
+ * @param {int} memory object id
+ * @param {string} type of the memory
+ * @param {boolean} if the memory is selected
+ * @param {string | int} memory content
+ * @param {string} type of the memory block
+ * @return {MemoryBlock} a memory block object
+ */
 function createMemObj(id, type, selected, content, contentType) {
   var mem = new MemoryBlock(id, type, selected);
   mem.setContent(content);
   mem.setContentType(contentType);
   return mem;
+}
+
+/**
+ * check if argument type match with memory content type
+ * @param {string} content type that the memory is for
+ * @param {*} command argument
+ * @return {boolean} true if type matches, false otherwise
+ */
+function contentTypeMatch(contentType, arg) {
+  if (contentType === "letters") {
+    if (!isNaN(arg)) {
+      return false;
+    }
+  } else if (contentType === "numbers") {
+    if (isNaN(arg)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * check if memory content is empty
+ * @param {string} memContent
+ * @return {boolean} true is the memory content is empty
+ */
+function memAvailability(memContent) {
+  // console.log("Memory Content: ", memContent);
+  return memContent === "";
 }
 
 // function getNextMem(id) {

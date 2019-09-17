@@ -85,7 +85,8 @@ export class Button extends Component {
       this.props.memObjToSymbol,
       this.props.updateMem,
       this.props.updateContentType,
-      this.props.moveMem
+      this.props.moveMem,
+      this.props.writeContent
     );
     console.log("RUN Clicked!");
   };
