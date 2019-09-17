@@ -153,12 +153,14 @@ export class App extends Component {
     }
   }
 
+  writeContent(memObj) {
+    var id = memObj.id;
+    var newMem = this.memObjToSymbol(memObj);
+    this.updateMem(id, newMem);
+  }
+
   // set state before render
   componentWillMount() {
-    // this.setState(state => ({
-    //   ...state,
-    //   memState: this.memArr,
-    // }))
     this.setState({
       memState: this.memArr
     })
@@ -168,7 +170,6 @@ export class App extends Component {
     window.addEventListener("beforeunload", () => {
       this.closeWindowPortal();
     });
-    console.log(this.state);
   }
 
   toggleIOWindow() {
@@ -285,6 +286,7 @@ export class App extends Component {
                           updateMem={this.updateMem}
                           updateContentType={this.updateContentType}
                           moveMem={this.moveMem}
+                          writeContent={this.writeContent}
                         />
                       </div>
                       <div
