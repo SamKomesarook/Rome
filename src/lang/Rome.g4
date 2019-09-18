@@ -24,8 +24,8 @@ NOT:'not';
 EQL:'equal';
 LESS:'less';
 GRE:'greater';
-//AND:'and';
-//OR:'or';
+AND:'and';
+OR:'or';
 
 MOVE:'move';
 RIGHT:'right';
@@ -33,10 +33,14 @@ LEFT:'left';
 
 LPAR:'(';
 RPAR:')';
-LSQ:'[';
-RSQ:']';
+LSQ:'{';
+RSQ:'}';
+
+LOOP:'loop';
 
 NEWLINE:'\n';
+
+SPACE:' ';
 
 IDENTIFIER : [a-zA-Z]+;
 
@@ -47,22 +51,24 @@ NUMBER
 // Rules
 
 intargs
-	: NUMBER
-	| MEM LPAR intargs RPAR
+	: NUMBER # Num
+	| MEM LPAR intargs RPAR # Mem
 	;
 
 STRLIT : '"' ~ ["\r\n]* '"';
 
-r : START NEWLINE expressions* END NEWLINE?;
+r : START NEWLINE expressions* END NEWLINE*;
 
 expressions : expression NEWLINE;
+
+conditional : (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (intargs | STRLIT) # Cond;
 
 expression
 	: SET LPAR (NUM | LET) RPAR # Set
 	| FREE # Free
 	| READ # Read
 	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
-	| IF LPAR (IS|NOT) (LESS|GRE|EQL) (intargs|STRLIT) RPAR LSQ NEWLINE expressions* RSQ # If //((AND|OR) (IS|NOT) (LESS|GRE|EQL) (intargs|STRLIT))*
-	| LSQ NEWLINE expressions+ RSQ LSQ intargs RSQ # Loop
-	| WRITE LPAR (intargs|STRLIT) RPAR # Write
+	| IF LPAR conditional ((AND | OR) SPACE conditional)* RPAR LSQ NEWLINE expressions* RSQ # If
+	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
+	| WRITE LPAR (intargs | STRLIT) RPAR # Write
 	;
