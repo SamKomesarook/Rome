@@ -37,6 +37,7 @@ export class App extends Component {
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
     this.moveRight = this.moveRight.bind(this);
+    this.loopAnimation = this.loopAnimation.bind(this);
     this.memArr = this.constructMem();
     console.log("Memory Array: ", this.memArr);
     // this.memObjArr = this.constructMemObj();
@@ -373,7 +374,7 @@ export class App extends Component {
                         this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
                       }
                     >
-                      <Button name="Animation test" toggle={this.errorAnimatioin.bind(this,"error message")}/>
+                      <Button name="Animation test" toggle={this.loopAnimation}/>
                     </div>
                     
                   </div>
