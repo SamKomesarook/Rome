@@ -3,7 +3,7 @@ import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
 // import Form from "./components/layout/Form";
-import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
+// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 // import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
@@ -11,14 +11,7 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 
-// import MemoryBlock from "./entity/MemoryBlock";
-
-// import {
-//   memObjToSymbol,
-//   updateMem,
-//   updateContentType,
-//   moveMem
-// } from "./MemFunc";
+import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
 const memArr = [15];
 
@@ -48,80 +41,8 @@ export class App extends Component {
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
 
-    this.memArr = this.constructMem();
+    this.memArr = constructMem();
     this.ref = [];
-  }
-
-  constructMem() {
-    var memArr = [];
-    var memLen = 15;
-    for (var i = 0; i < memLen; i++) {
-      if (i === 13) {
-        memArr.push(
-          <USBMemory
-            selected={false}
-            id={i}
-            content={"USBMemory"}
-            contentType={"letters"}
-          />
-        );
-      } else if (i === 14) {
-        memArr.push(
-          <NetMemory
-            selected={false}
-            id={i}
-            content={"NetMemory"}
-            contentType={"letters"}
-          />
-        );
-      } else {
-        memArr.push(
-          <Memory
-            selected={i === 0 ? true : false}
-            id={i}
-            content={"Memory"}
-            contentType={"letters"}
-          />
-        );
-      }
-    }
-    return memArr;
-  }
-
-  // map memory block object to react jsx
-  memObjToSymbol(mem) {
-    var type = mem.type;
-    switch (type) {
-      case "Memory":
-        return (
-          <Memory
-            selected={mem.selected}
-            id={mem.id}
-            content={mem.content}
-            contentType={mem.contentType}
-          />
-        );
-      case "NetMemory":
-        return (
-          <NetMemory
-            selected={mem.selected}
-            id={mem.id}
-            content={mem.content}
-            contentType={mem.contentType}
-          />
-        );
-      case "USBMemory":
-        return (
-          <USBMemory
-            selected={mem.selected}
-            id={mem.id}
-            content={mem.content}
-            contentType={mem.contentType}
-          />
-        );
-      default:
-        break;
-    }
   }
 
   updateMem(id, mem) {
@@ -132,7 +53,7 @@ export class App extends Component {
   }
 
   updateContentType(id, memObj) {
-    var newMem = this.memObjToSymbol(memObj);
+    var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
@@ -144,8 +65,8 @@ export class App extends Component {
     ) {
       alert("Invalide Move command!");
     } else {
-      var oldMem = this.memObjToSymbol(oldMemObj);
-      var newMem = this.memObjToSymbol(newMemObj);
+      var oldMem = mapMemObjToSymbol(oldMemObj);
+      var newMem = mapMemObjToSymbol(newMemObj);
       this.updateMem(oldMemObj.getId(), oldMem);
       this.updateMem(newMemObj.getId(), newMem);
     }
@@ -153,13 +74,13 @@ export class App extends Component {
 
   writeContent(memObj) {
     var id = memObj.id;
-    var newMem = this.memObjToSymbol(memObj);
+    var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
   freeMem(memObj) {
     var id = memObj.id;
-    var newMem = this.memObjToSymbol(memObj);
+    var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
