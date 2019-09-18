@@ -4,3 +4,15 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
+
+.lightBlue {
+    box-shadow: 5px 5px 5px lightblue;
+    border: 1px;
+    border-style: solid;
+}
+
+.lightGray {
+    box-shadow: 5px 5px 5px lightgray;
+    border: 1px;
+    border-style: solid;
+}
