@@ -3,19 +3,17 @@ import MemoryBlock from "../entity/MemoryBlock";
 
 var RInterpreter = function(
   memArr,
-  memObjToSymbol,
-  updateMem,
   updateContentType,
   moveMem,
-  writeContent
+  writeContent,
+  freeMem
 ) {
   RomeListener.call(this);
   this.memArr = memArr;
-  this.memObjToSymbol = memObjToSymbol;
-  this.updateMem = updateMem;
   this.updateContentType = updateContentType;
   this.moveMem = moveMem;
   this.writeContent = writeContent;
+  this.freeMem = freeMem;
   return this;
 };
 
@@ -151,6 +149,25 @@ RInterpreter.prototype.enterWrite = function(ctx) {
 
 RInterpreter.prototype.exitWrite = function(ctx) {};
 //End Write
+
+//Start Free
+RInterpreter.prototype.enterFree = function(ctx) {
+  console.log("Enter Free!");
+  var selectedMem = getSelectedMemId(this.memArr);
+  var tempMem = this.memArr[selectedMem];
+  var tempMemObj = createMemObj(
+    tempMem.props.id,
+    tempMem.type.name,
+    tempMem.props.selected,
+    "",
+    tempMem.props.contentType
+  );
+
+  this.freeMem(tempMemObj);
+};
+
+RInterpreter.prototype.exitFree = function(ctx) {};
+//End Free
 
 /**
  * get command and arguments

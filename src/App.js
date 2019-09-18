@@ -43,11 +43,12 @@ export class App extends Component {
     this.closeWindow = this.closeWindowPortal.bind(this);
 
     // bind function in order to reach callback
-    this.updateMem = this.updateMem.bind(this);
+    this.moveMem = this.moveMem.bind(this);
+    this.updateContentType = this.updateContentType.bind(this);
+    this.writeContent = this.writeContent.bind(this);
+    this.freeMem = this.freeMem.bind(this);
 
-    // this.memArr = this.constructMem();
     this.memArr = this.constructMem();
-    // console.log("Memory Array: ", this.memArr);
     this.ref = [];
   }
 
@@ -131,10 +132,8 @@ export class App extends Component {
   }
 
   updateContentType(id, memObj) {
-    // console.log("Before Update: ", this.memArr[id].props);
     var newMem = this.memObjToSymbol(memObj);
     this.updateMem(id, newMem);
-    // console.log("Afte update: ", this.memArr[id].props);
   }
 
   moveMem(oldMemObj, newMemObj, direction) {
@@ -153,6 +152,12 @@ export class App extends Component {
   }
 
   writeContent(memObj) {
+    var id = memObj.id;
+    var newMem = this.memObjToSymbol(memObj);
+    this.updateMem(id, newMem);
+  }
+
+  freeMem(memObj) {
     var id = memObj.id;
     var newMem = this.memObjToSymbol(memObj);
     this.updateMem(id, newMem);
@@ -281,11 +286,10 @@ export class App extends Component {
                           toggle={this.toggleBinaryString}
                           memArr={this.memArr}
                           compRef={el => this.ref.push(el)}
-                          memObjToSymbol={this.memObjToSymbol}
-                          updateMem={this.updateMem}
                           updateContentType={this.updateContentType}
                           moveMem={this.moveMem}
                           writeContent={this.writeContent}
+                          freeMem={this.freeMem}
                         />
                       </div>
                       <div
