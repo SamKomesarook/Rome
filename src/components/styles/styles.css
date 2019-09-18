@@ -4,3 +4,11 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
+
+.bg-lightBlue {
+    background-color: lightblue;
+}
+
+.bg-lightGray {
+    background-color: lightgray;
+}
