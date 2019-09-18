@@ -12,3 +12,9 @@
 .bg-lightGray {
     background-color: lightgray;
 }
+
+.memory-border {
+    border-style: solid;
+    border-width: 1px;
+    border-color: blue;
+}
