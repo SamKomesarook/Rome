@@ -26,7 +26,8 @@ export class App extends Component {
       // memState: memArr
       showAnimationArea: true,
       showTextArea:true,
-      showIOWindow:true
+      showIOWindow:true,
+      loopAnimation:false
     };
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
     this.toggleTextArea = this.toggleTextArea.bind(this);
@@ -285,6 +286,14 @@ export class App extends Component {
     setTimeout(() => ReactTooltip.hide(), 1000);
   }
 
+  /* Function for Loop Animation */
+  loopAnimation() {
+    this.setState(state => ({
+      ...state,
+      loopAnimation: !state.loopAnimation
+    }));
+  }
+
   render() {
     return (
       <Fragment>
@@ -395,7 +404,7 @@ export class App extends Component {
                   </div>
                 )}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-5" id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
+                  <div className={"col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
                     <div className="row">
                       <div className="col">{this.memArr[0]}</div>
                       <div className="col">{this.memArr[1]}</div>
