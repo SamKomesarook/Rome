@@ -8,7 +8,7 @@ export class Memory extends Component {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-white rounded border border-danger"
+          className="shadow-lg p-3 mb-5 bg-white rounded"
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -20,7 +20,7 @@ export class Memory extends Component {
     } else {
       return (
         <div
-          className={"p-3 mb-5 bg-white rounded " + ((this.props.contentType == 'letters')? "lightGray" : "lightBlue")}
+          className={"shadow-none p-3 mb-5 rounded " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -51,7 +51,7 @@ export class NetMemory extends Component {
     } else {
       return (
         <div
-          className={"p-3 mb-5 bg-white bg-brown rounded " + ((this.props.contentType == 'letters')? "lightGray" : "lightBlue")}
+          className={"shadow-none p-3 mb-5 rounded border border-info " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -71,7 +71,7 @@ export class USBMemory extends Component {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-blue rounded border border-warning"
+          className="shadow-lg p-3 mb-5 bg-blue rounded border border-dark"
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
@@ -82,7 +82,7 @@ export class USBMemory extends Component {
     } else {
       return (
         <div
-          className={"p-3 mb-5 bg-blue rounded " + ((this.props.contentType == 'letters')? "lightGray" : "lightBlue")}
+          className={"shadow-none p-3 mb-5 rounded border border-dark " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
