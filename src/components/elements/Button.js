@@ -82,11 +82,10 @@ export class Button extends Component {
     new Interpreter(
       code,
       this.state.memArr,
-      this.props.memObjToSymbol,
-      this.props.updateMem,
       this.props.updateContentType,
       this.props.moveMem,
-      this.props.writeContent
+      this.props.writeContent,
+      this.props.freeMem
     );
     console.log("RUN Clicked!");
   };

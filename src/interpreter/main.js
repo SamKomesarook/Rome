@@ -9,19 +9,17 @@ class Interpreter {
   constructor(
     code,
     memArr,
-    memObjToSymbol,
-    updateMem,
     updateContentType,
     moveMem,
-    writeContent
+    writeContent,
+    freeMem
   ) {
     this.code = code;
     this.memArr = memArr;
-    this.memObjToSymbol = memObjToSymbol;
-    this.updateMem = updateMem;
     this.updateContentType = updateContentType;
     this.moveMem = moveMem;
     this.writeContent = writeContent;
+    this.freeMem = freeMem;
     this.start(code);
   }
 
@@ -37,11 +35,10 @@ class Interpreter {
       if (tree.exception === null) {
         var rInterpreter = new RInterpreter(
           this.memArr,
-          this.memObjToSymbol,
-          this.updateMem,
           this.updateContentType,
           this.moveMem,
-          this.writeContent
+          this.writeContent,
+          this.freeMem
         );
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
       } else {
