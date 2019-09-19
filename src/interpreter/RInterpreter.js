@@ -84,29 +84,35 @@ RInterpreter.prototype.enterMove = function(ctx) {
   // console.log("Arg: ", arg);
   // console.log("Mem: ", selectedMem);
 
-  var tempOldMem = this.memArr[selectedMem];
-  var tempNewMem =
-    arg === "right"
-      ? this.memArr[selectedMem + 1]
-      : this.memArr[selectedMem - 1];
+  var validMove = checkMemRange(selectedMem, arg);
 
-  var tempOldMemObj = createMemObj(
-    tempOldMem.props.id,
-    tempOldMem.type.name,
-    false,
-    tempOldMem.props.content,
-    tempOldMem.props.contentType
-  );
+  if (validMove) {
+    var tempOldMem = this.memArr[selectedMem];
+    var tempNewMem =
+      arg === "right"
+        ? this.memArr[selectedMem + 1]
+        : this.memArr[selectedMem - 1];
 
-  var tempNewMemObj = createMemObj(
-    tempNewMem.props.id,
-    tempNewMem.type.name,
-    true,
-    tempNewMem.props.content,
-    tempNewMem.props.contentType
-  );
+    var tempOldMemObj = createMemObj(
+      tempOldMem.props.id,
+      tempOldMem.type.name,
+      false,
+      tempOldMem.props.content,
+      tempOldMem.props.contentType
+    );
 
-  this.moveMem(tempOldMemObj, tempNewMemObj, arg);
+    var tempNewMemObj = createMemObj(
+      tempNewMem.props.id,
+      tempNewMem.type.name,
+      true,
+      tempNewMem.props.content,
+      tempNewMem.props.contentType
+    );
+
+    this.moveMem(tempOldMemObj, tempNewMemObj, arg);
+  } else {
+    alert("Hit the wall of memory!");
+  }
 };
 
 RInterpreter.prototype.exitMove = function(ctx) {
@@ -168,6 +174,26 @@ RInterpreter.prototype.enterFree = function(ctx) {
 
 RInterpreter.prototype.exitFree = function(ctx) {};
 //End Free
+
+//Start Mem
+RInterpreter.prototype.enterMem = function(ctx) {
+  console.log("Enter Memory");
+  var command = getCommand(ctx);
+  var arg = getCommandArg("memory".length + 1, command);
+
+  var tempMem = this.memArr[arg];
+  if (tempMem.props.contentType === "letters") {
+    alert("Memory content is not a number");
+  } else {
+    alert(tempMem.props.contentType);
+    return tempMem.props.content;
+  }
+};
+
+RInterpreter.prototype.exitMem = function(ctx) {
+  console.log("Exit Memory");
+};
+//End Mem
 
 /**
  * get command and arguments
@@ -251,12 +277,19 @@ function memAvailability(memContent) {
   return memContent === "";
 }
 
-// function getNextMem(id) {
-//   return id + 1 <= 14 ? id + 1 : null;
-// }
-
-// function getPreviousMem(id) {
-//   return id - 1 >= 0 ? id - 1 : null;
-// }
+/**
+ * check if movement of selected memory is valid
+ * @param {int} id of memory block
+ * @param {string} direction direction of movement
+ * @return {Boolean} true if movement is valid, false otherwise
+ */
+function checkMemRange(id, direction) {
+  if (id === 0 && direction === "left") {
+    return false;
+  } else if (id === 14 && direction === "right") {
+    return false;
+  }
+  return true;
+}
 
 export default RInterpreter;
