@@ -331,7 +331,7 @@ export class App extends Component {
                 {this.state.showTextArea ? 
                 <div
                   className={
-                    this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
+                    this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
                   }
                 >
                   <TextArea compRef={ el => this.ref.push(el)}/>
@@ -341,7 +341,7 @@ export class App extends Component {
                   <div className="row">
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
                       }
                     >
                       <Button
@@ -354,7 +354,7 @@ export class App extends Component {
                     </div>
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
                       }
                     >
                       <Button name="Stop" toggle={this.initiliazeBinaryString} compRef={ el => this.ref.push(el)}/>
@@ -362,7 +362,7 @@ export class App extends Component {
                     
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
                       }
                     >
                       <Button name="Info" toggle={this.toggleRef}/>
@@ -370,22 +370,11 @@ export class App extends Component {
 
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
                       }
                     >
                       <Button name="Help" />
                     </div>
-
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
-                      }
-                    >
-
-                      <Button name="Animation test" toggle={this.printAnimation.bind(this,"print message")}/>
-
-                    </div>
-                    
                   </div>
                   {/* <Form method={"GET"} />
                   <Form method={"POST"} /> */}
@@ -412,52 +401,53 @@ export class App extends Component {
                       </Transition>
                     </div>
                   </div>
-                )}
-                {this.state.showAnimationArea && (
-                  <div className={"col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
-                    <div className="row">
-                      <div className="col">{this.memArr[0]}</div>
-                      <div className="col">{this.memArr[1]}</div>
-                      <div className="col">{this.memArr[2]}</div>
+                )} 
+                  <div className={this.state.showAnimationArea ?( "col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")):"col-sm-5"} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
+                  {this.state.showAnimationArea && (
+                    <div className="row-sm-6">
+                      <div className="row">
+                        <div className="col">{this.memArr[0]}</div>
+                        <div className="col">{this.memArr[1]}</div>
+                        <div className="col">{this.memArr[2]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[3]}</div>
+                        <div className="col">{this.memArr[4]}</div>
+                        <div className="col">{this.memArr[5]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[6]}</div>
+                        <div className="col">{this.memArr[7]}</div>
+                        <div className="col">{this.memArr[8]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[9]}</div>
+                        <div className="col">{this.memArr[10]}</div>
+                        <div className="col">{this.memArr[11]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[12]}</div>
+                        <div className="col">{this.memArr[13]}</div>
+                        <div className="col">{this.memArr[14]}</div>
+                      </div>
                     </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[3]}</div>
-                      <div className="col">{this.memArr[4]}</div>
-                      <div className="col">{this.memArr[5]}</div>
+                    )}
+                    {this.state.showIOWindow &&(
+                    <div className="row">	
+                      <div className="col-sm-12">	
+                        <InputOutputArea 
+                          compRef={ el => this.ref.push(el)}
+                        />	
+                      </div>	
                     </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[6]}</div>
-                      <div className="col">{this.memArr[7]}</div>
-                      <div className="col">{this.memArr[8]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[9]}</div>
-                      <div className="col">{this.memArr[10]}</div>
-                      <div className="col">{this.memArr[11]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[12]}</div>
-                      <div className="col">{this.memArr[13]}</div>
-                      <div className="col">{this.memArr[14]}</div>
-                    </div>
+                    )}	
                   </div>
-                )}
+                
               </div>
             </div>
           </div>
         </div>
-        {this.state.showIOWindow &&(
-        <div className="container-fluid">	
-          <div className="row">	
-            <div className="col-sm-12">	
-              <InputOutputArea 
-                compRef={ el => this.ref.push(el)}
-              />	
-            </div>	
-          </div>	
-        </div>
-        )
-        }
+
         <Tooltips />{" "}
 
       </Fragment>
