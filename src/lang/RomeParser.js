@@ -6,59 +6,69 @@ var grammarFileName = "Rome.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u001eS\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
-    "\u0004\u0004\u0005\t\u0005\u0003\u0002\u0003\u0002\u0003\u0002\u0003",
-    "\u0002\u0003\u0002\u0003\u0002\u0005\u0002\u0011\n\u0002\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0007\u0003\u0016\n\u0003\f\u0003\u000e\u0003",
-    "\u0019\u000b\u0003\u0003\u0003\u0003\u0003\u0005\u0003\u001d\n\u0003",
-    "\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0005\u00052\n\u0005\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0007\u00058\n\u0005\f\u0005\u000e\u0005;\u000b\u0005\u0003",
-    "\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003",
-    "\u0005\u0006\u0005D\n\u0005\r\u0005\u000e\u0005E\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0005\u0005N\n\u0005",
-    "\u0003\u0005\u0005\u0005Q\n\u0005\u0003\u0005\u0002\u0002\u0006\u0002",
-    "\u0004\u0006\b\u0002\u0006\u0003\u0002\u0006\u0007\u0003\u0002\u0013",
-    "\u0014\u0003\u0002\r\u000e\u0003\u0002\u000f\u0011\u0002[\u0002\u0010",
-    "\u0003\u0002\u0002\u0002\u0004\u0012\u0003\u0002\u0002\u0002\u0006\u001e",
-    "\u0003\u0002\u0002\u0002\bP\u0003\u0002\u0002\u0002\n\u0011\u0007\u001c",
-    "\u0002\u0002\u000b\f\u0007\t\u0002\u0002\f\r\u0007\u0017\u0002\u0002",
-    "\r\u000e\u0005\u0002\u0002\u0002\u000e\u000f\u0007\u0018\u0002\u0002",
-    "\u000f\u0011\u0003\u0002\u0002\u0002\u0010\n\u0003\u0002\u0002\u0002",
-    "\u0010\u000b\u0003\u0002\u0002\u0002\u0011\u0003\u0003\u0002\u0002\u0002",
-    "\u0012\u0013\u0007\u0003\u0002\u0002\u0013\u0017\u0007\u001b\u0002\u0002",
-    "\u0014\u0016\u0005\u0006\u0004\u0002\u0015\u0014\u0003\u0002\u0002\u0002",
-    "\u0016\u0019\u0003\u0002\u0002\u0002\u0017\u0015\u0003\u0002\u0002\u0002",
-    "\u0017\u0018\u0003\u0002\u0002\u0002\u0018\u001a\u0003\u0002\u0002\u0002",
-    "\u0019\u0017\u0003\u0002\u0002\u0002\u001a\u001c\u0007\u0004\u0002\u0002",
-    "\u001b\u001d\u0007\u001b\u0002\u0002\u001c\u001b\u0003\u0002\u0002\u0002",
-    "\u001c\u001d\u0003\u0002\u0002\u0002\u001d\u0005\u0003\u0002\u0002\u0002",
-    "\u001e\u001f\u0005\b\u0005\u0002\u001f \u0007\u001b\u0002\u0002 \u0007",
-    "\u0003\u0002\u0002\u0002!\"\u0007\u0005\u0002\u0002\"#\u0007\u0017\u0002",
-    "\u0002#$\t\u0002\u0002\u0002$Q\u0007\u0018\u0002\u0002%Q\u0007\b\u0002",
-    "\u0002&Q\u0007\n\u0002\u0002\'(\u0007\u0012\u0002\u0002()\u0007\u0017",
-    "\u0002\u0002)*\t\u0003\u0002\u0002*Q\u0007\u0018\u0002\u0002+,\u0007",
-    "\f\u0002\u0002,-\u0007\u0017\u0002\u0002-.\t\u0004\u0002\u0002.1\t\u0005",
-    "\u0002\u0002/2\u0005\u0002\u0002\u000202\u0007\u001d\u0002\u00021/\u0003",
-    "\u0002\u0002\u000210\u0003\u0002\u0002\u000223\u0003\u0002\u0002\u0002",
-    "34\u0007\u0018\u0002\u000245\u0007\u0019\u0002\u000259\u0007\u001b\u0002",
-    "\u000268\u0005\u0006\u0004\u000276\u0003\u0002\u0002\u00028;\u0003\u0002",
-    "\u0002\u000297\u0003\u0002\u0002\u00029:\u0003\u0002\u0002\u0002:<\u0003",
-    "\u0002\u0002\u0002;9\u0003\u0002\u0002\u0002<Q\u0007\u001a\u0002\u0002",
-    "=>\u0007\u0015\u0002\u0002>?\u0007\u0017\u0002\u0002?@\u0005\u0002\u0002",
-    "\u0002@A\u0007\u0018\u0002\u0002AC\u0007\u001b\u0002\u0002BD\u0005\u0006",
-    "\u0004\u0002CB\u0003\u0002\u0002\u0002DE\u0003\u0002\u0002\u0002EC\u0003",
-    "\u0002\u0002\u0002EF\u0003\u0002\u0002\u0002FG\u0003\u0002\u0002\u0002",
-    "GH\u0007\u0016\u0002\u0002HQ\u0003\u0002\u0002\u0002IJ\u0007\u000b\u0002",
-    "\u0002JM\u0007\u0017\u0002\u0002KN\u0005\u0002\u0002\u0002LN\u0007\u001d",
-    "\u0002\u0002MK\u0003\u0002\u0002\u0002ML\u0003\u0002\u0002\u0002NO\u0003",
-    "\u0002\u0002\u0002OQ\u0007\u0018\u0002\u0002P!\u0003\u0002\u0002\u0002",
-    "P%\u0003\u0002\u0002\u0002P&\u0003\u0002\u0002\u0002P\'\u0003\u0002",
-    "\u0002\u0002P+\u0003\u0002\u0002\u0002P=\u0003\u0002\u0002\u0002PI\u0003",
-    "\u0002\u0002\u0002Q\t\u0003\u0002\u0002\u0002\n\u0010\u0017\u001c19",
-    "EMP"].join("");
+    "\u0003 f\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t\u0004",
+    "\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0003\u0002\u0003\u0002\u0003",
+    "\u0002\u0003\u0002\u0003\u0002\u0003\u0002\u0005\u0002\u0013\n\u0002",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0007\u0003\u0018\n\u0003\f\u0003",
+    "\u000e\u0003\u001b\u000b\u0003\u0003\u0003\u0003\u0003\u0007\u0003\u001f",
+    "\n\u0003\f\u0003\u000e\u0003\"\u000b\u0003\u0003\u0004\u0003\u0004\u0003",
+    "\u0004\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003",
+    "\u0005\u0005\u0005-\n\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0007\u0006?\n\u0006\f\u0006\u000e\u0006B\u000b\u0006\u0003\u0006",
+    "\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u0006H\n\u0006\f\u0006\u000e",
+    "\u0006K\u000b\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006",
+    "\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u0006",
+    "V\n\u0006\f\u0006\u000e\u0006Y\u000b\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0005\u0006a\n\u0006\u0003",
+    "\u0006\u0005\u0006d\n\u0006\u0003\u0006\u0002\u0002\u0007\u0002\u0004",
+    "\u0006\b\n\u0002\u0007\u0003\u0002\r\u000e\u0003\u0002\u000f\u0011\u0003",
+    "\u0002\u0006\u0007\u0003\u0002\u0015\u0016\u0003\u0002\u0012\u0013\u0002",
+    "n\u0002\u0012\u0003\u0002\u0002\u0002\u0004\u0014\u0003\u0002\u0002",
+    "\u0002\u0006#\u0003\u0002\u0002\u0002\b&\u0003\u0002\u0002\u0002\nc",
+    "\u0003\u0002\u0002\u0002\f\u0013\u0007\u001f\u0002\u0002\r\u000e\u0007",
+    "\t\u0002\u0002\u000e\u000f\u0007\u0017\u0002\u0002\u000f\u0010\u0005",
+    "\u0002\u0002\u0002\u0010\u0011\u0007\u0018\u0002\u0002\u0011\u0013\u0003",
+    "\u0002\u0002\u0002\u0012\f\u0003\u0002\u0002\u0002\u0012\r\u0003\u0002",
+    "\u0002\u0002\u0013\u0003\u0003\u0002\u0002\u0002\u0014\u0015\u0007\u0003",
+    "\u0002\u0002\u0015\u0019\u0007\u001c\u0002\u0002\u0016\u0018\u0005\u0006",
+    "\u0004\u0002\u0017\u0016\u0003\u0002\u0002\u0002\u0018\u001b\u0003\u0002",
+    "\u0002\u0002\u0019\u0017\u0003\u0002\u0002\u0002\u0019\u001a\u0003\u0002",
+    "\u0002\u0002\u001a\u001c\u0003\u0002\u0002\u0002\u001b\u0019\u0003\u0002",
+    "\u0002\u0002\u001c \u0007\u0004\u0002\u0002\u001d\u001f\u0007\u001c",
+    "\u0002\u0002\u001e\u001d\u0003\u0002\u0002\u0002\u001f\"\u0003\u0002",
+    "\u0002\u0002 \u001e\u0003\u0002\u0002\u0002 !\u0003\u0002\u0002\u0002",
+    "!\u0005\u0003\u0002\u0002\u0002\" \u0003\u0002\u0002\u0002#$\u0005\n",
+    "\u0006\u0002$%\u0007\u001c\u0002\u0002%\u0007\u0003\u0002\u0002\u0002",
+    "&\'\t\u0002\u0002\u0002\'(\u0007\u001d\u0002\u0002()\t\u0003\u0002\u0002",
+    "),\u0007\u001d\u0002\u0002*-\u0005\u0002\u0002\u0002+-\u0007 \u0002",
+    "\u0002,*\u0003\u0002\u0002\u0002,+\u0003\u0002\u0002\u0002-\t\u0003",
+    "\u0002\u0002\u0002./\u0007\u0005\u0002\u0002/0\u0007\u0017\u0002\u0002",
+    "01\t\u0004\u0002\u00021d\u0007\u0018\u0002\u00022d\u0007\b\u0002\u0002",
+    "3d\u0007\n\u0002\u000245\u0007\u0014\u0002\u000256\u0007\u0017\u0002",
+    "\u000267\t\u0005\u0002\u00027d\u0007\u0018\u0002\u000289\u0007\f\u0002",
+    "\u00029:\u0007\u0017\u0002\u0002:@\u0005\b\u0005\u0002;<\t\u0006\u0002",
+    "\u0002<=\u0007\u001d\u0002\u0002=?\u0005\b\u0005\u0002>;\u0003\u0002",
+    "\u0002\u0002?B\u0003\u0002\u0002\u0002@>\u0003\u0002\u0002\u0002@A\u0003",
+    "\u0002\u0002\u0002AC\u0003\u0002\u0002\u0002B@\u0003\u0002\u0002\u0002",
+    "CD\u0007\u0018\u0002\u0002DE\u0007\u0019\u0002\u0002EI\u0007\u001c\u0002",
+    "\u0002FH\u0005\u0006\u0004\u0002GF\u0003\u0002\u0002\u0002HK\u0003\u0002",
+    "\u0002\u0002IG\u0003\u0002\u0002\u0002IJ\u0003\u0002\u0002\u0002JL\u0003",
+    "\u0002\u0002\u0002KI\u0003\u0002\u0002\u0002LM\u0007\u001a\u0002\u0002",
+    "Md\u0003\u0002\u0002\u0002NO\u0007\u001b\u0002\u0002OP\u0007\u0017\u0002",
+    "\u0002PQ\u0005\u0002\u0002\u0002QR\u0007\u0018\u0002\u0002RS\u0007\u0019",
+    "\u0002\u0002SW\u0007\u001c\u0002\u0002TV\u0005\u0006\u0004\u0002UT\u0003",
+    "\u0002\u0002\u0002VY\u0003\u0002\u0002\u0002WU\u0003\u0002\u0002\u0002",
+    "WX\u0003\u0002\u0002\u0002XZ\u0003\u0002\u0002\u0002YW\u0003\u0002\u0002",
+    "\u0002Z[\u0007\u001a\u0002\u0002[d\u0003\u0002\u0002\u0002\\]\u0007",
+    "\u000b\u0002\u0002]`\u0007\u0017\u0002\u0002^a\u0005\u0002\u0002\u0002",
+    "_a\u0007 \u0002\u0002`^\u0003\u0002\u0002\u0002`_\u0003\u0002\u0002",
+    "\u0002ab\u0003\u0002\u0002\u0002bd\u0007\u0018\u0002\u0002c.\u0003\u0002",
+    "\u0002\u0002c2\u0003\u0002\u0002\u0002c3\u0003\u0002\u0002\u0002c4\u0003",
+    "\u0002\u0002\u0002c8\u0003\u0002\u0002\u0002cN\u0003\u0002\u0002\u0002",
+    "c\\\u0003\u0002\u0002\u0002d\u000b\u0003\u0002\u0002\u0002\u000b\u0012",
+    "\u0019 ,@IW`c"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -70,16 +80,16 @@ var sharedContextCache = new antlr4.PredictionContextCache();
 var literalNames = [ null, "'start'", "'end'", "'set'", "'numbers'", "'letters'", 
                      "'free'", "'memory'", "'read'", "'write'", "'if'", 
                      "'is'", "'not'", "'equal'", "'less'", "'greater'", 
-                     "'move'", "'right'", "'left'", "'loop'", "'end_loop'", 
-                     "'('", "')'", "'['", "']'", "'\n'" ];
+                     "'and'", "'or'", "'move'", "'right'", "'left'", "'('", 
+                     "')'", "'{'", "'}'", "'loop'", "'\n'", "' '" ];
 
 var symbolicNames = [ null, "START", "END", "SET", "NUM", "LET", "FREE", 
                       "MEM", "READ", "WRITE", "IF", "IS", "NOT", "EQL", 
-                      "LESS", "GRE", "MOVE", "RIGHT", "LEFT", "LOOP", "ELOOP", 
-                      "LPAR", "RPAR", "LSQ", "RSQ", "NEWLINE", "NUMBER", 
-                      "STRLIT", "IDENTIFIER" ];
+                      "LESS", "GRE", "AND", "OR", "MOVE", "RIGHT", "LEFT", 
+                      "LPAR", "RPAR", "LSQ", "RSQ", "LOOP", "NEWLINE", "SPACE", 
+                      "IDENTIFIER", "NUMBER", "STRLIT" ];
 
-var ruleNames =  [ "intargs", "r", "expressions", "expression" ];
+var ruleNames =  [ "intargs", "r", "expressions", "conditional", "expression" ];
 
 function RomeParser (input) {
 	antlr4.Parser.call(this, input);
@@ -115,24 +125,27 @@ RomeParser.NOT = 12;
 RomeParser.EQL = 13;
 RomeParser.LESS = 14;
 RomeParser.GRE = 15;
-RomeParser.MOVE = 16;
-RomeParser.RIGHT = 17;
-RomeParser.LEFT = 18;
-RomeParser.LOOP = 19;
-RomeParser.ELOOP = 20;
+RomeParser.AND = 16;
+RomeParser.OR = 17;
+RomeParser.MOVE = 18;
+RomeParser.RIGHT = 19;
+RomeParser.LEFT = 20;
 RomeParser.LPAR = 21;
 RomeParser.RPAR = 22;
 RomeParser.LSQ = 23;
 RomeParser.RSQ = 24;
-RomeParser.NEWLINE = 25;
-RomeParser.NUMBER = 26;
-RomeParser.STRLIT = 27;
+RomeParser.LOOP = 25;
+RomeParser.NEWLINE = 26;
+RomeParser.SPACE = 27;
 RomeParser.IDENTIFIER = 28;
+RomeParser.NUMBER = 29;
+RomeParser.STRLIT = 30;
 
 RomeParser.RULE_intargs = 0;
 RomeParser.RULE_r = 1;
 RomeParser.RULE_expressions = 2;
-RomeParser.RULE_expression = 3;
+RomeParser.RULE_conditional = 3;
+RomeParser.RULE_expression = 4;
 
 
 function IntargsContext(parser, parent, invokingState) {
@@ -151,38 +164,77 @@ function IntargsContext(parser, parent, invokingState) {
 IntargsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 IntargsContext.prototype.constructor = IntargsContext;
 
-IntargsContext.prototype.NUMBER = function() {
-    return this.getToken(RomeParser.NUMBER, 0);
+
+ 
+IntargsContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
 
-IntargsContext.prototype.MEM = function() {
+
+function MemContext(parser, ctx) {
+	IntargsContext.call(this, parser);
+    IntargsContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+MemContext.prototype = Object.create(IntargsContext.prototype);
+MemContext.prototype.constructor = MemContext;
+
+RomeParser.MemContext = MemContext;
+
+MemContext.prototype.MEM = function() {
     return this.getToken(RomeParser.MEM, 0);
 };
 
-IntargsContext.prototype.LPAR = function() {
+MemContext.prototype.LPAR = function() {
     return this.getToken(RomeParser.LPAR, 0);
 };
 
-IntargsContext.prototype.intargs = function() {
+MemContext.prototype.intargs = function() {
     return this.getTypedRuleContext(IntargsContext,0);
 };
 
-IntargsContext.prototype.RPAR = function() {
+MemContext.prototype.RPAR = function() {
     return this.getToken(RomeParser.RPAR, 0);
 };
-
-IntargsContext.prototype.enterRule = function(listener) {
+MemContext.prototype.enterRule = function(listener) {
     if(listener instanceof RomeListener ) {
-        listener.enterIntargs(this);
+        listener.enterMem(this);
 	}
 };
 
-IntargsContext.prototype.exitRule = function(listener) {
+MemContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
-        listener.exitIntargs(this);
+        listener.exitMem(this);
 	}
 };
 
+
+function NumContext(parser, ctx) {
+	IntargsContext.call(this, parser);
+    IntargsContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+NumContext.prototype = Object.create(IntargsContext.prototype);
+NumContext.prototype.constructor = NumContext;
+
+RomeParser.NumContext = NumContext;
+
+NumContext.prototype.NUMBER = function() {
+    return this.getToken(RomeParser.NUMBER, 0);
+};
+NumContext.prototype.enterRule = function(listener) {
+    if(listener instanceof RomeListener ) {
+        listener.enterNum(this);
+	}
+};
+
+NumContext.prototype.exitRule = function(listener) {
+    if(listener instanceof RomeListener ) {
+        listener.exitNum(this);
+	}
+};
 
 
 
@@ -193,23 +245,25 @@ RomeParser.prototype.intargs = function() {
     var localctx = new IntargsContext(this, this._ctx, this.state);
     this.enterRule(localctx, 0, RomeParser.RULE_intargs);
     try {
-        this.state = 14;
+        this.state = 16;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case RomeParser.NUMBER:
+            localctx = new NumContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
-            this.state = 8;
+            this.state = 10;
             this.match(RomeParser.NUMBER);
             break;
         case RomeParser.MEM:
+            localctx = new MemContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
-            this.state = 9;
-            this.match(RomeParser.MEM);
-            this.state = 10;
-            this.match(RomeParser.LPAR);
             this.state = 11;
-            this.intargs();
+            this.match(RomeParser.MEM);
             this.state = 12;
+            this.match(RomeParser.LPAR);
+            this.state = 13;
+            this.intargs();
+            this.state = 14;
             this.match(RomeParser.RPAR);
             break;
         default:
@@ -301,33 +355,35 @@ RomeParser.prototype.r = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 16;
+        this.state = 18;
         this.match(RomeParser.START);
-        this.state = 17;
+        this.state = 19;
         this.match(RomeParser.NEWLINE);
-        this.state = 21;
+        this.state = 23;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) !== 0)) {
-            this.state = 18;
+            this.state = 20;
             this.expressions();
-            this.state = 23;
+            this.state = 25;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
-        this.state = 24;
-        this.match(RomeParser.END);
         this.state = 26;
+        this.match(RomeParser.END);
+        this.state = 30;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===RomeParser.NEWLINE) {
-            this.state = 25;
+        while(_la===RomeParser.NEWLINE) {
+            this.state = 27;
             this.match(RomeParser.NEWLINE);
+            this.state = 32;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
         }
-
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
-            localctx.exception = re;
+	        localctx.exception = re;
 	        this._errHandler.reportError(this, re);
 	        this._errHandler.recover(this, re);
 	    } else {
@@ -387,10 +443,159 @@ RomeParser.prototype.expressions = function() {
     this.enterRule(localctx, 4, RomeParser.RULE_expressions);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 28;
+        this.state = 33;
         this.expression();
-        this.state = 29;
+        this.state = 34;
         this.match(RomeParser.NEWLINE);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function ConditionalContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = RomeParser.RULE_conditional;
+    return this;
+}
+
+ConditionalContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ConditionalContext.prototype.constructor = ConditionalContext;
+
+
+ 
+ConditionalContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+
+function CondContext(parser, ctx) {
+	ConditionalContext.call(this, parser);
+    ConditionalContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+CondContext.prototype = Object.create(ConditionalContext.prototype);
+CondContext.prototype.constructor = CondContext;
+
+RomeParser.CondContext = CondContext;
+
+CondContext.prototype.SPACE = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(RomeParser.SPACE);
+    } else {
+        return this.getToken(RomeParser.SPACE, i);
+    }
+};
+
+
+CondContext.prototype.IS = function() {
+    return this.getToken(RomeParser.IS, 0);
+};
+
+CondContext.prototype.NOT = function() {
+    return this.getToken(RomeParser.NOT, 0);
+};
+
+CondContext.prototype.LESS = function() {
+    return this.getToken(RomeParser.LESS, 0);
+};
+
+CondContext.prototype.GRE = function() {
+    return this.getToken(RomeParser.GRE, 0);
+};
+
+CondContext.prototype.EQL = function() {
+    return this.getToken(RomeParser.EQL, 0);
+};
+
+CondContext.prototype.intargs = function() {
+    return this.getTypedRuleContext(IntargsContext,0);
+};
+
+CondContext.prototype.STRLIT = function() {
+    return this.getToken(RomeParser.STRLIT, 0);
+};
+CondContext.prototype.enterRule = function(listener) {
+    if(listener instanceof RomeListener ) {
+        listener.enterCond(this);
+	}
+};
+
+CondContext.prototype.exitRule = function(listener) {
+    if(listener instanceof RomeListener ) {
+        listener.exitCond(this);
+	}
+};
+
+
+
+RomeParser.ConditionalContext = ConditionalContext;
+
+RomeParser.prototype.conditional = function() {
+
+    var localctx = new ConditionalContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 6, RomeParser.RULE_conditional);
+    var _la = 0; // Token type
+    try {
+        localctx = new CondContext(this, localctx);
+        this.enterOuterAlt(localctx, 1);
+        this.state = 36;
+        _la = this._input.LA(1);
+        if(!(_la===RomeParser.IS || _la===RomeParser.NOT)) {
+        this._errHandler.recoverInline(this);
+        }
+        else {
+        	this._errHandler.reportMatch(this);
+            this.consume();
+        }
+        this.state = 37;
+        this.match(RomeParser.SPACE);
+        this.state = 38;
+        _la = this._input.LA(1);
+        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.EQL) | (1 << RomeParser.LESS) | (1 << RomeParser.GRE))) !== 0))) {
+        this._errHandler.recoverInline(this);
+        }
+        else {
+        	this._errHandler.reportMatch(this);
+            this.consume();
+        }
+        this.state = 39;
+        this.match(RomeParser.SPACE);
+        this.state = 42;
+        this._errHandler.sync(this);
+        switch(this._input.LA(1)) {
+        case RomeParser.MEM:
+        case RomeParser.NUMBER:
+            this.state = 40;
+            this.intargs();
+            break;
+        case RomeParser.STRLIT:
+            this.state = 41;
+            this.match(RomeParser.STRLIT);
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
+        }
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -483,12 +688,16 @@ LoopContext.prototype.RPAR = function() {
     return this.getToken(RomeParser.RPAR, 0);
 };
 
+LoopContext.prototype.LSQ = function() {
+    return this.getToken(RomeParser.LSQ, 0);
+};
+
 LoopContext.prototype.NEWLINE = function() {
     return this.getToken(RomeParser.NEWLINE, 0);
 };
 
-LoopContext.prototype.ELOOP = function() {
-    return this.getToken(RomeParser.ELOOP, 0);
+LoopContext.prototype.RSQ = function() {
+    return this.getToken(RomeParser.RSQ, 0);
 };
 
 LoopContext.prototype.expressions = function(i) {
@@ -689,6 +898,17 @@ IfContext.prototype.LPAR = function() {
     return this.getToken(RomeParser.LPAR, 0);
 };
 
+IfContext.prototype.conditional = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(ConditionalContext);
+    } else {
+        return this.getTypedRuleContext(ConditionalContext,i);
+    }
+};
+
 IfContext.prototype.RPAR = function() {
     return this.getToken(RomeParser.RPAR, 0);
 };
@@ -705,33 +925,17 @@ IfContext.prototype.RSQ = function() {
     return this.getToken(RomeParser.RSQ, 0);
 };
 
-IfContext.prototype.IS = function() {
-    return this.getToken(RomeParser.IS, 0);
+IfContext.prototype.SPACE = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(RomeParser.SPACE);
+    } else {
+        return this.getToken(RomeParser.SPACE, i);
+    }
 };
 
-IfContext.prototype.NOT = function() {
-    return this.getToken(RomeParser.NOT, 0);
-};
-
-IfContext.prototype.LESS = function() {
-    return this.getToken(RomeParser.LESS, 0);
-};
-
-IfContext.prototype.GRE = function() {
-    return this.getToken(RomeParser.GRE, 0);
-};
-
-IfContext.prototype.EQL = function() {
-    return this.getToken(RomeParser.EQL, 0);
-};
-
-IfContext.prototype.intargs = function() {
-    return this.getTypedRuleContext(IntargsContext,0);
-};
-
-IfContext.prototype.STRLIT = function() {
-    return this.getToken(RomeParser.STRLIT, 0);
-};
 
 IfContext.prototype.expressions = function(i) {
     if(i===undefined) {
@@ -743,6 +947,30 @@ IfContext.prototype.expressions = function(i) {
         return this.getTypedRuleContext(ExpressionsContext,i);
     }
 };
+
+IfContext.prototype.AND = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(RomeParser.AND);
+    } else {
+        return this.getToken(RomeParser.AND, i);
+    }
+};
+
+
+IfContext.prototype.OR = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(RomeParser.OR);
+    } else {
+        return this.getToken(RomeParser.OR, i);
+    }
+};
+
 IfContext.prototype.enterRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.enterIf(this);
@@ -762,20 +990,20 @@ RomeParser.ExpressionContext = ExpressionContext;
 RomeParser.prototype.expression = function() {
 
     var localctx = new ExpressionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 6, RomeParser.RULE_expression);
+    this.enterRule(localctx, 8, RomeParser.RULE_expression);
     var _la = 0; // Token type
     try {
-        this.state = 78;
+        this.state = 97;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case RomeParser.SET:
             localctx = new SetContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
-            this.state = 31;
+            this.state = 44;
             this.match(RomeParser.SET);
-            this.state = 32;
+            this.state = 45;
             this.match(RomeParser.LPAR);
-            this.state = 33;
+            this.state = 46;
             _la = this._input.LA(1);
             if(!(_la===RomeParser.NUM || _la===RomeParser.LET)) {
             this._errHandler.recoverInline(this);
@@ -784,29 +1012,29 @@ RomeParser.prototype.expression = function() {
             	this._errHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 34;
+            this.state = 47;
             this.match(RomeParser.RPAR);
             break;
         case RomeParser.FREE:
             localctx = new FreeContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
-            this.state = 35;
+            this.state = 48;
             this.match(RomeParser.FREE);
             break;
         case RomeParser.READ:
             localctx = new ReadContext(this, localctx);
             this.enterOuterAlt(localctx, 3);
-            this.state = 36;
+            this.state = 49;
             this.match(RomeParser.READ);
             break;
         case RomeParser.MOVE:
             localctx = new MoveContext(this, localctx);
             this.enterOuterAlt(localctx, 4);
-            this.state = 37;
+            this.state = 50;
             this.match(RomeParser.MOVE);
-            this.state = 38;
+            this.state = 51;
             this.match(RomeParser.LPAR);
-            this.state = 39;
+            this.state = 52;
             _la = this._input.LA(1);
             if(!(_la===RomeParser.RIGHT || _la===RomeParser.LEFT)) {
             this._errHandler.recoverInline(this);
@@ -815,117 +1043,109 @@ RomeParser.prototype.expression = function() {
             	this._errHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 40;
+            this.state = 53;
             this.match(RomeParser.RPAR);
             break;
         case RomeParser.IF:
             localctx = new IfContext(this, localctx);
             this.enterOuterAlt(localctx, 5);
-            this.state = 41;
+            this.state = 54;
             this.match(RomeParser.IF);
-            this.state = 42;
-            this.match(RomeParser.LPAR);
-            this.state = 43;
-            _la = this._input.LA(1);
-            if(!(_la===RomeParser.IS || _la===RomeParser.NOT)) {
-            this._errHandler.recoverInline(this);
-            }
-            else {
-            	this._errHandler.reportMatch(this);
-                this.consume();
-            }
-            this.state = 44;
-            _la = this._input.LA(1);
-            if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.EQL) | (1 << RomeParser.LESS) | (1 << RomeParser.GRE))) !== 0))) {
-            this._errHandler.recoverInline(this);
-            }
-            else {
-            	this._errHandler.reportMatch(this);
-                this.consume();
-            }
-            this.state = 47;
-            this._errHandler.sync(this);
-            switch(this._input.LA(1)) {
-            case RomeParser.MEM:
-            case RomeParser.NUMBER:
-                this.state = 45;
-                this.intargs();
-                break;
-            case RomeParser.STRLIT:
-                this.state = 46;
-                this.match(RomeParser.STRLIT);
-                break;
-            default:
-                throw new antlr4.error.NoViableAltException(this);
-            }
-            this.state = 49;
-            this.match(RomeParser.RPAR);
-            this.state = 50;
-            this.match(RomeParser.LSQ);
-            this.state = 51;
-            this.match(RomeParser.NEWLINE);
             this.state = 55;
+            this.match(RomeParser.LPAR);
+            this.state = 56;
+            this.conditional();
+            this.state = 62;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) !== 0)) {
-                this.state = 52;
-                this.expressions();
+            while(_la===RomeParser.AND || _la===RomeParser.OR) {
                 this.state = 57;
+                _la = this._input.LA(1);
+                if(!(_la===RomeParser.AND || _la===RomeParser.OR)) {
+                this._errHandler.recoverInline(this);
+                }
+                else {
+                	this._errHandler.reportMatch(this);
+                    this.consume();
+                }
+                this.state = 58;
+                this.match(RomeParser.SPACE);
+                this.state = 59;
+                this.conditional();
+                this.state = 64;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
-            this.state = 58;
+            this.state = 65;
+            this.match(RomeParser.RPAR);
+            this.state = 66;
+            this.match(RomeParser.LSQ);
+            this.state = 67;
+            this.match(RomeParser.NEWLINE);
+            this.state = 71;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) !== 0)) {
+                this.state = 68;
+                this.expressions();
+                this.state = 73;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+            this.state = 74;
             this.match(RomeParser.RSQ);
             break;
         case RomeParser.LOOP:
             localctx = new LoopContext(this, localctx);
             this.enterOuterAlt(localctx, 6);
-            this.state = 59;
+            this.state = 76;
             this.match(RomeParser.LOOP);
-            this.state = 60;
+            this.state = 77;
             this.match(RomeParser.LPAR);
-            this.state = 61;
+            this.state = 78;
             this.intargs();
-            this.state = 62;
+            this.state = 79;
             this.match(RomeParser.RPAR);
-            this.state = 63;
+            this.state = 80;
+            this.match(RomeParser.LSQ);
+            this.state = 81;
             this.match(RomeParser.NEWLINE);
-            this.state = 65; 
+            this.state = 85;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            do {
-                this.state = 64;
+            while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) !== 0)) {
+                this.state = 82;
                 this.expressions();
-                this.state = 67; 
+                this.state = 87;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-            } while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.SET) | (1 << RomeParser.FREE) | (1 << RomeParser.READ) | (1 << RomeParser.WRITE) | (1 << RomeParser.IF) | (1 << RomeParser.MOVE) | (1 << RomeParser.LOOP))) !== 0));
-            this.state = 69;
-            this.match(RomeParser.ELOOP);
+            }
+            this.state = 88;
+            this.match(RomeParser.RSQ);
             break;
         case RomeParser.WRITE:
             localctx = new WriteContext(this, localctx);
             this.enterOuterAlt(localctx, 7);
-            this.state = 71;
+            this.state = 90;
             this.match(RomeParser.WRITE);
-            this.state = 72;
+            this.state = 91;
             this.match(RomeParser.LPAR);
-            this.state = 75;
+            this.state = 94;
             this._errHandler.sync(this);
             switch(this._input.LA(1)) {
             case RomeParser.MEM:
             case RomeParser.NUMBER:
-                this.state = 73;
+                this.state = 92;
                 this.intargs();
                 break;
             case RomeParser.STRLIT:
-                this.state = 74;
+                this.state = 93;
                 this.match(RomeParser.STRLIT);
                 break;
             default:
                 throw new antlr4.error.NoViableAltException(this);
             }
-            this.state = 77;
+            this.state = 96;
             this.match(RomeParser.RPAR);
             break;
         default:

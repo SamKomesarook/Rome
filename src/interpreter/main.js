@@ -3,7 +3,19 @@ import RInterpreter from "./RInterpreter";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
-var RomeErrorListener = require("./ErrorListener").RomeErrorListener;
+
+var ErrorListener = function(errors) {
+        antlr4.error.ErrorListener.call(this);
+        this.errors = errors;
+        return this;
+    };
+
+ErrorListener.prototype = Object.create(antlr4.error.ErrorListener.prototype);
+ErrorListener.prototype.constructor = ErrorListener;
+ErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e){
+	console.log(msg);
+
+};
 
 class Interpreter {
   constructor(
@@ -24,11 +36,15 @@ class Interpreter {
   }
 
   start(code) {
+    var errors = [];
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
+    parser.removeErrorListeners();
+    var errorListener = new ErrorListener(errors);
+    parser.addErrorListener(errorListener);
 
     try {
       const tree = parser.r();

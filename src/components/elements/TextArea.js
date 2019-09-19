@@ -79,9 +79,11 @@ export class TextArea extends Component {
 
           <Typed
             strings={[
-              "Start\nMove Left()\nEnd",
-              "Start\nPrint(\"Hello World\")\nMove Down()\nEnd",
-              "Start\nMove Down()\nPrint(\"Hello\")\nEnd"
+              "start\nset(numbers)\nwrite(4)\nprint\nend",
+              "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
+              "start\nmove(right)\nmove(left)\nend",
+		"start\nloop(4){\nmove(right)\n}\nend",
+		    "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(right)\n}\nend}"
             ]}
             typeSpeed={40}
             backSpeed={30}

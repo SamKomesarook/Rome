@@ -2,8 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
-// import Form from "./components/layout/Form";
-// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
+import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 // import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
@@ -25,7 +24,8 @@ export class App extends Component {
       memState: memArr,
       showAnimationArea: true,
       showTextArea: true,
-      showIOWindow: true
+      showIOWindow: true,
+      loopAnimation: false
     };
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
     this.toggleTextArea = this.toggleTextArea.bind(this);
@@ -36,12 +36,18 @@ export class App extends Component {
     this.closeWindow = this.closeWindowPortal.bind(this);
 
     // bind function in order to reach callback
+    // back end function
     this.moveMem = this.moveMem.bind(this);
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
 
+    // animation functionI
+    this.moveRight = this.moveRight.bind(this);
+    this.loopAnimation = this.loopAnimation.bind(this);
+
     this.memArr = constructMem();
+    // console.log("Memory Array: ", this.memArr);
     this.ref = [];
   }
 
@@ -89,6 +95,92 @@ export class App extends Component {
     this.setState({
       memState: this.memArr
     });
+  }
+
+  errorAnimation(errMessage) {
+    var errMessageDiv =
+      "<span style='color:red'>" + errMessage + "</span><br/>";
+    var oldMessage = document.getElementById("outputArea").innerHTML;
+    oldMessage += errMessageDiv;
+    document.getElementById("outputArea").innerHTML = oldMessage;
+  }
+
+  printAnimation(argument) {
+    var argumentDiv = "<span>" + argument + "</span><br/>";
+    var oldMessage = document.getElementById("outputArea").innerHTML;
+    oldMessage += argumentDiv;
+    document.getElementById("outputArea").innerHTML = oldMessage;
+  }
+
+  moveRight() {
+    var error = false;
+    var selectedFound = false;
+    for (var i = 0; i < this.memArr.length; i++) {
+      if (this.memArr[i].props.selected == true) {
+        var selected = i;
+        selectedFound = true;
+      }
+    }
+    if (!selectedFound) {
+      console.log("Error:No memory is selected!");
+      //call error animation since no memory is selected
+    } else {
+      if (selected === 14) {
+        error = true;
+        console.log("Error:This is the last memory!");
+        //call error animation since can't move right anymore
+      } else if (selected === 13) {
+        this.memArr[selected] = (
+          <USBMemory
+            selected={false}
+            id={selected}
+            content={this.memArr[selected].props.content}
+            contentType={this.memArr[selected].props.contentType}
+          />
+        );
+      } else {
+        this.memArr[selected] = (
+          <Memory
+            selected={false}
+            id={selected}
+            content={this.memArr[selected].props.content}
+            contentType={this.memArr[selected].props.contentType}
+          />
+        );
+      }
+
+      if (!error) {
+        if (selected + 1 === 14) {
+          this.memArr[selected + 1] = (
+            <NetMemory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
+            />
+          );
+        } else if (selected + 1 === 13) {
+          this.memArr[selected + 1] = (
+            <USBMemory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
+            />
+          );
+        } else {
+          this.memArr[selected + 1] = (
+            <Memory
+              selected={true}
+              id={selected}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
+            />
+          );
+        }
+      }
+    }
+    this.forceUpdate();
   }
 
   componentDidMount() {
@@ -152,6 +244,14 @@ export class App extends Component {
 
     setTimeout(() => ReactTooltip.hide(), 1000);
   };
+
+  /* Function for Loop Animation */
+  loopAnimation() {
+    this.setState(state => ({
+      ...state,
+      loopAnimation: !state.loopAnimation
+    }));
+  }
 
   render() {
     return (
@@ -241,67 +341,79 @@ export class App extends Component {
                         <Button name="Help" />
                       </div>
                     </div>
-                    {/* <Form method={"GET"} />
-                  <Form method={"POST"} /> */}
+
+                    <div
+                      className={
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                      }
+                    >
+                      <Button
+                        name="Animation test"
+                        toggle={this.printAnimation.bind(this, "print message")}
+                      />
+                    </div>
                   </div>
                 ) : null}
-                {this.state.showAnimationArea && (
-                  <div className="col-sm-3" align="center">
-                    <div className="row">
-                      <i className="fas fa-microchip fa-4x float-right" />
-                      <Transition
-                        native
-                        items={this.state.showBinaryString}
-                        from={{ opacity: 1, marginLeft: 0 }}
-                        enter={{ opacity: 1, marginLeft: 150 }}
-                        leave={{ opacity: 0 }}
-                      >
-                        {show =>
-                          show &&
-                          (props => (
-                            <animated.div style={props}>1011101</animated.div>
-                          ))
-                        }
-                      </Transition>
-                    </div>
-                  </div>
-                )}
-                {this.state.showAnimationArea && (
-                  <div
-                    className="col-sm-5"
-                    id="memory"
-                    data-tip
-                    data-for="AnimationArea"
-                    ref={el => this.ref.push(el)}
-                  >
-                    <div className="row">
-                      <div className="col">{this.memArr[0]}</div>
-                      <div className="col">{this.memArr[1]}</div>
-                      <div className="col">{this.memArr[2]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[3]}</div>
-                      <div className="col">{this.memArr[4]}</div>
-                      <div className="col">{this.memArr[5]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[6]}</div>
-                      <div className="col">{this.memArr[7]}</div>
-                      <div className="col">{this.memArr[8]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[9]}</div>
-                      <div className="col">{this.memArr[10]}</div>
-                      <div className="col">{this.memArr[11]}</div>
-                    </div>
-                    <div className="row">
-                      <div className="col">{this.memArr[12]}</div>
-                      <div className="col">{this.memArr[13]}</div>
-                      <div className="col">{this.memArr[14]}</div>
-                    </div>
-                  </div>
-                )}
               </div>
+              {this.state.showAnimationArea && (
+                <div className="col-sm-3" align="center">
+                  <div className="row">
+                    <i className="fas fa-microchip fa-4x float-right" />
+                    <Transition
+                      native
+                      items={this.state.showBinaryString}
+                      from={{ opacity: 1, marginLeft: 0 }}
+                      enter={{ opacity: 1, marginLeft: 150 }}
+                      leave={{ opacity: 0 }}
+                    >
+                      {show =>
+                        show &&
+                        (props => (
+                          <animated.div style={props}>1011101</animated.div>
+                        ))
+                      }
+                    </Transition>
+                  </div>
+                </div>
+              )}
+              {this.state.showAnimationArea && (
+                <div
+                  className={
+                    "col-sm-5 " +
+                    (this.state.loopAnimation ? "memory-border" : "")
+                  }
+                  id="memory"
+                  data-tip
+                  data-for="AnimationArea"
+                  ref={el => this.ref.push(el)}
+                >
+                  <div className="row">
+                    <div className="col">{this.memArr[0]}</div>
+                    <div className="col">{this.memArr[1]}</div>
+                    <div className="col">{this.memArr[2]}</div>
+                  </div>
+                  <div className="row">
+                    <div className="col">{this.memArr[3]}</div>
+                    <div className="col">{this.memArr[4]}</div>
+                    <div className="col">{this.memArr[5]}</div>
+                  </div>
+                  <div className="row">
+                    <div className="col">{this.memArr[6]}</div>
+                    <div className="col">{this.memArr[7]}</div>
+                    <div className="col">{this.memArr[8]}</div>
+                  </div>
+                  <div className="row">
+                    <div className="col">{this.memArr[9]}</div>
+                    <div className="col">{this.memArr[10]}</div>
+                    <div className="col">{this.memArr[11]}</div>
+                  </div>
+                  <div className="row">
+                    <div className="col">{this.memArr[12]}</div>
+                    <div className="col">{this.memArr[13]}</div>
+                    <div className="col">{this.memArr[14]}</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
