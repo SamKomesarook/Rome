@@ -1,5 +1,5 @@
 import RInterpreter from "./RInterpreter";
-import RomeVisitor from "./RomeVisitor";
+import RomeBaseVisitor from "./RomeVisitor";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
