@@ -1,6 +1,4 @@
-
 import { RomeVisitor } from "../lang/RomeVisitor";
-import MemoryBlock from "../entity/MemoryBlock";
 
 RomeBaseVisitor = function(memArr, updateContentType) {
   RomeListener.call(this);
@@ -21,6 +19,7 @@ RomeBaseVisitor.prototype.visitMem = function(ctx) {
   return this.visitChildren(ctx);
 };
 
+<<<<<<< HEAD
 // Visit a parse tree produced by RomeParser#Set.
 RomeBaseVisitor.prototype.visitSet = function(ctx) {
   const affix = ")";
@@ -44,3 +43,10 @@ RomeBaseVisitor.prototype.visitSet = function(ctx) {
 
 
 export default RomeBaseVisitor
+=======
+RomeVisitor.prototype.visitMove = function(ctx) {
+  console.log("Visit Move!");
+};
+
+export default RomeVisitor;
+>>>>>>> 11f46bbb15cd3d3dc99f7a9b95bebaf5c079f3aa
