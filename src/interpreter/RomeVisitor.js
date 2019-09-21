@@ -137,7 +137,7 @@ RVisitor.prototype.visitWrite = function(ctx) {
       this.writeContent(newMemObj);
     }
   }
-}
+};
 
 RVisitor.prototype.visitFree = function(ctx) {
   console.log("Visit free!");
@@ -152,7 +152,28 @@ RVisitor.prototype.visitFree = function(ctx) {
   );
 
   this.freeMem(tempMemObj);
-}
+};
+
+RVisitor.prototype.visitMem = function(ctx) {
+  console.log("Visit Mem!");
+  var command = getCommand(ctx);
+  var arg = getCommandArg("memory".length + 1, command);
+
+  // if arg is a number, get memory block using the number
+  if (!isNaN(arg)) {
+    var tempMem = this.memArr[arg];
+    if (tempMem.props.contentType === "letters") {
+      // alert("Memory Content is not a number");
+      console.log("Memory content is not a number");
+    } else {
+      // console.log("Memory content: ", tempMem.props.content);
+      return tempMem.props.content;
+    }
+  } else {
+    // recursively memory interpreter
+    return this.visitChildren(ctx);
+  }
+};
 
 /**
  * get command and arguments
@@ -232,7 +253,6 @@ function contentTypeMatch(contentType, arg) {
  * @return {boolean} true is the memory content is empty
  */
 function memAvailability(memContent) {
-  // console.log("Memory Content: ", memContent);
   return memContent === "";
 }
 
