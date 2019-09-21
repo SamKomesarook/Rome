@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
-import ReactTooltip from 'react-tooltip'
+import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
-// import Form from "./components/layout/Form";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 // import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
@@ -11,10 +10,9 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 
+import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
-// import MemoryBlock from "./entity/MemoryBlock";
-
-// const memArr = [15];
+const memArr = [15];
 
 export class App extends Component {
   constructor(props) {
@@ -23,11 +21,11 @@ export class App extends Component {
     this.state = {
       showWindowPortal: false,
       showBinaryString: false,
-      // memState: memArr
+      memState: memArr,
       showAnimationArea: true,
-      showTextArea:true,
-      showIOWindow:true,
-      loopAnimation:false
+      showTextArea: true,
+      showIOWindow: true,
+      loopAnimation: false
     };
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
     this.toggleTextArea = this.toggleTextArea.bind(this);
@@ -36,126 +34,85 @@ export class App extends Component {
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
     this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
+
+    // bind function in order to reach callback
+    // back end function
+    this.moveMem = this.moveMem.bind(this);
+    this.updateContentType = this.updateContentType.bind(this);
+    this.writeContent = this.writeContent.bind(this);
+    this.freeMem = this.freeMem.bind(this);
+
+    // animation functionI
     this.moveRight = this.moveRight.bind(this);
     this.loopAnimation = this.loopAnimation.bind(this);
-    this.memArr = this.constructMem();
-    console.log("Memory Array: ", this.memArr);
-    // this.memObjArr = this.constructMemObj();
-    // console.log("Memory Object Array: ", this.memObjArr);
+
+    this.memArr = constructMem();
+    // console.log("Memory Array: ", this.memArr);
     this.ref = [];
   }
 
-  // constructMemObj() {
-  //   var memObjArr = [];
-  //   var memNum = 15;
-  //   for (var i = 0; i < memNum; i++) {
-  //     var tempMem;
-  //     if (i === 13) {
-  //       tempMem = new MemoryBlock(i, "USBMemory", false);
-  //       memObjArr.push(tempMem);
-  //     } else if (i === 14) {
-  //       tempMem = new MemoryBlock(i, "NetMemory", false);
-  //       memObjArr.push(tempMem);
-  //     } else {
-  //       tempMem = new MemoryBlock(i, "Memory", i === 0 ? true : false);
-  //       memObjArr.push(tempMem);
-  //     }
-  //   }
-  //   // this.setState({
-  //   //   memObjArr: memObjArr
-  //   // });
-  //   return memObjArr;
-  // }
+  updateMem(id, mem) {
+    this.memArr[id] = mem;
+    this.setState({
+      memState: this.memArr
+    });
+  }
 
-  constructMem() {
-    var memArr = [];
-    var memLen = 15;
-    for (var i = 0; i < memLen; i++) {
-      if (i === 13) {
-        memArr.push(
-          <USBMemory
-            selected={false}
-            id={i}
-            content={"USBMemory"}
-            contentType={"letters"}
-          />
-        );
-      } else if (i === 14) {
-        memArr.push(
-          <NetMemory
-            selected={false}
-            id={i}
-            content={"NetMemory"}
-            contentType={"letters"}
-          />
-        );
-      } else {
-        memArr.push(
-          <Memory
-            selected={i === 0 ? true : false}
-            id={i}
-            content={"Memory"}
-            contentType={"letters"}
-          />
-        );
-      }
+  updateContentType(id, memObj) {
+    var newMem = mapMemObjToSymbol(memObj);
+    this.updateMem(id, newMem);
+  }
+
+  moveMem(oldMemObj, newMemObj, direction) {
+    var currId = oldMemObj.id;
+    if (
+      (currId === 0 && direction === "left") ||
+      (currId === 14 && direction === "right")
+    ) {
+      alert("Invalide Move command!");
+    } else {
+      var oldMem = mapMemObjToSymbol(oldMemObj);
+      var newMem = mapMemObjToSymbol(newMemObj);
+      this.updateMem(oldMemObj.getId(), oldMem);
+      this.updateMem(newMemObj.getId(), newMem);
     }
-    return memArr;
   }
 
-  updateContentType(id, newMem) {
-    console.log("Before Update: ", this.memArr[id].props);
-    switch (newMem.type) {
-      case "Memory":
-        this.memArr[id] = (
-          <Memory
-            selected={newMem.selected}
-            id={id}
-            content={newMem.content}
-            contentType={newMem.contentType}
-          />
-        );
-        break;
-      case "NetMemory":
-        this.memArr[id] = (
-          <NetMemory
-            selected={newMem.selected}
-            id={id}
-            content={newMem.content}
-            contentType={newMem.contentType}
-          />
-        );
-        break;
-      case "USBMemory":
-        this.memArr[id] = (
-          <USBMemory
-            selected={newMem.selected}
-            id={id}
-            content={newMem.content}
-            contentType={newMem.contentType}
-          />
-        );
-        break;
-      default:
-    }
-    console.log("Afte update: ", this.memArr[id].props);
+  writeContent(memObj) {
+    var id = memObj.id;
+    var newMem = mapMemObjToSymbol(memObj);
+    this.updateMem(id, newMem);
   }
 
-  errorAnimation(errMessage){
-     var errMessageDiv = "<span style='color:red'>"+errMessage+"</span><br/>";
-     var oldMessage = document.getElementById("outputArea").innerHTML;
-     oldMessage += errMessageDiv;
-     document.getElementById("outputArea").innerHTML=oldMessage;
+  freeMem(memObj) {
+    var id = memObj.id;
+    var newMem = mapMemObjToSymbol(memObj);
+    this.updateMem(id, newMem);
   }
 
-  printAnimation(argument){
-    var argumentDiv = "<span>"+argument+"</span><br/>";
+  // set state before render
+  componentWillMount() {
+    this.setState({
+      memState: this.memArr
+    });
+  }
+
+  errorAnimation(errMessage) {
+    var errMessageDiv =
+      "<span style='color:red'>" + errMessage + "</span><br/>";
+    var oldMessage = document.getElementById("outputArea").innerHTML;
+    oldMessage += errMessageDiv;
+    document.getElementById("outputArea").innerHTML = oldMessage;
+  }
+
+  printAnimation(argument) {
+    var argumentDiv = "<span>" + argument + "</span><br/>";
     var oldMessage = document.getElementById("outputArea").innerHTML;
     oldMessage += argumentDiv;
-    document.getElementById("outputArea").innerHTML=oldMessage;
+    document.getElementById("outputArea").innerHTML = oldMessage;
   }
 
-  moveRight(){
+  moveRight() {
     var error = false;
     var selectedFound = false;
     for (var i = 0; i < this.memArr.length; i++) {
@@ -164,18 +121,15 @@ export class App extends Component {
         selectedFound = true;
       }
     }
-    if(!selectedFound){
+    if (!selectedFound) {
       console.log("Error:No memory is selected!");
       //call error animation since no memory is selected
-    }
-    else{
-      if(selected == 14){
+    } else {
+      if (selected === 14) {
         error = true;
         console.log("Error:This is the last memory!");
         //call error animation since can't move right anymore
-
-      }
-      else if(selected == 13){
+      } else if (selected === 13) {
         this.memArr[selected] = (
           <USBMemory
             selected={false}
@@ -184,8 +138,7 @@ export class App extends Component {
             contentType={this.memArr[selected].props.contentType}
           />
         );
-      }
-      else{
+      } else {
         this.memArr[selected] = (
           <Memory
             selected={false}
@@ -195,35 +148,33 @@ export class App extends Component {
           />
         );
       }
-      
-      if(!error){
-        if(selected+1 == 14){
-          this.memArr[selected+1] = (
+
+      if (!error) {
+        if (selected + 1 === 14) {
+          this.memArr[selected + 1] = (
             <NetMemory
               selected={true}
               id={selected}
-              content={this.memArr[selected+1].props.content}
-              contentType={this.memArr[selected+1].props.contentType}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
             />
           );
-        }
-        else if(selected+1 == 13){
-          this.memArr[selected+1] = (
+        } else if (selected + 1 === 13) {
+          this.memArr[selected + 1] = (
             <USBMemory
               selected={true}
               id={selected}
-              content={this.memArr[selected+1].props.content}
-              contentType={this.memArr[selected+1].props.contentType}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
             />
           );
-        }
-        else{
-          this.memArr[selected+1] = (
+        } else {
+          this.memArr[selected + 1] = (
             <Memory
               selected={true}
               id={selected}
-              content={this.memArr[selected+1].props.content}
-              contentType={this.memArr[selected+1].props.contentType}
+              content={this.memArr[selected + 1].props.content}
+              contentType={this.memArr[selected + 1].props.contentType}
             />
           );
         }
@@ -286,13 +237,13 @@ export class App extends Component {
 
   toggleRef = () => {
     console.log(this.ref);
-    for(var i=0; i < this.ref.length; i++) {
+    for (var i = 0; i < this.ref.length; i++) {
       // console.log(this.testRef[i]);
       ReactTooltip.show(this.ref[i]);
     }
 
     setTimeout(() => ReactTooltip.hide(), 1000);
-  }
+  };
 
   /* Function for Loop Animation */
   loopAnimation() {
@@ -305,8 +256,7 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
-        
+        <Header /> 
         <div className="container-fluid">
           <div className = "row">
             <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
@@ -350,6 +300,9 @@ export class App extends Component {
                         memArr={this.memArr}
                         compRef={ el => this.ref.push(el)}
                         updateContentType={this.updateContentType}
+                        moveMem={this.moveMem}
+                        writeContent={this.writeContent}
+                        freeMem={this.freeMem}
                       />
                     </div>
                     <div
@@ -447,9 +400,7 @@ export class App extends Component {
             </div>
           </div>
         </div>
-
         <Tooltips />{" "}
-
       </Fragment>
     );
   }
