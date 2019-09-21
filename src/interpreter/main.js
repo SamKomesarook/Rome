@@ -1,31 +1,31 @@
 import RInterpreter from "./RInterpreter";
-import RomeVisitor from "./RomeVisitor";
+import RVisitor from "./RomeVisitor";
+// import RomeVisitor from "./RomeVisitor";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
 
 var ErrorListener = function(errors) {
-        antlr4.error.ErrorListener.call(this);
-        this.errors = errors;
-        return this;
-    };
+  antlr4.error.ErrorListener.call(this);
+  this.errors = errors;
+  return this;
+};
 
 ErrorListener.prototype = Object.create(antlr4.error.ErrorListener.prototype);
 ErrorListener.prototype.constructor = ErrorListener;
-ErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e){
-	console.log(msg);
-
+ErrorListener.prototype.syntaxError = function(
+  recognizer,
+  offendingSymbol,
+  line,
+  column,
+  msg,
+  e
+) {
+  console.log(msg);
 };
 
 class Interpreter {
-  constructor(
-    code,
-    memArr,
-    updateContentType,
-    moveMem,
-    writeContent,
-    freeMem
-  ) {
+  constructor(code, memArr, updateContentType, moveMem, writeContent, freeMem) {
     this.code = code;
     this.memArr = memArr;
     this.updateContentType = updateContentType;
@@ -34,7 +34,7 @@ class Interpreter {
     this.freeMem = freeMem;
     this.start(code);
   }
-  
+
   // // using listener
   // start(code) {
   //   var errors = [];
@@ -56,7 +56,7 @@ class Interpreter {
   //       console.log("Exception: ", tree.exception);
   //     }
   //   } catch (re) {
-	//     console.log(re);
+  //     console.log(re);
   //   }
   // }
 
@@ -71,9 +71,17 @@ class Interpreter {
 
     // run code when there is no exception
     if (tree.exception === null) {
-      tree.accept(new RomeVisitor());
+      tree.accept(
+        new RVisitor(
+          this.memArr,
+          this.updateContentType,
+          this.moveMem,
+          this.writeContent,
+          this.freeMem
+        )
+      );
     } else {
-      console.log("Exception: " ,tree.exception);
+      console.log("Exception: ", tree.exception);
       console.log("ERROR");
     }
   }

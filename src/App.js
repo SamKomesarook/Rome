@@ -300,6 +300,9 @@ export class App extends Component {
                         memArr={this.memArr}
                         compRef={ el => this.ref.push(el)}
                         updateContentType={this.updateContentType}
+                        moveMem={this.moveMem}
+                        writeContent={this.writeContent}
+                        freeMem={this.freeMem}
                       />
                     </div>
                     <div
