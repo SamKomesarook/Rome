@@ -256,176 +256,147 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header /> 
         <div className="container-fluid">
-          <div className="row">
-            <div
-              className="col-sm-2"
-              data-tip
-              data-for="ComponentArea"
-              ref={el => this.ref.push(el)}
-            >
+          <div className = "row">
+            <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
               <div className="row">
                 <div className="col">
-                  <Button name="Coding Area" toggle={this.toggleTextArea} />
+                  <Button name="Coding Area" toggle={this.toggleTextArea}/>
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button
-                    name="Animation Area"
-                    toggle={this.toggleAnimationArea}
-                  />
+                  <Button name="Animation Area" toggle={this.toggleAnimationArea}/>
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button name="IO Window" toggle={this.toggleIOWindow} />
+                  <Button name="IO Window" toggle={this.toggleIOWindow}/>
                 </div>
               </div>
             </div>
             <div className="col">
               <div className="row">
-                {this.state.showTextArea ? (
-                  <div
-                    className={
-                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-12"
-                    }
-                  >
-                    <TextArea compRef={el => this.ref.push(el)} />
-                    <div className="row slider-container">
-                      <Slider compRef={el => this.ref.push(el)} />
+                {this.state.showTextArea ? 
+                <div
+                  className={
+                    this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                  }
+                >
+                  <TextArea compRef={ el => this.ref.push(el)}/>
+                  <div className="row slider-container">
+                    <Slider compRef={ el => this.ref.push(el)}/>
+                  </div>
+                  <div className="row">
+                    <div
+                      className={
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                      }
+                    >
+                      <Button
+                        name="Run"
+                        toggle={this.toggleBinaryString}
+                        memArr={this.memArr}
+                        compRef={ el => this.ref.push(el)}
+                        updateContentType={this.updateContentType}
+                      />
                     </div>
-                    <div className="row">
-                      <div
-                        className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
-                        }
-                      >
-                        <Button
-                          name="Run"
-                          toggle={this.toggleBinaryString}
-                          memArr={this.memArr}
-                          compRef={el => this.ref.push(el)}
-                          updateContentType={this.updateContentType}
-                          moveMem={this.moveMem}
-                          writeContent={this.writeContent}
-                          freeMem={this.freeMem}
-                        />
-                      </div>
-                      <div
-                        className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
-                        }
-                      >
-                        <Button
-                          name="Stop"
-                          toggle={this.initiliazeBinaryString}
-                          compRef={el => this.ref.push(el)}
-                        />
-                      </div>
-
-                      <div
-                        className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
-                        }
-                      >
-                        <Button name="Info" toggle={this.toggleRef} />
-                      </div>
-
-                      <div
-                        className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
-                        }
-                      >
-                        <Button name="Help" />
-                      </div>
+                    <div
+                      className={
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                      }
+                    >
+                      <Button name="Stop" toggle={this.initiliazeBinaryString} compRef={ el => this.ref.push(el)}/>
+                    </div>
+                    
+                    <div
+                      className={
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                      }
+                    >
+                      <Button name="Info" toggle={this.toggleRef}/>
                     </div>
 
                     <div
                       className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-1"
+                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
                       }
                     >
-                      <Button
-                        name="Animation test"
-                        toggle={this.printAnimation.bind(this, "print message")}
-                      />
+                      <Button name="Help" />
                     </div>
                   </div>
-                ) : null}
+                  {/* <Form method={"GET"} />
+                  <Form method={"POST"} /> */}
+                </div>
+                : null
+                }
+                {this.state.showAnimationArea && (
+                  <div className="col-sm-3" align="center">
+                    <div className="row">
+                      <i className="fas fa-microchip fa-4x float-right" />
+                      <Transition
+                        native
+                        items={this.state.showBinaryString}
+                        from={{ opacity: 1, marginLeft: 0 }}
+                        enter={{ opacity: 1, marginLeft: 150 }}
+                        leave={{ opacity: 0 }}
+                      >
+                        {show =>
+                          show &&
+                          (props => (
+                            <animated.div style={props}>1011101</animated.div>
+                          ))
+                        }
+                      </Transition>
+                    </div>
+                  </div>
+                )} 
+                  <div className={this.state.showAnimationArea ?( "col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")):"col-sm-5"} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
+                  {this.state.showAnimationArea && (
+                    <div className="row-sm-6">
+                      <div className="row">
+                        <div className="col">{this.memArr[0]}</div>
+                        <div className="col">{this.memArr[1]}</div>
+                        <div className="col">{this.memArr[2]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[3]}</div>
+                        <div className="col">{this.memArr[4]}</div>
+                        <div className="col">{this.memArr[5]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[6]}</div>
+                        <div className="col">{this.memArr[7]}</div>
+                        <div className="col">{this.memArr[8]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[9]}</div>
+                        <div className="col">{this.memArr[10]}</div>
+                        <div className="col">{this.memArr[11]}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col">{this.memArr[12]}</div>
+                        <div className="col">{this.memArr[13]}</div>
+                        <div className="col">{this.memArr[14]}</div>
+                      </div>
+                    </div>
+                    )}
+                    {this.state.showIOWindow &&(
+                    <div className="row">	
+                      <div className="col-sm-12">	
+                        <InputOutputArea 
+                          compRef={ el => this.ref.push(el)}
+                        />	
+                      </div>	
+                    </div>
+                    )}	
+                  </div>
+                
               </div>
-              {this.state.showAnimationArea && (
-                <div className="col-sm-3" align="center">
-                  <div className="row">
-                    <i className="fas fa-microchip fa-4x float-right" />
-                    <Transition
-                      native
-                      items={this.state.showBinaryString}
-                      from={{ opacity: 1, marginLeft: 0 }}
-                      enter={{ opacity: 1, marginLeft: 150 }}
-                      leave={{ opacity: 0 }}
-                    >
-                      {show =>
-                        show &&
-                        (props => (
-                          <animated.div style={props}>1011101</animated.div>
-                        ))
-                      }
-                    </Transition>
-                  </div>
-                </div>
-              )}
-              {this.state.showAnimationArea && (
-                <div
-                  className={
-                    "col-sm-5 " +
-                    (this.state.loopAnimation ? "memory-border" : "")
-                  }
-                  id="memory"
-                  data-tip
-                  data-for="AnimationArea"
-                  ref={el => this.ref.push(el)}
-                >
-                  <div className="row">
-                    <div className="col">{this.memArr[0]}</div>
-                    <div className="col">{this.memArr[1]}</div>
-                    <div className="col">{this.memArr[2]}</div>
-                  </div>
-                  <div className="row">
-                    <div className="col">{this.memArr[3]}</div>
-                    <div className="col">{this.memArr[4]}</div>
-                    <div className="col">{this.memArr[5]}</div>
-                  </div>
-                  <div className="row">
-                    <div className="col">{this.memArr[6]}</div>
-                    <div className="col">{this.memArr[7]}</div>
-                    <div className="col">{this.memArr[8]}</div>
-                  </div>
-                  <div className="row">
-                    <div className="col">{this.memArr[9]}</div>
-                    <div className="col">{this.memArr[10]}</div>
-                    <div className="col">{this.memArr[11]}</div>
-                  </div>
-                  <div className="row">
-                    <div className="col">{this.memArr[12]}</div>
-                    <div className="col">{this.memArr[13]}</div>
-                    <div className="col">{this.memArr[14]}</div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
-        {this.state.showIOWindow && (
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-sm-12">
-                <InputOutputArea compRef={el => this.ref.push(el)} />
-              </div>
-            </div>
-          </div>
-        )}
         <Tooltips />{" "}
       </Fragment>
     );
