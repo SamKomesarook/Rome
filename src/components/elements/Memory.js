@@ -4,7 +4,13 @@ export class Memory extends Component {
   // state = {
   //   content: this.props.content,
   // }
+
   render() {
+    const memoryStyle = {
+      height:"60px",
+      maxHeight:"60px"
+    }
+
     if (this.props.selected) {
       return (
         <div
@@ -12,6 +18,7 @@ export class Memory extends Component {
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
           
@@ -24,6 +31,7 @@ export class Memory extends Component {
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
         </div>
@@ -37,6 +45,11 @@ export class NetMemory extends Component {
   //   content: this.props.content
   // }
   render() {
+    const memoryStyle = {
+      height:"60px",
+      maxHeight:"60px"
+    }
+
     if (this.props.selected) {
       return (
         <div
@@ -44,6 +57,7 @@ export class NetMemory extends Component {
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
         </div>
@@ -55,8 +69,10 @@ export class NetMemory extends Component {
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
+          
         </div>
       );
     }
@@ -67,7 +83,13 @@ export class USBMemory extends Component {
   // state = {
   //   content: this.props.content
   // }
+  
   render() {
+    const memoryStyle = {
+      height:"60px",
+      maxHeight:"60px"
+    }
+
     if (this.props.selected) {
       return (
         <div
@@ -75,6 +97,7 @@ export class USBMemory extends Component {
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
         </div>
@@ -86,6 +109,7 @@ export class USBMemory extends Component {
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
+          style={memoryStyle}
         >
           {this.props.content}
         </div>
