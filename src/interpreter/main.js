@@ -1,5 +1,5 @@
 import RInterpreter from "./RInterpreter";
-
+import RomeVisitor from "./RomeVisitor";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
@@ -34,34 +34,47 @@ class Interpreter {
     this.freeMem = freeMem;
     this.start(code);
   }
+  
+  // // using listener
+  // start(code) {
+  //   var errors = [];
+  //   var chars = new antlr4.InputStream(code);
+  //   var lexer = new RomeLexer(chars);
+  //   var tokens = new antlr4.CommonTokenStream(lexer);
+  //   var parser = new RomeParser(tokens);
+  //   parser.buildParseTrees = true;
+  //   parser.removeErrorListeners();
+  //   var errorListener = new ErrorListener(errors);
+  //   parser.addErrorListener(errorListener);
 
+  //   try {
+  //     const tree = parser.r();
+  //     if (tree.exception === null) {
+  //       var rInterpreter = new RInterpreter(this.memArr, this.updateContentType);
+  //       antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
+  //     } else {
+  //       console.log("Exception: ", tree.exception);
+  //     }
+  //   } catch (re) {
+	//     console.log(re);
+  //   }
+  // }
+
+  // using visitor
   start(code) {
-    var errors = [];
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
-    parser.removeErrorListeners();
-    var errorListener = new ErrorListener(errors);
-    parser.addErrorListener(errorListener);
+    const tree = parser.r();
 
-    try {
-      const tree = parser.r();
-      if (tree.exception === null) {
-        var rInterpreter = new RInterpreter(
-          this.memArr,
-          this.updateContentType,
-          this.moveMem,
-          this.writeContent,
-          this.freeMem
-        );
-        antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
-      } else {
-        console.log("Exception: ", tree.exception);
-      }
-    } catch (re) {
-      console.log(re);
+    // run code when there is no exception
+    if (tree.exception === null) {
+      tree.accept(new RomeVisitor());
+    } else {
+      console.log("Exception: " ,tree.exception);
+      console.log("ERROR");
     }
   }
 }

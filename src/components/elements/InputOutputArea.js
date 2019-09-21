@@ -12,7 +12,7 @@ export default class InputOutputArea extends Component {
 
     render() {
         const outputStyle ={
-            height:"200px",
+            height:"180px",
             backgroundColor:"#D0D0D0",
             overflow:"auto"
         }
