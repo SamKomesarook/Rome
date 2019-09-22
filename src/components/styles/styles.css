@@ -18,3 +18,20 @@
     border-width: 1px;
     border-color: blue;
 }
+
+.btnGroup, .btnToggle:hover>button {
+    display: none;
+}
+
+.btnToggle:hover>.btnGroup {
+    display: block;
+    /* width: min-content; */
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+}
