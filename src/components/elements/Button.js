@@ -8,6 +8,7 @@ export class Button extends Component {
     clickFunc: null,
     dataFor: null,
     memArr: null,
+    icon: null,
     ref: this.props.compRef
   };
 
@@ -15,38 +16,45 @@ export class Button extends Component {
     switch(this.props.name) {
       case "Run":
           this.setState({
-            class: "btn btn-primary",
+            class: "btn btn-primary btn-sm hvr-icon-spin" ,
             clickFunc: this.runCode,
             dataFor: "ButtonRun",
+            icon: "fas fa-cog hvr-icon",
             memArr: this.props.memArr
           });
           break;
       case "Stop":
           this.setState({
-            class: "btn btn-danger",
+            class: "btn btn-danger btn-sm hvr-icon-pulse-grow",
             clickFunc: this.stopCode,
-            dataFor: "ButtonStop"
+            dataFor: "ButtonStop",
+            icon: "far fa-stop-circle hvr-icon"
           });
           break;
       case "Help":
           this.setState({
-            class: "btn btn-info",
+            class: "btn btn-info btn-sm hvr-icon-up",
             dataFor: "ButtonHelp",
             dataEvent: "click",
-            dataEventOff: "blur"
+            dataEventOff: "blur",
+            icon: "far fa-question-circle hvr-icon"
           });
           break;
       case "Info":
           this.setState({
-            class: "btn btn-warning",
-            dataFor: "ButtonInfo"
-          })
+            class: "btn btn-warning btn-sm hvr-icon-grow",
+            clickFunc: this.props.toggle,
+            dataFor: "ButtonInfo",
+            icon: "fas fa-info-circle hvr-icon"
+          });
+          break;
       default:
           this.setState({
-            class: "btn btn-info",
+            class: "btn btn-info btn-sm",
             clickFunc: this.props.toggle,
             dataFor: "ButtonHideShow"
           });
+          break;
     }
   }
 
@@ -99,7 +107,6 @@ export class Button extends Component {
       );
     } else {
       return (
-        <div className="form-group shadow-textarea">
           <button
             type="button"
             className={this.state.class}
@@ -110,9 +117,8 @@ export class Button extends Component {
             data-event-off={this.state.dataEventOff}
             ref={this.state.ref}
           >
-            {this.state.name}
+            <i className={this.state.icon}></i> {this.state.name}
           </button>
-        </div>
       );
     }
   }
