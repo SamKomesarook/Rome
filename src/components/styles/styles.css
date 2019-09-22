@@ -18,3 +18,8 @@
     border-width: 1px;
     border-color: blue;
 }
+
+.memory {
+    height:60px;
+    max-height:60px;
+  }
