@@ -10,7 +10,7 @@ import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
-
+import './components/styles/hover-min.css';
 
 // import MemoryBlock from "./entity/MemoryBlock";
 
@@ -310,21 +310,15 @@ export class App extends Component {
         <div className="container-fluid">
           <div className = "row">
             <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
-              <div className="row">
-                <div className="col">
+
+              <span className="btnToggle">
+                <button className="btn btn-dark btn-circle"><i className="far fa-caret-square-right"></i></button>
+                <div className="btn-group-vertical btnGroup" role="group">
                   <Button name="Coding Area" toggle={this.toggleTextArea}/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col">
                   <Button name="Animation Area" toggle={this.toggleAnimationArea}/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col">
                   <Button name="IO Window" toggle={this.toggleIOWindow}/>
                 </div>
-              </div>
+              </span>
             </div>
             <div className="col">
               <div className="row">
