@@ -11,15 +11,10 @@ export default class InputOutputArea extends Component {
     }
 
     render() {
-        const outputStyle ={
-            height:"180px",
-            backgroundColor:"#D0D0D0",
-            overflow:"auto"
-        }
         return (
             <div data-tip data-for="DashboardArea" ref={this.state.ref}>
                 <div contentEditable="false" className="form-control rounded-0 z-depth-1 testing" 
-                   id="outputArea" style={outputStyle}
+                   id="outputArea"
                  >
                 </div>
                 <Typed

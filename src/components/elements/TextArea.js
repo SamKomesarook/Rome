@@ -10,7 +10,9 @@ export class TextArea extends Component {
     };
     this.toggleLineNumber = this.toggleLineNumber.bind(this);
   }
+  
 
+  //state used to show/hide the line number of the coding area
   toggleLineNumber() {
     this.setState(state => ({
       ...state,
@@ -19,10 +21,6 @@ export class TextArea extends Component {
   }
 
   render() {
-    const wrapperStyle = {
-      display: "inline-block",
-      position: "relative"
-    };
 
     const lineNumberStyle = {
       display: "block",
@@ -40,14 +38,8 @@ export class TextArea extends Component {
       paddingTop: "12px",
       lineHeight: "16px"
     };
-
-    const buttonStyle = {
-      size:"10%",
-      position:"absolute",
-      bottom:"10px",
-      right:"20px"
-    };
-
+    
+    //change different style according to showLineNumber,in order to hide/show line number
     var textAreaStyle;
     if (this.state.showLineNumber) {
       textAreaStyle = lineNumberStyle;
@@ -57,25 +49,7 @@ export class TextArea extends Component {
 
     return (
       <div className="wrapper" data-tip data-for='TextAreaTips' ref={this.state.ref}>
-        <div className="form-group shadow-textarea" style={wrapperStyle} >
-          {/* <textarea
-            data-tip
-            data-for="TextAreaTips"
-            className="form-control rounded-0 z-depth-1"
-            cols="50"
-            id="codingArea"
-            rows="28"
-            placeholder="Coding area"
-            style={textAreaStyle}
-            // onChange={this.checkCode}
-          />
-          <button
-            className="btn btn-light"
-            style={buttonStyle}
-            onClick={this.toggleLineNumber}
-          >
-            toggle
-          </button> */}
+        <div className="form-group shadow-textarea" id="codingWrapper" >
 
           <Typed
             strings={[
@@ -99,7 +73,7 @@ export class TextArea extends Component {
               style = {textAreaStyle}
             />
           </Typed>
-          <button className="btn btn-light" style={buttonStyle} onClick={this.toggleLineNumber}>toggle</button>
+          <button className="btn btn-light" id="lineButton" onClick={this.toggleLineNumber}>toggle</button>
         </div>
       </div>
     );
