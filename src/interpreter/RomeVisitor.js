@@ -69,6 +69,7 @@ RVisitor.prototype.visitSet = function(ctx) {
   } else {
     this.updateContentType(selectedMem, tempMemObj);
   }
+  return this.visitChildren(ctx);
 };
 
 RVisitor.prototype.visitMove = function(ctx) {
@@ -137,6 +138,7 @@ RVisitor.prototype.visitWrite = function(ctx) {
       this.writeContent(newMemObj);
     }
   }
+  return this.visitChildren(ctx);
 };
 
 RVisitor.prototype.visitFree = function(ctx) {
@@ -152,6 +154,7 @@ RVisitor.prototype.visitFree = function(ctx) {
   );
 
   this.freeMem(tempMemObj);
+  return this.visitChildren(ctx);
 };
 
 RVisitor.prototype.visitMem = function(ctx) {
@@ -200,6 +203,7 @@ RVisitor.prototype.visitCond = function(ctx) {
 
 /**
  * get command and arguments
+ * @param {Object} ctx
  * @return {string} command and arguments
  */
 function getCommand(ctx) {
