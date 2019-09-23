@@ -175,6 +175,29 @@ RVisitor.prototype.visitMem = function(ctx) {
   }
 };
 
+// conditional regex: ((is|not)\ (less|greater|equal)\ (([0-9])|memory\([0-9]+\)))+
+// conditional regex, reserve for later use
+const condRegex = /((is|not) (less|greater|equal) (([0-9])|memory\([0-9]+\)))+/g;
+RVisitor.prototype.visitIf = function(ctx) {
+  console.log("Visit if!");
+  var command = getCommand(ctx);
+  var arg = getCommandArg("if".length + 1, command);
+
+  // get current selected memory
+  var currMem = this.memArr[getSelectedMemId(this.memArr)];
+
+  var condState = checkCond(arg, currMem);
+
+  if (condState) {
+    return this.visitChildren(ctx);
+  }
+};
+
+RVisitor.prototype.visitCond = function(ctx) {
+  console.log("Visit cond!");
+  console.log(ctx.getText());
+};
+
 /**
  * get command and arguments
  * @return {string} command and arguments
@@ -197,6 +220,56 @@ function getCommandArg(index, command) {
     arg = arg.replace(/['"]+/g, "");
   }
   return arg;
+}
+
+/**
+ * check the if statement condition with value of the current selected memory
+ * @param {string} condition string represent condition
+ * @param {Object} currMem current selected memory
+ * @return {Boolean} true is condition match, false otherwise
+ */
+function checkCond(condition, currMem) {
+  var conditionList = condition.split(" ");
+  // console.log(conditionList);
+  var comparsion = conditionList[0];
+  var type = conditionList[1];
+  var indicator = conditionList[2];
+
+  var memory = createMemObj(
+    currMem.props.id,
+    currMem.type.name,
+    currMem.props.selected,
+    currMem.props.content,
+    currMem.props.contentType
+  );
+
+  // only allow equal when comparing to string
+  if (memory.contentType === "letters") {
+    if (comparsion === "is") {
+      return type === "equal" && memory.content === indicator;
+    } else { // comparsion is "not"
+      return type === "equal" && memory.content !== indicator;
+    }
+  } else {
+    // check comparsion and match type with indicator
+    if (comparsion === "is") {
+      if (type === "less") {
+        return memory.content < indicator;
+      } else if (type === "equal") {
+        return memory.content === indicator;
+      } else if (type === "greater") {
+        return memory.content > indicator;
+      }
+    } else { // when comparsion type is "not"
+      if (type === "less") {
+        return memory.content >= indicator;
+      } else if (type === "equal") {
+        return memory.content !== indicator;
+      } else if (type === "greater") {
+        return memory.content <= indicator;
+      }
+    }
+  }
 }
 
 /**
