@@ -12,7 +12,7 @@ export class TextArea extends Component {
   }
   
 
-  //state used to show/hide the line number of the coding area
+  /*state used to show/hide the line number of the coding area*/
   toggleLineNumber() {
     this.setState(state => ({
       ...state,
