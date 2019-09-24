@@ -8,7 +8,7 @@ import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
-import './components/styles/hover-min.css';
+import 'hover.css';
 
 export class App extends Component {
   constructor(props) {
@@ -22,13 +22,12 @@ export class App extends Component {
       showIOWindow:true,
       loopAnimation:false
     };
+    this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
     this.toggleTextArea = this.toggleTextArea.bind(this);
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
-    this.toggleWindow = this.toggleWindowPortal.bind(this);
-    this.closeWindow = this.closeWindowPortal.bind(this);
     this.loopAnimation = this.loopAnimation.bind(this);
     this.memArr = this.constructMem();
     this.ref = [];
@@ -131,12 +130,6 @@ export class App extends Component {
     oldMessage += argumentDiv;
     document.getElementById("outputArea").innerHTML=oldMessage;
   }
-
-  componentDidMount() {
-    window.addEventListener("beforeunload", () => {
-      this.closeWindowPortal();
-    });
-  }
   
   /**
   *function used to show/hide the IO window
@@ -163,13 +156,6 @@ export class App extends Component {
       showTextArea: !state.showTextArea
     }));
   }
-
-  toggleWindowPortal() {
-    this.setState(state => ({
-      ...state,
-      showWindowPortal: !state.showWindowPortal
-    }));
-  }
   
   /*function used to display the animated binary string*/
   toggleBinaryString() {
@@ -187,21 +173,24 @@ export class App extends Component {
     }));
   }
 
-  closeWindowPortal() {
-    this.setState({ showWindowPortal: false });
-  }
-
-  toggleRef = () => {
-    console.log(this.ref);
+  /**
+   * Function for info button
+   * Display all tooltips on click
+   * @ref {array}
+   * setTimeout hide all tooltip 
+   */
+  toggleRef() {
     for(var i=0; i < this.ref.length; i++) {
-      // console.log(this.testRef[i]);
       ReactTooltip.show(this.ref[i]);
     }
 
     setTimeout(() => ReactTooltip.hide(), 1000);
   }
 
-  /* Function for Loop Animation */
+  /**
+   * Function for Loop Animation
+   * @loopAnimation {boolean}
+   */
   loopAnimation() {
     this.setState(state => ({
       ...state,
@@ -217,7 +206,6 @@ export class App extends Component {
         <div className="container-fluid">
           <div className = "row">
             <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
-
               <span className="btnToggle">
                 <button className="btn btn-dark btn-circle"><i className="far fa-caret-square-right"></i></button>
                 <div className="btn-group-vertical btnGroup" role="group">
@@ -341,7 +329,6 @@ export class App extends Component {
                     </div>
                     )}	
                   </div>
-                
               </div>
             </div>
           </div>
