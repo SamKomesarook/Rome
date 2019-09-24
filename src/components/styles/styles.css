@@ -41,6 +41,23 @@
     font-size: 15px;
 }
 
+#outputArea {
+    height: 180px;
+    background-color:#D0D0D0;
+    overflow:auto;
+}
+
+#codingWrapper {
+    display: inline-block;
+    position: relative;
+}
+
+#lineButton {
+    size: 10%;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+
 .ioArea {
     height: 180px;
     background-color: #D0D0D0;
