@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import Interpreter from "../../interpreter/main";
 
+/**
+ * Button component
+ * @prop {string} name
+ * @prop {string} class
+ * @prop {function} clickFunc
+ * @prop {string} dataFor
+ * @prop {object} memArr
+ * @prop {string} icon
+ * @prop {string} ref
+ */
 export class Button extends Component {
   state = {
     name: this.props.name,

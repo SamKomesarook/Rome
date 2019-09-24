@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import Typed from "react-typed";
 
+/**
+ * IO Area component
+ * @prop {string} ref - reference for the element
+ * @prop {boolean} showLineNumber - display line number
+ * @prop {function} toggleLineNumber
+ */
 export class TextArea extends Component {
   constructor(props) {
     super(props);
@@ -58,32 +64,13 @@ export class TextArea extends Component {
     return (
       <div className="wrapper" data-tip data-for='TextAreaTips' ref={this.state.ref}>
         <div className="form-group shadow-textarea" style={wrapperStyle} >
-          {/* <textarea
-            data-tip
-            data-for="TextAreaTips"
-            className="form-control rounded-0 z-depth-1"
-            cols="50"
-            id="codingArea"
-            rows="28"
-            placeholder="Coding area"
-            style={textAreaStyle}
-            // onChange={this.checkCode}
-          />
-          <button
-            className="btn btn-light"
-            style={buttonStyle}
-            onClick={this.toggleLineNumber}
-          >
-            toggle
-          </button> */}
-
           <Typed
             strings={[
               "start\nset(numbers)\nwrite(4)\nprint\nend",
               "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
               "start\nmove(right)\nmove(left)\nend",
-		"start\nloop(4){\nmove(right)\n}\nend",
-		    "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(right)\n}\nend}"
+		          "start\nloop(4){\nmove(right)\n}\nend",
+		          "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(right)\n}\nend}"
             ]}
             typeSpeed={40}
             backSpeed={30}
