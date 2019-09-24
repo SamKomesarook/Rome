@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import '../styles/styles.css';
 
 export class Memory extends Component {
-  // state = {
-  //   content: this.props.content,
-  // }
 
   render() {
 
@@ -36,9 +33,6 @@ export class Memory extends Component {
 }
 
 export class NetMemory extends Component {
-  // state = {
-  //   content: this.props.content
-  // }
   render() {
     if (this.props.selected) {
       return (
@@ -68,10 +62,6 @@ export class NetMemory extends Component {
 }
 
 export class USBMemory extends Component {
-  // state = {
-  //   content: this.props.content
-  // }
-  
   render() {
 
 

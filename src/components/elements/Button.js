@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import Interpreter from "../../interpreter/main";
 
+/**
+ * Button component
+ * @prop {string} name
+ * @prop {string} class
+ * @prop {function} clickFunc
+ * @prop {string} dataFor
+ * @prop {object} memArr
+ * @prop {string} icon
+ * @prop {string} ref
+ */
 export class Button extends Component {
   state = {
     name: this.props.name,
@@ -76,9 +86,6 @@ export class Button extends Component {
           textArea.focus();
           textArea.selectionStart = index;
           textArea.selectionEnd = index + lines[i].length;
-          //if(i > 0){
-          //  lines[i-1] = lines[i-1].replace();
-          //}
         }, 2000 * i);
       })(i);
     }
@@ -91,11 +98,8 @@ export class Button extends Component {
   };
 
   render() {
-    // console.log(this.props.name);
-    // console.log(this.state);
     if (this.props.type === "submit") {
       return (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a>
           <input
             type="submit"
