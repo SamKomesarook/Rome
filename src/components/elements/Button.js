@@ -36,7 +36,7 @@ export class Button extends Component {
       case "Stop":
         this.setState({
           class: "btn btn-danger btn-sm hvr-icon-pulse-grow",
-          clickFunc: this.stopCode,
+          clickFunc: this.props.toggle,
           dataFor: "ButtonStop",
           icon: "far fa-stop-circle hvr-icon"
         });

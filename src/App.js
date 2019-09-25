@@ -46,6 +46,7 @@ export class App extends Component {
     // animation functionI
     this.moveRight = this.moveRight.bind(this);
     this.loopAnimation = this.loopAnimation.bind(this);
+    this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
     // console.log("Memory Array: ", this.memArr);
@@ -256,6 +257,9 @@ export class App extends Component {
 
     setTimeout(() => ReactTooltip.hide(), 1000);
   };
+  /**
+   * Fuction for stop button,which intialize the memory blocks
+   */
   
 
   /**
@@ -330,7 +334,7 @@ export class App extends Component {
                       >
                         <Button
                           name="Stop"
-                          toggle={this.initiliazeBinaryString}
+                          toggle={this.stop}
                           compRef={el => this.ref.push(el)}
                         />
                       </div>
