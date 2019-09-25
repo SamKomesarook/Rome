@@ -9,6 +9,7 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
+import styles from "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
@@ -304,14 +305,14 @@ export class App extends Component {
                   </div>
                 ) : null}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3" align="center">
-                    <div className="row">
-                      <i className="fas fa-microchip fa-4x float-right" />
+                  <div className="col-sm-3" >
+                    <div className="row" id="cpuArea">
+                      <div id="animatedBinary">
                       <Transition
                         native
                         items={this.state.showBinaryString}
                         from={{ opacity: 0, marginLeft: 0 }}
-                        enter={{ opacity: 1, marginLeft: 150 }}
+                        enter={{ opacity: 1, marginLeft: 240 }}
                         leave={{ opacity: 0 }}
                       >
                         {show =>
@@ -321,6 +322,8 @@ export class App extends Component {
                           ))
                         }
                       </Transition>
+                      </div>
+                      <i className="fas fa-microchip fa-4x"/>
                     </div>
                   </div>
                 )}
