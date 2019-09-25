@@ -153,23 +153,33 @@ export class App extends Component {
 
   /*function used to display the animated binary string*/
   toggleBinaryString() {
+    if(!this.state.showRunTimeAnimation){
     this.setState(state => ({
       ...state,
       showBinaryString: !state.showBinaryString
     }));
     var _this = this;
+    this.setState(state => ({
+      ...state,
+      showRunTimeAnimation: true
+    }));
     t = setInterval(function() {
       _this.setState(state => ({
        ...state,
         showBinaryString: !state.showBinaryString
       }));
     }, 1500 );
+  }
    
   }
   
 
   /*function used to hide the animated binary string*/
   initiliazeBinaryString() {
+    this.setState(state => ({
+      ...state,
+      showRunTimeAnimation: false
+    }));
     clearTimeout(t); 
     this.setState(state => ({
       ...state,
