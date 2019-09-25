@@ -194,6 +194,7 @@ export class App extends Component {
     this.setState({
       memState: this.memArr
     });
+    document.getElementById("outputArea").innerHTML = "";
   }
 
   /**
