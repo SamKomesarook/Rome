@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
-import Header from "./components/layout/Header";
-import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
+// import Header from "./components/layout/Header";
+// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
@@ -44,7 +44,6 @@ export class App extends Component {
     this.freeMem = this.freeMem.bind(this);
 
     // animation functionI
-    this.moveRight = this.moveRight.bind(this);
     this.loopAnimation = this.loopAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
@@ -122,77 +121,6 @@ export class App extends Component {
     });
   }
 
-  moveRight() {
-    var error = false;
-    var selectedFound = false;
-    for (var i = 0; i < this.memArr.length; i++) {
-      if (this.memArr[i].props.selected == true) {
-        var selected = i;
-        selectedFound = true;
-      }
-    }
-    if (!selectedFound) {
-      console.log("Error:No memory is selected!");
-      //call error animation since no memory is selected
-    } else {
-      if (selected === 14) {
-        error = true;
-        console.log("Error:This is the last memory!");
-        //call error animation since can't move right anymore
-      } else if (selected === 13) {
-        this.memArr[selected] = (
-          <USBMemory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      } else {
-        this.memArr[selected] = (
-          <Memory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      }
-
-      if (!error) {
-        if (selected + 1 === 14) {
-          this.memArr[selected + 1] = (
-            <NetMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else if (selected + 1 === 13) {
-          this.memArr[selected + 1] = (
-            <USBMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else {
-          this.memArr[selected + 1] = (
-            <Memory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        }
-      }
-    }
-    this.forceUpdate();
-  }
-
   componentDidMount() {
     window.addEventListener("beforeunload", () => {
       this.closeWindowPortal();
@@ -257,17 +185,16 @@ export class App extends Component {
 
     setTimeout(() => ReactTooltip.hide(), 1000);
   };
+
   /**
    * Fuction for stop button,which intialize the memory blocks
    */
-  
-  stop(){
+  stop() {
     this.memArr = constructMem();
     this.setState({
       memState: this.memArr
     });
-   }
-
+  }
 
   /**
    * Function for Loop Animation

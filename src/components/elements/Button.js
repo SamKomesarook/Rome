@@ -17,7 +17,6 @@ export class Button extends Component {
     class: "btn btn-primary",
     clickFunc: null,
     dataFor: null,
-    memArr: null,
     icon: null,
     ref: this.props.compRef
   };
@@ -95,7 +94,7 @@ export class Button extends Component {
     var code = document.getElementById("codingArea").value;
     new Interpreter(
       code,
-      this.state.memArr,
+      this.props.memArr,
       this.props.updateContentType,
       this.props.moveMem,
       this.props.writeContent,
