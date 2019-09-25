@@ -9,16 +9,19 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
+import styles from "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
 const memArr = [15];
+var t;
 
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      showRunTimeAnimation:false,
       showWindowPortal: false,
       showBinaryString: false,
       memState: memArr,
@@ -152,14 +155,34 @@ export class App extends Component {
 
   /*function used to display the animated binary string*/
   toggleBinaryString() {
+    if(!this.state.showRunTimeAnimation){
     this.setState(state => ({
       ...state,
-      showBinaryString: true
+      showBinaryString: !state.showBinaryString
     }));
+    var _this = this;
+    this.setState(state => ({
+      ...state,
+      showRunTimeAnimation: true
+    }));
+    t = setInterval(function() {
+      _this.setState(state => ({
+       ...state,
+        showBinaryString: !state.showBinaryString
+      }));
+    }, 1500 );
   }
+   
+  }
+  
 
   /*function used to hide the animated binary string*/
   initiliazeBinaryString() {
+    this.setState(state => ({
+      ...state,
+      showRunTimeAnimation: false
+    }));
+    clearTimeout(t); 
     this.setState(state => ({
       ...state,
       showBinaryString: false
@@ -293,14 +316,14 @@ export class App extends Component {
                   </div>
                 ) : null}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3" align="center">
-                    <div className="row">
-                      <i className="fas fa-microchip fa-4x float-right" />
+                  <div className="col-sm-3" >
+                    <div className="row" id="cpuArea">
+                      <div id="animatedBinary">
                       <Transition
                         native
                         items={this.state.showBinaryString}
-                        from={{ opacity: 1, marginLeft: 0 }}
-                        enter={{ opacity: 1, marginLeft: 150 }}
+                        from={{ opacity: 0, marginLeft: 0 }}
+                        enter={{ opacity: 1, marginLeft: 240 }}
                         leave={{ opacity: 0 }}
                       >
                         {show =>
@@ -310,6 +333,8 @@ export class App extends Component {
                           ))
                         }
                       </Transition>
+                      </div>
+                      <i className="fas fa-microchip fa-4x"/>
                     </div>
                   </div>
                 )}
