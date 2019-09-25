@@ -10,7 +10,7 @@ export function constructMem() {
         <USBMemory
           selected={false}
           id={i}
-          content={"USBMemory"}
+          content={""}
           contentType={"letters"}
         />
       );
@@ -19,7 +19,7 @@ export function constructMem() {
         <NetMemory
           selected={false}
           id={i}
-          content={"NetMemory"}
+          content={""}
           contentType={"letters"}
         />
       );
@@ -28,7 +28,7 @@ export function constructMem() {
         <Memory
           selected={i === 0 ? true : false}
           id={i}
-          content={"Memory"}
+          content={""}
           contentType={"letters"}
         />
       );

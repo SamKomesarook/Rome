@@ -256,6 +256,7 @@ export class App extends Component {
 
     setTimeout(() => ReactTooltip.hide(), 1000);
   };
+  
 
   /**
    * Function for Loop Animation
@@ -271,7 +272,6 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
         <div className="container-fluid">
           <div className="row">
             <div
