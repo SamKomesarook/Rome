@@ -25,46 +25,46 @@ export class Button extends Component {
   componentWillMount() {
     switch (this.props.name) {
       case "Run":
-          this.setState({
-            class: "btn btn-primary btn-sm hvr-icon-spin" ,
-            clickFunc: this.runCode,
-            dataFor: "ButtonRun",
-            icon: "fas fa-cog hvr-icon",
-            memArr: this.props.memArr
-          });
-          break;
+        this.setState({
+          class: "btn btn-primary btn-sm hvr-icon-spin",
+          clickFunc: this.runCode,
+          dataFor: "ButtonRun",
+          icon: "fas fa-cog hvr-icon",
+          memArr: this.props.memArr
+        });
+        break;
       case "Stop":
-          this.setState({
-            class: "btn btn-danger btn-sm hvr-icon-pulse-grow",
-            clickFunc: this.stopCode,
-            dataFor: "ButtonStop",
-            icon: "far fa-stop-circle hvr-icon"
-          });
-          break;
+        this.setState({
+          class: "btn btn-danger btn-sm hvr-icon-pulse-grow",
+          clickFunc: this.stopCode,
+          dataFor: "ButtonStop",
+          icon: "far fa-stop-circle hvr-icon"
+        });
+        break;
       case "Help":
-          this.setState({
-            class: "btn btn-info btn-sm hvr-icon-up",
-            dataFor: "ButtonHelp",
-            dataEvent: "click",
-            dataEventOff: "blur",
-            icon: "far fa-question-circle hvr-icon"
-          });
-          break;
+        this.setState({
+          class: "btn btn-info btn-sm hvr-icon-up",
+          dataFor: "ButtonHelp",
+          dataEvent: "click",
+          dataEventOff: "blur",
+          icon: "far fa-question-circle hvr-icon"
+        });
+        break;
       case "Info":
-          this.setState({
-            class: "btn btn-warning btn-sm hvr-icon-grow",
-            clickFunc: this.props.toggle,
-            dataFor: "ButtonInfo",
-            icon: "fas fa-info-circle hvr-icon"
-          });
-          break;
+        this.setState({
+          class: "btn btn-warning btn-sm hvr-icon-grow",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonInfo",
+          icon: "fas fa-info-circle hvr-icon"
+        });
+        break;
       default:
-          this.setState({
-            class: "btn btn-info btn-sm",
-            clickFunc: this.props.toggle,
-            dataFor: "ButtonHideShow"
-          });
-          break;
+        this.setState({
+          class: "btn btn-info btn-sm",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonHideShow"
+        });
+        break;
     }
   }
 
@@ -107,6 +107,7 @@ export class Button extends Component {
   render() {
     if (this.props.type === "submit") {
       return (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a>
           <input
             type="submit"
@@ -118,18 +119,18 @@ export class Button extends Component {
       );
     } else {
       return (
-          <button
-            type="button"
-            className={this.state.class}
-            onClick={this.state.clickFunc}
-            data-tip
-            data-for={this.state.dataFor}
-            data-event={this.state.dataEvent}
-            data-event-off={this.state.dataEventOff}
-            ref={this.state.ref}
-          >
-            <i className={this.state.icon}></i> {this.state.name}
-          </button>
+        <button
+          type="button"
+          className={this.state.class}
+          onClick={this.state.clickFunc}
+          data-tip
+          data-for={this.state.dataFor}
+          data-event={this.state.dataEvent}
+          data-event-off={this.state.dataEventOff}
+          ref={this.state.ref}
+        >
+          <i className={this.state.icon}></i> {this.state.name}
+        </button>
       );
     }
   }

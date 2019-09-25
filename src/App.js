@@ -8,7 +8,7 @@ import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
-import 'hover.css';
+import "hover.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
@@ -59,7 +59,6 @@ export class App extends Component {
     });
   }
 
-
   updateContentType(id, memObj) {
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
@@ -79,24 +78,25 @@ export class App extends Component {
       this.updateMem(newMemObj.getId(), newMem);
     }
   }
-  
-  /** 
-   * Function for print the errMessage to dashboard area in red color 
+
+  /**
+   * Function for print the errMessage to dashboard area in red color
    * @param {string} errMessage - The message that will be printed in red color on dashboard
    */
-  errorAnimation(errMessage){
-     var errMessageDiv = "<span style='color:red'>"+errMessage+"</span><br/>";
-     var oldMessage = document.getElementById("outputArea").innerHTML;
-     oldMessage += errMessageDiv;
-     document.getElementById("outputArea").innerHTML=oldMessage;
+  errorAnimation(errMessage) {
+    var errMessageDiv =
+      "<span style='color:red'>" + errMessage + "</span><br/>";
+    var oldMessage = document.getElementById("outputArea").innerHTML;
+    oldMessage += errMessageDiv;
+    document.getElementById("outputArea").innerHTML = oldMessage;
   }
-  
+
   /**
-  *Function for print the message received to dashboard area 
-  *@param {string} argument - The message that will be printed on dashboard
-  */
-  printAnimation(argument){
-    var argumentDiv = "<span>"+argument+"</span><br/>";
+   *Function for print the message received to dashboard area
+   *@param {string} argument - The message that will be printed on dashboard
+   */
+  printAnimation(argument) {
+    var argumentDiv = "<span>" + argument + "</span><br/>";
     var oldMessage = document.getElementById("outputArea").innerHTML;
     oldMessage += argumentDiv;
     document.getElementById("outputArea").innerHTML = oldMessage;
@@ -204,7 +204,7 @@ export class App extends Component {
       showIOWindow: !state.showIOWindow
     }));
   }
-  
+
   /*function used to show/hide the animation area and the memory board*/
   toggleAnimationArea() {
     this.setState(state => ({
@@ -212,7 +212,7 @@ export class App extends Component {
       showAnimationArea: !state.showAnimationArea
     }));
   }
-  
+
   /*function used to show/hide the coding area*/
   toggleTextArea() {
     this.setState(state => ({
@@ -220,7 +220,7 @@ export class App extends Component {
       showTextArea: !state.showTextArea
     }));
   }
-  
+
   /*function used to display the animated binary string*/
   toggleBinaryString() {
     this.setState(state => ({
@@ -228,8 +228,8 @@ export class App extends Component {
       showBinaryString: true
     }));
   }
-  
- /*function used to hide the animated binary string*/
+
+  /*function used to hide the animated binary string*/
   initiliazeBinaryString() {
     this.setState(state => ({
       ...state,
@@ -245,7 +245,7 @@ export class App extends Component {
    * Function for info button
    * Display all tooltips on click
    * @ref {array}
-   * setTimeout hide all tooltip 
+   * setTimeout hide all tooltip
    */
   toggleRef = () => {
     console.log(this.ref);
@@ -271,75 +271,88 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header /> 
+        <Header />
         <div className="container-fluid">
-          <div className = "row">
-            <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
+          <div className="row">
+            <div
+              className="col-sm-2"
+              data-tip
+              data-for="ComponentArea"
+              ref={el => this.ref.push(el)}
+            >
               <span className="btnToggle">
-                <button className="btn btn-dark btn-circle"><i className="far fa-caret-square-right"></i></button>
+                <button className="btn btn-dark btn-circle">
+                  <i className="far fa-caret-square-right"></i>
+                </button>
                 <div className="btn-group-vertical btnGroup" role="group">
-                  <Button name="Coding Area" toggle={this.toggleTextArea}/>
-                  <Button name="Animation Area" toggle={this.toggleAnimationArea}/>
-                  <Button name="IO Window" toggle={this.toggleIOWindow}/>
+                  <Button name="Coding Area" toggle={this.toggleTextArea} />
+                  <Button
+                    name="Animation Area"
+                    toggle={this.toggleAnimationArea}
+                  />
+                  <Button name="IO Window" toggle={this.toggleIOWindow} />
                 </div>
               </span>
             </div>
             <div className="col">
               <div className="row">
-                {this.state.showTextArea ? 
-                <div
-                  className={
-                    this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
-                  }
-                >
-                  <TextArea compRef={ el => this.ref.push(el)}/>
-                  <div className="row slider-container">
-                    <Slider compRef={ el => this.ref.push(el)}/>
-                  </div>
-                  <div className="row">
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button
-                        name="Run"
-                        toggle={this.toggleBinaryString}
-                        memArr={this.memArr}
-                        compRef={ el => this.ref.push(el)}
-                        updateContentType={this.updateContentType}
-                        moveMem={this.moveMem}
-                        writeContent={this.writeContent}
-                        freeMem={this.freeMem}
-                      />
+                {this.state.showTextArea ? (
+                  <div
+                    className={
+                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                    }
+                  >
+                    <TextArea compRef={el => this.ref.push(el)} />
+                    <div className="row slider-container">
+                      <Slider compRef={el => this.ref.push(el)} />
                     </div>
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Stop" toggle={this.initiliazeBinaryString} compRef={ el => this.ref.push(el)}/>
-                    </div>
-                    
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Info" toggle={this.toggleRef}/>
-                    </div>
+                    <div className="row">
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button
+                          name="Run"
+                          toggle={this.toggleBinaryString}
+                          memArr={this.memArr}
+                          compRef={el => this.ref.push(el)}
+                          updateContentType={this.updateContentType}
+                          moveMem={this.moveMem}
+                          writeContent={this.writeContent}
+                          freeMem={this.freeMem}
+                        />
+                      </div>
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button
+                          name="Stop"
+                          toggle={this.initiliazeBinaryString}
+                          compRef={el => this.ref.push(el)}
+                        />
+                      </div>
 
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Help" />
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button name="Info" toggle={this.toggleRef} />
+                      </div>
+
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button name="Help" />
+                      </div>
                     </div>
                   </div>
-                </div>
-                : null
-                }
+                ) : null}
                 {this.state.showAnimationArea && (
                   <div className="col-sm-3" align="center">
                     <div className="row">
@@ -360,8 +373,19 @@ export class App extends Component {
                       </Transition>
                     </div>
                   </div>
-                )} 
-                  <div className={this.state.showAnimationArea ?( "col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")):"col-sm-5"} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
+                )}
+                <div
+                  className={
+                    this.state.showAnimationArea
+                      ? "col-sm-5 " +
+                        (this.state.loopAnimation ? "memory-border" : "")
+                      : "col-sm-5"
+                  }
+                  id="memory"
+                  data-tip
+                  data-for="AnimationArea"
+                  ref={el => this.ref.push(el)}
+                >
                   {this.state.showAnimationArea && (
                     <div className="row-sm-6">
                       <div className="row">
@@ -390,17 +414,15 @@ export class App extends Component {
                         <div className="col">{this.memArr[14]}</div>
                       </div>
                     </div>
-                    )}
-                    {this.state.showIOWindow &&(
-                    <div className="row">	
-                      <div className="col-sm-12">	
-                        <InputOutputArea 
-                          compRef={ el => this.ref.push(el)}
-                        />	
-                      </div>	
+                  )}
+                  {this.state.showIOWindow && (
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <InputOutputArea compRef={el => this.ref.push(el)} />
+                      </div>
                     </div>
-                    )}	
-                  </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
