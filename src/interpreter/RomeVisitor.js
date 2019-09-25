@@ -1,14 +1,14 @@
-import { RomeListener } from "../lang/RomeListener";
+import { RomeVisitor } from "../lang/RomeVisitor";
 import MemoryBlock from "../entity/MemoryBlock";
 
-var RInterpreter = function(
+var RVisitor = function(
   memArr,
   updateContentType,
   moveMem,
   writeContent,
   freeMem
 ) {
-  RomeListener.call(this);
+  RomeVisitor.call(this); // inherit default visitor
   this.memArr = memArr;
   this.updateContentType = updateContentType;
   this.moveMem = moveMem;
@@ -17,42 +17,43 @@ var RInterpreter = function(
   return this;
 };
 
-RInterpreter.prototype = Object.create(RomeListener.prototype);
-RInterpreter.prototype.constructor = RInterpreter;
+// continue inheriting default visitor
+RVisitor.prototype = Object.create(RomeVisitor.prototype);
+RVisitor.prototype.constructor = RVisitor;
 
-RInterpreter.prototype.enterR = function(ctx) {
-  console.log("ENTER R!");
-  // console.log(ctx.expressions());
-  // // get name of tokens
-  // for (var i = 0; i < ctx.expressions().length; i++) {
-  //   console.log("Next Token: ", ctx.expressions()[i].getText());
-  // }
+RVisitor.prototype.visitChildren = function(ctx) {
+  if (!ctx) {
+    return;
+  }
+
+  if (ctx.children) {
+    return ctx.children.map(child => {
+      if (child.children && child.children.length !== 0) {
+        return child.accept(this);
+      } else {
+        return child.getText();
+      }
+    });
+  }
 };
 
-RInterpreter.prototype.exitR = function(ctx) {
-  //console.log("EXIT R!");
+RVisitor.prototype.visitR = function(ctx) {
+  console.log("Visit R!");
+  return this.visitChildren(ctx);
 };
 
-// Start read
-RInterpreter.prototype.enterRead = function(ctx) {
-  console.log("Enter Read");
+// Visit a parse tree produced by RomeParser#Num.
+RVisitor.prototype.visitNum = function(ctx) {
+  return this.visitChildren(ctx);
 };
 
-RInterpreter.prototype.exitRead = function(ctx) {};
-// End read
-
-// Start set
-RInterpreter.prototype.enterSet = function(ctx) {
-  console.log("ENTER SET!");
-  // fetch the argument out from command
+RVisitor.prototype.visitSet = function(ctx) {
+  console.log("Visit Set!");
   var command = getCommand(ctx);
   var arg = getCommandArg("set".length + 1, command);
   var selectedMem = getSelectedMemId(this.memArr);
-  // console.log("Arg: ", arg);
-  // console.log("Mem: ", selectedMem);
 
   var tempMem = this.memArr[selectedMem];
-  // console.log("TEMP MEM: ", tempMem);
 
   var tempMemObj = createMemObj(
     tempMem.props.id,
@@ -68,24 +69,16 @@ RInterpreter.prototype.enterSet = function(ctx) {
   } else {
     this.updateContentType(selectedMem, tempMemObj);
   }
+  return this.visitChildren(ctx);
 };
 
-RInterpreter.prototype.exitSet = function(ctx) {
-  // console.log("EXIT SET!");
-};
-// End set
-
-// Start move
-RInterpreter.prototype.enterMove = function(ctx) {
-  console.log("ENTER Move!");
+RVisitor.prototype.visitMove = function(ctx) {
+  console.log("Visit Move!");
   var command = getCommand(ctx);
   var arg = getCommandArg("move".length + 1, command);
   var selectedMem = getSelectedMemId(this.memArr);
-  // console.log("Arg: ", arg);
-  // console.log("Mem: ", selectedMem);
 
   var validMove = checkMemRange(selectedMem, arg);
-
   if (validMove) {
     var tempOldMem = this.memArr[selectedMem];
     var tempNewMem =
@@ -111,18 +104,14 @@ RInterpreter.prototype.enterMove = function(ctx) {
 
     this.moveMem(tempOldMemObj, tempNewMemObj, arg);
   } else {
-    alert("Hit the wall of memory!");
+    alert("Hit the wall of memory");
   }
+
+  return this.visitChildren(ctx);
 };
 
-RInterpreter.prototype.exitMove = function(ctx) {
-  // console.log("EXIT Move!");
-};
-//End Move
-
-//Start Write
-RInterpreter.prototype.enterWrite = function(ctx) {
-  console.log("Enter write");
+RVisitor.prototype.visitWrite = function(ctx) {
+  console.log("Visit write!");
   var command = getCommand(ctx);
   var arg = getCommandArg("write".length + 1, command);
   var selectedMem = getSelectedMemId(this.memArr);
@@ -149,16 +138,11 @@ RInterpreter.prototype.enterWrite = function(ctx) {
       this.writeContent(newMemObj);
     }
   }
-
-  // this.writeContent(newMemObj);
+  return this.visitChildren(ctx);
 };
 
-RInterpreter.prototype.exitWrite = function(ctx) {};
-//End Write
-
-//Start Free
-RInterpreter.prototype.enterFree = function(ctx) {
-  console.log("Enter Free!");
+RVisitor.prototype.visitFree = function(ctx) {
+  console.log("Visit free!");
   var selectedMem = getSelectedMemId(this.memArr);
   var tempMem = this.memArr[selectedMem];
   var tempMemObj = createMemObj(
@@ -170,33 +154,56 @@ RInterpreter.prototype.enterFree = function(ctx) {
   );
 
   this.freeMem(tempMemObj);
+  return this.visitChildren(ctx);
 };
 
-RInterpreter.prototype.exitFree = function(ctx) {};
-//End Free
-
-//Start Mem
-RInterpreter.prototype.enterMem = function(ctx) {
-  console.log("Enter Memory");
+RVisitor.prototype.visitMem = function(ctx) {
+  console.log("Visit Mem!");
   var command = getCommand(ctx);
   var arg = getCommandArg("memory".length + 1, command);
 
-  var tempMem = this.memArr[arg];
-  if (tempMem.props.contentType === "letters") {
-    alert("Memory content is not a number");
+  // if arg is a number, get memory block using the number
+  if (!isNaN(arg)) {
+    var tempMem = this.memArr[arg];
+    if (tempMem.props.contentType === "letters") {
+      // alert("Memory Content is not a number");
+      console.log("Memory content is not a number");
+    } else {
+      // console.log("Memory content: ", tempMem.props.content);
+      return tempMem.props.content;
+    }
   } else {
-    alert(tempMem.props.contentType);
-    return tempMem.props.content;
+    // recursively memory interpreter
+    return this.visitChildren(ctx);
   }
 };
 
-RInterpreter.prototype.exitMem = function(ctx) {
-  console.log("Exit Memory");
+// conditional regex: ((is|not)\ (less|greater|equal)\ (([0-9])|memory\([0-9]+\)))+
+// conditional regex, reserve for later use
+const condRegex = /((is|not) (less|greater|equal) (([0-9])|memory\([0-9]+\)))+/g;
+RVisitor.prototype.visitIf = function(ctx) {
+  console.log("Visit if!");
+  var command = getCommand(ctx);
+  var arg = getCommandArg("if".length + 1, command);
+
+  // get current selected memory
+  var currMem = this.memArr[getSelectedMemId(this.memArr)];
+
+  var condState = checkCond(arg, currMem);
+
+  if (condState) {
+    return this.visitChildren(ctx);
+  }
 };
-//End Mem
+
+RVisitor.prototype.visitCond = function(ctx) {
+  console.log("Visit cond!");
+  console.log(ctx.getText());
+};
 
 /**
  * get command and arguments
+ * @param {Object} ctx
  * @return {string} command and arguments
  */
 function getCommand(ctx) {
@@ -217,6 +224,56 @@ function getCommandArg(index, command) {
     arg = arg.replace(/['"]+/g, "");
   }
   return arg;
+}
+
+/**
+ * check the if statement condition with value of the current selected memory
+ * @param {string} condition string represent condition
+ * @param {Object} currMem current selected memory
+ * @return {Boolean} true is condition match, false otherwise
+ */
+function checkCond(condition, currMem) {
+  var conditionList = condition.split(" ");
+  // console.log(conditionList);
+  var comparsion = conditionList[0];
+  var type = conditionList[1];
+  var indicator = conditionList[2];
+
+  var memory = createMemObj(
+    currMem.props.id,
+    currMem.type.name,
+    currMem.props.selected,
+    currMem.props.content,
+    currMem.props.contentType
+  );
+
+  // only allow equal when comparing to string
+  if (memory.contentType === "letters") {
+    if (comparsion === "is") {
+      return type === "equal" && memory.content === indicator;
+    } else { // comparsion is "not"
+      return type === "equal" && memory.content !== indicator;
+    }
+  } else {
+    // check comparsion and match type with indicator
+    if (comparsion === "is") {
+      if (type === "less") {
+        return memory.content < indicator;
+      } else if (type === "equal") {
+        return memory.content === indicator;
+      } else if (type === "greater") {
+        return memory.content > indicator;
+      }
+    } else { // when comparsion type is "not"
+      if (type === "less") {
+        return memory.content >= indicator;
+      } else if (type === "equal") {
+        return memory.content !== indicator;
+      } else if (type === "greater") {
+        return memory.content <= indicator;
+      }
+    }
+  }
 }
 
 /**
@@ -273,7 +330,6 @@ function contentTypeMatch(contentType, arg) {
  * @return {boolean} true is the memory content is empty
  */
 function memAvailability(memContent) {
-  // console.log("Memory Content: ", memContent);
   return memContent === "";
 }
 
@@ -292,4 +348,5 @@ function checkMemRange(id, direction) {
   return true;
 }
 
-export default RInterpreter;
+// export default RomeVisitor;
+export default RVisitor;

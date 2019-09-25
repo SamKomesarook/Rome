@@ -23,7 +23,7 @@ export class Button extends Component {
   };
 
   componentWillMount() {
-    switch(this.props.name) {
+    switch (this.props.name) {
       case "Run":
           this.setState({
             class: "btn btn-primary btn-sm hvr-icon-spin" ,
@@ -93,7 +93,14 @@ export class Button extends Component {
 
   runCode = () => {
     var code = document.getElementById("codingArea").value;
-    new Interpreter(code, this.state.memArr, this.props.updateContentType);
+    new Interpreter(
+      code,
+      this.state.memArr,
+      this.props.updateContentType,
+      this.props.moveMem,
+      this.props.writeContent,
+      this.props.freeMem
+    );
     console.log("RUN Clicked!");
   };
 
