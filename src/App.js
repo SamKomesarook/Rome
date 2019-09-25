@@ -13,12 +13,14 @@ import "hover.css";
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
 const memArr = [15];
+var t;
 
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      showRunTimeAnimation:false,
       showWindowPortal: false,
       showBinaryString: false,
       memState: memArr,
@@ -44,7 +46,6 @@ export class App extends Component {
     this.freeMem = this.freeMem.bind(this);
 
     // animation functionI
-    this.moveRight = this.moveRight.bind(this);
     this.loopAnimation = this.loopAnimation.bind(this);
 
     this.memArr = constructMem();
@@ -121,77 +122,6 @@ export class App extends Component {
     });
   }
 
-  moveRight() {
-    var error = false;
-    var selectedFound = false;
-    for (var i = 0; i < this.memArr.length; i++) {
-      if (this.memArr[i].props.selected == true) {
-        var selected = i;
-        selectedFound = true;
-      }
-    }
-    if (!selectedFound) {
-      console.log("Error:No memory is selected!");
-      //call error animation since no memory is selected
-    } else {
-      if (selected === 14) {
-        error = true;
-        console.log("Error:This is the last memory!");
-        //call error animation since can't move right anymore
-      } else if (selected === 13) {
-        this.memArr[selected] = (
-          <USBMemory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      } else {
-        this.memArr[selected] = (
-          <Memory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      }
-
-      if (!error) {
-        if (selected + 1 === 14) {
-          this.memArr[selected + 1] = (
-            <NetMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else if (selected + 1 === 13) {
-          this.memArr[selected + 1] = (
-            <USBMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else {
-          this.memArr[selected + 1] = (
-            <Memory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        }
-      }
-    }
-    this.forceUpdate();
-  }
-
   componentDidMount() {
     window.addEventListener("beforeunload", () => {
       this.closeWindowPortal();
@@ -225,12 +155,22 @@ export class App extends Component {
   toggleBinaryString() {
     this.setState(state => ({
       ...state,
-      showBinaryString: true
+      showBinaryString: !state.showBinaryString
     }));
+    var _this = this;
+    t = setInterval(function() {
+      _this.setState(state => ({
+       ...state,
+        showBinaryString: !state.showBinaryString
+      }));
+    }, 1500 );
+   
   }
+  
 
   /*function used to hide the animated binary string*/
   initiliazeBinaryString() {
+    clearTimeout(t); 
     this.setState(state => ({
       ...state,
       showBinaryString: false
@@ -360,7 +300,7 @@ export class App extends Component {
                       <Transition
                         native
                         items={this.state.showBinaryString}
-                        from={{ opacity: 1, marginLeft: 0 }}
+                        from={{ opacity: 0, marginLeft: 0 }}
                         enter={{ opacity: 1, marginLeft: 150 }}
                         leave={{ opacity: 0 }}
                       >
