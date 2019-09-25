@@ -8,7 +8,7 @@ export class Memory extends Component {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-white rounded memory"
+          className="shadow-lg mb-5 bg-white rounded memory"
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -20,7 +20,7 @@ export class Memory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none p-3 mb-5 rounded " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -37,7 +37,7 @@ export class NetMemory extends Component {
     if (this.props.selected) {
       return (
         <div
-          className="memory shadow-lg p-3 mb-5 bg-brown rounded border border-info"
+          className="memory shadow-lg mb-5 bg-brown rounded border border-info"
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -48,7 +48,7 @@ export class NetMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none p-3 mb-5 rounded border border-info " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded border border-info " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -68,7 +68,7 @@ export class USBMemory extends Component {
     if (this.props.selected) {
       return (
         <div
-          className="memory shadow-lg p-3 mb-5 bg-blue rounded border border-dark"
+          className="memory shadow-lg mb-5 bg-blue rounded border border-dark"
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
@@ -79,7 +79,7 @@ export class USBMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none p-3 mb-5 rounded border border-dark " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded border border-dark " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"

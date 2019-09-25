@@ -25,7 +25,7 @@ export class Button extends Component {
     switch (this.props.name) {
       case "Run":
         this.setState({
-          class: "btn btn-primary btn-sm hvr-icon-spin",
+          class: "btn btn-primary btn-sm hvr-icon-spin button",
           clickFunc: this.runCode,
           dataFor: "ButtonRun",
           icon: "fas fa-cog hvr-icon",
@@ -34,7 +34,7 @@ export class Button extends Component {
         break;
       case "Stop":
         this.setState({
-          class: "btn btn-danger btn-sm hvr-icon-pulse-grow",
+          class: "btn btn-danger btn-sm hvr-icon-pulse-grow button",
           clickFunc: this.props.toggle,
           dataFor: "ButtonStop",
           icon: "far fa-stop-circle hvr-icon"
@@ -42,7 +42,7 @@ export class Button extends Component {
         break;
       case "Help":
         this.setState({
-          class: "btn btn-info btn-sm hvr-icon-up",
+          class: "btn btn-info btn-sm hvr-icon-up button",
           dataFor: "ButtonHelp",
           dataEvent: "click",
           dataEventOff: "blur",
@@ -51,7 +51,7 @@ export class Button extends Component {
         break;
       case "Info":
         this.setState({
-          class: "btn btn-warning btn-sm hvr-icon-grow",
+          class: "btn btn-warning btn-sm hvr-icon-grow button",
           clickFunc: this.props.toggle,
           dataFor: "ButtonInfo",
           icon: "fas fa-info-circle hvr-icon"
