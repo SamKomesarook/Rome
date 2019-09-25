@@ -261,6 +261,13 @@ export class App extends Component {
    * Fuction for stop button,which intialize the memory blocks
    */
   
+  stop(){
+    this.memArr = constructMem();
+    this.setState({
+      memState: this.memArr
+    });
+   }
+
 
   /**
    * Function for Loop Animation
