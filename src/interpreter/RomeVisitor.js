@@ -47,6 +47,13 @@ RVisitor.prototype.visitNum = function(ctx) {
   return this.visitChildren(ctx);
 };
 
+RVisitor.prototype.visitLoop = function(ctx) {
+	for(var i=0; i<ctx.getText()[5]; i++){
+		this.visitChildren(ctx);
+	}
+	return;
+};
+
 RVisitor.prototype.visitSet = function(ctx) {
   console.log("Visit Set!");
   var command = getCommand(ctx);
