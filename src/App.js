@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
-import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
+// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 // import { SignalIcon, USBIcon } from "./components/elements/Icon";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
@@ -42,12 +42,10 @@ export class App extends Component {
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
 
-    // animation functionI
-    this.moveRight = this.moveRight.bind(this);
+    // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
 
     this.memArr = constructMem();
-    // console.log("Memory Array: ", this.memArr);
     this.ref = [];
   }
 
@@ -110,77 +108,6 @@ export class App extends Component {
     var oldMessage = document.getElementById("outputArea").innerHTML;
     oldMessage += argumentDiv;
     document.getElementById("outputArea").innerHTML = oldMessage;
-  }
-
-  moveRight() {
-    var error = false;
-    var selectedFound = false;
-    for (var i = 0; i < this.memArr.length; i++) {
-      if (this.memArr[i].props.selected == true) {
-        var selected = i;
-        selectedFound = true;
-      }
-    }
-    if (!selectedFound) {
-      console.log("Error:No memory is selected!");
-      //call error animation since no memory is selected
-    } else {
-      if (selected === 14) {
-        error = true;
-        console.log("Error:This is the last memory!");
-        //call error animation since can't move right anymore
-      } else if (selected === 13) {
-        this.memArr[selected] = (
-          <USBMemory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      } else {
-        this.memArr[selected] = (
-          <Memory
-            selected={false}
-            id={selected}
-            content={this.memArr[selected].props.content}
-            contentType={this.memArr[selected].props.contentType}
-          />
-        );
-      }
-
-      if (!error) {
-        if (selected + 1 === 14) {
-          this.memArr[selected + 1] = (
-            <NetMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else if (selected + 1 === 13) {
-          this.memArr[selected + 1] = (
-            <USBMemory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        } else {
-          this.memArr[selected + 1] = (
-            <Memory
-              selected={true}
-              id={selected}
-              content={this.memArr[selected + 1].props.content}
-              contentType={this.memArr[selected + 1].props.contentType}
-            />
-          );
-        }
-      }
-    }
-    this.forceUpdate();
   }
 
   componentDidMount() {
@@ -256,84 +183,95 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header /> 
+        <Header />
         <div className="container-fluid">
-          <div className = "row">
-            <div className="col-sm-2" data-tip data-for="ComponentArea" ref={ el => this.ref.push(el)}>
+          <div className="row">
+            <div
+              className="col-sm-2"
+              data-tip
+              data-for="ComponentArea"
+              ref={el => this.ref.push(el)}
+            >
               <div className="row">
                 <div className="col">
-                  <Button name="Coding Area" toggle={this.toggleTextArea}/>
+                  <Button name="Coding Area" toggle={this.toggleTextArea} />
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button name="Animation Area" toggle={this.toggleAnimationArea}/>
+                  <Button
+                    name="Animation Area"
+                    toggle={this.toggleAnimationArea}
+                  />
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <Button name="IO Window" toggle={this.toggleIOWindow}/>
+                  <Button name="IO Window" toggle={this.toggleIOWindow} />
                 </div>
               </div>
             </div>
             <div className="col">
               <div className="row">
-                {this.state.showTextArea ? 
-                <div
-                  className={
-                    this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
-                  }
-                >
-                  <TextArea compRef={ el => this.ref.push(el)}/>
-                  <div className="row slider-container">
-                    <Slider compRef={ el => this.ref.push(el)}/>
-                  </div>
-                  <div className="row">
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button
-                        name="Run"
-                        toggle={this.toggleBinaryString}
-                        memArr={this.memArr}
-                        compRef={ el => this.ref.push(el)}
-                        updateContentType={this.updateContentType}
-                        moveMem={this.moveMem}
-                        writeContent={this.writeContent}
-                        freeMem={this.freeMem}
-                      />
+                {this.state.showTextArea ? (
+                  <div
+                    className={
+                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                    }
+                  >
+                    <TextArea compRef={el => this.ref.push(el)} />
+                    <div className="row slider-container">
+                      <Slider compRef={el => this.ref.push(el)} />
                     </div>
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Stop" toggle={this.initiliazeBinaryString} compRef={ el => this.ref.push(el)}/>
-                    </div>
-                    
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Info" toggle={this.toggleRef}/>
-                    </div>
+                    <div className="row">
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button
+                          name="Run"
+                          toggle={this.toggleBinaryString}
+                          memArr={this.memArr}
+                          compRef={el => this.ref.push(el)}
+                          updateContentType={this.updateContentType}
+                          moveMem={this.moveMem}
+                          writeContent={this.writeContent}
+                          freeMem={this.freeMem}
+                        />
+                      </div>
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button
+                          name="Stop"
+                          toggle={this.initiliazeBinaryString}
+                          compRef={el => this.ref.push(el)}
+                        />
+                      </div>
 
-                    <div
-                      className={
-                        this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
-                      }
-                    >
-                      <Button name="Help" />
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button name="Info" toggle={this.toggleRef} />
+                      </div>
+
+                      <div
+                        className={
+                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                        }
+                      >
+                        <Button name="Help" />
+                      </div>
                     </div>
-                  </div>
-                  {/* <Form method={"GET"} />
+                    {/* <Form method={"GET"} />
                   <Form method={"POST"} /> */}
-                </div>
-                : null
-                }
+                  </div>
+                ) : null}
                 {this.state.showAnimationArea && (
                   <div className="col-sm-3" align="center">
                     <div className="row">
@@ -354,8 +292,19 @@ export class App extends Component {
                       </Transition>
                     </div>
                   </div>
-                )} 
-                  <div className={this.state.showAnimationArea ?( "col-sm-5 " + ((this.state.loopAnimation)? "memory-border" : "")):"col-sm-5"} id="memory" data-tip data-for="AnimationArea" ref={ el => this.ref.push(el)}>
+                )}
+                <div
+                  className={
+                    this.state.showAnimationArea
+                      ? "col-sm-5 " +
+                        (this.state.loopAnimation ? "memory-border" : "")
+                      : "col-sm-5"
+                  }
+                  id="memory"
+                  data-tip
+                  data-for="AnimationArea"
+                  ref={el => this.ref.push(el)}
+                >
                   {this.state.showAnimationArea && (
                     <div className="row-sm-6">
                       <div className="row">
@@ -384,18 +333,15 @@ export class App extends Component {
                         <div className="col">{this.memArr[14]}</div>
                       </div>
                     </div>
-                    )}
-                    {this.state.showIOWindow &&(
-                    <div className="row">	
-                      <div className="col-sm-12">	
-                        <InputOutputArea 
-                          compRef={ el => this.ref.push(el)}
-                        />	
-                      </div>	
+                  )}
+                  {this.state.showIOWindow && (
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <InputOutputArea compRef={el => this.ref.push(el)} />
+                      </div>
                     </div>
-                    )}	
-                  </div>
-                
+                  )}
+                </div>
               </div>
             </div>
           </div>
