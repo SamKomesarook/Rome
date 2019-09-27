@@ -100,6 +100,7 @@ export class Button extends Component {
       this.props.writeContent,
       this.props.freeMem
     );
+    this.props.toggle();
     console.log("RUN Clicked!");
   };
 
@@ -121,7 +122,7 @@ export class Button extends Component {
         <button
           type="button"
           className={this.state.class}
-          onClick={ this.state.clickFunc,this.props.toggle}
+          onClick={ this.state.clickFunc}
           data-tip
           data-for={this.state.dataFor}
           data-event={this.state.dataEvent}

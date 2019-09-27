@@ -21,7 +21,7 @@ export class App extends Component {
     super(props);
 
     this.state = {
-      showRunTimeAnimation:false,
+      showRunTimeAnimation: false,
       showWindowPortal: false,
       showBinaryString: false,
       memState: memArr,
@@ -46,12 +46,11 @@ export class App extends Component {
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
 
-    // animation functionI
+    // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
-    // console.log("Memory Array: ", this.memArr);
     this.ref = [];
   }
 
@@ -155,26 +154,24 @@ export class App extends Component {
 
   /*function used to display the animated binary string*/
   toggleBinaryString() {
-    if(!this.state.showRunTimeAnimation){
-    this.setState(state => ({
-      ...state,
-      showBinaryString: !state.showBinaryString
-    }));
-    var _this = this;
-    this.setState(state => ({
-      ...state,
-      showRunTimeAnimation: true
-    }));
-    t = setInterval(function() {
-      _this.setState(state => ({
-       ...state,
+    if (!this.state.showRunTimeAnimation) {
+      this.setState(state => ({
+        ...state,
         showBinaryString: !state.showBinaryString
       }));
-    }, 1500 );
+      var _this = this;
+      this.setState(state => ({
+        ...state,
+        showRunTimeAnimation: true
+      }));
+      t = setInterval(function() {
+        _this.setState(state => ({
+          ...state,
+          showBinaryString: !state.showBinaryString
+        }));
+      }, 1500);
+    }
   }
-   
-  }
-  
 
   /*function used to hide the animated binary string*/
   initiliazeBinaryString() {
@@ -182,7 +179,7 @@ export class App extends Component {
       ...state,
       showRunTimeAnimation: false
     }));
-    clearTimeout(t); 
+    clearTimeout(t);
     this.setState(state => ({
       ...state,
       showBinaryString: false
@@ -217,6 +214,7 @@ export class App extends Component {
     this.setState({
       memState: this.memArr
     });
+    this.initiliazeBinaryString();
     document.getElementById("outputArea").innerHTML = "";
   }
 
@@ -316,25 +314,25 @@ export class App extends Component {
                   </div>
                 ) : null}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3" >
+                  <div className="col-sm-3">
                     <div className="row" id="cpuArea">
                       <div id="animatedBinary">
-                      <Transition
-                        native
-                        items={this.state.showBinaryString}
-                        from={{ opacity: 0, marginLeft: 0 }}
-                        enter={{ opacity: 1, marginLeft: 240 }}
-                        leave={{ opacity: 0 }}
-                      >
-                        {show =>
-                          show &&
-                          (props => (
-                            <animated.div style={props}>1011101</animated.div>
-                          ))
-                        }
-                      </Transition>
+                        <Transition
+                          native
+                          items={this.state.showBinaryString}
+                          from={{ opacity: 0, marginLeft: 0 }}
+                          enter={{ opacity: 1, marginLeft: 240 }}
+                          leave={{ opacity: 0 }}
+                        >
+                          {show =>
+                            show &&
+                            (props => (
+                              <animated.div style={props}>1011101</animated.div>
+                            ))
+                          }
+                        </Transition>
                       </div>
-                      <i className="fas fa-microchip fa-4x"/>
+                      <i className="fas fa-microchip fa-4x" />
                     </div>
                   </div>
                 )}

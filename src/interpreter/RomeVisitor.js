@@ -48,10 +48,10 @@ RVisitor.prototype.visitNum = function(ctx) {
 };
 
 RVisitor.prototype.visitLoop = function(ctx) {
-	for(var i=0; i<ctx.getText()[5]; i++){
-		this.visitChildren(ctx);
-	}
-	return;
+  for (var i = 0; i < ctx.getText()[5]; i++) {
+    this.visitChildren(ctx);
+  }
+  return;
 };
 
 RVisitor.prototype.visitSet = function(ctx) {
@@ -133,17 +133,48 @@ RVisitor.prototype.visitWrite = function(ctx) {
     tempMem.props.contentType
   );
 
-  // check content type and if arguments is match to specific contentType
+  // check content type and memory availability
   var matchedType = contentTypeMatch(newMemObj.contentType, arg);
+  var contentAvail = memAvailability(tempMem.props.content);
   if (!matchedType) {
-    alert("Wrond content type!");
+    alert("Wrong type!");
+  } else if (!contentAvail) {
+    alert("Memory is not available!");
   } else {
-    var contentAvail = memAvailability(tempMem.props.content);
-    if (!contentAvail) {
-      alert("Memory is not available!");
-    } else {
-      this.writeContent(newMemObj);
-    }
+    this.writeContent(newMemObj);
+  }
+  return this.visitChildren(ctx);
+};
+
+RVisitor.prototype.visitRead = function(ctx) {
+  console.log("Visit Read!");
+  var selectedMem = getSelectedMemId(this.memArr);
+  var tempMem = this.memArr[selectedMem];
+  var typeAllow = tempMem.props.contentType;
+
+  var userInput = "";
+  // force user input something and only whitespace is not allowed
+  while (userInput === "" || userInput === null || userInput.match(/^\s+$/)) {
+    userInput = prompt("User Input, Please enter a " + typeAllow + " type");
+  }
+
+  var newMemObj = createMemObj(
+    tempMem.props.id,
+    tempMem.type.name,
+    tempMem.props.selected,
+    userInput,
+    tempMem.props.contentType
+  );
+
+  // check content type and memory availability
+  var matchedType = contentTypeMatch(newMemObj.contentType, userInput);
+  var contentAvail = memAvailability(tempMem.props.content);
+  if (!matchedType) {
+    alert("Wrong type!");
+  } else if (!contentAvail) {
+    alert("Memory is not available!");
+  } else {
+    this.writeContent(newMemObj);
   }
   return this.visitChildren(ctx);
 };
@@ -186,8 +217,6 @@ RVisitor.prototype.visitMem = function(ctx) {
 };
 
 // conditional regex: ((is|not)\ (less|greater|equal)\ (([0-9])|memory\([0-9]+\)))+
-// conditional regex, reserve for later use
-const condRegex = /((is|not) (less|greater|equal) (([0-9])|memory\([0-9]+\)))+/g;
 RVisitor.prototype.visitIf = function(ctx) {
   console.log("Visit if!");
   var command = getCommand(ctx);
@@ -258,7 +287,8 @@ function checkCond(condition, currMem) {
   if (memory.contentType === "letters") {
     if (comparsion === "is") {
       return type === "equal" && memory.content === indicator;
-    } else { // comparsion is "not"
+    } else {
+      // comparsion is "not"
       return type === "equal" && memory.content !== indicator;
     }
   } else {
@@ -271,7 +301,8 @@ function checkCond(condition, currMem) {
       } else if (type === "greater") {
         return memory.content > indicator;
       }
-    } else { // when comparsion type is "not"
+    } else {
+      // when comparsion type is "not"
       if (type === "less") {
         return memory.content >= indicator;
       } else if (type === "equal") {
