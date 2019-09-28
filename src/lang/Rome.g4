@@ -35,8 +35,8 @@ SNET:'write_net';
 RNET:'read_net';
 
 MOVE:'move';
-RIGHT:'right';
-LEFT:'left';
+RIGHT:'next';
+LEFT:'last';
 
 LPAR:'(';
 RPAR:')';
@@ -55,27 +55,35 @@ NUMBER
    : ('0' .. '9') +
    ;
 
+
+STRLIT : '"' ~ ["\r\n]* '"';
+
 // Rules
+
+imp : IMP SPACE STRLIT;
 
 intargs
 	: NUMBER # Num
 	| MEM LPAR intargs RPAR # Mem
 	;
 
-STRLIT : '"' ~ ["\r\n]* '"';
 
-r : START NEWLINE (IMP NEWLINE)? expressions* END NEWLINE*;
+r : START NEWLINE (imp NEWLINE)? expressions* END NEWLINE*;
 
 expressions : expression NEWLINE;
 
 conditional : (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (intargs | STRLIT) # Cond;
+
+
+// NOTE :: For multiple conds, add this: ((AND | OR) SPACE conditional)* 
+
 
 expression
 	: SET LPAR (NUM | LET) RPAR # Set
 	| FREE # Free
 	| READ # Read
 	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
-	| IF LPAR conditional ((AND | OR) SPACE conditional)* RPAR LSQ NEWLINE expressions* RSQ # If
+	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ # If
 	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
 	| WRITE LPAR (intargs | STRLIT) RPAR # Write
 	| SNET LPAR (intargs | STRLIT) RPAR #Snet
