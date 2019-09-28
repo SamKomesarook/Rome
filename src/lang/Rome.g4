@@ -15,8 +15,12 @@ LET:'letters';
 
 FREE:'free';
 MEM:'memory';
+KREAD:'read_keyboard';
+SWRITE:'write_screen';
 READ:'read';
 WRITE:'write';
+
+IMP:'import';
 
 IF:'if';
 IS:'is';
@@ -26,6 +30,9 @@ LESS:'less';
 GRE:'greater';
 AND:'and';
 OR:'or';
+
+SNET:'write_net';
+RNET:'read_net';
 
 MOVE:'move';
 RIGHT:'right';
@@ -57,7 +64,7 @@ intargs
 
 STRLIT : '"' ~ ["\r\n]* '"';
 
-r : START NEWLINE expressions* END NEWLINE*;
+r : START NEWLINE (IMP NEWLINE)? expressions* END NEWLINE*;
 
 expressions : expression NEWLINE;
 
@@ -71,4 +78,8 @@ expression
 	| IF LPAR conditional ((AND | OR) SPACE conditional)* RPAR LSQ NEWLINE expressions* RSQ # If
 	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
 	| WRITE LPAR (intargs | STRLIT) RPAR # Write
+	| SNET LPAR (intargs | STRLIT) RPAR #Snet
+	| RNET LPAR (intargs | STRLIT) RPAR #Rnet
+	| KREAD LPAR (intargs | STRLIT) RPAR #Kread
+	| SWRITE LPAR (intargs | STRLIT) RPAR #Swrite
 	;
