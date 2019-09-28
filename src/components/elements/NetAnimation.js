@@ -6,7 +6,7 @@ export default class NetAnimation extends Component {
         return (
             <Transition
             native
-            items={this.props.animate} // boolean here to trigger the animation (similar to binaryString that henry did)
+            items={this.props.animated} // boolean here to trigger the animation (similar to binaryString that henry did)
             from={{ opacity: 0, marginRight: -100 }}
             enter={{ opacity: 1, marginRight: 0 }}
             delay={500}
