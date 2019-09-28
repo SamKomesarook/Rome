@@ -119,5 +119,41 @@ RomeListener.prototype.exitWrite = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#Snet.
+RomeListener.prototype.enterSnet = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Snet.
+RomeListener.prototype.exitSnet = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Rnet.
+RomeListener.prototype.enterRnet = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Rnet.
+RomeListener.prototype.exitRnet = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Kread.
+RomeListener.prototype.enterKread = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Kread.
+RomeListener.prototype.exitKread = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Swrite.
+RomeListener.prototype.enterSwrite = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Swrite.
+RomeListener.prototype.exitSwrite = function(ctx) {
+};
+
+
 
 exports.RomeListener = RomeListener;
