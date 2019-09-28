@@ -237,6 +237,27 @@ RVisitor.prototype.visitCond = function(ctx) {
   console.log(ctx.getText());
 };
 
+RVisitor.prototype.visitSnet = function(ctx) {
+  console.log("Visit Send Net!");
+  const netMemId = 14;
+  var command = getCommand(ctx);
+  var arg = getCommandArg("write_net".length + 1, command);
+
+  var netMem = this.memArr[netMemId];
+  var memObj = new MemoryBlock(
+    netMemId,
+    netMem.type.name,
+    netMem.props.selected,
+    arg,
+    netMem.props.contentType
+  );
+  memObj.setAnimated(true);
+
+  this.writeContent(memObj);
+};
+
+RVisitor.prototype.visitRnet = function(ctx) {};
+
 /**
  * get command and arguments
  * @param {Object} ctx

@@ -3,8 +3,9 @@ class MemoryBlock {
     this.id = id;
     this.type = type;
     this.selected = selected;
-    this.content = "memory";
+    this.content = "";
     this.contentType = "letters";
+    this.animated = false;
   }
 
   getId() {
@@ -27,6 +28,10 @@ class MemoryBlock {
     return this.selected;
   }
 
+  getAnimated() {
+    return this.animated;
+  }
+
   setContent(content) {
     this.content = content;
   }
@@ -36,7 +41,11 @@ class MemoryBlock {
   }
 
   setSelected(selected) {
-      this.selected = selected;
+    this.selected = selected;
+  }
+
+  setAnimated(animated) {
+    this.animated = animated;
   }
 }
 

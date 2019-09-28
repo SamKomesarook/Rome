@@ -100,7 +100,7 @@ export class Button extends Component {
       this.props.writeContent,
       this.props.freeMem
     );
-    this.props.toggle();
+    // this.props.toggle();
     console.log("RUN Clicked!");
   };
 
