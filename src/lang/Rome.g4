@@ -35,8 +35,8 @@ SNET:'write_net';
 RNET:'read_net';
 
 MOVE:'move';
-RIGHT:'right';
-LEFT:'left';
+RIGHT:'next';
+LEFT:'last';
 
 LPAR:'(';
 RPAR:')';
