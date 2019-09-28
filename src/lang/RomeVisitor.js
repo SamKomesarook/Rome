@@ -12,6 +12,12 @@ function RomeVisitor() {
 RomeVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
 RomeVisitor.prototype.constructor = RomeVisitor;
 
+// Visit a parse tree produced by RomeParser#imp.
+RomeVisitor.prototype.visitImp = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Num.
 RomeVisitor.prototype.visitNum = function(ctx) {
   return this.visitChildren(ctx);
