@@ -9,7 +9,7 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
-import styles from "./App.css";
+//import styles from "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
