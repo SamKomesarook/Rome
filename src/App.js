@@ -28,7 +28,8 @@ export class App extends Component {
       showAnimationArea: true,
       showTextArea: true,
       showIOWindow: true,
-      loopAnimation: false
+      loopAnimation: false,
+      netAnimation: false // Net animation toggle by using boolean
     };
     this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
@@ -48,6 +49,7 @@ export class App extends Component {
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
+    this.netAnimation = this.netAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
@@ -227,6 +229,17 @@ export class App extends Component {
       ...state,
       loopAnimation: !state.loopAnimation
     }));
+  }
+
+  /**
+   * Function for Network memory animation
+   * @netAnimation {boolean}
+   */
+  netAnimation() {
+    this.setState(state => ({
+      ...state,
+      netAnimation: !state.netAnimation
+    }))
   }
 
   render() {

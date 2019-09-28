@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../styles/styles.css';
+import NetAnimation from "./NetAnimation";
 
 export class Memory extends Component {
 
@@ -53,8 +54,10 @@ export class NetMemory extends Component {
           data-tip
           data-for="NetMemoryTips"
         >
-          {this.props.content}
-          
+          {/* Not sure this still required or not */}
+          {/* {this.props.content} */}
+          {/* this place should pass the boolean value as props */}
+          <NetAnimation animated={this.props.animated}/> 
         </div>
       );
     }
