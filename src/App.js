@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
-// import Header from "./components/layout/Header";
+import Header from "./components/layout/Header";
 // import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
@@ -245,6 +245,7 @@ export class App extends Component {
   render() {
     return (
       <Fragment>
+        <Header />
         <div className="container-fluid">
           <div className="row">
             <div
