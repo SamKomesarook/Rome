@@ -21,7 +21,7 @@ export class Memory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -49,7 +49,7 @@ export class NetMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded border border-info " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded border border-info " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -82,7 +82,7 @@ export class USBMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded border border-dark " + ((this.props.contentType == 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={"memory shadow-none mb-5 rounded border border-dark " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
