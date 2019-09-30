@@ -1,14 +1,13 @@
 import React, { Component } from "react";
+import "../styles/styles.css";
+import NetAnimation from "./NetAnimation";
 
 export class Memory extends Component {
-  // state = {
-  //   content: this.props.content,
-  // }
   render() {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-white rounded"
+          className="shadow-lg mb-5 bg-white rounded memory"
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -19,7 +18,12 @@ export class Memory extends Component {
     } else {
       return (
         <div
-          className="shadow-none p-3 mb-5 bg-white rounded"
+          className={
+            "memory shadow-none mb-5 rounded " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -32,14 +36,11 @@ export class Memory extends Component {
 }
 
 export class NetMemory extends Component {
-  // state = {
-  //   content: this.props.content
-  // }
   render() {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-brown rounded border border-info"
+          className="memory shadow-lg mb-5 bg-brown rounded border border-info"
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -50,12 +51,20 @@ export class NetMemory extends Component {
     } else {
       return (
         <div
-          className="shadow-none p-3 mb-5 bg-brown rounded border border-info"
+          className={
+            "memory shadow-none mb-5 rounded border border-info " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
         >
-          {this.props.content}
+          {/* Not sure this still required or not */}
+          {/* {this.props.content} */}
+          {/* this place should pass the boolean value as props */}
+          <NetAnimation animated={this.props.animated} />
         </div>
       );
     }
@@ -63,14 +72,11 @@ export class NetMemory extends Component {
 }
 
 export class USBMemory extends Component {
-  // state = {
-  //   content: this.props.content
-  // }
   render() {
     if (this.props.selected) {
       return (
         <div
-          className="shadow-lg p-3 mb-5 bg-blue rounded border border-dark"
+          className="memory shadow-lg mb-5 bg-blue rounded border border-dark"
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"
@@ -81,7 +87,12 @@ export class USBMemory extends Component {
     } else {
       return (
         <div
-          className="shadow-none p-3 mb-5 bg-blue rounded border border-dark"
+          className={
+            "memory shadow-none mb-5 rounded border border-dark " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"

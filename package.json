@@ -15,6 +15,7 @@
   "homepage": "https://github.com/BaharuHarris/PJFC#readme",
   "dependencies": {
     "antlr4": "^4.7.2",
+    "hover.css": "^2.3.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",

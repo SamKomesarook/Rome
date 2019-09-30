@@ -1,52 +1,69 @@
 import React, { Component } from "react";
 import Interpreter from "../../interpreter/main";
 
+/**
+ * Button component
+ * @prop {string} name
+ * @prop {string} class
+ * @prop {function} clickFunc
+ * @prop {string} dataFor
+ * @prop {object} memArr
+ * @prop {string} icon
+ * @prop {string} ref
+ */
 export class Button extends Component {
   state = {
     name: this.props.name,
     class: "btn btn-primary",
     clickFunc: null,
     dataFor: null,
-    memArr: null,
+    icon: null,
     ref: this.props.compRef
   };
 
   componentWillMount() {
-    switch(this.props.name) {
+    switch (this.props.name) {
       case "Run":
-          this.setState({
-            class: "btn btn-primary",
-            clickFunc: this.runCode,
-            dataFor: "ButtonRun",
-            memArr: this.props.memArr
-          });
-          break;
+        this.setState({
+          class: "btn btn-primary btn-sm hvr-icon-spin button",
+          clickFunc: this.runCode,
+          dataFor: "ButtonRun",
+          icon: "fas fa-cog hvr-icon",
+          memArr: this.props.memArr
+        });
+        break;
       case "Stop":
-          this.setState({
-            class: "btn btn-danger",
-            clickFunc: this.stopCode,
-            dataFor: "ButtonStop"
-          });
-          break;
+        this.setState({
+          class: "btn btn-danger btn-sm hvr-icon-pulse-grow button",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonStop",
+          icon: "far fa-stop-circle hvr-icon"
+        });
+        break;
       case "Help":
-          this.setState({
-            class: "btn btn-info",
-            dataFor: "ButtonHelp",
-            dataEvent: "click",
-            dataEventOff: "blur"
-          });
-          break;
+        this.setState({
+          class: "btn btn-info btn-sm hvr-icon-up button",
+          dataFor: "ButtonHelp",
+          dataEvent: "click",
+          dataEventOff: "blur",
+          icon: "far fa-question-circle hvr-icon"
+        });
+        break;
       case "Info":
-          this.setState({
-            class: "btn btn-warning",
-            dataFor: "ButtonInfo"
-          })
+        this.setState({
+          class: "btn btn-warning btn-sm hvr-icon-grow button",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonInfo",
+          icon: "fas fa-info-circle hvr-icon"
+        });
+        break;
       default:
-          this.setState({
-            class: "btn btn-info",
-            clickFunc: this.props.toggle,
-            dataFor: "ButtonHideShow"
-          });
+        this.setState({
+          class: "btn btn-info btn-sm",
+          clickFunc: this.props.toggle,
+          dataFor: "ButtonHideShow"
+        });
+        break;
     }
   }
 
@@ -68,9 +85,6 @@ export class Button extends Component {
           textArea.focus();
           textArea.selectionStart = index;
           textArea.selectionEnd = index + lines[i].length;
-          //if(i > 0){
-          //  lines[i-1] = lines[i-1].replace();
-          //}
         }, 2000 * i);
       })(i);
     }
@@ -78,13 +92,21 @@ export class Button extends Component {
 
   runCode = () => {
     var code = document.getElementById("codingArea").value;
-    new Interpreter(code, this.state.memArr, this.props.updateContentType);
+    new Interpreter(
+      code,
+      this.props.memArr,
+      this.props.updateContentType,
+      this.props.moveMem,
+      this.props.writeContent,
+      this.props.freeMem,
+      this.props.sendNet,
+      this.props.readNet
+    );
+    this.props.toggle();
     console.log("RUN Clicked!");
   };
 
   render() {
-    // console.log(this.props.name);
-    // console.log(this.state);
     if (this.props.type === "submit") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -99,20 +121,18 @@ export class Button extends Component {
       );
     } else {
       return (
-        <div className="form-group shadow-textarea">
-          <button
-            type="button"
-            className={this.state.class}
-            onClick={this.state.clickFunc}
-            data-tip
-            data-for={this.state.dataFor}
-            data-event={this.state.dataEvent}
-            data-event-off={this.state.dataEventOff}
-            ref={this.state.ref}
-          >
-            {this.state.name}
-          </button>
-        </div>
+        <button
+          type="button"
+          className={this.state.class}
+          onClick={ this.state.clickFunc}
+          data-tip
+          data-for={this.state.dataFor}
+          data-event={this.state.dataEvent}
+          data-event-off={this.state.dataEventOff}
+          ref={this.state.ref}
+        >
+          <i className={this.state.icon}></i> {this.state.name}
+        </button>
       );
     }
   }

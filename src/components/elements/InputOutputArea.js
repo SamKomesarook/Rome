@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Typed from "react-typed";
 import '../styles/styles.css';
 
+/**
+ * IO Area component
+ * @prop {string} ref - reference for the element
+ */
 export default class InputOutputArea extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +17,10 @@ export default class InputOutputArea extends Component {
     render() {
         return (
             <div data-tip data-for="DashboardArea" ref={this.state.ref}>
-                <textarea className="dashboard" rows="10" disabled/>
+                <div contentEditable="false" className="form-control rounded-0 z-depth-1 ioArea" 
+                   id="outputArea"
+                 >
+                </div>
                 <Typed
                     strings={[
                         "Input something......."
