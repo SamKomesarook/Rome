@@ -11,6 +11,15 @@ function RomeListener() {
 RomeListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
 RomeListener.prototype.constructor = RomeListener;
 
+// Enter a parse tree produced by RomeParser#imp.
+RomeListener.prototype.enterImp = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#imp.
+RomeListener.prototype.exitImp = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Num.
 RomeListener.prototype.enterNum = function(ctx) {
 };
@@ -116,6 +125,42 @@ RomeListener.prototype.enterWrite = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Write.
 RomeListener.prototype.exitWrite = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Snet.
+RomeListener.prototype.enterSnet = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Snet.
+RomeListener.prototype.exitSnet = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Rnet.
+RomeListener.prototype.enterRnet = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Rnet.
+RomeListener.prototype.exitRnet = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Kread.
+RomeListener.prototype.enterKread = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Kread.
+RomeListener.prototype.exitKread = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Swrite.
+RomeListener.prototype.enterSwrite = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Swrite.
+RomeListener.prototype.exitSwrite = function(ctx) {
 };
 
 

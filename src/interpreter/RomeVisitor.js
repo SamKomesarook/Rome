@@ -6,7 +6,9 @@ var RVisitor = function(
   updateContentType,
   moveMem,
   writeContent,
-  freeMem
+  freeMem,
+  sendNet,
+  readNet
 ) {
   RomeVisitor.call(this); // inherit default visitor
   this.memArr = memArr;
@@ -14,6 +16,8 @@ var RVisitor = function(
   this.moveMem = moveMem;
   this.writeContent = writeContent;
   this.freeMem = freeMem;
+  this.sendNet = sendNet;
+  this.readNet = readNet;
   return this;
 };
 
@@ -235,6 +239,41 @@ RVisitor.prototype.visitIf = function(ctx) {
 RVisitor.prototype.visitCond = function(ctx) {
   console.log("Visit cond!");
   console.log(ctx.getText());
+};
+
+RVisitor.prototype.visitSnet = function(ctx) {
+  console.log("Visit Send Net!");
+  const netMemId = 14;
+  var command = getCommand(ctx);
+  var arg = getCommandArg("write_net".length + 1, command);
+
+  var netMem = this.memArr[netMemId];
+  var netMemObj = createMemObj(
+    netMemId,
+    netMem.type.name,
+    netMem.props.selected,
+    arg,
+    netMem.props.contentType
+  );
+  netMemObj.setAnimated(true);
+  this.sendNet(netMemObj);
+};
+
+RVisitor.prototype.visitRnet = function(ctx) {
+  console.log("Visit Receive Net!");
+  const netMemId = 14;
+  var received_content = "hello";
+
+  var netMem = this.memArr[netMemId];
+  var netMemObj = createMemObj(
+    netMemId,
+    netMem.type.name,
+    netMem.props.selected,
+    received_content,
+    netMem.props.contentType
+  );
+  netMemObj.setAnimated(true);
+  this.readNet(netMemObj);
 };
 
 /**

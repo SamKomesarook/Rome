@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import '../styles/styles.css';
+import "../styles/styles.css";
 import NetAnimation from "./NetAnimation";
 
 export class Memory extends Component {
-
   render() {
-
     if (this.props.selected) {
       return (
         <div
@@ -15,13 +13,17 @@ export class Memory extends Component {
           data-for="MemoryTips"
         >
           {this.props.content}
-          
         </div>
       );
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={
+            "memory shadow-none mb-5 rounded " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="MemoryTips"
@@ -49,7 +51,12 @@ export class NetMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded border border-info " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={
+            "memory shadow-none mb-5 rounded border border-info " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="NetMemoryTips"
@@ -57,7 +64,7 @@ export class NetMemory extends Component {
           {/* Not sure this still required or not */}
           {/* {this.props.content} */}
           {/* this place should pass the boolean value as props */}
-          <NetAnimation animated={this.props.animated}/> 
+          <NetAnimation animated={this.props.animated} />
         </div>
       );
     }
@@ -66,8 +73,6 @@ export class NetMemory extends Component {
 
 export class USBMemory extends Component {
   render() {
-
-
     if (this.props.selected) {
       return (
         <div
@@ -82,7 +87,12 @@ export class USBMemory extends Component {
     } else {
       return (
         <div
-          className={"memory shadow-none mb-5 rounded border border-dark " + ((this.props.contentType === 'letters')? "bg-lightGray" : "bg-lightBlue")}
+          className={
+            "memory shadow-none mb-5 rounded border border-dark " +
+            (this.props.contentType === "letters"
+              ? "bg-lightGray"
+              : "bg-lightBlue")
+          }
           id={this.props.id}
           data-tip
           data-for="USBMemoryTips"

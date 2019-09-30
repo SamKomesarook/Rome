@@ -21,6 +21,7 @@ export function constructMem() {
           id={i}
           content={""}
           contentType={"letters"}
+          animated={false}
         />
       );
     } else {
@@ -56,6 +57,7 @@ export function mapMemObjToSymbol(memObj) {
           id={memObj.id}
           content={memObj.content}
           contentType={memObj.contentType}
+          animated={memObj.animated}
         />
       );
     case "USBMemory":

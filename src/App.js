@@ -9,7 +9,8 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
-import "./App.css";
+// eslint-disable-next-line no-unused-vars
+import styles from "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
@@ -42,14 +43,17 @@ export class App extends Component {
 
     // bind function in order to reach callback
     // back end function
+    this.updateMem = this.updateMem.bind(this);
     this.moveMem = this.moveMem.bind(this);
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
+    this.sendNet = this.sendNet.bind(this);
+    this.readNet = this.readNet.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
-    this.netAnimation = this.netAnimation.bind(this);
+    // this.netAnimation = this.netAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
@@ -232,14 +236,31 @@ export class App extends Component {
   }
 
   /**
-   * Function for Network memory animation
-   * @netAnimation {boolean}
+   * set Net Animation state
+   * @param {MemoryBlock} netMemObj memory block object, has to be net memory type
    */
-  netAnimation() {
-    this.setState(state => ({
-      ...state,
-      netAnimation: !state.netAnimation
-    }))
+  setNetAnimationState(netMemObj) {
+    setTimeout(() => {
+      netMemObj.setAnimated(netMemObj.getAnimated() ? false : true);
+      netMemObj.setContent("");
+      var id = netMemObj.getId();
+      var netMem = mapMemObjToSymbol(netMemObj);
+      this.updateMem(id, netMem);
+    }, 5000);
+  }
+
+  sendNet(netMemObj) {
+    var id = netMemObj.getId();
+    var netMem = mapMemObjToSymbol(netMemObj);
+    this.updateMem(id, netMem);
+    this.setNetAnimationState(netMemObj);
+  }
+
+  readNet(netMemObj) {
+    var id = netMemObj.getId();
+    var netMem = mapMemObjToSymbol(netMemObj);
+    this.updateMem(id, netMem);
+    this.setNetAnimationState(netMemObj);
   }
 
   render() {
@@ -295,6 +316,8 @@ export class App extends Component {
                           moveMem={this.moveMem}
                           writeContent={this.writeContent}
                           freeMem={this.freeMem}
+                          sendNet={this.sendNet}
+                          readNet={this.readNet}
                         />
                       </div>
                       <div
