@@ -25,13 +25,15 @@ ErrorListener.prototype.syntaxError = function(
 };
 
 class Interpreter {
-  constructor(code, memArr, updateContentType, moveMem, writeContent, freeMem) {
+  constructor(code, memArr, updateContentType, moveMem, writeContent, freeMem, sendNet, readNet) {
     this.code = code;
     this.memArr = memArr;
     this.updateContentType = updateContentType;
     this.moveMem = moveMem;
     this.writeContent = writeContent;
     this.freeMem = freeMem;
+    this.sendNet = sendNet;
+    this.readNet = readNet;
     this.start(code);
   }
 
@@ -77,7 +79,9 @@ class Interpreter {
           this.updateContentType,
           this.moveMem,
           this.writeContent,
-          this.freeMem
+          this.freeMem,
+          this.sendNet,
+          this.readNet
         )
       );
     } else {

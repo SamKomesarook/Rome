@@ -6,7 +6,9 @@ var RVisitor = function(
   updateContentType,
   moveMem,
   writeContent,
-  freeMem
+  freeMem,
+  sendNet,
+  readNet
 ) {
   RomeVisitor.call(this); // inherit default visitor
   this.memArr = memArr;
@@ -14,6 +16,8 @@ var RVisitor = function(
   this.moveMem = moveMem;
   this.writeContent = writeContent;
   this.freeMem = freeMem;
+  this.sendNet = sendNet;
+  this.readNet = readNet;
   return this;
 };
 
@@ -244,19 +248,33 @@ RVisitor.prototype.visitSnet = function(ctx) {
   var arg = getCommandArg("write_net".length + 1, command);
 
   var netMem = this.memArr[netMemId];
-  var memObj = new MemoryBlock(
+  var netMemObj = createMemObj(
     netMemId,
     netMem.type.name,
     netMem.props.selected,
     arg,
     netMem.props.contentType
   );
-  memObj.setAnimated(true);
-
-  this.writeContent(memObj);
+  netMemObj.setAnimated(true);
+  this.sendNet(netMemObj);
 };
 
-RVisitor.prototype.visitRnet = function(ctx) {};
+RVisitor.prototype.visitRnet = function(ctx) {
+  console.log("Visit Receive Net!");
+  const netMemId = 14;
+  var received_content = "hello";
+
+  var netMem = this.memArr[netMemId];
+  var netMemObj = createMemObj(
+    netMemId,
+    netMem.type.name,
+    netMem.props.selected,
+    received_content,
+    netMem.props.contentType
+  );
+  netMemObj.setAnimated(true);
+  this.readNet(netMemObj);
+};
 
 /**
  * get command and arguments
