@@ -150,7 +150,7 @@ RVisitor.prototype.visitWrite = function(ctx) {
   return this.visitChildren(ctx);
 };
 
-RVisitor.prototype.visitRead = function(ctx) {
+RVisitor.prototype.visitKread = function(ctx) {
   console.log("Visit Read!");
   var selectedMem = getSelectedMemId(this.memArr);
   var tempMem = this.memArr[selectedMem];
