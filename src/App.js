@@ -29,8 +29,7 @@ export class App extends Component {
       showAnimationArea: true,
       showTextArea: true,
       showIOWindow: true,
-      loopAnimation: false,
-      netAnimation: false // Net animation toggle by using boolean
+      loopAnimation: false
     };
     this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
@@ -50,10 +49,11 @@ export class App extends Component {
     this.freeMem = this.freeMem.bind(this);
     this.sendNet = this.sendNet.bind(this);
     this.readNet = this.readNet.bind(this);
+    this.sendUsb = this.sendUsb.bind(this);
+    this.readUsb = this.readUsb.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
-    // this.netAnimation = this.netAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
@@ -263,6 +263,34 @@ export class App extends Component {
     this.setNetAnimationState(netMemObj);
   }
 
+  /**
+   * set Usb Animation state
+   * @param {MemoryBlock} usbMemObj memory block object, has to be net memory type
+   */
+  setUsbAnimationState(usbMemObj) {
+    setTimeout(() => {
+      usbMemObj.setAnimated(usbMemObj.getAnimated() ? false : true);
+      usbMemObj.setContent("");
+      var id = usbMemObj.getId();
+      var usbMem = mapMemObjToSymbol(usbMemObj);
+      this.updateMem(id, usbMem);
+    }, 5000);
+  }
+
+  sendUsb(usbMemObj) {
+    var id = usbMemObj.getId();
+    var usbMem = mapMemObjToSymbol(usbMemObj);
+    this.updateMem(id, usbMem);
+    this.setUsbAnimationState(usbMemObj);
+  }
+
+  readUsb(usbMemObj) {
+    var id = usbMemObj.getId();
+    var usbMem = mapMemObjToSymbol(usbMemObj);
+    this.updateMem(id, usbMem);
+    this.setUsbAnimationState(usbMemObj);
+  }
+
   render() {
     return (
       <Fragment>
@@ -318,6 +346,8 @@ export class App extends Component {
                           freeMem={this.freeMem}
                           sendNet={this.sendNet}
                           readNet={this.readNet}
+                          sendUsb={this.sendUsb}
+                          readUsb={this.readUsb}
                         />
                       </div>
                       <div
