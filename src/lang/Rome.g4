@@ -15,12 +15,13 @@ LET:'letters';
 
 FREE:'free';
 MEM:'memory';
-KREAD:'read_keyboard';
-SWRITE:'write_screen';
-READ:'read';
+KREAD:'k_read';
+SWRITE:'s_write';
 WRITE:'write';
 
 IMP:'import';
+NET:'network';
+IO:'IO';
 
 IF:'if';
 IS:'is';
@@ -31,8 +32,8 @@ GRE:'greater';
 AND:'and';
 OR:'or';
 
-SNET:'write_net';
-RNET:'read_net';
+SNET:'n_write';
+RNET:'n_read';
 
 MOVE:'move';
 RIGHT:'next';
@@ -60,7 +61,10 @@ STRLIT : '"' ~ ["\r\n]* '"';
 
 // Rules
 
-imp : IMP SPACE STRLIT;
+imp
+	: IMP SPACE NET # Net
+	| IMP SPACE IO # Io
+	;
 
 intargs
 	: NUMBER # Num
@@ -68,7 +72,7 @@ intargs
 	;
 
 
-r : START NEWLINE (imp NEWLINE)? expressions* END NEWLINE*;
+r : START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
 
 expressions : expression NEWLINE;
 
@@ -81,7 +85,6 @@ conditional : (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (intargs | STRLIT) # Con
 expression
 	: SET LPAR (NUM | LET) RPAR # Set
 	| FREE # Free
-	| READ # Read
 	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
 	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ # If
 	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
