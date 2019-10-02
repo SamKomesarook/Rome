@@ -70,3 +70,50 @@
     background-color: #D0D0D0;
     overflow: auto;
 }
+
+
+@media (max-width: 600px) {
+    .memory {
+        height:40px;
+        max-height:40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn-circle {
+        width: 15px;
+        height: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 5px;
+    }
+    
+    #outputArea {
+        height: 120px;
+        background-color:#D0D0D0;
+        overflow:auto;
+    }
+    
+    #codingWrapper {
+        display: inline-block;
+        position: relative;
+    }
+    
+    #lineButton {
+        size: 5%;
+        position: absolute;
+        bottom: 3px;
+        right: 8px;
+    }
+    .ioArea {
+        height: 60px;
+        background-color: #D0D0D0;
+        overflow: auto;
+    }
+
+    #codingArea{
+        height:400px;
+        width:200px;
+    }
+}

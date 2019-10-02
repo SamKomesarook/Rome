@@ -294,17 +294,17 @@ export class App extends Component {
                 {this.state.showTextArea ? (
                   <div
                     className={
-                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                      this.state.showAnimationArea ? "col-sm-4 executeBtn" : "col-sm-6 executeBtn"
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
                     <div className="row slider-container">
                       <Slider compRef={el => this.ref.push(el)} />
                     </div>
-                    <div className="row">
+                    <div className="row" id="executBtnGroup">
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -322,7 +322,7 @@ export class App extends Component {
                       </div>
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn": "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -334,7 +334,7 @@ export class App extends Component {
 
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
                         }
                       >
                         <Button name="Info" toggle={this.toggleRef} />
@@ -351,7 +351,7 @@ export class App extends Component {
                   </div>
                 ) : null}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3">
+                  <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
                       <div id="animatedBinary">
                         <Transition
