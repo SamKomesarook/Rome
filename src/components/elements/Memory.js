@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/styles.css";
 import NetAnimation from "./NetAnimation";
+import UsbAnimation from "./UsbAnimation";
 
 export class Memory extends Component {
   render() {
@@ -61,9 +62,6 @@ export class NetMemory extends Component {
           data-tip
           data-for="NetMemoryTips"
         >
-          {/* Not sure this still required or not */}
-          {/* {this.props.content} */}
-          {/* this place should pass the boolean value as props */}
           <NetAnimation animated={this.props.animated} />
         </div>
       );
@@ -97,7 +95,7 @@ export class USBMemory extends Component {
           data-tip
           data-for="USBMemoryTips"
         >
-          {this.props.content}
+          <UsbAnimation animated={this.props.animated} />
         </div>
       );
     }
