@@ -6,88 +6,81 @@ options {
 
 // Tokens
 
-START:'start';
-END:'end';
+START: 'start';
+END: 'end';
 
-SET:'set';
-NUM:'numbers';
-LET:'letters';
+SET: 'set';
+NUM: 'numbers';
+LET: 'letters';
 
-FREE:'free';
-MEM:'memory';
-KREAD:'read_keyboard';
-SWRITE:'write_screen';
-READ:'read';
-WRITE:'write';
+FREE: 'free';
+MEM: 'memory';
+KREAD: 'k_read';
+SWRITE: 's_write';
+WRITE: 'write';
 
-IMP:'import';
+IMP: 'import';
+NET: 'network';
+IO: 'IO';
 
-IF:'if';
-IS:'is';
-NOT:'not';
-EQL:'equal';
-LESS:'less';
-GRE:'greater';
-AND:'and';
-OR:'or';
+IF: 'if';
+IS: 'is';
+NOT: 'not';
+EQL: 'equal';
+LESS: 'less';
+GRE: 'greater';
+AND: 'and';
+OR: 'or';
 
-SNET:'write_net';
-RNET:'read_net';
+NWRITE: 'n_write';
+NREAD: 'n_read';
 
-MOVE:'move';
-RIGHT:'next';
-LEFT:'last';
+MOVE: 'move';
+RIGHT: 'next';
+LEFT: 'last';
 
-LPAR:'(';
-RPAR:')';
-LSQ:'{';
-RSQ:'}';
+LPAR: '(';
+RPAR: ')';
+LSQ: '{';
+RSQ: '}';
 
-LOOP:'loop';
+LOOP: 'loop';
 
-NEWLINE:'\n';
+NEWLINE: '\n';
 
-SPACE:' ';
+SPACE: ' ';
 
-IDENTIFIER : [a-zA-Z]+;
+IDENTIFIER: [a-zA-Z]+;
 
-NUMBER
-   : ('0' .. '9') +
-   ;
+NUMBER: ('0' .. '9')+;
 
-
-STRLIT : '"' ~ ["\r\n]* '"';
+STRLIT: '"' ~ ["\r\n]* '"';
 
 // Rules
 
-imp : IMP SPACE STRLIT;
+imp: IMP SPACE NET # Net | IMP SPACE IO # Io;
 
-intargs
-	: NUMBER # Num
-	| MEM LPAR intargs RPAR # Mem
-	;
+intargs: NUMBER # Num | MEM LPAR intargs RPAR # Mem;
 
+r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
 
-r : START NEWLINE (imp NEWLINE)? expressions* END NEWLINE*;
+expressions: expression NEWLINE;
 
-expressions : expression NEWLINE;
-
-conditional : (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (intargs | STRLIT) # Cond;
-
+conditional: (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (
+		intargs
+		| STRLIT
+	) # Cond;
 
 // NOTE :: For multiple conds, add this: ((AND | OR) SPACE conditional)* 
 
-
-expression
-	: SET LPAR (NUM | LET) RPAR # Set
-	| FREE # Free
-	| READ # Read
-	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
-	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ # If
-	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
-	| WRITE LPAR (intargs | STRLIT) RPAR # Write
-	| SNET LPAR (intargs | STRLIT) RPAR #Snet
-	| RNET LPAR (intargs | STRLIT) RPAR #Rnet
-	| KREAD LPAR (intargs | STRLIT) RPAR #Kread
-	| SWRITE LPAR (intargs | STRLIT) RPAR #Swrite
-	;
+expression:
+	SET LPAR (NUM | LET) RPAR								# Set
+	| FREE													# Free
+	| MOVE LPAR (RIGHT | LEFT) RPAR							# Move
+	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ	# If
+	| LOOP LPAR intargs RPAR LSQ NEWLINE expressions* RSQ	# Loop
+	| WRITE LPAR (intargs | STRLIT) RPAR					# Write
+	| NWRITE LPAR (intargs | STRLIT) RPAR					# Snet
+	| NREAD													# Rnet
+	| KREAD													# Kread
+	| SWRITE LPAR (intargs | STRLIT) RPAR					# Swrite;
