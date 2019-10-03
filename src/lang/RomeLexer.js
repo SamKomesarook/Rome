@@ -203,8 +203,8 @@ RomeLexer.LESS = 18;
 RomeLexer.GRE = 19;
 RomeLexer.AND = 20;
 RomeLexer.OR = 21;
-RomeLexer.SNET = 22;
-RomeLexer.RNET = 23;
+RomeLexer.NWRITE = 22;
+RomeLexer.NREAD = 23;
 RomeLexer.MOVE = 24;
 RomeLexer.RIGHT = 25;
 RomeLexer.LEFT = 26;
@@ -237,7 +237,7 @@ RomeLexer.prototype.symbolicNames = [ null, "START", "END", "SET", "NUM",
                                       "LET", "FREE", "MEM", "KREAD", "SWRITE", 
                                       "WRITE", "IMP", "NET", "IO", "IF", 
                                       "IS", "NOT", "EQL", "LESS", "GRE", 
-                                      "AND", "OR", "SNET", "RNET", "MOVE", 
+                                      "AND", "OR", "NWRITE", "NREAD", "MOVE", 
                                       "RIGHT", "LEFT", "LPAR", "RPAR", "LSQ", 
                                       "RSQ", "LOOP", "NEWLINE", "SPACE", 
                                       "IDENTIFIER", "NUMBER", "STRLIT" ];
@@ -245,10 +245,10 @@ RomeLexer.prototype.symbolicNames = [ null, "START", "END", "SET", "NUM",
 RomeLexer.prototype.ruleNames = [ "START", "END", "SET", "NUM", "LET", "FREE", 
                                   "MEM", "KREAD", "SWRITE", "WRITE", "IMP", 
                                   "NET", "IO", "IF", "IS", "NOT", "EQL", 
-                                  "LESS", "GRE", "AND", "OR", "SNET", "RNET", 
-                                  "MOVE", "RIGHT", "LEFT", "LPAR", "RPAR", 
-                                  "LSQ", "RSQ", "LOOP", "NEWLINE", "SPACE", 
-                                  "IDENTIFIER", "NUMBER", "STRLIT" ];
+                                  "LESS", "GRE", "AND", "OR", "NWRITE", 
+                                  "NREAD", "MOVE", "RIGHT", "LEFT", "LPAR", 
+                                  "RPAR", "LSQ", "RSQ", "LOOP", "NEWLINE", 
+                                  "SPACE", "IDENTIFIER", "NUMBER", "STRLIT" ];
 
 RomeLexer.prototype.grammarFileName = "Rome.g4";
 
