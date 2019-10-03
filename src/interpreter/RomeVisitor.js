@@ -18,7 +18,6 @@ var RVisitor = function(
   this.freeMem = freeMem;
   this.sendNet = sendNet;
   this.readNet = readNet;
-  this.utility = new Utility();
   return this;
 };
 
