@@ -32,8 +32,8 @@ GRE:'greater';
 AND:'and';
 OR:'or';
 
-SNET:'n_write';
-RNET:'n_read';
+NWRITE:'n_write';
+NREAD:'n_read';
 
 MOVE:'move';
 RIGHT:'next';
@@ -89,8 +89,8 @@ expression
 	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ # If
 	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
 	| WRITE LPAR (intargs | STRLIT) RPAR # Write
-	| SNET LPAR (intargs | STRLIT) RPAR #Snet
-	| RNET  #Rnet
+	| NWRITE LPAR (intargs | STRLIT) RPAR #Snet
+	| NREAD  #Rnet
 	| KREAD #Kread
 	| SWRITE LPAR (intargs | STRLIT) RPAR #Swrite
 	;
