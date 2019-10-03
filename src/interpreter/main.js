@@ -1,4 +1,4 @@
-import RInterpreter from "./RInterpreter";
+//import RInterpreter from "./RInterpreter";
 import RVisitor from "./RomeVisitor";
 // import RomeVisitor from "./RomeVisitor";
 var antlr4 = require("antlr4");
