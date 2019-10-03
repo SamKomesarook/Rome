@@ -90,7 +90,7 @@ expression
 	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
 	| WRITE LPAR (intargs | STRLIT) RPAR # Write
 	| SNET LPAR (intargs | STRLIT) RPAR #Snet
-	| RNET LPAR (intargs | STRLIT) RPAR #Rnet
-	| KREAD LPAR (intargs | STRLIT) RPAR #Kread
+	| RNET  #Rnet
+	| KREAD #Kread
 	| SWRITE LPAR (intargs | STRLIT) RPAR #Swrite
 	;
