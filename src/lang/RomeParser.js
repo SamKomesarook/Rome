@@ -2,6 +2,8 @@
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 var RomeListener = require('./RomeListener').RomeListener;
+var RomeVisitor = require('./RomeVisitor').RomeVisitor;
+
 var grammarFileName = "Rome.g4";
 
 
@@ -229,6 +231,14 @@ IoContext.prototype.exitRule = function(listener) {
 	}
 };
 
+IoContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitIo(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function NetContext(parser, ctx) {
 	ImpContext.call(this, parser);
@@ -262,6 +272,14 @@ NetContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitNet(this);
 	}
+};
+
+NetContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitNet(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -376,6 +394,14 @@ MemContext.prototype.exitRule = function(listener) {
 	}
 };
 
+MemContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitMem(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function NumContext(parser, ctx) {
 	IntargsContext.call(this, parser);
@@ -401,6 +427,14 @@ NumContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitNum(this);
 	}
+};
+
+NumContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitNum(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -521,6 +555,14 @@ RContext.prototype.exitRule = function(listener) {
 	}
 };
 
+RContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitR(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 
 
@@ -620,6 +662,14 @@ ExpressionsContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitExpressions(this);
 	}
+};
+
+ExpressionsContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitExpressions(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -735,6 +785,14 @@ CondContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitCond(this);
 	}
+};
+
+CondContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitCond(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -885,6 +943,14 @@ LoopContext.prototype.exitRule = function(listener) {
 	}
 };
 
+LoopContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitLoop(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function WriteContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -926,6 +992,14 @@ WriteContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitWrite(this);
 	}
+};
+
+WriteContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitWrite(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -971,6 +1045,14 @@ SetContext.prototype.exitRule = function(listener) {
 	}
 };
 
+SetContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitSet(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function MoveContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -1014,6 +1096,14 @@ MoveContext.prototype.exitRule = function(listener) {
 	}
 };
 
+MoveContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitMove(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function KreadContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -1039,6 +1129,14 @@ KreadContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitKread(this);
 	}
+};
+
+KreadContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitKread(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -1084,6 +1182,14 @@ SwriteContext.prototype.exitRule = function(listener) {
 	}
 };
 
+SwriteContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitSwrite(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function FreeContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -1109,6 +1215,14 @@ FreeContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitFree(this);
 	}
+};
+
+FreeContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitFree(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 
@@ -1173,6 +1287,14 @@ IfContext.prototype.exitRule = function(listener) {
 	}
 };
 
+IfContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitIf(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function SnetContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -1216,6 +1338,14 @@ SnetContext.prototype.exitRule = function(listener) {
 	}
 };
 
+SnetContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitSnet(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function RnetContext(parser, ctx) {
 	ExpressionContext.call(this, parser);
@@ -1241,6 +1371,14 @@ RnetContext.prototype.exitRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.exitRnet(this);
 	}
+};
+
+RnetContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof RomeVisitor ) {
+        return visitor.visitRnet(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
 };
 
 

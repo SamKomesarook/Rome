@@ -93,7 +93,7 @@ RVisitor.prototype.visitMove = function(ctx) {
   if (validMove) {
     var tempOldMem = this.memArr[selectedMem];
     var tempNewMem =
-      arg === "right"
+      arg === "next"
         ? this.memArr[selectedMem + 1]
         : this.memArr[selectedMem - 1];
 
