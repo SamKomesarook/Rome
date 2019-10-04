@@ -11,12 +11,21 @@ function RomeListener() {
 RomeListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
 RomeListener.prototype.constructor = RomeListener;
 
-// Enter a parse tree produced by RomeParser#imp.
-RomeListener.prototype.enterImp = function(ctx) {
+// Enter a parse tree produced by RomeParser#Net.
+RomeListener.prototype.enterNet = function(ctx) {
 };
 
-// Exit a parse tree produced by RomeParser#imp.
-RomeListener.prototype.exitImp = function(ctx) {
+// Exit a parse tree produced by RomeParser#Net.
+RomeListener.prototype.exitNet = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Io.
+RomeListener.prototype.enterIo = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Io.
+RomeListener.prototype.exitIo = function(ctx) {
 };
 
 
@@ -80,15 +89,6 @@ RomeListener.prototype.enterFree = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Free.
 RomeListener.prototype.exitFree = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Read.
-RomeListener.prototype.enterRead = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Read.
-RomeListener.prototype.exitRead = function(ctx) {
 };
 
 

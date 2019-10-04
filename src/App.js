@@ -75,8 +75,8 @@ export class App extends Component {
   moveMem(oldMemObj, newMemObj, direction) {
     var currId = oldMemObj.id;
     if (
-      (currId === 0 && direction === "left") ||
-      (currId === 14 && direction === "right")
+      (currId === 0 && direction === "last") ||
+      (currId === 14 && direction === "next")
     ) {
       alert("Invalide Move command!");
     } else {

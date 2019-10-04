@@ -12,8 +12,14 @@ function RomeVisitor() {
 RomeVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
 RomeVisitor.prototype.constructor = RomeVisitor;
 
-// Visit a parse tree produced by RomeParser#imp.
-RomeVisitor.prototype.visitImp = function(ctx) {
+// Visit a parse tree produced by RomeParser#Net.
+RomeVisitor.prototype.visitNet = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Io.
+RomeVisitor.prototype.visitIo = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -56,12 +62,6 @@ RomeVisitor.prototype.visitSet = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Free.
 RomeVisitor.prototype.visitFree = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Read.
-RomeVisitor.prototype.visitRead = function(ctx) {
   return this.visitChildren(ctx);
 };
 

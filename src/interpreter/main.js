@@ -25,7 +25,16 @@ ErrorListener.prototype.syntaxError = function(
 };
 
 class Interpreter {
-  constructor(code, memArr, updateContentType, moveMem, writeContent, freeMem, sendNet, readNet) {
+  constructor(
+    code,
+    memArr,
+    updateContentType,
+    moveMem,
+    writeContent,
+    freeMem,
+    sendNet,
+    readNet
+  ) {
     this.code = code;
     this.memArr = memArr;
     this.updateContentType = updateContentType;
