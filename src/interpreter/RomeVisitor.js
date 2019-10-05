@@ -8,8 +8,8 @@ class RVisitor extends RomeVisitor {
     moveMem,
     writeContent,
     freeMem,
-    sendNet,
-    readNet
+    sendMemAnimation,
+    readMemAnimation
   ) {
     super();
     this.memArr = memArr;
@@ -17,8 +17,8 @@ class RVisitor extends RomeVisitor {
     this.moveMem = moveMem;
     this.writeContent = writeContent;
     this.freeMem = freeMem;
-    this.sendNet = sendNet;
-    this.readNet = readNet;
+    this.sendMemAnimation = sendMemAnimation;
+    this.readMemAnimation = readMemAnimation;
   }
   visitChildren(ctx) {
     if (!ctx) {
@@ -239,7 +239,7 @@ class RVisitor extends RomeVisitor {
       netMem.props.contentType
     );
     netMemObj.setAnimated(true);
-    this.sendNet(netMemObj);
+    this.sendMemAnimation(netMemObj);
   }
 
   visitRnet(ctx) {
@@ -256,7 +256,7 @@ class RVisitor extends RomeVisitor {
       netMem.props.contentType
     );
     netMemObj.setAnimated(true);
-    this.readNet(netMemObj);
+    this.readMemAnimation(netMemObj);
   }
 }
 

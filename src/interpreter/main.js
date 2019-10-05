@@ -32,8 +32,8 @@ class Interpreter {
     moveMem,
     writeContent,
     freeMem,
-    sendNet,
-    readNet
+    sendMemAnimation,
+    readMemAnimation
   ) {
     this.code = code;
     this.memArr = memArr;
@@ -41,8 +41,8 @@ class Interpreter {
     this.moveMem = moveMem;
     this.writeContent = writeContent;
     this.freeMem = freeMem;
-    this.sendNet = sendNet;
-    this.readNet = readNet;
+    this.sendMemAnimation = sendMemAnimation;
+    this.readMemAnimation = readMemAnimation;
     this.start(code);
   }
 
@@ -89,8 +89,8 @@ class Interpreter {
           this.moveMem,
           this.writeContent,
           this.freeMem,
-          this.sendNet,
-          this.readNet
+          this.sendMemAnimation,
+          this.readMemAnimation
         )
       );
     } else {
