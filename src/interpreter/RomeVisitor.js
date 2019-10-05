@@ -103,8 +103,6 @@ class RVisitor extends RomeVisitor {
         tempNewMem.props.contentType
       );
       this.moveMem(tempOldMemObj, tempNewMemObj);
-    } else {
-      alert("Hit the wall of memory");
     }
     return this.visitChildren(ctx);
   }

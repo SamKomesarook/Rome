@@ -142,13 +142,20 @@ class Utility {
    * @return {Boolean} true if movement is valid, false otherwise
    */
   checkMemRange(id, direction) {
-    if (
-      (id === 0 && direction === "last") ||
-      (id === 14 && direction === "next")
-    ) {
+    try {
+      if (
+        (id === 0 && direction === "last") ||
+        (id === 14 && direction === "next")
+      ) {
+        throw new Error("Hit the wall of memory");
+      } else if (direction !== "last" && direction !== "next") {
+        throw new Error("Invalid direction argument");
+      }
+      return true;
+    } catch (e) {
+      alert(e.name + ": " + e.message);
       return false;
     }
-    return true;
   }
 }
 
