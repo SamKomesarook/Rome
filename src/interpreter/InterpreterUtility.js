@@ -158,9 +158,9 @@ class Utility {
     }
   }
 
-  // [1]"Generate random string/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
   /**
    * Generator a random string which has max lenth of 10, and min length of 1
+   * // [1]"Generate random string/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
    * @return {String} random string generated
    */
   stringGenerator() {
