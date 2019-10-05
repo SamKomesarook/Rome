@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Transition, animated } from 'react-spring/renderprops'
 
-export default class NetAnimation extends Component {
+export default class UsbAnimation extends Component {
     render() {
         return (
             <Transition
@@ -15,7 +15,7 @@ export default class NetAnimation extends Component {
             >
 
             {show => show && (props => (
-                <animated.h3 style={props}><i className="fas fa-satellite"></i></animated.h3>
+                <animated.h3 style={props}><i className="fab fa-usb"></i></animated.h3>
             ))}
             </Transition>
         )

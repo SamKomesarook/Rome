@@ -6,3 +6,21 @@
   padding-top:5%;
   width:40%;
 }
+
+@media (max-width: 600px) {
+  #animationArea{
+    display:none;
+  }
+
+  #memory{
+    max-width:250px;
+  }
+
+  .btnGroup{
+    max-width:100px;
+  }
+
+  .executeBtn{
+    max-width:30%;
+  }
+}

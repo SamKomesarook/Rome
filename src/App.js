@@ -29,8 +29,7 @@ export class App extends Component {
       showAnimationArea: true,
       showTextArea: true,
       showIOWindow: true,
-      loopAnimation: false,
-      netAnimation: false // Net animation toggle by using boolean
+      loopAnimation: false
     };
     this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
@@ -49,6 +48,8 @@ export class App extends Component {
     this.freeMem = this.freeMem.bind(this);
     this.sendNet = this.sendNet.bind(this);
     this.readNet = this.readNet.bind(this);
+    this.sendUsb = this.sendUsb.bind(this);
+    this.readUsb = this.readUsb.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
@@ -252,6 +253,34 @@ export class App extends Component {
     this.setNetAnimationState(netMemObj);
   }
 
+  /**
+   * set Usb Animation state
+   * @param {MemoryBlock} usbMemObj memory block object, has to be net memory type
+   */
+  setUsbAnimationState(usbMemObj) {
+    setTimeout(() => {
+      usbMemObj.setAnimated(usbMemObj.getAnimated() ? false : true);
+      usbMemObj.setContent("");
+      var id = usbMemObj.getId();
+      var usbMem = mapMemObjToSymbol(usbMemObj);
+      this.updateMem(id, usbMem);
+    }, 5000);
+  }
+
+  sendUsb(usbMemObj) {
+    var id = usbMemObj.getId();
+    var usbMem = mapMemObjToSymbol(usbMemObj);
+    this.updateMem(id, usbMem);
+    this.setUsbAnimationState(usbMemObj);
+  }
+
+  readUsb(usbMemObj) {
+    var id = usbMemObj.getId();
+    var usbMem = mapMemObjToSymbol(usbMemObj);
+    this.updateMem(id, usbMem);
+    this.setUsbAnimationState(usbMemObj);
+  }
+
   render() {
     return (
       <Fragment>
@@ -283,17 +312,17 @@ export class App extends Component {
                 {this.state.showTextArea ? (
                   <div
                     className={
-                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                      this.state.showAnimationArea ? "col-sm-4 executeBtn" : "col-sm-6 executeBtn"
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
                     <div className="row slider-container">
                       <Slider compRef={el => this.ref.push(el)} />
                     </div>
-                    <div className="row">
+                    <div className="row" id="executBtnGroup">
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -307,11 +336,13 @@ export class App extends Component {
                           freeMem={this.freeMem}
                           sendNet={this.sendNet}
                           readNet={this.readNet}
+                          sendUsb={this.sendUsb}
+                          readUsb={this.readUsb}
                         />
                       </div>
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn": "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -323,7 +354,7 @@ export class App extends Component {
 
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
                         }
                       >
                         <Button name="Info" toggle={this.toggleRef} />
@@ -340,7 +371,7 @@ export class App extends Component {
                   </div>
                 ) : null}
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3">
+                  <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
                       <div id="animatedBinary">
                         <Transition
