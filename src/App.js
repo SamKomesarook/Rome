@@ -57,6 +57,11 @@ export class App extends Component {
     this.ref = [];
   }
 
+  /**
+   * update the memArr using id and new memory JSX
+   * @param {int} id memory id
+   * @param {MemoryJSX} mem new memory JSX
+   */
   updateMem(id, mem) {
     this.memArr[id] = mem;
     this.setState({
@@ -64,11 +69,21 @@ export class App extends Component {
     });
   }
 
+  /**
+   * update the contentType of selected memory JSX
+   * @param {int} id memory id
+   * @param {MemoryBlock} memObj MemoryBlock object
+   */
   updateContentType(id, memObj) {
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
+  /**
+   * move selected memory
+   * @param {MemoryBlock} oldMemObj MemoryBlock which will be de-selected
+   * @param {MemoryBlock} newMemObj MemroyBlock which the selected state will be set to true
+   */
   moveMem(oldMemObj, newMemObj) {
     var oldMem = mapMemObjToSymbol(oldMemObj);
     var newMem = mapMemObjToSymbol(newMemObj);
@@ -99,12 +114,20 @@ export class App extends Component {
     document.getElementById("outputArea").innerHTML = oldMessage;
   }
 
+  /**
+   * write content to a memory JSX
+   * @param {MemoryBlock} memObj MemoryBlock Object which has the content information
+   */
   writeContent(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
+  /**
+   * release memory availability of selected memory
+   * @param {MemoryBlock} memObj MemoryBlock object which content is empty
+   */
   freeMem(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
@@ -188,7 +211,6 @@ export class App extends Component {
   /**
    * Function for info button
    * Display all tooltips on click
-   * @ref {array}
    * setTimeout hide all tooltip
    */
   toggleRef = () => {
