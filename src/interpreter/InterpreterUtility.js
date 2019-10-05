@@ -157,6 +157,21 @@ class Utility {
       return false;
     }
   }
+
+  /**
+   * Generator a random string which has max lenth of 10, and min length of 1
+   * @return {String} random string generated
+   */
+  stringGenerator() {
+    var length = Math.floor(Math.random() * 10) + 1;
+    var str = "";
+    var charPool = "abcdefghijklmnopqrstuvwxyz";
+    var poolLength = charPool.length;
+    for (var i = 0; i < length; i++) {
+      str += charPool.charAt(Math.floor(Math.random() * poolLength));
+    }
+    return str;
+  }
 }
 
 export default Utility;

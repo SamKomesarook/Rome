@@ -240,23 +240,25 @@ class RVisitor extends RomeVisitor {
     );
     netMemObj.setAnimated(true);
     this.sendMemAnimation(netMemObj);
+    return this.visitChildren(ctx);
   }
 
   visitRnet(ctx) {
     console.log("Visit Receive Net!");
     var utility = new Utility();
     const netMemId = 14;
-    var received_content = "hello";
+    var receivedContent = utility.stringGenerator();
     var netMem = this.memArr[netMemId];
     var netMemObj = utility.createMemObj(
       netMemId,
       netMem.type.name,
       netMem.props.selected,
-      received_content,
+      receivedContent,
       netMem.props.contentType
     );
     netMemObj.setAnimated(true);
     this.readMemAnimation(netMemObj);
+    return this.visitChildren(ctx);
   }
 }
 

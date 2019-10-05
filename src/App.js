@@ -46,10 +46,6 @@ export class App extends Component {
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
-    // this.sendNet = this.sendNet.bind(this);
-    // this.readNet = this.readNet.bind(this);
-    // this.sendUsb = this.sendUsb.bind(this);
-    // this.readUsb = this.readUsb.bind(this);
     this.sendMemAnimation = this.sendMemAnimation.bind(this);
     this.readMemAnimation = this.readMemAnimation.bind(this);
 
@@ -320,10 +316,6 @@ export class App extends Component {
                           moveMem={this.moveMem}
                           writeContent={this.writeContent}
                           freeMem={this.freeMem}
-                          // sendNet={this.sendNet}
-                          // readNet={this.readNet}
-                          // sendUsb={this.sendUsb}
-                          // readUsb={this.readUsb}
                           sendMemAnimation={this.sendMemAnimation}
                           readMemAnimation={this.readMemAnimation}
                         />
