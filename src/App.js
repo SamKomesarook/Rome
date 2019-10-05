@@ -38,7 +38,6 @@ export class App extends Component {
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
-    // this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
 
     // bind function in order to reach callback
@@ -53,7 +52,6 @@ export class App extends Component {
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
-    // this.netAnimation = this.netAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
@@ -72,19 +70,11 @@ export class App extends Component {
     this.updateMem(id, newMem);
   }
 
-  moveMem(oldMemObj, newMemObj, direction) {
-    var currId = oldMemObj.id;
-    if (
-      (currId === 0 && direction === "last") ||
-      (currId === 14 && direction === "next")
-    ) {
-      alert("Invalide Move command!");
-    } else {
+  moveMem(oldMemObj, newMemObj) {
       var oldMem = mapMemObjToSymbol(oldMemObj);
       var newMem = mapMemObjToSymbol(newMemObj);
       this.updateMem(oldMemObj.getId(), oldMem);
       this.updateMem(newMemObj.getId(), newMem);
-    }
   }
 
   /**
@@ -226,7 +216,6 @@ export class App extends Component {
 
   /**
    * Function for Loop Animation
-   * @loopAnimation {boolean}
    */
   loopAnimation() {
     this.setState(state => ({
