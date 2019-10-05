@@ -37,7 +37,6 @@ export class App extends Component {
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
-    // this.toggleWindow = this.toggleWindowPortal.bind(this);
     this.closeWindow = this.closeWindowPortal.bind(this);
 
     // bind function in order to reach callback
@@ -47,10 +46,8 @@ export class App extends Component {
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
-    this.sendNet = this.sendNet.bind(this);
-    this.readNet = this.readNet.bind(this);
-    this.sendUsb = this.sendUsb.bind(this);
-    this.readUsb = this.readUsb.bind(this);
+    this.sendMemAnimation = this.sendMemAnimation.bind(this);
+    this.readMemAnimation = this.readMemAnimation.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
@@ -60,6 +57,11 @@ export class App extends Component {
     this.ref = [];
   }
 
+  /**
+   * update the memArr using id and new memory JSX
+   * @param {int} id memory id
+   * @param {MemoryJSX} mem new memory JSX
+   */
   updateMem(id, mem) {
     this.memArr[id] = mem;
     this.setState({
@@ -67,24 +69,26 @@ export class App extends Component {
     });
   }
 
+  /**
+   * update the contentType of selected memory JSX
+   * @param {int} id memory id
+   * @param {MemoryBlock} memObj MemoryBlock object
+   */
   updateContentType(id, memObj) {
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
-  moveMem(oldMemObj, newMemObj, direction) {
-    var currId = oldMemObj.id;
-    if (
-      (currId === 0 && direction === "last") ||
-      (currId === 14 && direction === "next")
-    ) {
-      alert("Invalide Move command!");
-    } else {
-      var oldMem = mapMemObjToSymbol(oldMemObj);
-      var newMem = mapMemObjToSymbol(newMemObj);
-      this.updateMem(oldMemObj.getId(), oldMem);
-      this.updateMem(newMemObj.getId(), newMem);
-    }
+  /**
+   * move selected memory
+   * @param {MemoryBlock} oldMemObj MemoryBlock which will be de-selected
+   * @param {MemoryBlock} newMemObj MemroyBlock which the selected state will be set to true
+   */
+  moveMem(oldMemObj, newMemObj) {
+    var oldMem = mapMemObjToSymbol(oldMemObj);
+    var newMem = mapMemObjToSymbol(newMemObj);
+    this.updateMem(oldMemObj.getId(), oldMem);
+    this.updateMem(newMemObj.getId(), newMem);
   }
 
   /**
@@ -110,12 +114,20 @@ export class App extends Component {
     document.getElementById("outputArea").innerHTML = oldMessage;
   }
 
+  /**
+   * write content to a memory JSX
+   * @param {MemoryBlock} memObj MemoryBlock Object which has the content information
+   */
   writeContent(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
+  /**
+   * release memory availability of selected memory
+   * @param {MemoryBlock} memObj MemoryBlock object which content is empty
+   */
   freeMem(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
@@ -199,7 +211,6 @@ export class App extends Component {
   /**
    * Function for info button
    * Display all tooltips on click
-   * @ref {array}
    * setTimeout hide all tooltip
    */
   toggleRef = () => {
@@ -226,7 +237,6 @@ export class App extends Component {
 
   /**
    * Function for Loop Animation
-   * @loopAnimation {boolean}
    */
   loopAnimation() {
     this.setState(state => ({
@@ -236,59 +246,39 @@ export class App extends Component {
   }
 
   /**
-   * set Net Animation state
-   * @param {MemoryBlock} netMemObj memory block object, has to be net memory type
+   * Set the animation state for memory block
+   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
    */
-  setNetAnimationState(netMemObj) {
+  setMemoryAnimationState(memObj) {
     setTimeout(() => {
-      netMemObj.setAnimated(netMemObj.getAnimated() ? false : true);
-      netMemObj.setContent("");
-      var id = netMemObj.getId();
-      var netMem = mapMemObjToSymbol(netMemObj);
-      this.updateMem(id, netMem);
+      memObj.setAnimated(memObj.getAnimated() ? false : true);
+      memObj.setContent("");
+      var id = memObj.getId();
+      var mem = mapMemObjToSymbol(memObj);
+      this.updateMem(id, mem);
     }, 5000);
-  }
-
-  sendNet(netMemObj) {
-    var id = netMemObj.getId();
-    var netMem = mapMemObjToSymbol(netMemObj);
-    this.updateMem(id, netMem);
-    this.setNetAnimationState(netMemObj);
-  }
-
-  readNet(netMemObj) {
-    var id = netMemObj.getId();
-    var netMem = mapMemObjToSymbol(netMemObj);
-    this.updateMem(id, netMem);
-    this.setNetAnimationState(netMemObj);
   }
 
   /**
-   * set Usb Animation state
-   * @param {MemoryBlock} usbMemObj memory block object, has to be net memory type
+   * Send netMem/usbMem animation
+   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
    */
-  setUsbAnimationState(usbMemObj) {
-    setTimeout(() => {
-      usbMemObj.setAnimated(usbMemObj.getAnimated() ? false : true);
-      usbMemObj.setContent("");
-      var id = usbMemObj.getId();
-      var usbMem = mapMemObjToSymbol(usbMemObj);
-      this.updateMem(id, usbMem);
-    }, 5000);
+  sendMemAnimation(memObj) {
+    var id = memObj.getId();
+    var mem = mapMemObjToSymbol(memObj);
+    this.updateMem(id, mem);
+    this.setMemoryAnimationState(memObj);
   }
 
-  sendUsb(usbMemObj) {
-    var id = usbMemObj.getId();
-    var usbMem = mapMemObjToSymbol(usbMemObj);
-    this.updateMem(id, usbMem);
-    this.setUsbAnimationState(usbMemObj);
-  }
-
-  readUsb(usbMemObj) {
-    var id = usbMemObj.getId();
-    var usbMem = mapMemObjToSymbol(usbMemObj);
-    this.updateMem(id, usbMem);
-    this.setUsbAnimationState(usbMemObj);
+  /**
+   * read netMem/usbMem animation
+   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+   */
+  readMemAnimation(memObj) {
+    var id = memObj.getId();
+    var mem = mapMemObjToSymbol(memObj);
+    this.updateMem(id, mem);
+    this.setMemoryAnimationState(memObj);
   }
 
   render() {
@@ -322,7 +312,9 @@ export class App extends Component {
                 {this.state.showTextArea ? (
                   <div
                     className={
-                      this.state.showAnimationArea ? "col-sm-4 executeBtn" : "col-sm-6 executeBtn"
+                      this.state.showAnimationArea
+                        ? "col-sm-4 executeBtn"
+                        : "col-sm-6 executeBtn"
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
@@ -332,7 +324,9 @@ export class App extends Component {
                     <div className="row" id="executBtnGroup">
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -344,15 +338,15 @@ export class App extends Component {
                           moveMem={this.moveMem}
                           writeContent={this.writeContent}
                           freeMem={this.freeMem}
-                          sendNet={this.sendNet}
-                          readNet={this.readNet}
-                          sendUsb={this.sendUsb}
-                          readUsb={this.readUsb}
+                          sendMemAnimation={this.sendMemAnimation}
+                          readMemAnimation={this.readMemAnimation}
                         />
                       </div>
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3 executeBtn": "col-sm-2 executeBtn"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -364,7 +358,9 @@ export class App extends Component {
 
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3 executeBtn" : "col-sm-2 executeBtn"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
                         <Button name="Info" toggle={this.toggleRef} />

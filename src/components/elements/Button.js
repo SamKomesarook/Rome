@@ -67,11 +67,6 @@ export class Button extends Component {
     }
   }
 
-  // TODO: stop button function
-  stopCode = () => {
-    console.log("STOP Clicked!");
-  };
-
   //Highlight section loop through the text area ,delays every 2 seconds
   runHighlight = () => {
     var textArea = document.getElementById("codingArea");
@@ -99,8 +94,8 @@ export class Button extends Component {
       this.props.moveMem,
       this.props.writeContent,
       this.props.freeMem,
-      this.props.sendNet,
-      this.props.readNet
+      this.props.sendMemAnimation,
+      this.props.readMemAnimation
     );
     this.props.toggle();
     console.log("RUN Clicked!");

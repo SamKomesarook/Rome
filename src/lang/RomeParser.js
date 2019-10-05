@@ -1,3 +1,7 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable default-case */
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-unused-vars */
 // Generated from Rome.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('antlr4/index');

@@ -142,13 +142,52 @@ class Utility {
    * @return {Boolean} true if movement is valid, false otherwise
    */
   checkMemRange(id, direction) {
-    if (
-      (id === 0 && direction === "last") ||
-      (id === 14 && direction === "next")
-    ) {
+    try {
+      if (
+        (id === 0 && direction === "last") ||
+        (id === 14 && direction === "next")
+      ) {
+        throw new Error("Hit the wall of memory");
+      } else if (direction !== "last" && direction !== "next") {
+        throw new Error("Invalid direction argument");
+      }
+      return true;
+    } catch (e) {
+      alert(e.name + ": " + e.message);
       return false;
     }
-    return true;
+  }
+
+  /**
+   * Generator a random string which has max lenth of 10, and min length of 1
+   * // [1]"Generate random string/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
+   * @return {String} random string generated
+   */
+  stringGenerator() {
+    var length = Math.floor(Math.random() * 10) + 1;
+    var str = "";
+    var charPool = "abcdefghijklmnopqrstuvwxyz";
+    var poolLength = charPool.length;
+    for (var i = 0; i < length; i++) {
+      str += charPool.charAt(Math.floor(Math.random() * poolLength));
+    }
+    return str;
+  }
+
+  /**
+   * Check if package is imported
+   * @param {Boolean} imported boolean value to indicate if package is imported
+   */
+  checkImp(imported) {
+    try {
+      if (!imported) {
+        throw new Error("Missing import package!");
+      }
+      return true;
+    } catch (e) {
+      alert(e.name + ": " + e.message);
+      return false;
+    }
   }
 }
 
