@@ -60,7 +60,6 @@ class RVisitor extends RomeVisitor {
     var utility = new Utility();
     var command = utility.getCommand(ctx);
     var num = utility.loopMemCommand(command, this.memArr);
-    alert(num);
     for (var i = 0; i < num; i++) {
       this.visitChildren(ctx);
     }
