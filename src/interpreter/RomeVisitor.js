@@ -12,7 +12,8 @@ class RVisitor extends RomeVisitor {
     writeContent,
     freeMem,
     sendMemAnimation,
-    readMemAnimation
+    readMemAnimation,
+    printAnimation
   ) {
     super();
     this.memArr = memArr;
@@ -22,6 +23,7 @@ class RVisitor extends RomeVisitor {
     this.freeMem = freeMem;
     this.sendMemAnimation = sendMemAnimation;
     this.readMemAnimation = readMemAnimation;
+    this.printAnimation = printAnimation;
     this.netImported = false;
     this.ioImported = false;
   }
@@ -271,7 +273,7 @@ class RVisitor extends RomeVisitor {
     const netMemId = 14;
     if (imported) {
       var command = utility.getCommand(ctx);
-      var arg = utility.getCommandArg("write_net".length + 1, command);
+      var arg = utility.getCommandArg("n_write".length + 1, command);
       var netMem = this.memArr[netMemId];
       var netMemObj = utility.createMemObj(
         netMemId,
@@ -327,6 +329,18 @@ class RVisitor extends RomeVisitor {
   visitIo(ctx) {
     this.ioImported = true;
     return this.visitChildren(ctx);
+  }
+
+  /**
+   * print to output area, s_write visitor
+   * @param {Object} ctx context generate by antlr4
+   */
+  visitSwrite(ctx) {
+    console.log("Visit SWrite!");
+    var utility = new Utility();
+    var command = utility.getCommand(ctx);
+    var arg = utility.getCommandArg("s_write".length + 1, command);
+    this.printAnimation(arg);
   }
 }
 

@@ -96,7 +96,8 @@ export class Button extends Component {
       this.props.freeMem,
       this.props.sendMemAnimation,
       this.props.readMemAnimation,
-      this.props.toggle
+      this.props.toggle,
+      this.props.printAnimation
     );
     console.log("RUN Clicked!");
   };
