@@ -8,8 +8,7 @@ import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
-// eslint-disable-next-line no-unused-vars
-import styles from "./App.css";
+import "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
@@ -339,6 +338,7 @@ export class App extends Component {
                           freeMem={this.freeMem}
                           sendMemAnimation={this.sendMemAnimation}
                           readMemAnimation={this.readMemAnimation}
+                          printAnimation={this.printAnimation}
                         />
                       </div>
                       <div

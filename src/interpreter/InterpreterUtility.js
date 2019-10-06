@@ -219,7 +219,7 @@ class Utility {
       var memCmd = command.match(memCmdRegex)[0];
       command = command.replace(memCmd, value);
       if (memRegex.test(command)) {
-        return this.memoryCommand(command, memArr);
+        return this.loopMemCommand(command, memArr);
       } else {
         return value;
       }
