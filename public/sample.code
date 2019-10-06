@@ -70,6 +70,7 @@ move(next)
 }
 end
 
+# selected memory should be moved to the fifth memory since the first memory's content is 4, and the loop time is depends on the first memory's content
 start
 set(numbers)
 write(4)
@@ -79,7 +80,31 @@ move(next)
 end
 
 ========== n_write command ==========
+# alert window should pop up: Missing import package
+start
+n_write("hello")
+end
+
+# a little animation should be appeared on the net memory block
+start
+import network
+n_write("hello")
+end
 
 ========== n_read command ==========
+# alert window should pop up: Missing import package
+start
+n_read("hello")
+end
+
+# a little animation should be appeared on the net memory block
+start
+import network
+n_read
+end
 
 ========== k_read command ==========
+# a prompt window should pop and user is able to put userinput
+start
+k_read
+end
