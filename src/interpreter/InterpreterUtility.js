@@ -189,6 +189,45 @@ class Utility {
       return false;
     }
   }
+
+  /**
+   * Fetch the content when hit the memory command, for loop command
+   * @param {String} command command which contain the word "memory"
+   * @param {Array} memArr memory array
+   * @return {int} content inside a memory, 0 if invalid
+   */
+  loopMemCommand(command, memArr) {
+    const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
+    const memRegex = /(memory)/gm; // match exact word "memory"
+    const numRegex = /\d+/gm; // match any number
+
+    if (memCmdRegex.test(command)) {
+      // when the argument need to get content from other memory block
+
+      var num = command.match(numRegex)[0];
+      var tempMem = memArr[num];
+
+      if (tempMem.props.contentType === "letters") {
+        alert("Memory content is not a number!");
+        return 0;
+      }
+      var value = tempMem.props.content;
+      if (value > 14) {
+        alert("Out of range!");
+        return 0;
+      }
+      var memCmd = command.match(memCmdRegex)[0];
+      command = command.replace(memCmd, value);
+      if (memRegex.test(command)) {
+        return this.memoryCommand(command, memArr);
+      } else {
+        return value;
+      }
+    } else if (numRegex.test(command)) {
+      // if the argument is number only
+      return command.match(numRegex)[0];
+    }
+  }
 }
 
 export default Utility;
