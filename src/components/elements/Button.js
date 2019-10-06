@@ -95,41 +95,27 @@ export class Button extends Component {
       this.props.writeContent,
       this.props.freeMem,
       this.props.sendMemAnimation,
-      this.props.readMemAnimation
+      this.props.readMemAnimation,
+      this.props.toggle
     );
-    this.props.toggle();
     console.log("RUN Clicked!");
   };
 
   render() {
-    if (this.props.type === "submit") {
-      return (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a>
-          <input
-            type="submit"
-            value={this.props.name}
-            className={this.state.class}
-            href="#"
-          />
-        </a>
-      );
-    } else {
-      return (
-        <button
-          type="button"
-          className={this.state.class}
-          onClick={ this.state.clickFunc}
-          data-tip
-          data-for={this.state.dataFor}
-          data-event={this.state.dataEvent}
-          data-event-off={this.state.dataEventOff}
-          ref={this.state.ref}
-        >
-          <i className={this.state.icon}></i> {this.state.name}
-        </button>
-      );
-    }
+    return (
+      <button
+        type="button"
+        className={this.state.class}
+        onClick={this.state.clickFunc}
+        data-tip
+        data-for={this.state.dataFor}
+        data-event={this.state.dataEvent}
+        data-event-off={this.state.dataEventOff}
+        ref={this.state.ref}
+      >
+        <i className={this.state.icon}></i> {this.state.name}
+      </button>
+    );
   }
 }
 

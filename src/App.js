@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
-// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";

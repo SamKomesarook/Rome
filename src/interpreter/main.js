@@ -1,6 +1,4 @@
-//import RInterpreter from "./RInterpreter";
 import RVisitor from "./RomeVisitor";
-// import RomeVisitor from "./RomeVisitor";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
@@ -33,7 +31,8 @@ class Interpreter {
     writeContent,
     freeMem,
     sendMemAnimation,
-    readMemAnimation
+    readMemAnimation,
+    toggle
   ) {
     this.code = code;
     this.memArr = memArr;
@@ -43,33 +42,9 @@ class Interpreter {
     this.freeMem = freeMem;
     this.sendMemAnimation = sendMemAnimation;
     this.readMemAnimation = readMemAnimation;
+    this.toggle = toggle;
     this.start(code);
   }
-
-  // // using listener
-  // start(code) {
-  //   var errors = [];
-  //   var chars = new antlr4.InputStream(code);
-  //   var lexer = new RomeLexer(chars);
-  //   var tokens = new antlr4.CommonTokenStream(lexer);
-  //   var parser = new RomeParser(tokens);
-  //   parser.buildParseTrees = true;
-  //   parser.removeErrorListeners();
-  //   var errorListener = new ErrorListener(errors);
-  //   parser.addErrorListener(errorListener);
-
-  //   try {
-  //     const tree = parser.r();
-  //     if (tree.exception === null) {
-  //       var rInterpreter = new RInterpreter(this.memArr, this.updateContentType);
-  //       antlr4.tree.ParseTreeWalker.DEFAULT.walk(rInterpreter, tree);
-  //     } else {
-  //       console.log("Exception: ", tree.exception);
-  //     }
-  //   } catch (re) {
-  //     console.log(re);
-  //   }
-  // }
 
   // using visitor
   start(code) {
@@ -93,6 +68,7 @@ class Interpreter {
           this.readMemAnimation
         )
       );
+      this.toggle();
     } else {
       console.log("Exception: ", tree.exception);
       console.log("ERROR");
