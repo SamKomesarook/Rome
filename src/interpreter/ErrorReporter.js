@@ -39,13 +39,9 @@ class ErrorReporter extends antlr4.error.ErrorListener {
       outputMsg += " at line " + line + " column " + column;
     }
 
-    if (outputMsg == null) {
-      outputMsg =
-        "Missing the key word end at line " +
-        (parseInt(line) + 1) +
-        " column 0";
+    if (outputMsg != null) {
+      this.interpreter.printAnimation(outputMsg);
     }
-    this.interpreter.printAnimation(outputMsg);
   }
 }
 
