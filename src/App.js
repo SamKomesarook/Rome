@@ -13,6 +13,8 @@ import "./App.css";
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
 const memArr = [15];
+const startpoint = "0%";
+const endpoint = "200%";
 var t;
 
 export class App extends Component {
@@ -382,8 +384,8 @@ export class App extends Component {
                         <Transition
                           native
                           items={this.state.showBinaryString}
-                          from={{ opacity: 0, marginLeft: 0 }}
-                          enter={{ opacity: 1, marginLeft: 240 }}
+                          from={{ opacity: 0, marginLeft: startpoint }}
+                          enter={{ opacity: 1, marginLeft: endpoint }}
                           leave={{ opacity: 0 }}
                         >
                           {show =>
