@@ -1,26 +1,8 @@
 import RVisitor from "./RomeVisitor";
+import ErrorReporter from "./ErrorReporter";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
-
-var ErrorListener = function(errors) {
-  antlr4.error.ErrorListener.call(this);
-  this.errors = errors;
-  return this;
-};
-
-ErrorListener.prototype = Object.create(antlr4.error.ErrorListener.prototype);
-ErrorListener.prototype.constructor = ErrorListener;
-ErrorListener.prototype.syntaxError = function(
-  recognizer,
-  offendingSymbol,
-  line,
-  column,
-  msg,
-  e
-) {
-  console.log(msg);
-};
 
 class Interpreter {
   constructor(
@@ -55,6 +37,9 @@ class Interpreter {
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
+    // replace with custom error listener
+    parser.removeErrorListeners();
+    parser.addErrorListener(new ErrorReporter(this));
     const tree = parser.r();
 
     // run code when there is no exception
@@ -72,9 +57,6 @@ class Interpreter {
         )
       );
       this.toggle();
-    } else {
-      console.log("Exception: ", tree.exception);
-      console.log("ERROR");
     }
   }
 }
