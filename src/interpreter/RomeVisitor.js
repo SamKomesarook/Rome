@@ -339,6 +339,7 @@ class RVisitor extends RomeVisitor {
     var utility = new Utility();
     var command = utility.getCommand(ctx);
     var arg = utility.getCommandArg("s_write".length + 1, command);
+    arg = utility.swriteMemCommand(command, this.memArr);
     this.printAnimation(arg);
   }
 }

@@ -194,7 +194,7 @@ class Utility {
    * Fetch the content when hit the memory command, for loop command
    * @param {String} command command which contain the word "memory"
    * @param {Array} memArr memory array
-   * @return {int} content inside a memory, 0 if invalid
+   * @return {int} content inside a memory, null if invalid
    */
   loopMemCommand(command, memArr) {
     const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
@@ -209,12 +209,12 @@ class Utility {
 
       if (tempMem.props.contentType === "letters") {
         alert("Memory content is not a number!");
-        return 0;
+        return null;
       }
       var value = tempMem.props.content;
       if (value > 14) {
         alert("Out of range!");
-        return 0;
+        return null;
       }
       var memCmd = command.match(memCmdRegex)[0];
       command = command.replace(memCmd, value);
@@ -226,6 +226,39 @@ class Utility {
     } else if (numRegex.test(command)) {
       // if the argument is number only
       return command.match(numRegex)[0];
+    }
+  }
+
+  /**
+   * Fetch the content when hit the memory command, for s_write command
+   * @param {String} command command which contain the word "memory"
+   * @param {Array} memArr memory array
+   * @return {String} content inside a memory, null if invalid
+   */
+  swriteMemCommand(command, memArr) {
+    const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
+    const memRegex = /(memory)/gm; // match exact word "memory"
+    const numRegex = /\d+/gm; // match any number
+
+    if (memCmdRegex.test(command)) {
+      var num = command.match(numRegex)[0];
+      var tempMem = memArr[num];
+      var content = tempMem.props.content;
+      if (content > 14) {
+        alert("Out of range!");
+        return null;
+      }
+      var memCmd = command.match(memCmdRegex)[0];
+      command = command.replace(memCmd, content);
+      if (memRegex.test(command)) {
+        return this.swriteMemCommand(command, memArr);
+      } else {
+        return content;
+      }
+    } else if (command === "s_write") {
+      var currentId = this.getSelectedMemId(memArr);
+      var resultMem = memArr[currentId];
+      return resultMem.props.content;
     }
   }
 }

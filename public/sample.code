@@ -108,3 +108,19 @@ end
 start
 k_read
 end
+
+========= s_write command ==========
+# selected memory should be the third one
+# memory 1 should have content 1, memory 2 should have content "hello"
+# output area should have 1 and "hello"
+start
+set(numbers)
+write(1)
+s_write
+move(next)
+write("hello")
+s_write(memory(memory(0)))
+loop(memory(0)){
+move(next)
+}
+end
