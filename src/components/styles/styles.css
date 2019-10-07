@@ -22,9 +22,10 @@
 .memory {
     height:60px;
     max-height:60px;
+    min-width:80px;
+    max-width:110px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow:hidden;
   }
 
 .btnGroup, .btnToggle:hover>button {
