@@ -13,15 +13,18 @@ class ErrorReporter extends antlr4.error.ErrorListener {
     const extraneousRegex = /(expecting)\s(?:({('[a-zA-Z_]*'(, )*)*)(})*)/gm;
     const extraneousRequireRegex = /('[a-zA-Z_]*')/gm;
 
-    console.log("MSG: ", msg);
-
     var outputMsg;
     if (mismatchRegex.test(msg)) {
       outputMsg = msg.match(mismatchRegex)[0];
       outputMsg = outputMsg.replace(mismatchRequireRegex, "");
       outputMsg = outputMsg.replace("'", "");
       outputMsg =
-        "Require a '<strong>" + outputMsg + "</strong>' at line " + line + " column " + column;
+        "Require a '<strong>" +
+        outputMsg +
+        "</strong>' at line " +
+        line +
+        " column " +
+        column;
     } else if (extraneousRegex.test(msg)) {
       outputMsg = msg.match(extraneousRegex)[0];
       var acceptableToken = outputMsg.match(extraneousRequireRegex);
@@ -36,6 +39,12 @@ class ErrorReporter extends antlr4.error.ErrorListener {
       outputMsg += " at line " + line + " column " + column;
     }
 
+    if (outputMsg == null) {
+      outputMsg =
+        "Missing the key word end at line " +
+        (parseInt(line) + 1) +
+        " column 0";
+    }
     this.interpreter.printAnimation(outputMsg);
   }
 }
