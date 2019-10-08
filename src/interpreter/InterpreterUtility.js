@@ -201,6 +201,10 @@ class Utility {
     const memRegex = /(memory)/gm; // match exact word "memory"
     const numRegex = /\d+/gm; // match any number
 
+    // somehow has to put to console.log here
+    console.log("Command: ", command);
+    console.log(memCmdRegex.test(command));
+
     if (memCmdRegex.test(command)) {
       // when the argument need to get content from other memory block
 
