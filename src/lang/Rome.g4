@@ -39,16 +39,11 @@ MOVE: 'move';
 RIGHT: 'next';
 LEFT: 'last';
 
-LPAR: '(';
-RPAR: ')';
-LSQ: '{';
-RSQ: '}';
-
 LOOP: 'loop';
 
 NEWLINE: '\n';
 
-SPACE: ' ';
+WS: ' ';
 
 IDENTIFIER: [a-zA-Z]+;
 
@@ -58,29 +53,32 @@ STRLIT: '"' ~ ["\r\n]* '"';
 
 // Rules
 
-imp: IMP SPACE NET # Net | IMP SPACE IO # Io;
+strargs : STRLIT #Str ;
 
-intargs: NUMBER # Num | MEM LPAR intargs RPAR # Mem;
+imp: IMP WS NET # Net 
+	| IMP WS IO # Io
+	;
+
+intargs: NUMBER # Num 
+	| MEM '(' intargs ')' # Mem
+	;
 
 r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
 
 expressions: expression NEWLINE;
 
-conditional: (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (
-		intargs
-		| STRLIT
-	) # Cond;
+conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
-// NOTE :: For multiple conds, add this: ((AND | OR) SPACE conditional)* 
+// NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)* 
 
 expression:
-	SET LPAR (NUM | LET) RPAR								# Set
+	SET '(' (NUM | LET) ')'								# Set
 	| FREE													# Free
-	| MOVE LPAR (RIGHT | LEFT) RPAR							# Move
-	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ	# If
-	| LOOP LPAR intargs RPAR LSQ NEWLINE expressions* RSQ	# Loop
-	| WRITE LPAR (intargs | STRLIT) RPAR					# Write
-	| NWRITE LPAR (intargs | STRLIT) RPAR					# Snet
+	| MOVE '(' (RIGHT | LEFT) ')'							# Move
+	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
+	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
+	| WRITE '(' (intargs | STRLIT) ')'					# Write
+	| NWRITE '(' (intargs | STRLIT) ')'					# Snet
 	| NREAD													# Rnet
 	| KREAD													# Kread
-	| SWRITE LPAR (intargs | STRLIT) RPAR					# Swrite;
+	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite;
