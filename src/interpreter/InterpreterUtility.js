@@ -20,7 +20,12 @@ class Utility {
    * @return {string | int} arguments that inside the command
    */
   getCommandArg(index, command) {
-    const affix = ")";
+    var affix;
+    if (command.includes("{")) {
+      affix = "{";
+    } else {
+      affix = ")"
+    }
     var arg = command.substring(index, command.indexOf(affix));
     if (arg.indexOf("'") >= 0 || arg.indexOf('"') >= 0) {
       arg = arg.replace(/['"]+/g, "");
@@ -200,10 +205,6 @@ class Utility {
     const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
     const memRegex = /(memory)/gm; // match exact word "memory"
     const numRegex = /\d+/gm; // match any number
-
-    // somehow has to put to console.log here
-    console.log("Command: ", command);
-    console.log(memCmdRegex.test(command));
 
     if (memCmdRegex.test(command)) {
       // when the argument need to get content from other memory block
