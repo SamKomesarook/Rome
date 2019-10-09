@@ -60,9 +60,9 @@ export class TextArea extends Component {
             strings={[
               "start\nset(numbers)\nwrite(4)\nprint\nend",
               "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
-              "start\nmove(right)\nmove(left)\nend",
-		          "start\nloop(4){\nmove(right)\n}\nend",
-		          "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(right)\n}\nend}"
+              "start\nmove(next)\nmove(last)\nend",
+		          "start\nloop(4){\nmove(next)\n}\nend",
+		          "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
             ]}
             typeSpeed={40}
             backSpeed={30}
