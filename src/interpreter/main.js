@@ -44,6 +44,7 @@ class Interpreter {
 
     // run code when there is no exception
     if (tree.exception === null) {
+	try{
       tree.accept(
         new RVisitor(
           this.memArr,
@@ -57,6 +58,9 @@ class Interpreter {
         )
       );
       this.toggle();
+    }catch(e){
+	alert(e.name + ": " + e.message);
+    }
     }
   }
 }

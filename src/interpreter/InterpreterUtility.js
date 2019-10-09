@@ -147,21 +147,20 @@ class Utility {
    * @return {Boolean} true if movement is valid, false otherwise
    */
   checkMemRange(id, direction) {
-    try {
+    
       if (
         (id === 0 && direction === "last") ||
         (id === 14 && direction === "next")
       ) {
         throw new Error("Hit the wall of memory");
+	      return false;
       } else if (direction !== "last" && direction !== "next") {
         throw new Error("Invalid direction argument");
+	      return false;
       }
       return true;
-    } catch (e) {
-      alert(e.name + ": " + e.message);
-      return false;
     }
-  }
+  
 
   /**
    * Generator a random string which has max lenth of 10, and min length of 1
@@ -184,15 +183,13 @@ class Utility {
    * @param {Boolean} imported boolean value to indicate if package is imported
    */
   checkImp(imported) {
-    try {
+    
       if (!imported) {
         throw new Error("Missing import package!");
+	      return false;
       }
       return true;
-    } catch (e) {
-      alert(e.name + ": " + e.message);
-      return false;
-    }
+    
   }
 
   /**
@@ -213,12 +210,12 @@ class Utility {
       var tempMem = memArr[num];
 
       if (tempMem.props.contentType === "letters") {
-        alert("Memory content is not a number!");
+        throw new Error("Memory content is not a number!");
         return null;
       }
       var value = tempMem.props.content;
       if (value > 14) {
-        alert("Out of range!");
+        throw new Error ("Out of range!");
         return null;
       }
       var memCmd = command.match(memCmdRegex)[0];
@@ -250,7 +247,7 @@ class Utility {
       var tempMem = memArr[num];
       var content = tempMem.props.content;
       if (content > 14) {
-        alert("Out of range!");
+        throw new Error("Out of range!");
         return null;
       }
       var memCmd = command.match(memCmdRegex)[0];
