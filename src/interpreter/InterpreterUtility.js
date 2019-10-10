@@ -7,7 +7,7 @@ class Utility {
   /**
    * get command and arguments
    * @param {Object} ctx
-   * @return {string} command and arguments
+   * @return {String} command and arguments
    */
   getCommand(ctx) {
     return ctx.getText();
@@ -16,15 +16,16 @@ class Utility {
   /**
    * strip argument out from command
    * @param {int} index
-   * @param {string} command
-   * @return {string | int} arguments that inside the command
+   * @param {String} command
+   * @return {String | int} arguments that inside the command
    */
   getCommandArg(index, command) {
     var affix;
+    // set different affix when hit loop or if command
     if (command.includes("{")) {
       affix = "{";
     } else {
-      affix = ")"
+      affix = ")";
     }
     var arg = command.substring(index, command.indexOf(affix));
     if (arg.indexOf("'") >= 0 || arg.indexOf('"') >= 0) {
@@ -35,7 +36,7 @@ class Utility {
 
   /**
    * check the if statement condition with value of the current selected memory
-   * @param {string} condition string represent condition
+   * @param {String} condition string represent condition
    * @param {Object} currMem current selected memory
    * @return {Boolean} true is condition match, false otherwise
    */
@@ -85,7 +86,7 @@ class Utility {
 
   /**
    * get selected memory from memory array
-   * @param {array} memArr
+   * @param {Array} memArr
    * @return {int} selected memory ID
    */
   getSelectedMemId(memArr) {
@@ -99,11 +100,11 @@ class Utility {
   /**
    * create memory block object
    * @param {int} memory object id
-   * @param {string} type of the memory
-   * @param {boolean} if the memory is selected
-   * @param {string | int} memory content
-   * @param {string} type of the memory block
-   * @return {MemoryBlock} a memory block object
+   * @param {String} type of the memory
+   * @param {Boolean} if the memory is selected
+   * @param {String | int} memory content
+   * @param {String} type of the memory block
+   * @return {MemoryBlock} a MemoryBlock object
    */
   createMemObj(id, type, selected, content, contentType) {
     var memObj = new MemoryBlock(id, type, selected);
@@ -114,9 +115,9 @@ class Utility {
 
   /**
    * check if argument type match with memory content type
-   * @param {string} content type that the memory is for
-   * @param {*} command argument
-   * @return {boolean} true if type matches, false otherwise
+   * @param {String} content type that the memory is for
+   * @param {String | int} arg argument
+   * @return {Boolean} true if type matches, false otherwise
    */
   contentTypeMatch(contentType, arg) {
     if (contentType === "letters") {
@@ -132,9 +133,9 @@ class Utility {
   }
 
   /**
-   * check if memory content is empty
-   * @param {string} memContent
-   * @return {boolean} true is the memory content is empty
+   * check if memory content is available to writing i.e. content is empty
+   * @param {String} memContent
+   * @return {Boolean} true is the memory content is empty
    */
   memAvailability(memContent) {
     return memContent === "";
@@ -143,31 +144,27 @@ class Utility {
   /**
    * check if movement of selected memory is valid
    * @param {int} id id of memory block
-   * @param {string} direction direction of movement
+   * @param {String} direction direction of movement
    * @return {Boolean} true if movement is valid, false otherwise
    */
   checkMemRange(id, direction) {
-    
-      if (
-        (id === 0 && direction === "last") ||
-        (id === 14 && direction === "next")
-      ) {
-        throw new Error("Hit the wall of memory");
-	      return false;
-      } else if (direction !== "last" && direction !== "next") {
-        throw new Error("Invalid direction argument");
-	      return false;
-      }
-      return true;
+    if (
+      (id === 0 && direction === "last") ||
+      (id === 14 && direction === "next")
+    ) {
+      throw new Error("Hit the wall of memory");
+    } else if (direction !== "last" && direction !== "next") {
+      throw new Error("Invalid direction argument");
     }
-  
+    return true;
+  }
 
   /**
-   * Generator a random string which has max lenth of 10, and min length of 1
-   * // [1]"Generate random string/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
-   * @return {String} random string generated
+   * Generator a random String which has max lenth of 10, and min length of 1
+   * // [1]"Generate random String/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-String-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
+   * @return {String} random String generated
    */
-  stringGenerator() {
+  StringGenerator() {
     var length = Math.floor(Math.random() * 10) + 1;
     var str = "";
     var charPool = "abcdefghijklmnopqrstuvwxyz";
@@ -183,20 +180,17 @@ class Utility {
    * @param {Boolean} imported boolean value to indicate if package is imported
    */
   checkImp(imported) {
-    
-      if (!imported) {
-        throw new Error("Missing import package!");
-	      return false;
-      }
-      return true;
-    
+    if (!imported) {
+      throw new Error("Missing import package!");
+    }
+    return true;
   }
 
   /**
    * Fetch the content when hit the memory command, for loop command
    * @param {String} command command which contain the word "memory"
    * @param {Array} memArr memory array
-   * @return {int} content inside a memory, null if invalid
+   * @return {int} content inside a memory, throw exception if not valid
    */
   loopMemCommand(command, memArr) {
     const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
@@ -211,12 +205,10 @@ class Utility {
 
       if (tempMem.props.contentType === "letters") {
         throw new Error("Memory content is not a number!");
-        return null;
       }
       var value = tempMem.props.content;
       if (value > 14) {
-        throw new Error ("Out of range!");
-        return null;
+        throw new Error("Out of range!");
       }
       var memCmd = command.match(memCmdRegex)[0];
       command = command.replace(memCmd, value);
@@ -235,7 +227,7 @@ class Utility {
    * Fetch the content when hit the memory command, for s_write command
    * @param {String} command command which contain the word "memory"
    * @param {Array} memArr memory array
-   * @return {String} content inside a memory, null if invalid
+   * @return {String} content inside a memory, throw exception if not valid
    */
   swriteMemCommand(command, memArr) {
     const memCmdRegex = /(memory\()\d+\)/gm; // match memory([0-9]+)
@@ -248,7 +240,6 @@ class Utility {
       var content = tempMem.props.content;
       if (content > 14) {
         throw new Error("Out of range!");
-        return null;
       }
       var memCmd = command.match(memCmdRegex)[0];
       command = command.replace(memCmd, content);

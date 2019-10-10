@@ -1,5 +1,8 @@
 var antlr4 = require("antlr4");
 
+/**
+ * Custom Error Listener inherit from antlr4 ErrorListener
+ */
 class ErrorReporter extends antlr4.error.ErrorListener {
   constructor(interpreter) {
     super();

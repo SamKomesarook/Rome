@@ -20,10 +20,8 @@ var t;
 export class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showRunTimeAnimation: false,
-      showWindowPortal: false,
       showBinaryString: false,
       memState: memArr,
       showAnimationArea: true,
@@ -37,7 +35,6 @@ export class App extends Component {
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
-    this.closeWindow = this.closeWindowPortal.bind(this);
 
     // bind function in order to reach callback
     // back end function
@@ -104,8 +101,8 @@ export class App extends Component {
   }
 
   /**
-   *Function for print the message received to dashboard area
-   *@param {string} argument - The message that will be printed on dashboard
+   * Function for print the message received to dashboard area
+   * @param {string} argument - The message that will be printed on dashboard
    */
   printAnimation(argument) {
     var argumentDiv = "<span>" + argument + "</span><br/>";
@@ -147,6 +144,9 @@ export class App extends Component {
     });
   }
 
+  /**
+   * open or close IO window
+   */
   toggleIOWindow() {
     this.setState(state => ({
       ...state,
@@ -154,7 +154,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to show/hide the animation area and the memory board*/
+  /**
+   * function used to show/hide the animation area and the memory board
+   */
   toggleAnimationArea() {
     this.setState(state => ({
       ...state,
@@ -162,7 +164,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to show/hide the coding area*/
+  /**
+   * function used to show/hide the coding area
+   */
   toggleTextArea() {
     this.setState(state => ({
       ...state,
@@ -170,7 +174,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to display the animated binary string*/
+  /**
+   * function used to display the animated binary string
+   */
   toggleBinaryString() {
     if (!this.state.showRunTimeAnimation) {
       this.setState(state => ({
@@ -191,7 +197,9 @@ export class App extends Component {
     }
   }
 
-  /*function used to hide the animated binary string*/
+  /**
+   * function used to hide the animated binary string
+   */
   initiliazeBinaryString() {
     this.setState(state => ({
       ...state,
@@ -202,10 +210,6 @@ export class App extends Component {
       ...state,
       showBinaryString: false
     }));
-  }
-
-  closeWindowPortal() {
-    this.setState({ showWindowPortal: false });
   }
 
   /**

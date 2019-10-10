@@ -112,6 +112,7 @@ class RVisitor extends RomeVisitor {
         arg === "next"
           ? this.memArr[selectedMem + 1]
           : this.memArr[selectedMem - 1];
+      // set current selected memory selected status to false
       var tempOldMemObj = utility.createMemObj(
         tempOldMem.props.id,
         tempOldMem.type.name,
@@ -119,6 +120,7 @@ class RVisitor extends RomeVisitor {
         tempOldMem.props.content,
         tempOldMem.props.contentType
       );
+      // set the target memory selected status to true
       var tempNewMemObj = utility.createMemObj(
         tempNewMem.props.id,
         tempNewMem.type.name,
@@ -173,7 +175,7 @@ class RVisitor extends RomeVisitor {
     var tempMem = this.memArr[selectedMem];
     var typeAllow = tempMem.props.contentType;
     var userInput = "";
-    // force user input something and only whitespace is not allowed
+    // force user input something and whitespace only is not allowed
     while (userInput === "" || userInput === null || userInput.match(/^\s+$/)) {
       userInput = prompt("User Input, Please enter a " + typeAllow + " type");
     }
@@ -256,8 +258,8 @@ class RVisitor extends RomeVisitor {
     var command = utility.getCommand(ctx);
     var arg = utility.getCommandArg("if".length + 1, command);
     // get current selected memory
-    var currMem = this.memArr[utility.getSelectedMemId(this.memArr)];
-    var condState = utility.checkCond(arg, currMem);
+    var selectedMem = this.memArr[utility.getSelectedMemId(this.memArr)];
+    var condState = utility.checkCond(arg, selectedMem);
     if (condState) {
       return this.visitChildren(ctx);
     }

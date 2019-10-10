@@ -1,6 +1,9 @@
 import React from "react";
 import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 
+/**
+ * Construct memory
+ */
 export function constructMem() {
   var memArr = [];
   var memLen = 15;
@@ -38,6 +41,10 @@ export function constructMem() {
   return memArr;
 }
 
+/**
+ * Map MemoryBlock object to Memory JSX in order to render
+ * @param {MemoryBlock} memObj MemoryBlock object which contains information that Memory JSX needed
+ */
 export function mapMemObjToSymbol(memObj) {
   var type = memObj.type;
   switch (type) {
