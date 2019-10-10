@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import Typed from "react-typed";
 import '../styles/styles.css';
 
-/**
- * IO Area component
- * @prop {string} ref - reference for the element
- */
 export default class InputOutputArea extends Component {
     constructor(props) {
         super(props);
