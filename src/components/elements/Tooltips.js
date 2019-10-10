@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import ReactToolTip from "react-tooltip";
 import HelpSection from "./HelpSection";
 
-/**
- * Tooltips component
- * All element tooltips declare here
- */
 export class Tooltips extends Component {
   render() {
     return (

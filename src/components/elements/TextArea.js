@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import Typed from "react-typed";
 
-/**
- * IO Area component
- * @prop {string} ref - reference for the element
- * @prop {boolean} showLineNumber - display line number
- * @prop {function} toggleLineNumber
- */
 export class TextArea extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +10,6 @@ export class TextArea extends Component {
     };
     this.toggleLineNumber = this.toggleLineNumber.bind(this);
   }
-  
 
   /*state used to show/hide the line number of the coding area*/
   toggleLineNumber() {
@@ -27,7 +20,6 @@ export class TextArea extends Component {
   }
 
   render() {
-
     const lineNumberStyle = {
       display: "block",
       background: "url(http://i.imgur.com/2cOaJ.png)",
@@ -44,7 +36,7 @@ export class TextArea extends Component {
       paddingTop: "12px",
       lineHeight: "16px"
     };
-    
+
     //change different style according to showLineNumber,in order to hide/show line number
     var textAreaStyle;
     if (this.state.showLineNumber) {
@@ -54,15 +46,20 @@ export class TextArea extends Component {
     }
 
     return (
-      <div className="wrapper" data-tip data-for='TextAreaTips' ref={this.state.ref}>
-        <div className="form-group shadow-textarea" id="codingWrapper" >
+      <div
+        className="wrapper"
+        data-tip
+        data-for="TextAreaTips"
+        ref={this.state.ref}
+      >
+        <div className="form-group shadow-textarea" id="codingWrapper">
           <Typed
             strings={[
               "start\nset(numbers)\nwrite(4)\nprint\nend",
               "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
               "start\nmove(next)\nmove(last)\nend",
-		          "start\nloop(4){\nmove(next)\n}\nend",
-		          "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
+              "start\nloop(4){\nmove(next)\n}\nend",
+              "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
             ]}
             typeSpeed={40}
             backSpeed={30}
@@ -71,14 +68,20 @@ export class TextArea extends Component {
             showCursor={false}
           >
             <textarea
-              className="form-control rounded-0 z-depth-1"    
+              className="form-control rounded-0 z-depth-1"
               cols="50"
               id="codingArea"
               rows="28"
-              style = {textAreaStyle}
+              style={textAreaStyle}
             />
           </Typed>
-          <button className="btn btn-light" id="lineButton" onClick={this.toggleLineNumber}>toggle</button>
+          <button
+            className="btn btn-light"
+            id="lineButton"
+            onClick={this.toggleLineNumber}
+          >
+            toggle
+          </button>
         </div>
       </div>
     );

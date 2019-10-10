@@ -1,5 +1,8 @@
 var antlr4 = require("antlr4");
 
+/**
+ * Custom Error Listener inherit from antlr4 ErrorListener
+ */
 class ErrorReporter extends antlr4.error.ErrorListener {
   constructor(interpreter) {
     super();
@@ -7,6 +10,7 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
+
     const mismatchRegex = /(expecting)\s(?:('[a-zA-z]*'))/gm;
     const mismatchRequireRegex = /(expecting)\s'/gm;
 
