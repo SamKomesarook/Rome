@@ -7,6 +7,7 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
+
     const mismatchRegex = /(expecting)\s(?:('[a-zA-z]*'))/gm;
     const mismatchRequireRegex = /(expecting)\s'/gm;
 

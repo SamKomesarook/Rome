@@ -43,9 +43,8 @@ class Interpreter {
     //parser.removeErrorListeners();
     //parser.addErrorListener(new ErrorReporter(this));
     const tree = parser.r();
-	console.log(tree.exception);
     // run code when there is no exception
-    if (tree.exception === null) {
+    if (tree.exception === null && parser._syntaxErrors == 0) {
 	try{
       tree.accept(
         new RVisitor(
@@ -61,8 +60,11 @@ class Interpreter {
       );
       this.toggle();
     }catch(e){
-	alert(e.name + ": " + e.message);
+	console.log("ERROR AFTER");
+	    alert(e.name + ": " + e.message);
     }
+    }else{
+	console.log("ERROR BEFORE");
     }
   }
 }
