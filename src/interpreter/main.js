@@ -34,14 +34,16 @@ class Interpreter {
   start(code) {
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
+//	lexer.removeErrorListeners();
+//	  lexer.addErrorListener(new ErrorReporter(this));
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
     // replace with custom error listener
-    parser.removeErrorListeners();
-    parser.addErrorListener(new ErrorReporter(this));
+    //parser.removeErrorListeners();
+    //parser.addErrorListener(new ErrorReporter(this));
     const tree = parser.r();
-
+	console.log(tree.exception);
     // run code when there is no exception
     if (tree.exception === null) {
 	try{
