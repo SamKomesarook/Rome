@@ -31,7 +31,7 @@ export class Tooltips extends Component {
           <span>Info Tips</span>
         </ReactToolTip>
 
-        <ReactToolTip id="ButtonHelp" place="right" effect="solid">
+        <ReactToolTip id="ButtonHelp" place="bottom" effect="solid">
           <HelpSection />
         </ReactToolTip>
 

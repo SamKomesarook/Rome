@@ -35,7 +35,7 @@ export class Button extends Component {
           class: "btn btn-info btn-sm hvr-icon-up button",
           dataFor: "ButtonHelp",
           dataEvent: "click",
-          dataEventOff: "blur",
+          dataEventOff: "mouseout",
           icon: "far fa-question-circle hvr-icon"
         });
         break;
