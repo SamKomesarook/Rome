@@ -27,7 +27,8 @@ export class App extends Component {
       showAnimationArea: true,
       showTextArea: true,
       showIOWindow: true,
-      loopAnimation: false
+      loopAnimation: false,
+      runClicked: false
     };
     this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
@@ -35,6 +36,8 @@ export class App extends Component {
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
+
+    this.toggleButton = this.toggleButton.bind(this);
 
     // bind function in order to reach callback
     // back end function
@@ -279,6 +282,17 @@ export class App extends Component {
     this.setMemoryAnimationState(memObj);
   }
 
+  /**
+   * toggle the state of runClicked, true to false or the other way around
+   * @param {Boolean} originState current state of runClicked
+   */
+  toggleButton(originState) {
+    this.setState(state => ({
+      ...state,
+      runClicked: !originState
+    }));
+  }
+
   render() {
     return (
       <Fragment>
@@ -339,6 +353,8 @@ export class App extends Component {
                           sendMemAnimation={this.sendMemAnimation}
                           readMemAnimation={this.readMemAnimation}
                           printAnimation={this.printAnimation}
+                          toggleButton={this.toggleButton}
+                          runClicked={this.state.runClicked}
                         />
                       </div>
                       <div
@@ -352,6 +368,8 @@ export class App extends Component {
                           name="Stop"
                           toggle={this.stop}
                           compRef={el => this.ref.push(el)}
+                          toggleButton={this.toggleButton}
+                          runClicked={this.state.runClicked}
                         />
                       </div>
 

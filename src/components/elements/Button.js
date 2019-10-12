@@ -25,7 +25,7 @@ export class Button extends Component {
       case "Stop":
         this.setState({
           class: "btn btn-danger btn-sm hvr-icon-pulse-grow button",
-          clickFunc: this.props.toggle,
+          clickFunc: this.stopCode,
           dataFor: "ButtonStop",
           icon: "far fa-stop-circle hvr-icon"
         });
@@ -76,7 +76,7 @@ export class Button extends Component {
   };
 
   runCode = () => {
-    var code = document.getElementById("codingArea").value;
+    const code = document.getElementById("codingArea").value;
     new Interpreter(
       code,
       this.props.memArr,
@@ -89,24 +89,53 @@ export class Button extends Component {
       this.props.toggle,
       this.props.printAnimation
     );
+    this.props.toggleButton(this.props.runClicked);
     console.log("RUN Clicked!");
   };
 
+  stopCode = () => {
+    this.props.toggle();
+    this.props.toggleButton(this.props.runClicked);
+    console.log("STOP Clicked!");
+  };
+
   render() {
-    return (
-      <button
-        type="button"
-        className={this.state.class}
-        onClick={this.state.clickFunc}
-        data-tip
-        data-for={this.state.dataFor}
-        data-event={this.state.dataEvent}
-        data-event-off={this.state.dataEventOff}
-        ref={this.state.ref}
-      >
-        <i className={this.state.icon}></i> {this.state.name}
-      </button>
-    );
+    if (this.state.name === "Run" || this.state.name === "Stop") {
+      return (
+        <button
+          type="button"
+          className={this.state.class}
+          onClick={this.state.clickFunc}
+          data-tip
+          data-for={this.state.dataFor}
+          data-event={this.state.dataEvent}
+          data-event-off={this.state.dataEventOff}
+          ref={this.state.ref}
+          disabled={
+            this.state.name === "Run"
+              ? this.props.runClicked
+              : !this.props.runClicked
+          }
+        >
+          <i className={this.state.icon}></i> {this.state.name}
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="button"
+          className={this.state.class}
+          onClick={this.state.clickFunc}
+          data-tip
+          data-for={this.state.dataFor}
+          data-event={this.state.dataEvent}
+          data-event-off={this.state.dataEventOff}
+          ref={this.state.ref}
+        >
+          <i className={this.state.icon}></i> {this.state.name}
+        </button>
+      );
+    }
   }
 }
 
