@@ -40,8 +40,6 @@ class Interpreter {
   start(code) {
     var chars = new antlr4.InputStream(code);
     var lexer = new RomeLexer(chars);
-    // lexer.removeErrorListeners();
-    // lexer.addErrorListener(new ErrorReporter(this));
     var tokens = new antlr4.CommonTokenStream(lexer);
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
@@ -69,10 +67,6 @@ class Interpreter {
         console.log("ERROR AFTER");
         alert(e.name + ": " + e.message);
       }
-    } else {
-      console.log(parser);
-      console.log(parser._syntaxErrors);
-      console.log("ERROR BEFORE");
     }
   }
 }
