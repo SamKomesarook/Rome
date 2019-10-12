@@ -12,7 +12,7 @@ import "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
-const memArr = [15];
+const memArr = [];
 const startpoint = "0%";
 const endpoint = "200%";
 var t;
@@ -135,12 +135,6 @@ export class App extends Component {
   componentWillMount() {
     this.setState({
       memState: this.memArr
-    });
-  }
-
-  componentDidMount() {
-    window.addEventListener("beforeunload", () => {
-      this.closeWindowPortal();
     });
   }
 
