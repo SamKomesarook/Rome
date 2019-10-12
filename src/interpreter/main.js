@@ -1,5 +1,5 @@
 import RVisitor from "./RomeVisitor";
-// import ErrorReporter from "./ErrorReporter";
+import ErrorReporter from "./ErrorReporter";
 var antlr4 = require("antlr4");
 var RomeLexer = require("../lang/RomeLexer").RomeLexer;
 var RomeParser = require("../lang/RomeParser").RomeParser;
@@ -46,8 +46,8 @@ class Interpreter {
     var parser = new RomeParser(tokens);
     parser.buildParseTrees = true;
     // replace with custom error listener
-    // parser.removeErrorListeners();
-    // parser.addErrorListener(new ErrorReporter(this));
+    parser.removeErrorListeners();
+    parser.addErrorListener(new ErrorReporter(this));
     const tree = parser.r();
     // run code when there is no exception
     if (tree.exception === null && parser._syntaxErrors === 0) {
@@ -70,6 +70,8 @@ class Interpreter {
         alert(e.name + ": " + e.message);
       }
     } else {
+      console.log(parser);
+      console.log(parser._syntaxErrors);
       console.log("ERROR BEFORE");
     }
   }
