@@ -164,7 +164,7 @@ class Utility {
    * // [1]"Generate random String/characters in JavaScript", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/1349404/generate-random-String-characters-in-javascript?page=1&tab=votes#tab-top. [Accessed: 05- Oct- 2019].
    * @return {String} random String generated
    */
-  StringGenerator() {
+  stringGenerator() {
     var length = Math.floor(Math.random() * 10) + 1;
     var str = "";
     var charPool = "abcdefghijklmnopqrstuvwxyz";
