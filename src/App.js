@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Transition, animated } from "react-spring/renderprops";
+// import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
 import TextArea from "./components/elements/TextArea";
@@ -13,8 +13,8 @@ import "./App.css";
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
 const memArr = [];
-const startpoint = "0%";
-const endpoint = "200%";
+// const startpoint = "0%";
+// const endpoint = "200%";
 var t;
 
 export class App extends Component {
@@ -46,8 +46,8 @@ export class App extends Component {
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
-    this.sendMemAnimation = this.sendMemAnimation.bind(this);
-    this.readMemAnimation = this.readMemAnimation.bind(this);
+    // this.sendMemAnimation = this.sendMemAnimation.bind(this);
+    // this.readMemAnimation = this.readMemAnimation.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
@@ -246,41 +246,42 @@ export class App extends Component {
     }));
   }
 
-  /**
-   * Set the animation state for memory block
-   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
-   */
-  setMemoryAnimationState(memObj) {
-    setTimeout(() => {
-      memObj.setAnimated(memObj.getAnimated() ? false : true);
-      memObj.setContent("");
-      var id = memObj.getId();
-      var mem = mapMemObjToSymbol(memObj);
-      this.updateMem(id, mem);
-    }, 5000);
-  }
+  // disable for later usage
+  // /**
+  //  * Set the animation state for memory block
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // setMemoryAnimationState(memObj) {
+  //   setTimeout(() => {
+  //     memObj.setAnimated(memObj.getAnimated() ? false : true);
+  //     memObj.setContent("");
+  //     var id = memObj.getId();
+  //     var mem = mapMemObjToSymbol(memObj);
+  //     this.updateMem(id, mem);
+  //   }, 5000);
+  // }
 
-  /**
-   * Send netMem/usbMem animation
-   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
-   */
-  sendMemAnimation(memObj) {
-    var id = memObj.getId();
-    var mem = mapMemObjToSymbol(memObj);
-    this.updateMem(id, mem);
-    this.setMemoryAnimationState(memObj);
-  }
+  // /**
+  //  * Send netMem/usbMem animation
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // sendMemAnimation(memObj) {
+  //   var id = memObj.getId();
+  //   var mem = mapMemObjToSymbol(memObj);
+  //   this.updateMem(id, mem);
+  //   this.setMemoryAnimationState(memObj);
+  // }
 
-  /**
-   * read netMem/usbMem animation
-   * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
-   */
-  readMemAnimation(memObj) {
-    var id = memObj.getId();
-    var mem = mapMemObjToSymbol(memObj);
-    this.updateMem(id, mem);
-    this.setMemoryAnimationState(memObj);
-  }
+  // /**
+  //  * read netMem/usbMem animation
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // readMemAnimation(memObj) {
+  //   var id = memObj.getId();
+  //   var mem = mapMemObjToSymbol(memObj);
+  //   this.updateMem(id, mem);
+  //   this.setMemoryAnimationState(memObj);
+  // }
 
   /**
    * toggle the state of runClicked, true to false or the other way around
@@ -393,6 +394,7 @@ export class App extends Component {
                     </div>
                   </div>
                 ) : null}
+                {/* The animation is disabled for the moment
                 {this.state.showAnimationArea && (
                   <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
@@ -415,7 +417,7 @@ export class App extends Component {
                       <i className="fas fa-microchip fa-4x" />
                     </div>
                   </div>
-                )}
+                        )}*/}
                 <div
                   className={
                     this.state.showAnimationArea
