@@ -374,15 +374,15 @@ export class App extends Component {
                         />
                       </div>
 
-                      <div
+                      {/* <div
                         className={
                           this.state.showAnimationArea
                             ? "col-sm-3 executeBtn"
                             : "col-sm-2 executeBtn"
                         }
                       >
-                        <Button name="Info" toggle={this.toggleRef} />
-                      </div>
+                         <Button name="Info" toggle={this.toggleRef} /> Temporary disable the button for future use 
+                      </div> */}
 
                       <div
                         className={

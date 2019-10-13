@@ -6,6 +6,7 @@ export class Tooltips extends Component {
   render() {
     return (
       <div>
+        {/* https://github.com/wwayne/react-tooltip */}
         <ReactToolTip id="TextAreaTips" effect="solid" delayShow={100}>
           <span>Text Area Tips</span>
         </ReactToolTip>
