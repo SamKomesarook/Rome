@@ -75,9 +75,12 @@ export class Button extends Component {
     }
   };
 
+  /**
+   * Once run button is clicked, create Interperter and start parsing code
+   */
   runCode = () => {
     const code = document.getElementById("codingArea").value;
-    new Interpreter(
+    var interpreter = new Interpreter(
       code,
       this.props.memArr,
       this.props.updateContentType,
@@ -89,10 +92,17 @@ export class Button extends Component {
       this.props.toggle,
       this.props.printAnimation
     );
-    this.props.toggleButton(this.props.runClicked);
+    var validCode = interpreter.start(code);
+    // only disable run button when the code is valid
+    if (validCode) {
+      this.props.toggleButton(this.props.runClicked);
+    }
     console.log("RUN Clicked!");
   };
 
+  /**
+   * Stop code from running and reset memory area and output window area
+   */
   stopCode = () => {
     this.props.toggle();
     this.props.toggleButton(this.props.runClicked);

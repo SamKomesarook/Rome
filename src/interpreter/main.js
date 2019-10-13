@@ -30,12 +30,12 @@ class Interpreter {
     this.readMemAnimation = readMemAnimation;
     this.toggle = toggle;
     this.printAnimation = printAnimation;
-    this.start(code);
   }
 
   /**
    * Starting point of lexer, parser and interpreter. Interpreter will only comes in when there is no error in code
    * @param {Object} code code that need to be parsed
+   * @return {Boolean} true if code is valid, false if there is error in code
    */
   start(code) {
     var chars = new antlr4.InputStream(code);
@@ -63,9 +63,11 @@ class Interpreter {
           )
         );
         this.toggle();
+        return true;
       } catch (e) {
         console.log("ERROR AFTER");
         alert(e.name + ": " + e.message);
+        return false;
       }
     }
   }
