@@ -393,6 +393,7 @@ export class App extends Component {
                     </div>
                   </div>
                 ) : null}
+                {/* The animation is disabled for the moment
                 {this.state.showAnimationArea && (
                   <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
@@ -415,7 +416,7 @@ export class App extends Component {
                       <i className="fas fa-microchip fa-4x" />
                     </div>
                   </div>
-                )}
+                        )}*/}
                 <div
                   className={
                     this.state.showAnimationArea
