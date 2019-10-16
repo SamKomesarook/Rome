@@ -331,9 +331,10 @@ export class App extends Component {
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
+                    {/* the slider is diabled for later usage
                     <div className="row slider-container">
                       <Slider compRef={el => this.ref.push(el)} />
-                    </div>
+                    </div>*/}
                     <div className="row" id="executBtnGroup">
                       <div
                         className={
@@ -394,7 +395,7 @@ export class App extends Component {
                     </div>
                   </div>
                 ) : null}
-                {/* The animation is disabled for the moment
+                {/* The animation is disabled for later usage
                 {this.state.showAnimationArea && (
                   <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
