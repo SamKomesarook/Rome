@@ -7,7 +7,7 @@ export class Tooltips extends Component {
     return (
       <div>
         {/* https://github.com/wwayne/react-tooltip */}
-        <ReactToolTip id="TextAreaTips" effect="solid" delayShow={100}>
+        {/* <ReactToolTip id="TextAreaTips" effect="solid" delayShow={100}>
           <span>Text Area Tips</span>
         </ReactToolTip>
 
@@ -30,13 +30,13 @@ export class Tooltips extends Component {
 
         <ReactToolTip id="ButtonInfo" effect="solid">
           <span>Info Tips</span>
-        </ReactToolTip>
+        </ReactToolTip> */}
 
         <ReactToolTip id="ButtonHelp" place="bottom" effect="solid">
           <HelpSection />
         </ReactToolTip>
 
-        <ReactToolTip id="DashboardArea" place="top" effect="solid">
+        {/* <ReactToolTip id="DashboardArea" place="top" effect="solid">
           <span>Dashboard Output Tips</span>
         </ReactToolTip>
 
@@ -46,7 +46,7 @@ export class Tooltips extends Component {
 
         <ReactToolTip id="ComponentArea" place="top" effect="solid">
           <span>This is Component Area</span>
-        </ReactToolTip>
+        </ReactToolTip> */}
       </div>
     );
   }
