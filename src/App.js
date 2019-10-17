@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
 import TextArea from "./components/elements/TextArea";
-import Slider from "./components/elements/Slider";
+// import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
