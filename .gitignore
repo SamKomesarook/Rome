@@ -1,6 +1,7 @@
 node_modules
 .vscode
 old/
+.swp
 pjfc/frontend/static/frontend/main.js
 .antlr/
 *.DS_Store

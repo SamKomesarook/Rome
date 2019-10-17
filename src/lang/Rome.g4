@@ -6,88 +6,79 @@ options {
 
 // Tokens
 
-START:'start';
-END:'end';
+START: 'start';
+END: 'end';
 
-SET:'set';
-NUM:'numbers';
-LET:'letters';
+SET: 'set';
+NUM: 'numbers';
+LET: 'letters';
 
-FREE:'free';
-MEM:'memory';
-KREAD:'read_keyboard';
-SWRITE:'write_screen';
-READ:'read';
-WRITE:'write';
+FREE: 'free';
+MEM: 'memory';
+KREAD: 'k_read';
+SWRITE: 's_write';
+WRITE: 'write';
 
-IMP:'import';
+IMP: 'import';
+NET: 'network';
+IO: 'IO';
 
-IF:'if';
-IS:'is';
-NOT:'not';
-EQL:'equal';
-LESS:'less';
-GRE:'greater';
-AND:'and';
-OR:'or';
+IF: 'if';
+IS: 'is';
+NOT: 'not';
+EQL: 'equal';
+LESS: 'less';
+GRE: 'greater';
+AND: 'and';
+OR: 'or';
 
-SNET:'write_net';
-RNET:'read_net';
+NWRITE: 'n_write';
+NREAD: 'n_read';
 
-MOVE:'move';
-RIGHT:'next';
-LEFT:'last';
+MOVE: 'move';
+RIGHT: 'next';
+LEFT: 'last';
 
-LPAR:'(';
-RPAR:')';
-LSQ:'{';
-RSQ:'}';
+LOOP: 'loop';
 
-LOOP:'loop';
+NEWLINE: '\n';
 
-NEWLINE:'\n';
+WS: ' ';
 
-SPACE:' ';
+IDENTIFIER: [a-zA-Z]+;
 
-IDENTIFIER : [a-zA-Z]+;
+NUMBER: ('0' .. '9')+;
 
-NUMBER
-   : ('0' .. '9') +
-   ;
-
-
-STRLIT : '"' ~ ["\r\n]* '"';
+STRLIT: '"' ~ ["\r\n]* '"';
 
 // Rules
 
-imp : IMP SPACE STRLIT;
+strargs : STRLIT #Str ;
 
-intargs
-	: NUMBER # Num
-	| MEM LPAR intargs RPAR # Mem
+imp: IMP WS NET # Net 
+	| IMP WS IO # Io
 	;
 
-
-r : START NEWLINE (imp NEWLINE)? expressions* END NEWLINE*;
-
-expressions : expression NEWLINE;
-
-conditional : (IS | NOT) SPACE (LESS | GRE | EQL) SPACE (intargs | STRLIT) # Cond;
-
-
-// NOTE :: For multiple conds, add this: ((AND | OR) SPACE conditional)* 
-
-
-expression
-	: SET LPAR (NUM | LET) RPAR # Set
-	| FREE # Free
-	| READ # Read
-	| MOVE LPAR (RIGHT | LEFT) RPAR # Move
-	| IF LPAR conditional RPAR LSQ NEWLINE expressions* RSQ # If
-	| LOOP LPAR intargs RPAR LSQ NEWLINE  expressions* RSQ # Loop
-	| WRITE LPAR (intargs | STRLIT) RPAR # Write
-	| SNET LPAR (intargs | STRLIT) RPAR #Snet
-	| RNET LPAR (intargs | STRLIT) RPAR #Rnet
-	| KREAD LPAR (intargs | STRLIT) RPAR #Kread
-	| SWRITE LPAR (intargs | STRLIT) RPAR #Swrite
+intargs: NUMBER # Num 
+	| MEM '(' intargs ')' # Mem
 	;
+
+r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
+
+expressions: expression NEWLINE;
+
+conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
+
+// NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)* 
+
+expression:
+	SET '(' (NUM | LET) ')'								# Set
+	| FREE													# Free
+	| MOVE '(' (RIGHT | LEFT) ')'							# Move
+	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
+	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
+	| WRITE '(' (intargs | STRLIT) ')'					# Write
+	| NWRITE '(' (intargs | STRLIT) ')'					# Snet
+	| NREAD													# Rnet
+	| KREAD													# Kread
+	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite;

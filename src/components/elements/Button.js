@@ -1,16 +1,6 @@
 import React, { Component } from "react";
 import Interpreter from "../../interpreter/main";
 
-/**
- * Button component
- * @prop {string} name
- * @prop {string} class
- * @prop {function} clickFunc
- * @prop {string} dataFor
- * @prop {object} memArr
- * @prop {string} icon
- * @prop {string} ref
- */
 export class Button extends Component {
   state = {
     name: this.props.name,
@@ -35,7 +25,7 @@ export class Button extends Component {
       case "Stop":
         this.setState({
           class: "btn btn-danger btn-sm hvr-icon-pulse-grow button",
-          clickFunc: this.props.toggle,
+          clickFunc: this.stopCode,
           dataFor: "ButtonStop",
           icon: "far fa-stop-circle hvr-icon"
         });
@@ -45,7 +35,7 @@ export class Button extends Component {
           class: "btn btn-info btn-sm hvr-icon-up button",
           dataFor: "ButtonHelp",
           dataEvent: "click",
-          dataEventOff: "blur",
+          dataEventOff: "mouseout",
           icon: "far fa-question-circle hvr-icon"
         });
         break;
@@ -67,11 +57,6 @@ export class Button extends Component {
     }
   }
 
-  // TODO: stop button function
-  stopCode = () => {
-    console.log("STOP Clicked!");
-  };
-
   //Highlight section loop through the text area ,delays every 2 seconds
   runHighlight = () => {
     var textArea = document.getElementById("codingArea");
@@ -90,41 +75,67 @@ export class Button extends Component {
     }
   };
 
+  /**
+   * Once run button is clicked, create Interperter and start parsing code
+   */
   runCode = () => {
-    var code = document.getElementById("codingArea").value;
-    new Interpreter(
+    const code = document.getElementById("codingArea").value;
+    var interpreter = new Interpreter(
       code,
       this.props.memArr,
       this.props.updateContentType,
       this.props.moveMem,
       this.props.writeContent,
       this.props.freeMem,
-      this.props.sendNet,
-      this.props.readNet
+      this.props.sendMemAnimation,
+      this.props.readMemAnimation,
+      this.props.toggle,
+      this.props.printAnimation
     );
-    this.props.toggle();
+    var validCode = interpreter.start(code);
+    // only disable run button when the code is valid
+    if (validCode) {
+      this.props.toggleButton(this.props.runClicked);
+    }
     console.log("RUN Clicked!");
   };
 
+  /**
+   * Stop code from running and reset memory area and output window area
+   */
+  stopCode = () => {
+    this.props.toggle();
+    this.props.toggleButton(this.props.runClicked);
+    console.log("STOP Clicked!");
+  };
+
   render() {
-    if (this.props.type === "submit") {
+    if (this.state.name === "Run" || this.state.name === "Stop") {
       return (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a>
-          <input
-            type="submit"
-            value={this.props.name}
-            className={this.state.class}
-            href="#"
-          />
-        </a>
+        <button
+          type="button"
+          className={this.state.class}
+          onClick={this.state.clickFunc}
+          data-tip
+          data-for={this.state.dataFor}
+          data-event={this.state.dataEvent}
+          data-event-off={this.state.dataEventOff}
+          ref={this.state.ref}
+          disabled={
+            this.state.name === "Run"
+              ? this.props.runClicked
+              : !this.props.runClicked
+          }
+        >
+          <i className={this.state.icon}></i> {this.state.name}
+        </button>
       );
     } else {
       return (
         <button
           type="button"
           className={this.state.class}
-          onClick={ this.state.clickFunc}
+          onClick={this.state.clickFunc}
           data-tip
           data-for={this.state.dataFor}
           data-event={this.state.dataEvent}

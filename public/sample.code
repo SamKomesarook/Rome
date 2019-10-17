@@ -1,0 +1,126 @@
+========== move command ==========
+# selected memory should be the second one in the first row
+start
+move(next)
+end
+
+# alert window should pop up: Invalid direction argument
+start
+move(right)
+end
+
+# alert window should pop up: Hit the wall of memory
+start
+move(last)
+end
+
+========== free command ==========
+# Memory content should be cleaned even when the memory is already free
+start
+free
+end
+
+========== write command ==========
+# memory content should changed to "hello world" - when the content type of the memory is letters
+start
+write("hello world")
+end
+
+========== set command ==========
+# alert window should pop up: Wrong Type!
+start
+set(numbers)
+write("hello world")
+end
+
+# memory content should changed to 1024
+start
+set(numbers)
+write(1024)
+end
+
+========== if command ==========
+# selected memory should stay at the first one, and content should changed to 4
+start
+if(is equal 4){
+move(next)
+}
+if(not equal 4){
+set(numbers)
+write("4")
+}
+end
+
+# selected memory should move to the second memory, and the second memory content should change to 4
+start
+if(not equal 4){
+move(next)
+}
+if(not equal 4){
+set(numbers)
+write("4")
+}
+end
+
+========== loop command ==========
+# selected memory should move to the fifth memory
+start
+loop(4){
+move(next)
+}
+end
+
+# selected memory should be moved to the fifth memory since the first memory's content is 4, and the loop time is depends on the first memory's content
+start
+set(numbers)
+write(4)
+loop(memory(0)){
+move(next)
+}
+end
+
+========== n_write command ==========
+# alert window should pop up: Missing import package
+start
+n_write("hello")
+end
+
+# a little animation should be appeared on the net memory block
+start
+import network
+n_write("hello")
+end
+
+========== n_read command ==========
+# alert window should pop up: Missing import package
+start
+n_read("hello")
+end
+
+# a little animation should be appeared on the net memory block
+start
+import network
+n_read
+end
+
+========== k_read command ==========
+# a prompt window should pop and user is able to put userinput
+start
+k_read
+end
+
+========= s_write command ==========
+# selected memory should be the third one
+# memory 1 should have content 1, memory 2 should have content "hello"
+# output area should have 1 and "hello"
+start
+set(numbers)
+write(1)
+s_write
+move(next)
+write("hello")
+s_write(memory(memory(0)))
+loop(memory(0)){
+move(next)
+}
+end

@@ -1,36 +1,34 @@
 import React, { Component, Fragment } from "react";
-import { Transition, animated } from "react-spring/renderprops";
+// import { Transition, animated } from "react-spring/renderprops";
 import ReactTooltip from "react-tooltip";
 import Header from "./components/layout/Header";
-// import { Memory, USBMemory, NetMemory } from "./components/elements/Memory";
 import TextArea from "./components/elements/TextArea";
 import Slider from "./components/elements/Slider";
 import Button from "./components/elements/Button";
 import Tooltips from "./components/elements/Tooltips";
 import InputOutputArea from "./components/elements/InputOutputArea";
 import "hover.css";
-// eslint-disable-next-line no-unused-vars
-import styles from "./App.css";
+import "./App.css";
 
 import { constructMem, mapMemObjToSymbol } from "./MemFunc";
 
-const memArr = [15];
+const memArr = [];
+// const startpoint = "0%";
+// const endpoint = "200%";
 var t;
 
 export class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showRunTimeAnimation: false,
-      showWindowPortal: false,
       showBinaryString: false,
       memState: memArr,
       showAnimationArea: true,
       showTextArea: true,
       showIOWindow: true,
       loopAnimation: false,
-      netAnimation: false // Net animation toggle by using boolean
+      runClicked: false
     };
     this.toggleRef = this.toggleRef.bind(this);
     this.toggleIOWindow = this.toggleIOWindow.bind(this);
@@ -38,8 +36,8 @@ export class App extends Component {
     this.toggleAnimationArea = this.toggleAnimationArea.bind(this);
     this.initiliazeBinaryString = this.initiliazeBinaryString.bind(this);
     this.toggleBinaryString = this.toggleBinaryString.bind(this);
-    // this.toggleWindow = this.toggleWindowPortal.bind(this);
-    this.closeWindow = this.closeWindowPortal.bind(this);
+
+    this.toggleButton = this.toggleButton.bind(this);
 
     // bind function in order to reach callback
     // back end function
@@ -48,18 +46,22 @@ export class App extends Component {
     this.updateContentType = this.updateContentType.bind(this);
     this.writeContent = this.writeContent.bind(this);
     this.freeMem = this.freeMem.bind(this);
-    this.sendNet = this.sendNet.bind(this);
-    this.readNet = this.readNet.bind(this);
+    // this.sendMemAnimation = this.sendMemAnimation.bind(this);
+    // this.readMemAnimation = this.readMemAnimation.bind(this);
 
     // animation function
     this.loopAnimation = this.loopAnimation.bind(this);
-    // this.netAnimation = this.netAnimation.bind(this);
     this.stop = this.stop.bind(this);
 
     this.memArr = constructMem();
     this.ref = [];
   }
 
+  /**
+   * update the memArr using id and new memory JSX
+   * @param {int} id memory id
+   * @param {MemoryJSX} mem new memory JSX
+   */
   updateMem(id, mem) {
     this.memArr[id] = mem;
     this.setState({
@@ -67,24 +69,26 @@ export class App extends Component {
     });
   }
 
+  /**
+   * update the contentType of selected memory JSX
+   * @param {int} id memory id
+   * @param {MemoryBlock} memObj MemoryBlock object
+   */
   updateContentType(id, memObj) {
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
-  moveMem(oldMemObj, newMemObj, direction) {
-    var currId = oldMemObj.id;
-    if (
-      (currId === 0 && direction === "left") ||
-      (currId === 14 && direction === "right")
-    ) {
-      alert("Invalide Move command!");
-    } else {
-      var oldMem = mapMemObjToSymbol(oldMemObj);
-      var newMem = mapMemObjToSymbol(newMemObj);
-      this.updateMem(oldMemObj.getId(), oldMem);
-      this.updateMem(newMemObj.getId(), newMem);
-    }
+  /**
+   * move selected memory
+   * @param {MemoryBlock} oldMemObj MemoryBlock which will be de-selected
+   * @param {MemoryBlock} newMemObj MemroyBlock which the selected state will be set to true
+   */
+  moveMem(oldMemObj, newMemObj) {
+    var oldMem = mapMemObjToSymbol(oldMemObj);
+    var newMem = mapMemObjToSymbol(newMemObj);
+    this.updateMem(oldMemObj.getId(), oldMem);
+    this.updateMem(newMemObj.getId(), newMem);
   }
 
   /**
@@ -100,8 +104,8 @@ export class App extends Component {
   }
 
   /**
-   *Function for print the message received to dashboard area
-   *@param {string} argument - The message that will be printed on dashboard
+   * Function for print the message received to dashboard area
+   * @param {string} argument - The message that will be printed on dashboard
    */
   printAnimation(argument) {
     var argumentDiv = "<span>" + argument + "</span><br/>";
@@ -110,12 +114,20 @@ export class App extends Component {
     document.getElementById("outputArea").innerHTML = oldMessage;
   }
 
+  /**
+   * write content to a memory JSX
+   * @param {MemoryBlock} memObj MemoryBlock Object which has the content information
+   */
   writeContent(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
     this.updateMem(id, newMem);
   }
 
+  /**
+   * release memory availability of selected memory
+   * @param {MemoryBlock} memObj MemoryBlock object which content is empty
+   */
   freeMem(memObj) {
     var id = memObj.id;
     var newMem = mapMemObjToSymbol(memObj);
@@ -129,12 +141,9 @@ export class App extends Component {
     });
   }
 
-  componentDidMount() {
-    window.addEventListener("beforeunload", () => {
-      this.closeWindowPortal();
-    });
-  }
-
+  /**
+   * open or close IO window
+   */
   toggleIOWindow() {
     this.setState(state => ({
       ...state,
@@ -142,7 +151,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to show/hide the animation area and the memory board*/
+  /**
+   * function used to show/hide the animation area and the memory board
+   */
   toggleAnimationArea() {
     this.setState(state => ({
       ...state,
@@ -150,7 +161,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to show/hide the coding area*/
+  /**
+   * function used to show/hide the coding area
+   */
   toggleTextArea() {
     this.setState(state => ({
       ...state,
@@ -158,7 +171,9 @@ export class App extends Component {
     }));
   }
 
-  /*function used to display the animated binary string*/
+  /**
+   * function used to display the animated binary string
+   */
   toggleBinaryString() {
     if (!this.state.showRunTimeAnimation) {
       this.setState(state => ({
@@ -179,7 +194,9 @@ export class App extends Component {
     }
   }
 
-  /*function used to hide the animated binary string*/
+  /**
+   * function used to hide the animated binary string
+   */
   initiliazeBinaryString() {
     this.setState(state => ({
       ...state,
@@ -192,14 +209,9 @@ export class App extends Component {
     }));
   }
 
-  closeWindowPortal() {
-    this.setState({ showWindowPortal: false });
-  }
-
   /**
    * Function for info button
    * Display all tooltips on click
-   * @ref {array}
    * setTimeout hide all tooltip
    */
   toggleRef = () => {
@@ -226,7 +238,6 @@ export class App extends Component {
 
   /**
    * Function for Loop Animation
-   * @loopAnimation {boolean}
    */
   loopAnimation() {
     this.setState(state => ({
@@ -235,32 +246,52 @@ export class App extends Component {
     }));
   }
 
+  // disable for later usage
+  // /**
+  //  * Set the animation state for memory block
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // setMemoryAnimationState(memObj) {
+  //   setTimeout(() => {
+  //     memObj.setAnimated(memObj.getAnimated() ? false : true);
+  //     memObj.setContent("");
+  //     var id = memObj.getId();
+  //     var mem = mapMemObjToSymbol(memObj);
+  //     this.updateMem(id, mem);
+  //   }, 5000);
+  // }
+
+  // /**
+  //  * Send netMem/usbMem animation
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // sendMemAnimation(memObj) {
+  //   var id = memObj.getId();
+  //   var mem = mapMemObjToSymbol(memObj);
+  //   this.updateMem(id, mem);
+  //   this.setMemoryAnimationState(memObj);
+  // }
+
+  // /**
+  //  * read netMem/usbMem animation
+  //  * @param {MemoryBlock} memObj MemoryBlock object, has to be either network memory or usb memory
+  //  */
+  // readMemAnimation(memObj) {
+  //   var id = memObj.getId();
+  //   var mem = mapMemObjToSymbol(memObj);
+  //   this.updateMem(id, mem);
+  //   this.setMemoryAnimationState(memObj);
+  // }
+
   /**
-   * set Net Animation state
-   * @param {MemoryBlock} netMemObj memory block object, has to be net memory type
+   * toggle the state of runClicked, true to false or the other way around
+   * @param {Boolean} originState current state of runClicked
    */
-  setNetAnimationState(netMemObj) {
-    setTimeout(() => {
-      netMemObj.setAnimated(netMemObj.getAnimated() ? false : true);
-      netMemObj.setContent("");
-      var id = netMemObj.getId();
-      var netMem = mapMemObjToSymbol(netMemObj);
-      this.updateMem(id, netMem);
-    }, 5000);
-  }
-
-  sendNet(netMemObj) {
-    var id = netMemObj.getId();
-    var netMem = mapMemObjToSymbol(netMemObj);
-    this.updateMem(id, netMem);
-    this.setNetAnimationState(netMemObj);
-  }
-
-  readNet(netMemObj) {
-    var id = netMemObj.getId();
-    var netMem = mapMemObjToSymbol(netMemObj);
-    this.updateMem(id, netMem);
-    this.setNetAnimationState(netMemObj);
+  toggleButton(originState) {
+    this.setState(state => ({
+      ...state,
+      runClicked: !originState
+    }));
   }
 
   render() {
@@ -294,17 +325,22 @@ export class App extends Component {
                 {this.state.showTextArea ? (
                   <div
                     className={
-                      this.state.showAnimationArea ? "col-sm-4" : "col-sm-6"
+                      this.state.showAnimationArea
+                        ? "col-sm-4 executeBtn"
+                        : "col-sm-6 executeBtn"
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
+                    {/* the slider is diabled for later usage
                     <div className="row slider-container">
                       <Slider compRef={el => this.ref.push(el)} />
-                    </div>
-                    <div className="row">
+                    </div>*/}
+                    <div className="row" id="executBtnGroup">
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
@@ -316,29 +352,38 @@ export class App extends Component {
                           moveMem={this.moveMem}
                           writeContent={this.writeContent}
                           freeMem={this.freeMem}
-                          sendNet={this.sendNet}
-                          readNet={this.readNet}
+                          sendMemAnimation={this.sendMemAnimation}
+                          readMemAnimation={this.readMemAnimation}
+                          printAnimation={this.printAnimation}
+                          toggleButton={this.toggleButton}
+                          runClicked={this.state.runClicked}
                         />
                       </div>
                       <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
                         <Button
                           name="Stop"
                           toggle={this.stop}
                           compRef={el => this.ref.push(el)}
+                          toggleButton={this.toggleButton}
+                          runClicked={this.state.runClicked}
                         />
                       </div>
 
-                      <div
+                      {/* <div
                         className={
-                          this.state.showAnimationArea ? "col-sm-3" : "col-sm-2"
+                          this.state.showAnimationArea
+                            ? "col-sm-3 executeBtn"
+                            : "col-sm-2 executeBtn"
                         }
                       >
-                        <Button name="Info" toggle={this.toggleRef} />
-                      </div>
+                         <Button name="Info" toggle={this.toggleRef} /> Temporary disable the button for future use 
+                      </div> */}
 
                       <div
                         className={
@@ -350,15 +395,16 @@ export class App extends Component {
                     </div>
                   </div>
                 ) : null}
+                {/* The animation is disabled for later usage
                 {this.state.showAnimationArea && (
-                  <div className="col-sm-3">
+                  <div className="col-sm-3" id="animationArea">
                     <div className="row" id="cpuArea">
                       <div id="animatedBinary">
                         <Transition
                           native
                           items={this.state.showBinaryString}
-                          from={{ opacity: 0, marginLeft: 0 }}
-                          enter={{ opacity: 1, marginLeft: 240 }}
+                          from={{ opacity: 0, marginLeft: startpoint }}
+                          enter={{ opacity: 1, marginLeft: endpoint }}
                           leave={{ opacity: 0 }}
                         >
                           {show =>
@@ -372,7 +418,7 @@ export class App extends Component {
                       <i className="fas fa-microchip fa-4x" />
                     </div>
                   </div>
-                )}
+                        )}*/}
                 <div
                   className={
                     this.state.showAnimationArea

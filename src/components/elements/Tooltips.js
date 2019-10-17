@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import ReactToolTip from "react-tooltip";
 import HelpSection from "./HelpSection";
 
-/**
- * Tooltips component
- * All element tooltips declare here
- */
 export class Tooltips extends Component {
   render() {
     return (
       <div>
-        <ReactToolTip id="TextAreaTips" effect="solid" delayShow={100}>
+        {/* https://github.com/wwayne/react-tooltip */}
+        {/* <ReactToolTip id="TextAreaTips" effect="solid" delayShow={100}>
           <span>Text Area Tips</span>
         </ReactToolTip>
 
@@ -33,13 +30,13 @@ export class Tooltips extends Component {
 
         <ReactToolTip id="ButtonInfo" effect="solid">
           <span>Info Tips</span>
-        </ReactToolTip>
+        </ReactToolTip> */}
 
-        <ReactToolTip id="ButtonHelp" place="right" effect="solid">
+        <ReactToolTip id="ButtonHelp" place="bottom" effect="solid">
           <HelpSection />
         </ReactToolTip>
 
-        <ReactToolTip id="DashboardArea" place="top" effect="solid">
+        {/* <ReactToolTip id="DashboardArea" place="top" effect="solid">
           <span>Dashboard Output Tips</span>
         </ReactToolTip>
 
@@ -49,7 +46,7 @@ export class Tooltips extends Component {
 
         <ReactToolTip id="ComponentArea" place="top" effect="solid">
           <span>This is Component Area</span>
-        </ReactToolTip>
+        </ReactToolTip> */}
       </div>
     );
   }
