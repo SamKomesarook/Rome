@@ -18,7 +18,8 @@ class Interpreter {
     sendMemAnimation,
     readMemAnimation,
     toggle,
-    printAnimation
+    printAnimation,
+	  delay
   ) {
     this.code = code;
     this.memArr = memArr;
@@ -30,6 +31,7 @@ class Interpreter {
     this.readMemAnimation = readMemAnimation;
     this.toggle = toggle;
     this.printAnimation = printAnimation;
+	  this.delay = delay;
   }
 
   /**
@@ -59,7 +61,8 @@ class Interpreter {
             this.freeMem,
             this.sendMemAnimation,
             this.readMemAnimation,
-            this.printAnimation
+            this.printAnimation,
+		  this.delay
           )
         );
         this.toggle();

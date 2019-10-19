@@ -331,10 +331,10 @@ export class App extends Component {
                     }
                   >
                     <TextArea compRef={el => this.ref.push(el)} />
-                    {/* the slider is diabled for later usage
+                    { //the slider is diabled for later usage
                     <div className="row slider-container">
                       <Slider compRef={el => this.ref.push(el)} />
-                    </div>*/}
+                    </div>}
                     <div className="row" id="executBtnGroup">
                       <div
                         className={
