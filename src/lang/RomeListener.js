@@ -11,6 +11,15 @@ function RomeListener() {
 RomeListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
 RomeListener.prototype.constructor = RomeListener;
 
+// Enter a parse tree produced by RomeParser#Str.
+RomeListener.prototype.enterStr = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Str.
+RomeListener.prototype.exitStr = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Net.
 RomeListener.prototype.enterNet = function(ctx) {
 };
