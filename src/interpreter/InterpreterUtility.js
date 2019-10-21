@@ -22,12 +22,16 @@ class Utility {
   getCommandArg(index, command) {
     var affix;
     // set different affix when hit loop or if command
-    if (command.includes("{")) {
+   if (command.includes("{")) {
       affix = "{";
     } else {
       affix = ")";
     }
     var arg = command.substring(index, command.indexOf(affix));
+	  //TODO Conds and Loops return an argument with ')' attached, so this removes it...
+ if (command.includes("{")) {
+arg = arg.substring(0, arg.length - 1);
+ }
     if (arg.indexOf("'") >= 0 || arg.indexOf('"') >= 0) {
       arg = arg.replace(/['"]+/g, "");
     }
@@ -53,7 +57,6 @@ class Utility {
       currMem.props.content,
       currMem.props.contentType
     );
-
     if (memObj.contentType === "letters") {
       if (comparison === "is") {
         return type === "equal" && memObj.content === indicator;
