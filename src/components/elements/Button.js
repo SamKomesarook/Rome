@@ -80,6 +80,8 @@ export class Button extends Component {
    */
   runCode = () => {
     const code = document.getElementById("codingArea").value;
+	  const delay = document.getElementById("Slider").value;
+	  //console.log(delay);
     var interpreter = new Interpreter(
       code,
       this.props.memArr,
@@ -90,7 +92,8 @@ export class Button extends Component {
       this.props.sendMemAnimation,
       this.props.readMemAnimation,
       this.props.toggle,
-      this.props.printAnimation
+      this.props.printAnimation,
+	delay
     );
     var validCode = interpreter.start(code);
     // only disable run button when the code is valid

@@ -16,7 +16,7 @@ export class Slider extends Component {
           type="range"
           className="Slider"
           min="0"
-          max="100"
+          max="7"
           step="1"
           id="Slider"
           ref={this.state.ref}
