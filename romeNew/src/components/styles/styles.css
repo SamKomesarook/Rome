@@ -1,0 +1,29 @@
+.memory{
+	border: solid grey 2px;
+height:60px;
+max-height:60px;
+    min-width:80px;
+    max-width:110px;
+    display: flex;
+    overflow:hidden;
+    justify-content: center;
+        align-items: center;
+}
+
+.memorySelected{
+ background: grey;
+}
+
+.memoryLetters{
+ border: solid blue 2px;
+}
+
+.memoryNumbers{
+	border: solid green 2px;
+}
+
+.ioArea {
+    height: 180px;
+    background-color: #D0D0D0;
+    overflow: auto;
+}
