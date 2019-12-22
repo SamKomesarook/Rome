@@ -13,12 +13,21 @@ export const DisplayProvider = (props) => {
 	reading:false,
 	selected:0,
 	commands:[],
+	command_index:0,
 	memory:[
 		{
 		key:0,
 		type:"",
-		content:"hi",
+		content:"",
 		selected:true,
+		special:"",
+		name:""
+		},
+		{
+		key:1,
+		type:"",
+		content:"",
+		selected:false,
 		special:"",
 		name:""
 		}
