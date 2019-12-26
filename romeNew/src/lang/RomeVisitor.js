@@ -11,6 +11,7 @@ import {
 } from '../state/DisplayState';
 var antlr4 = require("antlr4");
 
+//TODO some updates use setDisplay. Should we?
 class Visitor extends RomeVisitor {
     constructor(set, display) {
         super()
@@ -33,6 +34,7 @@ class Visitor extends RomeVisitor {
     }
 
     visitR(ctx) {
+	    /*
         var comms = this.display.commands
         for (var child of ctx.children) {
             if (child.toString() == "[45]") { //TODO change this to compare the 'constructor.name' property
@@ -43,7 +45,7 @@ class Visitor extends RomeVisitor {
             ...display,
             commands: comms
         }))
-
+*/
         return this.visitChildren(ctx)
     }
 
@@ -64,7 +66,7 @@ class Visitor extends RomeVisitor {
     }
 
     visitLoop(ctx) {
-	    if(ctx.expressions().length >= 1){
+	    if(ctx.expressions().length < 1){
 		return
 	    }
 	try{
@@ -74,8 +76,9 @@ class Visitor extends RomeVisitor {
 	}
         var exprs = []
         for (var i = 0; i < upperBound; i++) {
-            this.display.commands.unshift(ctx.expressions())
-        }
+            	this.display.commands.unshift(ctx.expressions())
+		this.display.commands = this.display.commands.flat(Infinity) //TODO is the assignment really necessary?
+	}
     }
     visitMem(ctx) {
 	if(ctx.intargs().constructor.name == "NumContext"){
@@ -106,6 +109,47 @@ class Visitor extends RomeVisitor {
 			this.display.memory[this.display.selected-1].selected = true
 			this.display.selected-=1
 		}
+	}
+
+	visitWrite(ctx){
+		if(this.display.memory[this.display.selected].content != ""){
+			//TODO throw error
+		}
+		var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
+		if(typeof arg == "object"){
+			arg = arg[0]
+		}
+		if (arg[0] == "\"" && this.display.memory[this.display.selected].type == "numbers"){
+			//TODO throw error
+		}
+		if (arg != "\"" && this.display.memory[this.display.selected].type == "letters"){
+			//TODO throw error
+		}
+		if(this.display.selected == 11){
+			//TODO animate
+		}else if(this.display.selected == 12){
+			//TODO animate
+		}else{
+			this.display.memory[this.display.selected].content = arg;
+		}
+	}
+	visitFree(ctx){
+		this.display.memory[this.display.selected].content = "";
+	}
+	visitIf(ctx){
+
+	}
+	visitSnet(ctx){
+
+	}
+	visitRnet(ctx){
+
+	}
+	visitKread(ctx){
+		//TODO is this necessary?
+	}
+	visitSwrite(ctx){
+
 	}
 }
 

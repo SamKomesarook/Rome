@@ -5,24 +5,26 @@ var antlr4 = require("antlr4");
 var RomeLexer = require("../../lang/grammar/RomeLexer").RomeLexer;
 var RomeParser = require("../../lang/grammar/RomeParser").RomeParser;
 
-
+//TODO no updates use setDisplay. Should we?
 const StartButton = () => {
 
 	const [display, setDisplay] = useContext(DisplayContext);
 
 	//TODO centralise the method below
 	function processInstrs(){
-		var count = 0;
-		for(var instr of display.commands){
-			count+=1
+		while(true){
+			var instr = display.commands[0]
+			display.commands.splice(0,1)
 			if(instr.children[0].constructor.name == "KreadContext"){
 				display.reading = true
 				break
 			}else{
 				instr.accept(new Visitor(setDisplay, display))
-			}		
+			}
+			if (display.commands.length == 0){
+				break
+			}
 		}
-		display.commands = display.commands.slice(count)
 		return true
 	}
 
@@ -36,10 +38,9 @@ const StartButton = () => {
 		const tree = parser.r();
 		if (tree.exception === null && parser._syntaxErrors === 0) {
 		try{
-			var comms = display.commands
 			for(var child of tree.children){
 				if(child.toString() == "[45]"){ //TODO change this to compare the 'constructor.name' property
-					comms.push(child)
+					display.commands.push(child)
 				}
 			}
 			processInstrs()

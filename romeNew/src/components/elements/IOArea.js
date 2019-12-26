@@ -1,24 +1,26 @@
 import React, { Component, useContext } from "react";
 import { DisplayContext } from '../../state/DisplayState';
 import { Visitor } from '../../lang/RomeVisitor'
-
+//TODO no updates use setDisplay. Should we?
 const InputArea = () => {
 	const [display, setDisplay] = useContext(DisplayContext);
 	//TODO centralise the method below
 	function processInstrs(){
-		var count = 0;
-		for(var instr of display.commands){
-			count+=1
+		while(true){
+			var instr = display.commands[0]
+			display.commands.splice(0,1)
 			if(instr.children[0].constructor.name == "KreadContext"){
-				display.running = false
 				display.reading = true
 				break
 			}else{
 				instr.accept(new Visitor(setDisplay, display))
-			}		
+			}
+			if (display.commands.length == 0){
+				break
+			}
 		}
-		display.commands = display.commands.slice(count)
 		return true
+
 	}
 
 	function handleKey(event) {

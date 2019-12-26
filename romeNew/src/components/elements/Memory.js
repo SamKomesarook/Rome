@@ -6,7 +6,6 @@ const Memory = () => {
 	const [display] = useContext(DisplayContext);
 	var memoryToReturn = []
 	for (var mem of display.memory){
-		console.log("con", mem.content)
 			memoryToReturn.push(
 				<div
 				class={"memory" 
