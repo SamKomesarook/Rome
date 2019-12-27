@@ -13,6 +13,8 @@ export const DisplayProvider = (props) => {
 	reading:false,
 	selected:0,
 	commands:[],
+	importIO:false,
+	importNet:false,
 	memory:[
 		{
 		key:0,

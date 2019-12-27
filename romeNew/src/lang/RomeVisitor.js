@@ -147,9 +147,25 @@ class Visitor extends RomeVisitor {
 	}
 	visitKread(ctx){
 		//TODO is this necessary?
+		//TODO check for IO in outside methods
+		//TODO check for memory number to determine if animations are needed
 	}
 	visitSwrite(ctx){
-
+		if(!this.display.importIo){
+			//TODO throw error
+		}
+		var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
+		if(typeof arg == "object"){
+			arg = arg[0]
+		}
+		this.display.output = this.display.output.concat(arg.replace('"','').replace('"', ''), "\n")
+		console.log(this.display.output)
+	}
+	visitNet(ctx){
+		this.display.importNet = true
+	}
+	visitIo(ctx){
+		this.display.importIo = true
 	}
 }
 
