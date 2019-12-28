@@ -15,7 +15,7 @@ setDisplay(display => ({ ...display, text: value }))
 }
 	
 	return (
-	<div className="form-group shadow-textarea" id="codingWrapper">
+	<div className="textArea form-group shadow-textarea" id="codingWrapper">
 	<Typed
 	    //TODO write the example strings
             strings={[

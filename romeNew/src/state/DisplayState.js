@@ -19,8 +19,7 @@ export const DisplayProvider = (props) => {
 		{
 		key:0,
 		type:"",
-		content:"yo",
-		selected:true,
+		content:"",
 		special:"",
 		name:""
 		},
@@ -28,10 +27,87 @@ export const DisplayProvider = (props) => {
 		key:1,
 		type:"",
 		content:"",
-		selected:false,
 		special:"",
 		name:""
+		},
+		{
+		key:2,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:3,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:4,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:5,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:6,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:7,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:8,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:9,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:10,
+		type:"",
+		content:"",
+		special:"",
+		name:""
+		},
+		{
+		key:11,
+		type:"",
+		content:"",
+		special:"usb",
+		name:""
+		},
+		{
+		key:12,
+		type:"",
+		content:"",
+		special:"net",
+		name:""
 		}
+
 	]
       }
   )

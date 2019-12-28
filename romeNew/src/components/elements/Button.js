@@ -56,6 +56,7 @@ const StartButton = () => {
 
 	return(
 	<button
+		className="startButton"
 	  onClick={start}
           type="button"
           disabled={
@@ -71,12 +72,26 @@ const StartButton = () => {
 const StopButton = () => {
 	const [display, setDisplay] = useContext(DisplayContext);
 	function stop(event) {
-		setDisplay(display => ({ ...display, running: false }))
-		//TODO reset all memory and IO
+		var newMem = display.memory
+		for(var mem of newMem){
+		mem.type="";
+			mem.content="";
+			mem.name="";
+		}
+		setDisplay(display => ({ ...display, running: false,
+		output:"",
+			input:"",
+	reading:false,
+	selected:0,
+	commands:[],
+	importIO:false,
+	importNet:false,
+		memory: newMem}))
 	}
 
 	return(
 	<button
+		className="stopButton"
 	  onClick={stop}
           type="button"
           disabled={

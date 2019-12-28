@@ -39,7 +39,7 @@ const InputArea = () => {
 		setDisplay(display => ({...display, input: value}))
 	}
 	return(
-		<input type="text" onKeyDown={handleKey} onChange={onChange} disabled={!display.reading} value={!display.reading ? "" : display.input}></input> 
+		<input className="inputBar" size="60" type="text" onKeyDown={handleKey} onChange={onChange} disabled={!display.reading} value={!display.reading ? "" : display.input}></input> 
 	)
 }
 
@@ -47,7 +47,7 @@ const OutputArea = () => {
 
 	const [display, setDisplay] = useContext(DisplayContext);
 	return(
-		<div contentEditable="false" className="ioArea" 
+		<div contentEditable="false" className="outputArea" 
                    id="outputArea"
                  >
 		{display.output}

@@ -12,7 +12,7 @@ event.preventDefault()
   }
 
     return (	
-      <div className="form-group shadow-textarea">
+      <div className="slider form-group shadow-textarea">
         <input
           data-tip data-for="SliderTips"
           type="range"

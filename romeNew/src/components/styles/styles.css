@@ -1,17 +1,62 @@
 .memory{
 	border: solid grey 2px;
-height:60px;
-max-height:60px;
-    min-width:80px;
-    max-width:110px;
+height:120px;
+    width:120px;
+    max-width:120px;
+    max-height:120px;
     display: flex;
     overflow:hidden;
     justify-content: center;
         align-items: center;
 }
 
+.memorySection{
+position: absolute;
+top: 40px; right: 40px;
+}
+
+.memoryRow{
+display: inline-block;
+}
+
 .memorySelected{
  background: grey;
+}
+
+.slider{
+position: absolute;
+top: 450px; left: 250px;
+}
+
+.startButton{
+position: absolute;
+top: 550px; left: 250px;
+}
+
+.stopButton{
+position: absolute;
+top: 550px; left: 360px;
+}
+
+.textArea{
+	position: absolute;
+top: 50px; left: 180px;
+resize:none;
+}
+
+.usbPeriph{
+position: absolute;
+top: 425px; right: 180px;
+}
+
+.netPeriph{
+position: absolute;
+top: 425px; right: 40px;
+}
+
+.inputBar{
+position: absolute;
+top: 685px; right: 130px;
 }
 
 .memoryLetters{
@@ -22,9 +67,12 @@ max-height:60px;
 	border: solid green 2px;
 }
 
-.ioArea {
+.outputArea {
     height: 180px;
     background-color: #D0D0D0;
     overflow: auto;
     white-space: pre-line;
+    width: 500px;
+    position: absolute;
+top: 500px; right: 40px;
 }

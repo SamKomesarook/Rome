@@ -3,12 +3,6 @@ import { DisplayContext } from '../../state/DisplayState';
 import firss from '../../icons/firss.svg';
 import fiusb from '../../icons/fiusb.svg'
 
-function toggleRSS() {
-	let elem = document.getElementById("fiusb");
-	setInterval(() => elem.hidden = !elem.hidden, Math.floor((Math.random() * 10) + 1));
-}
-
-
 const NetPeripheral = () => {
 
 	function toggle(event) {
@@ -18,7 +12,7 @@ const NetPeripheral = () => {
 	}
 
 	return (
-		<img src={firss} width="100" height="30" id="firss" onClick={toggle}/>
+		<img className="usbPeriph" src={firss} width="100" height="30" id="firss" onClick={toggle}/>
 	)
 }
 
@@ -31,7 +25,7 @@ const USBPeripheral = () => {
 	}
 
 	return (
-		<img src={fiusb} width="100" height="30" id="fiusb" onClick={toggle}/>
+		<img className="netPeriph" src={fiusb} width="100" height="30" id="fiusb" onClick={toggle}/>
 	)
 }
 
