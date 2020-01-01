@@ -220,7 +220,18 @@ function processInstrs(display, setDisplay){
     return true
 }
 
+class ErrorReporter extends antlr4.error.ErrorListener {
+  constructor(display) {
+    super();
+    this.display = display;
+  }
+  syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
+      this.display.output = this.display.output.concat(msg + "\n")
+  }
+}
+
 export {
     Visitor,
-    processInstrs
+    processInstrs,
+    ErrorReporter
 };

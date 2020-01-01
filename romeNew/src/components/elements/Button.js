@@ -1,6 +1,6 @@
 import React, { Component, useContext } from "react";
 import { DisplayContext } from '../../state/DisplayState';
-import { Visitor, processInstrs } from '../../lang/RomeVisitor'
+import { Visitor, processInstrs, ErrorReporter } from '../../lang/RomeVisitor'
 var antlr4 = require("antlr4");
 var RomeLexer = require("../../lang/grammar/RomeLexer").RomeLexer;
 var RomeParser = require("../../lang/grammar/RomeParser").RomeParser;
@@ -17,6 +17,8 @@ const StartButton = () => {
     		var tokens = new antlr4.CommonTokenStream(lexer);
     		var parser = new RomeParser(tokens);
 		parser.buildParseTrees = true;
+		parser.removeErrorListeners();
+    	parser.addErrorListener(new ErrorReporter(display));
 		const tree = parser.r();
 		if (tree.exception === null && parser._syntaxErrors === 0) {
 		try{
