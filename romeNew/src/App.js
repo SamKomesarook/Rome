@@ -7,13 +7,11 @@ import Memory from './components/elements/Memory'
 import {StartButton, StopButton} from './components/elements/Button'
 import {InputArea, OutputArea} from './components/elements/IOArea'
 import {NetPeripheral, USBPeripheral} from './components/elements/Peripherals'
-import { VisitorComponent } from './lang/RomeVisitor'
 
 const App = () => {
 
   return (
 	<DisplayProvider>
-	  <VisitorComponent />
     <div className="App">
 	<TextArea />
 	  <Memory />

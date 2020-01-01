@@ -1,6 +1,6 @@
 import React, { Component, useContext } from "react";
 import { DisplayContext } from '../../state/DisplayState';
-import { Visitor } from '../../lang/RomeVisitor'
+import { Visitor, processInstrs } from '../../lang/RomeVisitor'
 var antlr4 = require("antlr4");
 var RomeLexer = require("../../lang/grammar/RomeLexer").RomeLexer;
 var RomeParser = require("../../lang/grammar/RomeParser").RomeParser;
@@ -9,24 +9,6 @@ var RomeParser = require("../../lang/grammar/RomeParser").RomeParser;
 const StartButton = () => {
 
 	const [display, setDisplay] = useContext(DisplayContext);
-
-	//TODO centralise the method below
-	function processInstrs(){
-		while(true){
-			var instr = display.commands[0]
-			display.commands.splice(0,1)
-			if(instr.children[0].constructor.name == "KreadContext"){
-				display.reading = true
-				break
-			}else{
-				instr.accept(new Visitor(setDisplay, display))
-			}
-			if (display.commands.length == 0){
-				break
-			}
-		}
-		return true
-	}
 
 	function start(event) {
 		setDisplay(display => ({ ...display, running: true }));
@@ -43,7 +25,7 @@ const StartButton = () => {
 					display.commands.push(child)
 				}
 			}
-			processInstrs()
+			processInstrs(display, setDisplay)
 			return true;
 		}catch(e){
 			console.log(e)
@@ -101,7 +83,7 @@ const StopButton = () => {
           }
         >	stop
 		</button>
-	
+
 	)
 }
 
