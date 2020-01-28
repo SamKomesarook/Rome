@@ -1,6 +1,8 @@
 import {RomeVisitor} from "./grammar/RomeVisitor";
 import React, {Component, useContext} from "react";
 import {DisplayContext, DisplayProvider} from '../state/DisplayState';
+import {NetToggle, USBToggle} from '../components/elements/Peripherals'
+
 var antlr4 = require("antlr4");
 
 //TODO some updates use setDisplay. Should we?
@@ -94,7 +96,7 @@ class Visitor extends RomeVisitor {
     }
 
     visitWrite(ctx) {
-        //TODO check for maximum length (or spillover to the next memory cell? <<<<<< )
+        //TODO check for maximum length (or spillover to the next memory cell?
         if (this.display.memory[this.display.selected].content != "") {
             //TODO throw error
         }
@@ -108,10 +110,10 @@ class Visitor extends RomeVisitor {
         if (arg != "\"" && this.display.memory[this.display.selected].type == "letters") {
             //TODO throw error
         }
-        if (this.display.selected == 11) {
-            //TODO animate
-        } else if (this.display.selected == 12) {
-            //TODO animate
+        if (this.display.selected == 10) {
+            NetToggle()
+        } else if (this.display.selected == 11) {
+            USBToggle()
         } else {
             this.display.memory[this.display.selected].content = arg;
         }
@@ -174,10 +176,16 @@ class Visitor extends RomeVisitor {
         }
     }
     visitSnet(ctx) {
-        //TODO
+        NetToggle()
     }
     visitRnet(ctx) {
-        //TODO
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < Math.floor((Math.random() * 10) + 1); i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
     }
     visitKread(ctx) {
         //TODO is this necessary?
@@ -203,17 +211,17 @@ class Visitor extends RomeVisitor {
     }
 }
 
-function processInstrs(display, setDisplay){
-    while(true){
-        if (display.commands.length == 0){
+function processInstrs(display, setDisplay) {
+    while (true) {
+        if (display.commands.length == 0) {
             break
         }
         var instr = display.commands[0]
-        display.commands.splice(0,1)
-        if(instr.children[0].constructor.name == "KreadContext"){
+        display.commands.splice(0, 1)
+        if (instr.children[0].constructor.name == "KreadContext") {
             display.reading = true
             break
-        }else{
+        } else {
             instr.accept(new Visitor(setDisplay, display))
         }
     }
@@ -221,13 +229,13 @@ function processInstrs(display, setDisplay){
 }
 
 class ErrorReporter extends antlr4.error.ErrorListener {
-  constructor(display) {
-    super();
-    this.display = display;
-  }
-  syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-      this.display.output = this.display.output.concat(msg + "\n")
-  }
+    constructor(display) {
+        super();
+        this.display = display;
+    }
+    syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
+        this.display.output = this.display.output.concat(msg + "\n")
+    }
 }
 
 export {
