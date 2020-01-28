@@ -1,78 +1,104 @@
-.memory{
-	border: solid grey 2px;
-height:120px;
-    width:120px;
-    max-width:120px;
-    max-height:120px;
-    display: flex;
-    overflow:hidden;
+.memory {
+    border: solid grey 2px;
+    height: 33%;
+    width: 100%;
+    overflow: hidden;
     justify-content: center;
-        align-items: center;
+    align-items: center;
 }
 
-.memorySection{
-position: absolute;
-top: 40px; right: 40px;
+.memorySection {
+    position: absolute;
+    top: 6%;
+    right: 10%;
+    height: 50%;
+    width: 35%;
+    background-color: white;
 }
 
-.memoryRow{
-display: inline-block;
+.memoryRow {
+    display: inline-block;
+    height: 100%;
+    width: 25%;
 }
 
-.memorySelected{
- background: grey;
+.memorySelected {
+    background: grey;
 }
 
-.slider{
-position: absolute;
-top: 450px; left: 250px;
+.slider {
+    position: absolute;
+    top: 68%;
+    left: 25%;
 }
 
-.startButton{
-position: absolute;
-top: 550px; left: 250px;
+.startButton {
+    position: absolute;
+    top: 75%;
+    left: 24%;
 }
 
-.stopButton{
-position: absolute;
-top: 550px; left: 360px;
+.stopButton {
+    position: absolute;
+    top: 75%;
+    left: 32%;
 }
 
-.textArea{
-	position: absolute;
-top: 50px; left: 180px;
-resize:none;
+textArea {
+    resize: none;
+    width: 25%;
+    height: 50%;
 }
 
-.usbPeriph{
-position: absolute;
-top: 425px; right: 180px;
+#codingWrapper {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 12%;
+    right: 20%;
 }
 
-.netPeriph{
-position: absolute;
-top: 425px; right: 40px;
+.usbPeriph {
+    position: absolute;
+    top: 58%;
+    right: 20%;
 }
 
-.inputBar{
-position: absolute;
-top: 685px; right: 130px;
+.netPeriph {
+    position: absolute;
+    top: 58%;
+    right: 12%;
 }
 
-.memoryLetters{
- border: solid blue 2px;
+.inputBar {
+    position: absolute;
+    top: 90%;
+    right: 15%;
+    width: 25%;
+    background-color: white;
 }
 
-.memoryNumbers{
-	border: solid green 2px;
+.memoryLetters {
+    border: solid red 2px;
+}
+
+.memoryNumbers {
+    border: solid pink 2px;
+}
+
+img {
+    height: 4%;
+    width: 4%;
 }
 
 .outputArea {
-    height: 180px;
-    background-color: #D0D0D0;
+    border: solid grey 2px;
+    height: 20%;
+    background-color: white;
     overflow: auto;
     white-space: pre-line;
-    width: 500px;
+    width: 25%;
     position: absolute;
-top: 500px; right: 40px;
+    top: 65%;
+    right: 15%;
 }
