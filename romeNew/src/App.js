@@ -7,7 +7,7 @@ import Memory from './components/elements/Memory'
 import {StartButton, StopButton} from './components/elements/Button'
 import {InputArea, OutputArea} from './components/elements/IOArea'
 import {NetPeripheral, USBPeripheral} from './components/elements/Peripherals'
-
+import Switch from './components/elements/Switch'
 const App = () => {
 
   return (
@@ -16,6 +16,7 @@ const App = () => {
 	<TextArea />
 	  <Memory />
 	<Slider />
+    <Switch />
 	<StartButton />
 	  <StopButton />
 	  <InputArea />

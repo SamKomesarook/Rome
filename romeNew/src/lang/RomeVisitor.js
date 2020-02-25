@@ -1,4 +1,4 @@
-import {RomeVisitor} from "./grammar/RomeVisitor";
+import {RomeVisitor} from "./grammar/Rome/RomeVisitor";
 import React, {Component, useContext} from "react";
 import {DisplayContext, DisplayProvider} from '../state/DisplayState';
 import {NetToggle, USBToggle} from '../components/elements/Peripherals'
@@ -200,6 +200,7 @@ class Visitor extends RomeVisitor {
         if (typeof arg == "object") {
             arg = arg[0]
         }
+        //TODO if string, print with parenthesis?
         this.display.output = this.display.output.concat(arg.replace('"', '').replace('"', ''), "\n")
         console.log(this.display.output)
     }
@@ -212,6 +213,23 @@ class Visitor extends RomeVisitor {
 }
 
 function processInstrs(display, setDisplay) {
+    var delayCount = 0;
+    /*
+    if (display.commands.length == 0) {
+        break
+    }
+
+    for(var i=0; i<display.commands.length; i++){
+        var instr = display.commands[i]
+        if (instr.children[0].constructor.name == "KreadContext") {
+            display.reading = true
+            display.commands.splice(0, i)
+            break
+        } else {
+            setTimeout(instr.accept(new Visitor(setDisplay, display)), delayCount)
+        }
+    }
+    */
     while (true) {
         if (display.commands.length == 0) {
             break

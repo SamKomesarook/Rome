@@ -4,24 +4,25 @@ export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {
   const [display, setDisplay] = useState(
-    {	
-	delay:10,
-	text:"",
-	output:"",
-	input:"",
-	running:false,
-	reading:false,
-	selected:0,
-	commands:[],
-	importIO:false,
-	importNet:false,
-	memory:[
+    {
+    machine:true, // If the user is using the Machine language
+	delay:10, // Number of seconds of delay between command execution
+	text:"", // Content of the programming section
+	output:"", // Content of the output bar
+	input:"", // Content of the input bar
+	running:false, // If there is a program running
+	reading:false, // If the program is reading user input
+	selected:0, // The key of the selected memory
+	commands:[], // The saved list of commands while the program is reading user input
+	importIO:false, // If the user has imported the IO package
+	importNet:false, // If the user has imported the Net package
+	memory:[ // Memory array
 		{
-		key:0,
-		type:"",
-		content:"",
-		special:"",
-		name:""
+		key:0, // Unique key
+		type:"", // Type 'numbers or letters'
+		content:"", // defined content
+		special:"", //
+		name:"" //
 		},
 		{
 		key:1,

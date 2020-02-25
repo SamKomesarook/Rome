@@ -2,8 +2,8 @@ import React, { Component, useContext } from "react";
 import { DisplayContext } from '../../state/DisplayState';
 import { Visitor, processInstrs, ErrorReporter } from '../../lang/RomeVisitor'
 var antlr4 = require("antlr4");
-var RomeLexer = require("../../lang/grammar/RomeLexer").RomeLexer;
-var RomeParser = require("../../lang/grammar/RomeParser").RomeParser;
+var RomeLexer = require("../../lang/grammar/Rome/RomeLexer").RomeLexer;
+var RomeParser = require("../../lang/grammar/Rome/RomeParser").RomeParser;
 
 //TODO no updates use setDisplay. Should we?
 const StartButton = () => {
