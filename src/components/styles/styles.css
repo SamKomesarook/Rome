@@ -1,120 +1,146 @@
-.dashboard {
-    width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-}
-
-.bg-lightBlue {
-    background-color: lightblue;
-}
-
-.bg-lightGray {
-    background-color: lightgray;
-}
-
-.memory-border {
-    border-style: solid;
-    border-width: 1px;
-    border-color: blue;
-}
-
 .memory {
-    height:60px;
-    max-height:60px;
-    min-width:80px;
-    max-width:110px;
-    display: flex;
-    overflow:hidden;
-  }
-
-.btnGroup, .btnToggle:hover>button {
-    display: none;
+    border: solid grey 2px;
+    height: 33%;
+    width: 100%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
 }
 
-.btnToggle:hover>.btnGroup {
-    display: block;
-    /* width: min-content; */
+.memorySection {
+    position: absolute;
+    top: 6%;
+    right: 10%;
+    height: 50%;
+    width: 35%;
+    background-color: white;
 }
 
-.btn-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    text-align: center;
-    font-size: 15px;
+.memoryRow {
+    display: inline-block;
+    height: 100%;
+    width: 25%;
 }
 
-.button {
-    width: 66px;
+.memorySelected {
+    background: grey;
 }
 
-#outputArea {
-    height: 180px;
-    background-color:#D0D0D0;
-    overflow:auto;
+.slider {
+    position: absolute;
+    top: 68%;
+    left: 25%;
+}
+
+.startButton {
+    position: absolute;
+    top: 75%;
+    left: 24%;
+}
+
+.stopButton {
+    position: absolute;
+    top: 75%;
+    left: 32%;
+}
+
+textArea {
+    resize: none;
+    width: 25%;
+    height: 50%;
 }
 
 #codingWrapper {
-    display: inline-block;
-    position: relative;
-}
-
-#lineButton {
-    size: 10%;
+    width: 100%;
     position: absolute;
-    bottom: 10px;
-    right: 20px;
+    height: 100%;
+    top: 12%;
+    right: 20%;
 }
-.ioArea {
-    height: 180px;
-    background-color: #D0D0D0;
+
+.usbPeriph {
+    position: absolute;
+    top: 58%;
+    right: 20%;
+}
+
+.netPeriph {
+    position: absolute;
+    top: 58%;
+    right: 12%;
+}
+
+.inputBar {
+    position: absolute;
+    top: 90%;
+    right: 15%;
+    width: 25%;
+    background-color: white;
+}
+
+.memoryLetters {
+    border: solid red 2px;
+}
+
+.memoryNumbers {
+    border: solid pink 2px;
+}
+
+img {
+    height: 4%;
+    width: 4%;
+}
+
+.outputArea {
+    border: solid grey 2px;
+    height: 20%;
+    background-color: white;
     overflow: auto;
+    white-space: pre-line;
+    width: 25%;
+    position: absolute;
+    top: 65%;
+    right: 15%;
+}
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
 }
 
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 3%;
+  height: 3%;
+  background: grey;
+  border-radius: 100px;
+  position: absolute;
+  top: 64%;
+  left: 28%;
+  transition: background-color .2s;
+}
 
-@media (max-width: 600px) {
-    .memory {
-        height:40px;
-        max-height:40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 50%;
+  height: 85%;
+  border-radius: 45px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
 
-      .btn-circle {
-        width: 15px;
-        height: 15px;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 5px;
-    }
-    
-    #outputArea {
-        height: 120px;
-        background-color:#D0D0D0;
-        overflow:auto;
-    }
-    
-    #codingWrapper {
-        display: inline-block;
-        position: relative;
-    }
-    
-    #lineButton {
-        size: 5%;
-        position: absolute;
-        bottom: 3px;
-        right: 8px;
-    }
-    .ioArea {
-        height: 60px;
-        background-color: #D0D0D0;
-        overflow: auto;
-    }
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
 
-    #codingArea{
-        height:400px;
-        width:200px;
-    }
+.react-switch-label:active .react-switch-button {
+  width: 60px;
 }
