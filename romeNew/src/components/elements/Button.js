@@ -1,9 +1,14 @@
 import React, { Component, useContext } from "react";
 import { DisplayContext } from '../../state/DisplayState';
-import { Visitor, processInstrs, ErrorReporter } from '../../lang/RomeVisitor'
+import { RVisitor } from '../../lang/RomeVisitor'
+import { MVisitor } from '../../lang/MachineVisitor'
+import { processInstrs, ErrorReporter } from '../../lang/Common'
 var antlr4 = require("antlr4");
 var RomeLexer = require("../../lang/grammar/Rome/RomeLexer").RomeLexer;
 var RomeParser = require("../../lang/grammar/Rome/RomeParser").RomeParser;
+var MachineLexer = require("../../lang/grammar/Machine/MachineLexer").MachineLexer;
+var MachineParser = require("../../lang/grammar/Machine/MachineParser").MachineParser;
+
 
 //TODO no updates use setDisplay. Should we?
 const StartButton = () => {
@@ -11,19 +16,22 @@ const StartButton = () => {
 	const [display, setDisplay] = useContext(DisplayContext);
 
 	function start(event) {
+
 		setDisplay(display => ({ ...display, running: true }));
 		var chars = new antlr4.InputStream(display.text);
-    		var lexer = new RomeLexer(chars);
-    		var tokens = new antlr4.CommonTokenStream(lexer);
-    		var parser = new RomeParser(tokens);
+		var lexer = (display.machine) ? new MachineLexer(chars) : new RomeLexer(chars)
+		var tokens = new antlr4.CommonTokenStream(lexer);
+		var parser = (display.machine) ? new MachineParser(tokens) : new RomeParser(tokens)
 		parser.buildParseTrees = true;
 		parser.removeErrorListeners();
     	parser.addErrorListener(new ErrorReporter(display));
+
 		const tree = parser.r();
+
 		if (tree.exception === null && parser._syntaxErrors === 0) {
 		try{
 			for(var child of tree.children){
-				if(child.toString() == "[45]"){ //TODO change this to compare the 'constructor.name' property
+				if(child.constructor.name == "ExpressionsContext"){ //TODO change this to compare the 'constructor.name' property
 					display.commands.push(child)
 				}
 			}
@@ -32,7 +40,6 @@ const StartButton = () => {
 		}catch(e){
 			console.log(e)
 			//TODO print error messages
-
 		}
 		}
 
@@ -57,11 +64,18 @@ const StopButton = () => {
 	const [display, setDisplay] = useContext(DisplayContext);
 	function stop(event) {
 		var newMem = display.memory
-		for(var mem of newMem){
-		mem.type="";
-			mem.content="";
-			mem.name="";
+		if(display.machine){
+			for(var mem of newMem){
+				mem.content=0;
+			}
+		}else{
+			for(var mem of newMem){
+			mem.type="";
+				mem.content="";
+				mem.name="";
+			}
 		}
+
 		setDisplay(display => ({ ...display, running: false,
 		output:"",
 			input:"",

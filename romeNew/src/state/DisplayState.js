@@ -5,7 +5,7 @@ export const DisplayContext = React.createContext();
 export const DisplayProvider = (props) => {
   const [display, setDisplay] = useState(
     {
-    machine:true, // If the user is using the Machine language
+    machine:false, // If the user is using the Machine language
 	delay:10, // Number of seconds of delay between command execution
 	text:"", // Content of the programming section
 	output:"", // Content of the output bar

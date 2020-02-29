@@ -6,7 +6,7 @@ import {NetToggle, USBToggle} from '../components/elements/Peripherals'
 var antlr4 = require("antlr4");
 
 //TODO some updates use setDisplay. Should we?
-class Visitor extends RomeVisitor {
+class RVisitor extends RomeVisitor {
     constructor(set, display) {
         super()
         this.set = set
@@ -124,7 +124,6 @@ class Visitor extends RomeVisitor {
     visitIf(ctx) {
         var args = this.visitChildren(ctx.conditional())
         var mem = this.display.memory[this.display.selected]
-        console.log(mem.content)
         if (mem.type == "letters") {
             var condArg1 = mem.content
         } else {
@@ -202,7 +201,6 @@ class Visitor extends RomeVisitor {
         }
         //TODO if string, print with parenthesis?
         this.display.output = this.display.output.concat(arg.replace('"', '').replace('"', ''), "\n")
-        console.log(this.display.output)
     }
     visitNet(ctx) {
         this.display.importNet = true
@@ -212,52 +210,6 @@ class Visitor extends RomeVisitor {
     }
 }
 
-function processInstrs(display, setDisplay) {
-    var delayCount = 0;
-    /*
-    if (display.commands.length == 0) {
-        break
-    }
-
-    for(var i=0; i<display.commands.length; i++){
-        var instr = display.commands[i]
-        if (instr.children[0].constructor.name == "KreadContext") {
-            display.reading = true
-            display.commands.splice(0, i)
-            break
-        } else {
-            setTimeout(instr.accept(new Visitor(setDisplay, display)), delayCount)
-        }
-    }
-    */
-    while (true) {
-        if (display.commands.length == 0) {
-            break
-        }
-        var instr = display.commands[0]
-        display.commands.splice(0, 1)
-        if (instr.children[0].constructor.name == "KreadContext") {
-            display.reading = true
-            break
-        } else {
-            instr.accept(new Visitor(setDisplay, display))
-        }
-    }
-    return true
-}
-
-class ErrorReporter extends antlr4.error.ErrorListener {
-    constructor(display) {
-        super();
-        this.display = display;
-    }
-    syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-        this.display.output = this.display.output.concat(msg + "\n")
-    }
-}
-
 export {
-    Visitor,
-    processInstrs,
-    ErrorReporter
+    RVisitor
 };

@@ -8,9 +8,20 @@ const Switch = () => {
 
     function onChange(event) {
         var value = display.machine
+        if(!value){
+            var newMem = display.memory
+    		for(var mem of newMem){
+    			mem.content=0;
+    		}
+        }else{
+            var newMem = display.memory
+            for(var mem of newMem){
+                mem.content="";
+            }
+        }
         setDisplay(display => ({
             ...display,
-            machine: !value //TODO this does not seem to update fast enough
+            machine: !value
         }))
     }
 
@@ -21,10 +32,16 @@ const Switch = () => {
         id={`react-switch-new`}
         type="checkbox"
         onChange={onChange.bind(this)}
+        disabled={
+          display.running
+            ? "disabled"
+            : ""
+        }
       />
       <label
-        className="react-switch-label"
-        htmlFor={`react-switch-new`}
+          style={{ background: display.machine && '#06D6A0' }}
+    className="react-switch-label"
+    htmlFor={`react-switch-new`}
       >
         <span className={`react-switch-button`} />
       </label>

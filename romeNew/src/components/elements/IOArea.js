@@ -1,7 +1,8 @@
 import React, {Component, useContext} from "react";
 import {DisplayContext} from '../../state/DisplayState';
-import {Visitor} from '../../lang/RomeVisitor'
-import {processInstrs} from '../../lang/RomeVisitor'
+import {RVisitor} from '../../lang/RomeVisitor'
+import {MVisitor} from '../../lang/MachineVisitor'
+import {processInstrs} from '../../lang/Common'
 import {NetToggle, USBToggle} from './Peripherals'
 //TODO no updates use setDisplay. Should we?
 const InputArea = () => {
@@ -34,6 +35,8 @@ const InputArea = () => {
             input: value
         }))
     }
+
+
     return (<input className="inputBar" size="60" type="text" onKeyDown={handleKey} onChange={onChange} disabled={!display.reading} value={!display.reading
             ? ""
             : display.input}></input>)

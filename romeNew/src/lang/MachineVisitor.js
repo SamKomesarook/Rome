@@ -1,6 +1,6 @@
 import {
     MachineVisitor
-} from "./grammar/RomeVisitor";
+} from "./grammar/Machine/MachineVisitor";
 import React, {
     Component,
     useContext
@@ -12,7 +12,7 @@ import {
 
 var antlr4 = require("antlr4");
 
-class Visitor extends RomeVisitor {
+class MVisitor extends MachineVisitor {
 
     constructor(set, display) {
         super()
@@ -56,7 +56,18 @@ class Visitor extends RomeVisitor {
         this.display.memory[this.display.selected].content -= 1
     }
     visitLoop(ctx) {
-
+        //TODO add catch for infinite loop
+        if (ctx.expressions().length < 1) {
+            return
+        }
+        if(this.display.memory[this.display.selected].content != 0){
+            this.display.commands.unshift(ctx)
+            this.display.commands.unshift(ctx.expressions())
+            this.display.commands = this.display.commands.flat(Infinity)
+        }
     }
 
 }
+export {
+    MVisitor
+};
