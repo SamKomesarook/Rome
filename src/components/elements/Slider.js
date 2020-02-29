@@ -1,29 +1,23 @@
-import React, { Component } from "react";
+import React, {Component, useContext} from "react";
+import {DisplayContext} from '../../state/DisplayState'
 
-export class Slider extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      ref: this.props.compRef
-    };
-  }
+const Slider = () => {
 
-  render() {
-    return (
-      <div className="form-group shadow-textarea">
-        <input
-          data-tip data-for="SliderTips"
-          type="range"
-          className="Slider"
-          min="0"
-          max="7"
-          step="1"
-          id="Slider"
-          ref={this.state.ref}
-        />
-      </div>
-    );
-  }
+    const [display, setDisplay] = useContext(DisplayContext);
+
+    function onChange(event) {
+        event.preventDefault()
+        const value = event.target.value
+        setDisplay(display => ({
+            ...display,
+            delay: value
+        }))
+    }
+
+    return (<div className="slider form-group shadow-textarea">
+        <input data-tip="data-tip" data-for="SliderTips" type="range" className="Slider" min="1" max="10" step="1" id="Slider" onChange={onChange.bind(this)}/>
+    </div>);
+
 }
 
 export default Slider;

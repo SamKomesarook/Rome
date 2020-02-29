@@ -1,61 +1,68 @@
-# PJFC Lang
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-## Introduction
-PJFC Lang is a website base application which focus on teaching children from age 6 to 12. It provide an interface contains coding area, IO section and animation section.\
-Children are able to write code in the coding area and Click the run button to run code written by them.\
-If code written is not valid, error message will be printed out to the output window. Other wise, some changes can be viewed base on different code.
+In the project directory, you can run:
 
-## Available Command
-* start
-  * Indicate the start of the program
-* end
-  * Indicate the end of the program
-* move
-  * Move the selected memory.
-    * move(next) or move(last).
-* set
-  * Set the variable type that can be stored in the selected memory. Type can only be either "letters" or "numbers". The default type of a memory block is letters.
-    * set(numbers) or set(letters). 
-* write
-  * Write content into selected memory block. It will check if the type need to be written in match with the content type that allow to be stored in the selected memory block.
-    * When write letters: write("hello") **Note: has to have double quote**
-    * When write numbers: write(1024)
-* s_write
-  * s_wrtie will write to output window instead of memory block. s_write can either write number directly to output window or use *memory* command to write content inside a certain memory block to output window.
-    * When write number directly: s_write(1024)
-    * When write using memory command: s_write(memory(0))
-* if
-  * only run conditional code when condition inside if statment is true. Inside the if condition, it can take: (is/not less/greater/equal number/*memory()*).
-    *  if (is equal 1) {*conditional code*}
-* loop
-  * Equvialent to iteration in other programming languages. The different is this loop statement need to have a number or *memory()* to indicate the number of iterations.
-    * loop(5){*conditional code*} **Run condition code for 5 time**
-    * loop(memory(0)){*conditional code*} **Number of iterations is dependents on the value stored inside the first memory.**
-* memory
-  * Retrieve the content inside memory
-    * memory(0) **Get content stored inside the first memory**
-* free
-  * Release the selected memory block. In other word, earse the content inside the selected memory
-    * free
-* k_read
-  * Reading input from keyboard. A prompt window should pop up to let user make input.
-    * k_read
-* n_read
-  * Read from network memory. An animation should show when reach this command.
-    * n_read
-* n_write
-  * Write into network memory. An animation should show when reach this command too.
-    * n_write("hello") **Note: has to have double quote when write a string**
-    * n_write(1024)
-* import
-  * import package. If n_read and n_write are going to be used, network package should be imported.
-    * import network.
+### `npm start`
 
-## Development
-This project is built using ReactJS. To contribute into the development of the project. Follow the following steps:
-1. Clone the git repo: `git clone https://github.com/BaharuHarris/PJFC.git`
-2. `cd PJFC`
-3. install required package: `npm install`
-4. Run the localhost server: `npm start`
-5. Open browser and visit `localhost:3000`
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -1,91 +1,28 @@
-import React, { Component } from "react";
+import React, {Component, useContext} from "react";
 import Typed from "react-typed";
+import {DisplayContext} from '../../state/DisplayState'
 
-export class TextArea extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showLineNumber: true,
-      ref: this.props.compRef
-    };
-    this.toggleLineNumber = this.toggleLineNumber.bind(this);
-  }
+const TextArea = () => {
 
-  /*state used to show/hide the line number of the coding area*/
-  toggleLineNumber() {
-    this.setState(state => ({
-      ...state,
-      showLineNumber: !state.showLineNumber
-    }));
-  }
+    const [display, setDisplay] = useContext(DisplayContext);
 
-  render() {
-    const lineNumberStyle = {
-      display: "block",
-      background: "url(http://i.imgur.com/2cOaJ.png)",
-      backgroundAttachment: "local",
-      backgroundRepeat: "no-repeat",
-      borderColor: "#ccc",
-      paddingLeft: "35px",
-      paddingTop: "12px",
-      lineHeight: "16px"
-    };
-
-    const defaultStyle = {
-      display: "block",
-      paddingTop: "12px",
-      lineHeight: "16px"
-    };
-
-    //change different style according to showLineNumber,in order to hide/show line number
-    var textAreaStyle;
-    if (this.state.showLineNumber) {
-      textAreaStyle = lineNumberStyle;
-    } else {
-      textAreaStyle = defaultStyle;
+    function onChange(event) {
+        event.preventDefault()
+        const value = event.target.value
+        //TODO ensure the below includes newline breaks and shit...
+        setDisplay(display => ({
+            ...display,
+            text: value
+        }))
     }
 
-    return (
-      <div
-        className="wrapper"
-        data-tip
-        data-for="TextAreaTips"
-        ref={this.state.ref}
-      >
-        <div className="form-group shadow-textarea" id="codingWrapper">
-          <Typed
-            strings={[
-              "start\nset(numbers)\nwrite(4)\nprint\nend",
-              "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
-              "start\nmove(next)\nmove(last)\nend",
-              "start\nloop(4){\nmove(next)\n}\nend",
-              "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
-            ]}
-            typeSpeed={40}
-            backSpeed={30}
-            attr="placeholder"
-            loop
-            showCursor={false}
-          >
-            <textarea
-              className="form-control rounded-0 z-depth-1"
-              cols="50"
-              id="codingArea"
-              rows="28"
-              style={textAreaStyle}
-            />
-          </Typed>
-          <button
-            className="btn btn-light"
-            id="lineButton"
-            onClick={this.toggleLineNumber}
-          >
-            toggle
-          </button>
-        </div>
-      </div>
-    );
-  }
+    return (<div className="textArea form-group shadow-textarea" id="codingWrapper">
+        <Typed
+            //TODO write the example strings
+            strings={["testing string here", "more testing strings..."]} typeSpeed={40} backSpeed={30} attr="placeholder" loop="loop" showCursor={false}>
+            <textarea className="form-control rounded-0 z-depth-1" cols="50" rows="28" id="codingArea" onChange={onChange.bind(this)}/>
+        </Typed>
+    </div>);
 }
 
 export default TextArea;
