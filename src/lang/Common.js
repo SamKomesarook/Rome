@@ -22,7 +22,7 @@ function processInstrs(display, setDisplay) {
     }
     */
     while (true) {
-        if (display.commands.length == 0) {
+        if (display.commands.length == 0 || display.errors) {
             break
         }
         var instr = display.commands[0]
@@ -47,6 +47,11 @@ class ErrorReporter extends antlr4.error.ErrorListener {
     }
     syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
         this.display.output = this.display.output.concat(msg + "\n")
+        this.display.errors = true
+    }
+    generalError(msg){
+        this.display.output = this.display.output.concat(msg + "\n")
+        this.display.errors = true
     }
 }
 
