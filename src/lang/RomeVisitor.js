@@ -229,6 +229,9 @@ class RVisitor extends RomeVisitor {
     visitIo(ctx) {
         this.display.importIo = true
     }
+    visitName(ctx){
+        
+    }
 }
 
 export {
