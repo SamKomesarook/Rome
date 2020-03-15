@@ -12,7 +12,7 @@ class RVisitor extends RomeVisitor {
         super()
         this.set = set
         this.display = display
-        this.reporter = new ErrorReporter(display) //TODO is it necessary to have two?
+        this.reporter = new ErrorReporter(display) //TODO is it necessary to have one here and one in the processInstrs function?
     }
     visitChildren(ctx) {
         if (!ctx) {

@@ -29,6 +29,11 @@ function processInstrs(display, setDisplay) {
         var instr = display.commands[0]
         display.commands.splice(0, 1)
         if (instr.children[0].constructor.name == "KreadContext" || instr.children[0].constructor.name == "ReadContext") {
+            if(!display.importIO){
+                var errors = new ErrorReporter(display)
+                errors.generalError("Unknown function \'k_read\'")
+                return
+            }
             setDisplay(display => ({
                 ...display,
                 reading: true
