@@ -104,6 +104,10 @@ class RVisitor extends RomeVisitor {
             this.reporter.generalError("Memory cell not empty")
             return
         }
+        if (this.display.memory[this.display.selected].type == "") {
+            this.reporter.generalError("Memory type not set")
+            return
+        }
         var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
         if (typeof arg == "object") {
             arg = arg[0]
@@ -112,7 +116,7 @@ class RVisitor extends RomeVisitor {
             this.reporter.generalError("Wrong memory type for writing")
             return
         }
-        if (arg != "\"" && this.display.memory[this.display.selected].type == "letters") {
+        if (arg[0] != "\"" && this.display.memory[this.display.selected].type == "letters") {
             this.reporter.generalError("Wrong memory type for writing")
             return
         }
@@ -140,11 +144,10 @@ class RVisitor extends RomeVisitor {
                 return
             }
         }
-        try { //TODO not too effective, as someone might want to write a string of numbers
+        if(this.display.memory[this.display.selected].type == "letters"){
+            var condArg2 = args[4]
+        }else{
             var condArg2 = args[4][0]
-        } catch (e) {
-            this.reporter.generalError("Second conditional part incorrect")
-            return
         }
         if (args[0] == "is") {
             if (args[2] == "less") {
@@ -184,14 +187,14 @@ class RVisitor extends RomeVisitor {
     }
     visitSnet(ctx) {
         if(!this.display.importNet){
-            this.reporter.generalError("Unknown function \'Snet\'")
+            this.reporter.generalError("Unknown function \'n_write\'")
             return
         }
         NetToggle()
     }
     visitRnet(ctx) {
         if(!this.display.importNet){
-            this.reporter.generalError("Unknown function \'Rnet\'")
+            this.reporter.generalError("Unknown function \'n_read\'")
             return
         }
         var result = '';
@@ -204,7 +207,7 @@ class RVisitor extends RomeVisitor {
     }
     visitKread(ctx) {
         if(!this.display.importIO){
-            this.reporter.generalError("Unknown function \'Kread\'")
+            this.reporter.generalError("Unknown function \'k_read\'")
             return
         }
         //TODO is this necessary?
@@ -213,7 +216,7 @@ class RVisitor extends RomeVisitor {
     }
     visitSwrite(ctx) {
         if (!this.display.importIo) {
-            this.reporter.generalError("Unknown function \'Swrite\'")
+            this.reporter.generalError("Unknown function \'s_write\'")
             return
         }
         var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
@@ -230,7 +233,7 @@ class RVisitor extends RomeVisitor {
         this.display.importIo = true
     }
     visitName(ctx){
-        
+
     }
 }
 
