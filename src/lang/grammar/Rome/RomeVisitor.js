@@ -42,7 +42,7 @@ RomeVisitor.prototype.visitNum = function(ctx) {
 };
 
 
-// Visit a parse tree produced by RomeParser#memory.
+// Visit a parse tree produced by RomeParser#Memory.
 RomeVisitor.prototype.visitMemory = function(ctx) {
   return this.visitChildren(ctx);
 };

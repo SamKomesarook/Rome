@@ -22,9 +22,8 @@ function processInstrs(display, setDisplay) {
     }
     */
     while (true) {
+        console.dir(display)
         if (display.commands.length == 0 || display.errors) {
-            display.commands = []
-            display.errors = false
             break
         }
         var instr = display.commands[0]

@@ -197,12 +197,18 @@ class RVisitor extends RomeVisitor {
             this.reporter.generalError("Unknown function \'n_read\'")
             return
         }
+        if (this.display.memory[this.display.selected].content != "") {
+            this.reporter.generalError("Memory cell not empty")
+            return
+        }
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
         for (var i = 0; i < Math.floor((Math.random() * 10) + 1); i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
+        this.display.memory[this.display.selected].content = result
+        NetToggle()
         return result;
     }
     visitKread(ctx) {
@@ -215,7 +221,7 @@ class RVisitor extends RomeVisitor {
         //TODO check for memory number to determine if animations are needed
     }
     visitSwrite(ctx) {
-        if (!this.display.importIo) {
+        if (!this.display.importIO) {
             this.reporter.generalError("Unknown function \'s_write\'")
             return
         }
@@ -230,7 +236,7 @@ class RVisitor extends RomeVisitor {
         this.display.importNet = true
     }
     visitIo(ctx) {
-        this.display.importIo = true
+        this.display.importIO = true
     }
     visitName(ctx){
 
