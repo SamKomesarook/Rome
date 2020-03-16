@@ -60,7 +60,7 @@ imp: IMP '(' NET ')' # Net
 	| IMP '(' IO ')' # Io
 	;
 
-mem: MEM '(' intargs ')';
+mem: MEM '(' (intargs | strargs) ')';
 
 intargs: NUMBER # Num
 	| mem # Memory

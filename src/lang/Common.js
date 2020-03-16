@@ -22,7 +22,6 @@ function processInstrs(display, setDisplay) {
     }
     */
     while (true) {
-        console.dir(display)
         if (display.commands.length == 0 || display.errors) {
             break
         }

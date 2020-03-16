@@ -71,15 +71,26 @@ class RVisitor extends RomeVisitor {
         }
     }
     visitMem(ctx) {
-        if (ctx.intargs().constructor.name == "NumContext") {
-            try {
-                return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content
-            } catch (e) {
-                this.reporter.generalError("Cannot parse memory argument")
-                return null
+        if(ctx.strargs() != null){
+            var arg = this.visitChildren(ctx.strargs())[0]
+            for (var i =0; i< this.display.memory.length; i++){
+                var mem = this.display.memory[i]
+                if (mem.name == arg){
+                    return mem.content
+                }
             }
-        } else {
-            return this.visitChildren(ctx.intargs())
+            this.reporter.generalError("No memory with that name")
+        }else{
+            if (ctx.intargs().constructor.name == "NumContext") {
+                try {
+                    return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content
+                } catch (e) {
+                    this.reporter.generalError("Cannot parse memory argument")
+                    return null
+                }
+            } else {
+                return this.visitChildren(ctx.intargs())
+            }
         }
     }
     visitMove(ctx) {
@@ -239,7 +250,15 @@ class RVisitor extends RomeVisitor {
         this.display.importIO = true
     }
     visitName(ctx){
-
+        var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
+        if (typeof arg == "object") {
+            arg = arg[0]
+        }
+        if (arg[0] != "\"") {
+            this.reporter.generalError("Cannot name a memory area as a number")
+            return
+        }
+        this.display.memory[this.display.selected].name = arg
     }
 }
 
