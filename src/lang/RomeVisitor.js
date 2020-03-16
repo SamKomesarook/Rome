@@ -1,10 +1,6 @@
 import {RomeVisitor} from "./grammar/Rome/RomeVisitor";
-import React, {Component, useContext} from "react";
-import {DisplayContext, DisplayProvider} from '../state/DisplayState';
 import {NetToggle, USBToggle} from '../components/elements/Peripherals'
 import { ErrorReporter } from './Common'
-
-var antlr4 = require("antlr4");
 
 //TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -64,7 +60,6 @@ class RVisitor extends RomeVisitor {
             this.reporter.generalError("Non-number loop argument")
             return
         }
-        var exprs = []
         for (var i = 0; i < upperBound; i++) {
             this.display.commands.unshift(ctx.expressions())
             this.display.commands = this.display.commands.flat(Infinity) //TODO is the assignment really necessary?
@@ -75,13 +70,13 @@ class RVisitor extends RomeVisitor {
             var arg = this.visitChildren(ctx.strargs())[0]
             for (var i =0; i< this.display.memory.length; i++){
                 var mem = this.display.memory[i]
-                if (mem.name == arg){
+                if (mem.name === arg){
                     return mem.content
                 }
             }
             this.reporter.generalError("No memory with that name")
         }else{
-            if (ctx.intargs().constructor.name == "NumContext") {
+            if (ctx.intargs().constructor.name === "NumContext") {
                 try {
                     return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content
                 } catch (e) {
@@ -94,14 +89,14 @@ class RVisitor extends RomeVisitor {
         }
     }
     visitMove(ctx) {
-        if (ctx.children[2].getText() == "next") {
-            if (this.display.selected == 10) { //TODO replace magic number
+        if (ctx.children[2].getText() === "next") {
+            if (this.display.selected === 10) { //TODO replace magic number
                 this.reporter.generalError("No more memory")
                 return
             }
             this.display.selected += 1
         } else {
-            if (this.display.selected == 0) {
+            if (this.display.selected === 0) {
                 this.reporter.generalError("No more memory")
                 return
             }
@@ -111,11 +106,11 @@ class RVisitor extends RomeVisitor {
 
     visitWrite(ctx) {
         //TODO check for maximum length (or spillover to the next memory cell?
-        if (this.display.memory[this.display.selected].content != "") {
+        if (this.display.memory[this.display.selected].content !== "") {
             this.reporter.generalError("Memory cell not empty")
             return
         }
-        if (this.display.memory[this.display.selected].type == "") {
+        if (this.display.memory[this.display.selected].type === "") {
             this.reporter.generalError("Memory type not set")
             return
         }
@@ -123,17 +118,17 @@ class RVisitor extends RomeVisitor {
         if (typeof arg == "object") {
             arg = arg[0]
         }
-        if (arg[0] == "\"" && this.display.memory[this.display.selected].type == "numbers") {
+        if (arg[0] === "\"" && this.display.memory[this.display.selected].type === "numbers") {
             this.reporter.generalError("Wrong memory type for writing")
             return
         }
-        if (arg[0] != "\"" && this.display.memory[this.display.selected].type == "letters") {
+        if (arg[0] !== "\"" && this.display.memory[this.display.selected].type === "letters") {
             this.reporter.generalError("Wrong memory type for writing")
             return
         }
-        if (this.display.selected == 10) {
+        if (this.display.selected === 10) {
             NetToggle()
-        } else if (this.display.selected == 11) {
+        } else if (this.display.selected === 11) {
             USBToggle()
         } else {
             this.display.memory[this.display.selected].content = arg;
@@ -143,53 +138,55 @@ class RVisitor extends RomeVisitor {
         this.display.memory[this.display.selected].content = "";
     }
     visitIf(ctx) {
+        var condArg1
+        var condArg2
         var args = this.visitChildren(ctx.conditional())
         var mem = this.display.memory[this.display.selected]
-        if (mem.type == "letters") {
-            var condArg1 = mem.content
+        if (mem.type === "letters") {
+            condArg1 = mem.content
         } else {
             try {
-                var condArg1 = parseInt(mem.content)
+                condArg1 = parseInt(mem.content)
             } catch (e) {
                 this.reporter.generalError("Wrong conditional argument type")
                 return
             }
         }
-        if(this.display.memory[this.display.selected].type == "letters"){
-            var condArg2 = args[4]
+        if(this.display.memory[this.display.selected].type === "letters"){
+            condArg2 = args[4]
         }else{
-            var condArg2 = args[4][0]
+            condArg2 = args[4][0]
         }
-        if (args[0] == "is") {
-            if (args[2] == "less") {
+        if (args[0] === "is") {
+            if (args[2] === "less") {
                 if (condArg1 < condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
-            } else if (args[2] == "greater") {
+            } else if (args[2] === "greater") {
                 if (condArg1 > condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
             } else {
-                if (condArg1 == condArg2) {
+                if (condArg1 === condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
             }
         } else {
-            if (args[2] == "less") {
+            if (args[2] === "less") {
                 if (condArg1 >= condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
-            } else if (args[2] == "greater") {
+            } else if (args[2] === "greater") {
                 if (condArg1 <= condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
             } else {
-                if (condArg1 != condArg2) {
+                if (condArg1 !== condArg2) {
                     this.display.commands.unshift(ctx.expressions())
                     this.display.commands = this.display.commands.flat(Infinity)
                 }
@@ -198,17 +195,17 @@ class RVisitor extends RomeVisitor {
     }
     visitSnet(ctx) {
         if(!this.display.importNet){
-            this.reporter.generalError("Unknown function \'n_write\'")
+            this.reporter.generalError("Unknown function 'n_write'")
             return
         }
         NetToggle()
     }
     visitRnet(ctx) {
         if(!this.display.importNet){
-            this.reporter.generalError("Unknown function \'n_read\'")
+            this.reporter.generalError("Unknown function 'n_read'")
             return
         }
-        if (this.display.memory[this.display.selected].content != "") {
+        if (this.display.memory[this.display.selected].content !== "") {
             this.reporter.generalError("Memory cell not empty")
             return
         }
@@ -224,7 +221,7 @@ class RVisitor extends RomeVisitor {
     }
     visitKread(ctx) {
         if(!this.display.importIO){
-            this.reporter.generalError("Unknown function \'k_read\'")
+            this.reporter.generalError("Unknown function 'k_read'")
             return
         }
         //TODO is this necessary?
@@ -233,11 +230,11 @@ class RVisitor extends RomeVisitor {
     }
     visitSwrite(ctx) {
         if (!this.display.importIO) {
-            this.reporter.generalError("Unknown function \'s_write\'")
+            this.reporter.generalError("Unknown function 's_write'")
             return
         }
         var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
-        if (typeof arg == "object") {
+        if (typeof arg === "object") {
             arg = arg[0]
         }
         //TODO if string, print with parenthesis?
@@ -251,10 +248,10 @@ class RVisitor extends RomeVisitor {
     }
     visitName(ctx){
         var arg = this.visitChildren(ctx)[2] //TODO no need to visit all children, just the args
-        if (typeof arg == "object") {
+        if (typeof arg === "object") {
             arg = arg[0]
         }
-        if (arg[0] != "\"") {
+        if (arg[0] !== "\"") {
             this.reporter.generalError("Cannot name a memory area as a number")
             return
         }

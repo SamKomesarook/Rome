@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Visitor, VisitorComponent } from '../lang/RomeVisitor'
 export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {

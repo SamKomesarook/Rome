@@ -1,7 +1,5 @@
-import React, {Component, useContext} from "react";
+import React, { useContext } from "react";
 import {DisplayContext} from '../../state/DisplayState';
-import {RVisitor} from '../../lang/RomeVisitor'
-import {MVisitor} from '../../lang/MachineVisitor'
 import {processInstrs, ErrorReporter} from '../../lang/Common'
 var antlr4 = require("antlr4");
 var RomeLexer = require("../../lang/grammar/Rome/RomeLexer").RomeLexer;
@@ -37,7 +35,7 @@ const StartButton = () => {
         if (tree.exception === null && parser._syntaxErrors === 0) {
             try {
                 for (var child of tree.children) {
-                    if (child.constructor.name != "TerminalNodeImpl") {
+                    if (child.constructor.name !== "TerminalNodeImpl") {
                         display.commands.push(child)
                     }
                 }
@@ -68,8 +66,8 @@ const StopButton = () => {
     function stop(event) {
         var newMem = display.memory
         if (display.machine) {
-            for (var mem of newMem) {
-                mem.content = 0;
+            for (var memory of newMem) {
+                memory.content = 0;
             }
         } else {
             for (var mem of newMem) {

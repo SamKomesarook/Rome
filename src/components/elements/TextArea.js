@@ -1,10 +1,10 @@
-import React, {Component, useContext} from "react";
+import React, { useContext } from "react";
 import Typed from "react-typed";
 import {DisplayContext} from '../../state/DisplayState'
 
 const TextArea = () => {
 
-    const [display, setDisplay] = useContext(DisplayContext);
+    const [ setDisplay ] = useContext(DisplayContext);
 
     function onChange(event) {
         event.preventDefault()

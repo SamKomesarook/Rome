@@ -1,4 +1,4 @@
-import React, {Component, useContext} from "react";
+import React, { useContext } from "react";
 import {DisplayContext} from '../../state/DisplayState'
 import "../styles/styles.css";
 
@@ -8,7 +8,7 @@ const Memory = () => {
 
     function getMemory(id) {
         return (<div class={"memory" + (
-                id == display.selected
+                id === display.selected
                 ? " memorySelected"
                 : "") + (
                 display.memory[id].type === "letters"
