@@ -2,7 +2,6 @@ import { RVisitor } from './RomeVisitor'
 import { MVisitor } from './MachineVisitor'
 var antlr4 = require("antlr4");
 
-
 function processInstrs(display, setDisplay) {
     //var delayCount = 0;
     /*

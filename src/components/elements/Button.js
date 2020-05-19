@@ -53,7 +53,7 @@ const StartButton = () => {
 
     }
 
-    return (<button className="startButton" onClick={start} type="button" disabled={display.running
+    return (<button className="startButton btn-sm btn-outline-secondary" onClick={start} type="button" disabled={display.running
             ? true
             : false
 }>
@@ -92,7 +92,7 @@ const StopButton = () => {
         }))
     }
 
-    return (<button className="stopButton" onClick={stop} type="button" disabled={display.running
+    return (<button className="stopButton btn-sm btn-outline-secondary" onClick={stop} type="button" disabled={display.running
             ? false
             : true
 }>

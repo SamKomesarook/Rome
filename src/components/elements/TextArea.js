@@ -4,7 +4,7 @@ import {DisplayContext} from '../../state/DisplayState'
 
 const TextArea = () => {
 
-    const [ setDisplay ] = useContext(DisplayContext);
+    const [ display, setDisplay ] = useContext(DisplayContext);
 
     function onChange(event) {
         event.preventDefault()
@@ -15,8 +15,9 @@ const TextArea = () => {
             text: value
         }))
     }
-
-    return (<div className="textArea form-group shadow-textarea" id="codingWrapper">
+//textArea form-group shadow-textarea
+//form-control rounded-0 z-depth-1
+    return (<div className="md-form mb-4 col-md-4 textArea" id="codingWrapper">
         <Typed
             strings={[
                 "start\nmove(next)\nmove(last)\nend",
@@ -34,7 +35,8 @@ const TextArea = () => {
                 "start\nimport(IO)\nk_read\nend",
                 "start\nimport(IO)\nk_write(\"hello!\")\nend",
             ]} typeSpeed={40} backSpeed={30} attr="placeholder" loop="loop" showCursor={false}>
-            <textarea className="form-control rounded-0 z-depth-1" cols="50" rows="28" id="codingArea" onChange={onChange.bind(this)}/>
+            <textarea className="form-control md-textarea" rows="3" id="codingArea" rows="15" onChange={onChange.bind(this)}/>
+
         </Typed>
     </div>);
 }

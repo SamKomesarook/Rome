@@ -50,12 +50,16 @@ textArea {
     height: 50%;
 }
 
+textArea:active {
+    border: 1px solid #f48fb1;
+}
+
 #codingWrapper {
     width: 100%;
     position: absolute;
     height: 100%;
     top: 12%;
-    right: 20%;
+    right: 53%;
 }
 
 .usbPeriph {
