@@ -1,3 +1,4 @@
+
 import React from 'react'
 import './App.css'
 import TextArea from './components/elements/TextArea'
@@ -25,6 +26,7 @@ const App = () => {
       </div>
 	</DisplayProvider>
   );
+
 }
 
 export default App;
