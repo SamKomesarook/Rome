@@ -1,105 +1,37 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import {DisplayContext} from '../../state/DisplayState'
 import "../styles/styles.css";
-import NetAnimation from "./NetAnimation";
-import UsbAnimation from "./UsbAnimation";
 
-export class Memory extends Component {
-  render() {
-    if (this.props.selected) {
-      return (
-        <div
-          className="shadow-lg mb-5 bg-white rounded memory"
-          id={this.props.id}
-          data-tip
-          data-for="MemoryTips"
-        >
-          {this.props.content}
-        </div>
-      );
-    } else {
-      return (
-        <div
-          className={
-            "memory shadow-none mb-5 rounded " +
-            (this.props.contentType === "letters"
-              ? "bg-lightGray"
-              : "bg-lightBlue")
-          }
-          id={this.props.id}
-          data-tip
-          data-for="MemoryTips"
-        >
-          {this.props.content}
-        </div>
-      );
+const Memory = () => {
+
+    const [display] = useContext(DisplayContext);
+
+    function getMemory(id) {
+        return (<div class={"memory" + (
+                id === display.selected
+                ? " memorySelected"
+                : "") + (
+                display.memory[id].type === "letters"
+                ? " memoryLetters"
+                : display.memory[id].type === "numbers"
+                    ? " memoryNumbers"
+                    : "")
+            //TODO add fields for special and name
+		} key={display.memory[id].key}>
+            {display.memory[id].content}
+        </div>)
     }
-  }
+
+    return (<div class={"memorySection"}>
+        <div class={"memoryRow"}>
+            {getMemory(0)}{getMemory(4)}{getMemory(8)}</div>
+        <div class={"memoryRow"}>
+            {getMemory(1)}{getMemory(5)}{getMemory(9)}</div>
+        <div class={"memoryRow"}>
+            {getMemory(2)}{getMemory(6)}{getMemory(10)}</div>
+        <div class={"memoryRow"}>
+            {getMemory(3)}{getMemory(7)}{getMemory(11)}</div>
+    </div>)
 }
 
-export class NetMemory extends Component {
-  render() {
-    if (this.props.selected) {
-      return (
-        <div
-          className="memory shadow-lg mb-5 bg-brown rounded border border-info"
-          id={this.props.id}
-          data-tip
-          data-for="NetMemoryTips"
-        >
-          {this.props.content}
-        </div>
-      );
-    } else {
-      return (
-        <div
-          className={
-            "memory shadow-none mb-5 rounded border border-info " +
-            (this.props.contentType === "letters"
-              ? "bg-lightGray"
-              : "bg-lightBlue")
-          }
-          id={this.props.id}
-          data-tip
-          data-for="NetMemoryTips"
-        >
-          <NetAnimation animated={this.props.animated} />
-        </div>
-      );
-    }
-  }
-}
-
-export class USBMemory extends Component {
-  render() {
-    if (this.props.selected) {
-      return (
-        <div
-          className="memory shadow-lg mb-5 bg-blue rounded border border-dark"
-          id={this.props.id}
-          data-tip
-          data-for="USBMemoryTips"
-        >
-          {this.props.content}
-        </div>
-      );
-    } else {
-      return (
-        <div
-          className={
-            "memory shadow-none mb-5 rounded border border-dark " +
-            (this.props.contentType === "letters"
-              ? "bg-lightGray"
-              : "bg-lightBlue")
-          }
-          id={this.props.id}
-          data-tip
-          data-for="USBMemoryTips"
-        >
-          <UsbAnimation animated={this.props.animated} />
-        </div>
-      );
-    }
-  }
-}
-
-export default { Memory, NetMemory, USBMemory };
+export default Memory;
