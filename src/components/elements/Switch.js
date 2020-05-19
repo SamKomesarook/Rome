@@ -1,4 +1,4 @@
-import React, {Component, useContext} from 'react';
+import React, { useContext } from 'react';
 import "../styles/styles.css";
 import {DisplayContext} from '../../state/DisplayState'
 
@@ -8,16 +8,9 @@ const Switch = () => {
 
     function onChange(event) {
         var value = display.machine
-        if(!value){
-            var newMem = display.memory
-    		for(var mem of newMem){
-    			mem.content=0;
-    		}
-        }else{
-            var newMem = display.memory
-            for(var mem of newMem){
-                mem.content="";
-            }
+        var newMem = display.memory
+        for(var mem of newMem){
+            !value ? mem.content=0 : mem.content="";
         }
         setDisplay(display => ({
             ...display,

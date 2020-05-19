@@ -56,14 +56,14 @@ STRLIT: '"' ~ ["\r\n]* '"';
 
 strargs : STRLIT #Str ;
 
-imp: IMP WS NET # Net 
-	| IMP WS IO # Io
+imp: IMP '(' NET ')' # Net
+	| IMP '(' IO ')' # Io
 	;
 
-mem: MEM '(' intargs ')';
+mem: MEM '(' (intargs | strargs) ')';
 
-intargs: NUMBER # Num 
-	| mem #memory
+intargs: NUMBER # Num
+	| mem # Memory
 	;
 
 r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
@@ -72,7 +72,7 @@ expressions: expression NEWLINE;
 
 conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
-// NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)* 
+// NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
 	SET '(' (NUM | LET) ')'								# Set
@@ -87,4 +87,3 @@ expression:
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
 	;
-

@@ -15,7 +15,6 @@ const App = () => {
     <div className="App">
 	<TextArea />
 	  <Memory />
-	<Slider />
     <Switch />
 	<StartButton />
 	  <StopButton />

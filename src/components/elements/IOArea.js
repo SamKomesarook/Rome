@@ -1,7 +1,5 @@
-import React, {Component, useContext} from "react";
+import React, { useContext } from "react";
 import {DisplayContext} from '../../state/DisplayState';
-import {RVisitor} from '../../lang/RomeVisitor'
-import {MVisitor} from '../../lang/MachineVisitor'
 import {processInstrs} from '../../lang/Common'
 import {NetToggle, USBToggle} from './Peripherals'
 //TODO no updates use setDisplay. Should we?
@@ -11,9 +9,9 @@ const InputArea = () => {
     function handleKey(event) {
         if (event.keyCode === 13) {
             var newMem = display.memory
-            if (display.selected == 10){
+            if (display.selected === 10){
 				NetToggle()
-			}else if(display.selected == 11) {
+			}else if(display.selected === 11) {
 				USBToggle()
 			} else {
                 newMem[display.selected].content = display.input
@@ -44,7 +42,7 @@ const InputArea = () => {
 
 const OutputArea = () => {
 
-    const [display, setDisplay] = useContext(DisplayContext);
+    const [display] = useContext(DisplayContext);
     return (<div contentEditable="false" className="outputArea" id="outputArea">
         {display.output}
     </div>)

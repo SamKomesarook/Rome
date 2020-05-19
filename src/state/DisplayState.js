@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Visitor, VisitorComponent } from '../lang/RomeVisitor'
 export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {
@@ -12,6 +11,7 @@ export const DisplayProvider = (props) => {
 	input:"", // Content of the input bar
 	running:false, // If there is a program running
 	reading:false, // If the program is reading user input
+    errors:false, //If there are any runtime errors
 	selected:0, // The key of the selected memory
 	commands:[], // The saved list of commands while the program is reading user input
 	importIO:false, // If the user has imported the IO package

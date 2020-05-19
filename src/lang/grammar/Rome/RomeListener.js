@@ -56,11 +56,11 @@ RomeListener.prototype.exitNum = function(ctx) {
 };
 
 
-// Enter a parse tree produced by RomeParser#memory.
+// Enter a parse tree produced by RomeParser#Memory.
 RomeListener.prototype.enterMemory = function(ctx) {
 };
 
-// Exit a parse tree produced by RomeParser#memory.
+// Exit a parse tree produced by RomeParser#Memory.
 RomeListener.prototype.exitMemory = function(ctx) {
 };
 

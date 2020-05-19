@@ -1,16 +1,6 @@
 import {
     MachineVisitor
 } from "./grammar/Machine/MachineVisitor";
-import React, {
-    Component,
-    useContext
-} from "react";
-import {
-    DisplayContext,
-    DisplayProvider
-} from '../state/DisplayState';
-
-var antlr4 = require("antlr4");
 
 class MVisitor extends MachineVisitor {
 
@@ -60,7 +50,7 @@ class MVisitor extends MachineVisitor {
         if (ctx.expressions().length < 1) {
             return
         }
-        if(this.display.memory[this.display.selected].content != 0){
+        if(this.display.memory[this.display.selected].content !== 0){
             this.display.commands.unshift(ctx)
             this.display.commands.unshift(ctx.expressions())
             this.display.commands = this.display.commands.flat(Infinity)

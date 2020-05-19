@@ -1,9 +1,9 @@
-import React, {Component, useContext} from "react";
+import React, { useContext } from "react";
 import {DisplayContext} from '../../state/DisplayState'
 
 const Slider = () => {
 
-    const [display, setDisplay] = useContext(DisplayContext);
+    const [ setDisplay ] = useContext(DisplayContext);
 
     function onChange(event) {
         event.preventDefault()
