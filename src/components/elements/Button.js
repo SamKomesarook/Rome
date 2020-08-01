@@ -1,106 +1,112 @@
-import React, { useContext } from "react";
-import {DisplayContext} from '../../state/DisplayState';
-import {processInstrs, ErrorReporter} from '../../lang/Common'
-var antlr4 = require("antlr4");
-var RomeLexer = require("../../lang/grammar/Rome/RomeLexer").RomeLexer;
-var RomeParser = require("../../lang/grammar/Rome/RomeParser").RomeParser;
-var MachineLexer = require("../../lang/grammar/Machine/MachineLexer").MachineLexer;
-var MachineParser = require("../../lang/grammar/Machine/MachineParser").MachineParser;
+import React, { useContext } from 'react';
+import { DisplayContext } from '../../state/DisplayState';
+import { processInstrs, ErrorReporter } from '../../lang/Common';
 
-//TODO no updates use setDisplay. Should we?
+const antlr4 = require('antlr4');
+const { RomeLexer } = require('../../lang/grammar/Rome/RomeLexer');
+const { RomeParser } = require('../../lang/grammar/Rome/RomeParser');
+const { MachineLexer } = require('../../lang/grammar/Machine/MachineLexer');
+const { MachineParser } = require('../../lang/grammar/Machine/MachineParser');
+
+// TODO no updates use setDisplay. Should we?
 const StartButton = () => {
+  const [display, setDisplay] = useContext(DisplayContext);
 
-    const [display, setDisplay] = useContext(DisplayContext);
+  function start(event) {
+    setDisplay((display) => ({
+      ...display,
+      running: true,
+    }));
+    const chars = new antlr4.InputStream(display.text);
+    const lexer = (display.machine)
+      ? new MachineLexer(chars)
+      : new RomeLexer(chars);
+    const tokens = new antlr4.CommonTokenStream(lexer);
+    const parser = (display.machine)
+      ? new MachineParser(tokens)
+      : new RomeParser(tokens);
+    parser.buildParseTrees = true;
+    parser.removeErrorListeners();
+    parser.addErrorListener(new ErrorReporter(display));
 
-    function start(event) {
+    const tree = parser.r();
 
-        setDisplay(display => ({
-            ...display,
-            running: true
-        }));
-        var chars = new antlr4.InputStream(display.text);
-        var lexer = (display.machine)
-            ? new MachineLexer(chars)
-            : new RomeLexer(chars)
-        var tokens = new antlr4.CommonTokenStream(lexer);
-        var parser = (display.machine)
-            ? new MachineParser(tokens)
-            : new RomeParser(tokens)
-        parser.buildParseTrees = true;
-        parser.removeErrorListeners();
-        parser.addErrorListener(new ErrorReporter(display));
-
-        const tree = parser.r();
-
-        if (tree.exception === null && parser._syntaxErrors === 0) {
-            try {
-                for (var child of tree.children) {
-                    if (child.constructor.name !== "TerminalNodeImpl") {
-                        display.commands.push(child)
-                    }
-                }
-                setDisplay(display => ({
-                    ...display,
-                    errors: false
-                }));
-                processInstrs(display, setDisplay)
-                return true;
-            } catch (e) {
-                console.log(e)
-                //TODO print error messages
-            }
+    if (tree.exception === null && parser._syntaxErrors === 0) {
+      try {
+        for (const child of tree.children) {
+          if (child.constructor.name !== 'TerminalNodeImpl') {
+            display.commands.push(child);
+          }
         }
-
+        setDisplay((display) => ({
+          ...display,
+          errors: false,
+        }));
+        processInstrs(display, setDisplay);
+        return true;
+      } catch (e) {
+        console.log(e);
+        // TODO print error messages
+      }
     }
+  }
 
-    return (<button className="startButton btn-sm btn-outline-secondary" onClick={start} type="button" disabled={display.running
-            ? true
-            : false
-}>
-        start
-    </button>)
-}
+  return (
+    <button
+      className="startButton btn-sm btn-outline-secondary"
+      onClick={start}
+      type="button"
+      disabled={!!display.running}
+    >
+      start
+    </button>
+  );
+};
 
 const StopButton = () => {
-    const [display, setDisplay] = useContext(DisplayContext);
-    function stop(event) {
-        var newMem = display.memory
-        if (display.machine) {
-            for (var memory of newMem) {
-                memory.content = 0;
-            }
-        } else {
-            for (var mem of newMem) {
-                mem.type = "";
-                mem.content = "";
-                mem.name = "";
-            }
-        }
-
-        setDisplay(display => ({
-            ...display,
-            running: false,
-            output: "",
-            input: "",
-            errors: false,
-            reading: false,
-            selected: 0,
-            commands: [],
-            importIO: false,
-            importNet: false,
-            memory: newMem
-        }))
+  const [display, setDisplay] = useContext(DisplayContext);
+  function stop(event) {
+    const newMem = display.memory;
+    if (display.machine) {
+      for (const memory of newMem) {
+        memory.content = 0;
+      }
+    } else {
+      for (const mem of newMem) {
+        mem.type = '';
+        mem.content = '';
+        mem.name = '';
+      }
     }
 
-    return (<button className="stopButton btn-sm btn-outline-secondary" onClick={stop} type="button" disabled={display.running
-            ? false
-            : true
-}>
-        stop
-    </button>)
-}
+    setDisplay((display) => ({
+      ...display,
+      running: false,
+      output: '',
+      input: '',
+      errors: false,
+      reading: false,
+      selected: 0,
+      commands: [],
+      importIO: false,
+      importNet: false,
+      memory: newMem,
+    }));
+  }
+
+  return (
+    <button
+      className="stopButton btn-sm btn-outline-secondary"
+      onClick={stop}
+      type="button"
+      disabled={!display.running}
+    >
+      stop
+    </button>
+  );
+};
 
 export {
-    StartButton,
-    StopButton
+  StartButton,
+  StopButton,
 };
