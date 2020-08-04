@@ -5,26 +5,24 @@ import '../styles/styles.css';
 const Memory = () => {
   const [display] = useContext(DisplayContext);
 
-  function getMemory(id) {
+  const getMemory = (id) => {
+    const memorySelected = id === display.selected ? ' memorySelected' : '';
+    let memoryType = '';
+    if (display.memory[id].type === 'letters') {
+      memoryType = ' memoryLetters';
+    } else if (display.memory[id].type === 'numbers') {
+      memoryType = ' memoryNumbers';
+    }
+
     return (
       <div
-        className={`memory${
-          id === display.selected
-            ? ' memorySelected'
-            : ''
-        }${display.memory[id].type === 'letters'
-          ? ' memoryLetters'
-          : display.memory[id].type === 'numbers'
-            ? ' memoryNumbers'
-            : ''}`
-            // TODO add fields for special and name
-		}
+        className={`memory${memorySelected}${memoryType}`} // TODO add fields for special and name
         key={display.memory[id].key}
       >
         {display.memory[id].content}
       </div>
     );
-  }
+  };
 
   return (
     <div className="memorySection">

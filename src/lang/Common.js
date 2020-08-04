@@ -31,7 +31,7 @@ function processInstrs(display, setDisplay) {
       if (!display.importIO) {
         const errors = new ErrorReporter(display);
         errors.generalError("Unknown function 'k_read'");
-        return;
+        break;
       }
       setDisplay((display) => ({
         ...display,
@@ -42,7 +42,6 @@ function processInstrs(display, setDisplay) {
       instr.accept(display.machine ? new MVisitor(setDisplay, display) : new RVisitor(setDisplay, display));
     }
   }
-  return true;
 }
 
 class ErrorReporter extends antlr4.error.ErrorListener {

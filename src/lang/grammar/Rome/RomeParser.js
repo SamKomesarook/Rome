@@ -187,7 +187,7 @@ RomeParser.RULE_expression = 7;
 
 function StrargsContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -249,13 +249,13 @@ RomeParser.prototype.strargs = function () {
     this.state = 16;
     this.match(RomeParser.STRLIT);
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -264,7 +264,7 @@ RomeParser.prototype.strargs = function () {
 
 function ImpContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -378,7 +378,6 @@ RomeParser.prototype.imp = function () {
         this.state = 21;
         this.match(RomeParser.T__1);
         break;
-
       case 2:
         localctx = new IoContext(this, localctx);
         this.enterOuterAlt(localctx, 2);
@@ -391,15 +390,17 @@ RomeParser.prototype.imp = function () {
         this.state = 25;
         this.match(RomeParser.T__1);
         break;
+      default:
+        break;
     }
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -408,7 +409,7 @@ RomeParser.prototype.imp = function () {
 
 function MemContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -482,13 +483,13 @@ RomeParser.prototype.mem = function () {
     this.state = 34;
     this.match(RomeParser.T__1);
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -497,7 +498,7 @@ RomeParser.prototype.mem = function () {
 
 function IntargsContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -606,13 +607,13 @@ RomeParser.prototype.intargs = function () {
         throw new antlr4.error.NoViableAltException(this);
     }
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -621,7 +622,7 @@ RomeParser.prototype.intargs = function () {
 
 function RContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -739,13 +740,13 @@ RomeParser.prototype.r = function () {
       _la = this._input.LA(1);
     }
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -754,7 +755,7 @@ RomeParser.prototype.r = function () {
 
 function ExpressionsContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -807,13 +808,13 @@ RomeParser.prototype.expressions = function () {
     this.state = 64;
     this.match(RomeParser.NEWLINE);
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -822,7 +823,7 @@ RomeParser.prototype.expressions = function () {
 
 function ConditionalContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -921,7 +922,7 @@ RomeParser.prototype.conditional = function () {
     if (!(_la === RomeParser.IS || _la === RomeParser.NOT)) {
       this._errHandler.recoverInline(this);
     } else {
-        	this._errHandler.reportMatch(this);
+      this._errHandler.reportMatch(this);
       this.consume();
     }
     this.state = 67;
@@ -931,7 +932,7 @@ RomeParser.prototype.conditional = function () {
     if (!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.EQL) | (1 << RomeParser.LESS) | (1 << RomeParser.GRE))) !== 0))) {
       this._errHandler.recoverInline(this);
     } else {
-        	this._errHandler.reportMatch(this);
+      this._errHandler.reportMatch(this);
       this.consume();
     }
     this.state = 69;
@@ -952,13 +953,13 @@ RomeParser.prototype.conditional = function () {
         throw new antlr4.error.NoViableAltException(this);
     }
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }
@@ -967,7 +968,7 @@ RomeParser.prototype.conditional = function () {
 
 function ExpressionContext(parser, parent, invokingState) {
   if (parent === undefined) {
-	    parent = null;
+    parent = null;
   }
   if (invokingState === undefined || invokingState === null) {
     invokingState = -1;
@@ -1454,7 +1455,7 @@ RomeParser.prototype.expression = function () {
         if (!(_la === RomeParser.NUM || _la === RomeParser.LET)) {
           this._errHandler.recoverInline(this);
         } else {
-            	this._errHandler.reportMatch(this);
+          this._errHandler.reportMatch(this);
           this.consume();
         }
         this.state = 77;
@@ -1478,7 +1479,7 @@ RomeParser.prototype.expression = function () {
         if (!(_la === RomeParser.RIGHT || _la === RomeParser.LEFT)) {
           this._errHandler.recoverInline(this);
         } else {
-            	this._errHandler.reportMatch(this);
+          this._errHandler.reportMatch(this);
           this.consume();
         }
         this.state = 82;
@@ -1655,13 +1656,13 @@ RomeParser.prototype.expression = function () {
         throw new antlr4.error.NoViableAltException(this);
     }
   } catch (re) {
-    	if (re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
+    if (re instanceof antlr4.error.RecognitionException) {
+      localctx.exception = re;
+      this._errHandler.reportError(this, re);
+      this._errHandler.recover(this, re);
+    } else {
+      throw re;
+    }
   } finally {
     this.exitRule();
   }

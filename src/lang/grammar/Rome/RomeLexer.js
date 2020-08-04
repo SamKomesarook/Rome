@@ -170,7 +170,10 @@ const decisionsToDFA = atn.decisionToState.map((ds, index) => new antlr4.dfa.DFA
 
 function RomeLexer(input) {
   antlr4.Lexer.call(this, input);
-  this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
+  this._interp = new antlr4.atn.LexerATNSimulator(
+    this, atn, decisionsToDFA,
+    new antlr4.PredictionContextCache(),
+  );
   return this;
 }
 

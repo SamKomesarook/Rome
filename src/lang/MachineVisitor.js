@@ -1,6 +1,4 @@
-import {
-  MachineVisitor,
-} from './grammar/Machine/MachineVisitor';
+import { MachineVisitor } from './grammar/Machine/MachineVisitor';
 
 class MVisitor extends MachineVisitor {
   constructor(set, display) {
@@ -61,6 +59,4 @@ class MVisitor extends MachineVisitor {
     }
   }
 }
-export {
-  MVisitor,
-};
+export { MVisitor };

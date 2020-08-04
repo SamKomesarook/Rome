@@ -24,11 +24,7 @@ const Switch = () => {
         id="react-switch-new"
         type="checkbox"
         onChange={onChange.bind(this)}
-        disabled={
-          display.running
-            ? 'disabled'
-            : ''
-        }
+        disabled={display.running ? 'disabled' : ''}
       />
       <label
         style={{ background: display.machine && '#06D6A0' }}

@@ -21,6 +21,13 @@
     "rules": {
         "linebreak-style": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "no-restricted-syntax": "off",
+        "no-constant-condition": [2, { "checkLoops": false }],
+        "no-underscore-dangle": "off",
+        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+        "func-names": [1, "as-needed"]
+        
     }
 }
