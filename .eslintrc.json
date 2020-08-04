@@ -19,15 +19,15 @@
         "react"
     ],
     "rules": {
-        "linebreak-style": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "linebreak-style": "off",
+        "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
         "no-unused-vars": "warn",
         "no-console": "warn",
         "no-restricted-syntax": "off",
-        "no-constant-condition": [2, { "checkLoops": false }],
+        "no-constant-condition": ["error", { "checkLoops": false }],
         "no-underscore-dangle": "off",
-        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
-        "func-names": [1, "as-needed"]
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "func-names": ["warn", "as-needed"]
         
     }
 }

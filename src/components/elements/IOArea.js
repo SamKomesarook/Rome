@@ -7,7 +7,7 @@ import { NetToggle, USBToggle } from './Peripherals';
 const InputArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  function handleKey(event) {
+  const handleKey = (event) => {
     if (event.keyCode === 13) {
       const newMem = display.memory;
       if (display.selected === 10) {
@@ -24,16 +24,16 @@ const InputArea = () => {
       }));
       processInstrs(display, setDisplay);
     }
-  }
+  };
 
-  function onChange(event) {
+  const onChange = (event) => {
     event.preventDefault();
     const { value } = event.target;
     setDisplay((display) => ({
       ...display,
       input: value,
     }));
-  }
+  };
 
   return (
     <input
@@ -43,9 +43,7 @@ const InputArea = () => {
       onKeyDown={handleKey}
       onChange={onChange}
       disabled={!display.reading}
-      value={!display.reading
-        ? ''
-        : display.input}
+      value={!display.reading ? '' : display.input}
     />
   );
 };

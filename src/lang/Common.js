@@ -3,7 +3,7 @@ import { MVisitor } from './MachineVisitor';
 
 const antlr4 = require('antlr4');
 
-function processInstrs(display, setDisplay) {
+const processInstrs = (display, setDisplay) => {
   // var delayCount = 0;
   /*
     if (display.commands.length == 0) {
@@ -42,7 +42,7 @@ function processInstrs(display, setDisplay) {
       instr.accept(display.machine ? new MVisitor(setDisplay, display) : new RVisitor(setDisplay, display));
     }
   }
-}
+};
 
 class ErrorReporter extends antlr4.error.ErrorListener {
   constructor(display) {

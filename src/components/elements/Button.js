@@ -12,7 +12,7 @@ const { MachineParser } = require('../../lang/grammar/Machine/MachineParser');
 const StartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  function start(event) {
+  const start = (event) => {
     setDisplay((display) => ({
       ...display,
       running: true,
@@ -49,7 +49,7 @@ const StartButton = () => {
         // TODO print error messages
       }
     }
-  }
+  };
 
   return (
     <button
@@ -65,7 +65,7 @@ const StartButton = () => {
 
 const StopButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  function stop(event) {
+  const stop = (event) => {
     const newMem = display.memory;
     if (display.machine) {
       for (const memory of newMem) {
@@ -92,7 +92,7 @@ const StopButton = () => {
       importNet: false,
       memory: newMem,
     }));
-  }
+  };
 
   return (
     <button
