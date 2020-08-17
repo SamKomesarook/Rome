@@ -9,6 +9,7 @@ module.exports = {
     filename: 'main.js',
     publicPath: '/',
   },
+  target: 'node',
   devServer: {
     historyApiFallback: true,
   },
