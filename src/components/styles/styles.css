@@ -148,6 +148,20 @@ button:disabled {
     background: #30383F;
 }
 
+/** PERIPHERAL **/
+.peripheral-icon-grp {
+    align-self: flex-end;
+    width: 20vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.periph-icon {
+    background-color: white;
+    border-radius: 10px;
+    height: 30px;
+}
+
 /** IO AREA **/
 
 #output-area {

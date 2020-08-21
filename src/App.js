@@ -22,8 +22,10 @@ const App = () => (
       </div>
       <div className="layout-column">
         <Memory />
-        <NetPeripheral />
-        <USBPeripheral />
+        <div className="peripheral-icon-grp">
+          <NetPeripheral />
+          <USBPeripheral />
+        </div>
         <OutputArea />
         <InputArea />
       </div>

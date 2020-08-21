@@ -11,7 +11,7 @@ const NetToggle = (event) => {
   }, 1000);
 };
 
-const NetPeripheral = () => (<img className="usbPeriph" src={firss} width="100" height="30" id="firss" alt="usb symbol" />);
+const NetPeripheral = () => (<img className="periph-icon" src={firss} id="firss" alt="usb symbol" />);
 
 const USBToggle = (event) => {
   const elem = document.getElementById('fiusb');
@@ -22,7 +22,7 @@ const USBToggle = (event) => {
   }, 1000);
 };
 
-const USBPeripheral = () => (<img className="netPeriph" src={fiusb} width="100" height="30" id="fiusb" alt="usb symbol" />);
+const USBPeripheral = () => (<img className="periph-icon" src={fiusb} id="fiusb" alt="usb symbol" />);
 
 export {
   NetPeripheral,
