@@ -37,7 +37,7 @@ const InputArea = () => {
 
   return (
     <input
-      id="inputBar"
+      id="input-bar"
       size="60"
       type="text"
       onKeyDown={handleKey}
@@ -51,7 +51,7 @@ const InputArea = () => {
 const OutputArea = () => {
   const [display] = useContext(DisplayContext);
   return (
-    <div contentEditable="false" id="outputArea">
+    <div contentEditable="false" id="output-area">
       {display.output}
     </div>
   );

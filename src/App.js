@@ -24,8 +24,8 @@ const App = () => (
         <Memory />
         <NetPeripheral />
         <USBPeripheral />
-        <InputArea />
         <OutputArea />
+        <InputArea />
       </div>
     </div>
   </DisplayProvider>
