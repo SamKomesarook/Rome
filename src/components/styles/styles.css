@@ -13,7 +13,7 @@
 
 /** CODING AREA **/
 
-#coding-wrapper {
+#coding-area-wrapper {
     width: 100%;
 }
 
@@ -21,8 +21,11 @@
     width: 100%;
     height: 60vh;
     padding: 1rem 1.5rem;
-    border: 1px solid #9583FF;
+    border: 3px solid #9583FF;
     border-radius: 10px;
+    background-color: #1E272E;
+    color: white;
+    font-size: 1rem;
 }
 
 /** SWITCH **/
@@ -87,7 +90,7 @@ button {
 
 button:hover:enabled {
     cursor: pointer;
-    filter: brightness(120%);
+    filter: brightness(90%);
 }
 
 button:disabled {
@@ -98,6 +101,11 @@ button:disabled {
 .primary-btn {
     background-color: #4873FF;
     color: white;
+}
+
+.secondary-btn {
+    background-color: #D3D3D3;
+    color: black;
 }
 
 /** MEMORY **/
@@ -114,32 +122,35 @@ button:disabled {
     border-radius: 10px;
 }
 
-.memory {
+.memory-cell {
     flex: 1 1 25%;
-    background-color: white;
-    /* border: 5px solid #9583FF; */
+    background-color: #1E272E;
 }
 
-.memory:first-child {
+.memory-cell:first-child {
     border-top-left-radius: 8px;
 }
 
-.memory:last-child {
+.memory-cell:last-child {
     border-bottom-right-radius: 8px;
 }
 
-.memory:nth-child(4) {
+.memory-cell:nth-child(4) {
     border-top-right-radius: 8px;
 }
 
-.memory:nth-child(9) {
+.memory-cell:nth-child(9) {
     border-bottom-left-radius: 8px;
+}
+
+.memorySelected {
+    background: #30383F;
 }
 
 /** IO AREA **/
 
 #output-area {
-    background-color: white;
+    background-color: #1E272E;
     white-space: pre-line;
     width: 100%;
     height: 20%;
@@ -149,7 +160,7 @@ button:disabled {
 }
 
 #input-bar {
-    background-color: white;
+    background-color: #1E272E;
     width: 100%;
     height: 3rem;
     border: solid #9583FF 3px;

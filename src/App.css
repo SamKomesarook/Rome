@@ -1,8 +1,9 @@
 .App {
-    text-align: center;
     height: 100%;
     width: 100%;
-    background-color: rgba(244, 196, 145, 0.2);
+    background-color: #384047;
+    color: white;
+    text-align: center;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -14,10 +14,9 @@ const TextArea = () => {
       text: value,
     }));
   }
-  // textArea form-group shadow-textarea
-  // form-control rounded-0 z-depth-1
+
   return (
-    <div id="coding-wrapper">
+    <div id="coding-area-wrapper">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
@@ -42,7 +41,6 @@ const TextArea = () => {
         showCursor={false}
       >
         <textarea id="coding-area" onChange={onChange.bind(this)} />
-
       </Typed>
     </div>
   );
