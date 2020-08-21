@@ -18,7 +18,7 @@ const Switch = () => {
   }
 
   return (
-    <>
+    <div>
       <input
         className="react-switch-checkbox"
         id="react-switch-new"
@@ -33,7 +33,7 @@ const Switch = () => {
       >
         <span className="react-switch-button" />
       </label>
-    </>
+    </div>
   );
 };
 
