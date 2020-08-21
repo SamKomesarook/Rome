@@ -85,6 +85,16 @@ button {
     border-radius: 10px;
 }
 
+button:hover:enabled {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
+button:disabled {
+    cursor: default;
+    filter: brightness(125%);
+}
+
 .primary-btn {
     background-color: #4873FF;
     color: white;
