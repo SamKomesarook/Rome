@@ -19,7 +19,7 @@
 
 #coding-area {
     width: 100%;
-    height: 60vh;
+    height: 73vh;
     padding: 1rem 1.5rem;
     border: 3px solid #9583FF;
     border-radius: 10px;
@@ -108,7 +108,7 @@ button:disabled {
 /** MEMORY **/
 
 .memory-section {
-    height: 33vh;
+    height: 50vh;
     width: 100%;
     background-color: #9583FF;
     display: grid;
