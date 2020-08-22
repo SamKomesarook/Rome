@@ -4,9 +4,11 @@
     background-color: #384047;
     color: white;
     text-align: center;
+    padding: 5rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 3rem;
 }
 
 /* .App-logo {
