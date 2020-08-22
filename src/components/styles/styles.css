@@ -26,6 +26,7 @@
     background-color: #1E272E;
     color: white;
     font-size: 1rem;
+    resize: none;
 }
 
 /** SWITCH **/
@@ -55,23 +56,18 @@
 .react-switch-label .react-switch-button {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
+    left: 2.5px;
     width: 20px;
     height: 20px;
     border-radius: 45px;
     transition: 0.2s;
-    background: #fff;
+    background-color: white;
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
 .react-switch-checkbox:checked+.react-switch-label .react-switch-button {
-    left: calc(100% - 2px);
+    left: calc(100% - 2.5px);
     transform: translateX(-100%);
-}
-
-.react-switch-label:active .react-switch-button {
-    width: calc(100% - 3px);
 }
 
 /** BUTTONS **/
