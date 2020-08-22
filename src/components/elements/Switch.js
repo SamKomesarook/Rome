@@ -18,20 +18,10 @@ const Switch = () => {
   }
 
   return (
-    <div>
-      <input
-        className="react-switch-checkbox"
-        id="react-switch-new"
-        type="checkbox"
-        onChange={onChange.bind(this)}
-        disabled={display.running ? 'disabled' : ''}
-      />
-      <label
-        style={{ background: display.machine && '#06D6A0' }}
-        className="react-switch-label"
-        htmlFor="react-switch-new"
-      >
-        <span className="react-switch-button" />
+    <div className="switch-container">
+      <label className="switch" htmlFor="memory-info-switch">
+        <input type="checkbox" id="memory-info-switch" />
+        <span className="slider round" />
       </label>
     </div>
   );
