@@ -200,7 +200,7 @@ button:disabled {
     border-bottom-left-radius: 8px;
 }
 
-.memorySelected {
+.selected-memory-cell {
     background: #30383F;
 }
 

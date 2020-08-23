@@ -6,17 +6,11 @@ const Memory = () => {
   const [display] = useContext(DisplayContext);
 
   const getMemory = (id) => {
-    const memorySelected = id === display.selected ? ' memorySelected' : '';
-    let memoryType = '';
-    if (display.memory[id].type === 'letters') {
-      memoryType = ' memoryLetters';
-    } else if (display.memory[id].type === 'numbers') {
-      memoryType = ' memoryNumbers';
-    }
+    const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
 
     return (
       <div
-        className={`memory-cell${memorySelected}${memoryType}`} // TODO add fields for special and name
+        className={`memory-cell${selectedMemoryCell}`}
         key={display.memory[id].key}
       >
         {display.memory[id].content}

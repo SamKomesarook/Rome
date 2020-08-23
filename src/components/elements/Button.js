@@ -53,7 +53,7 @@ const StartButton = () => {
 
   return (
     <button
-      id="startButton"
+      id="start-button"
       onClick={start}
       type="button"
       disabled={!!display.running}
@@ -97,7 +97,7 @@ const StopButton = () => {
 
   return (
     <button
-      id="stopButton"
+      id="stop-button"
       onClick={stop}
       type="button"
       disabled={!display.running}
