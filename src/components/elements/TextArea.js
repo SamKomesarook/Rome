@@ -40,7 +40,7 @@ const TextArea = () => {
         loop
         showCursor={false}
       >
-        <textarea id="coding-area" onChange={onChange.bind(this)} />
+        <textarea id="coding-area" onChange={onChange.bind(this)} spellCheck={false} />
       </Typed>
     </div>
   );

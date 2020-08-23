@@ -20,7 +20,7 @@ const Switch = () => {
   return (
     <div className="switch-container">
       <label className="switch" htmlFor="memory-info-switch">
-        <input type="checkbox" id="memory-info-switch" />
+        <input type="checkbox" id="memory-info-switch" onChange={onChange.bind(this)} disabled={display.running ? 'disabled' : ''} />
         <span className="slider round" />
       </label>
     </div>
