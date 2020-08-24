@@ -18,22 +18,12 @@ const Switch = () => {
   }
 
   return (
-    <>
-      <input
-        className="react-switch-checkbox"
-        id="react-switch-new"
-        type="checkbox"
-        onChange={onChange.bind(this)}
-        disabled={display.running ? 'disabled' : ''}
-      />
-      <label
-        style={{ background: display.machine && '#06D6A0' }}
-        className="react-switch-label"
-        htmlFor="react-switch-new"
-      >
-        <span className="react-switch-button" />
+    <div className="switch-container">
+      <label className="switch" htmlFor="machine-language-switch">
+        <input type="checkbox" id="machine-language-switch" onChange={onChange.bind(this)} disabled={display.running ? 'disabled' : ''} />
+        <span className="slider round" />
       </label>
-    </>
+    </div>
   );
 };
 

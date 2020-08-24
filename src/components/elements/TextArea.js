@@ -14,10 +14,9 @@ const TextArea = () => {
       text: value,
     }));
   }
-  // textArea form-group shadow-textarea
-  // form-control rounded-0 z-depth-1
+
   return (
-    <div className="md-form mb-4 col-md-4 textArea" id="codingWrapper">
+    <div id="coding-area-wrapper">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
@@ -38,11 +37,10 @@ const TextArea = () => {
         typeSpeed={40}
         backSpeed={30}
         attr="placeholder"
-        loop="loop"
+        loop
         showCursor={false}
       >
-        <textarea className="form-control md-textarea" rows="3" id="codingArea" rows="15" onChange={onChange.bind(this)} />
-
+        <textarea id="coding-area" onChange={onChange.bind(this)} spellCheck={false} />
       </Typed>
     </div>
   );

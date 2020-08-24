@@ -12,15 +12,23 @@ import Switch from './components/elements/Switch';
 const App = () => (
   <DisplayProvider>
     <div className="App">
-      <TextArea />
-      <Memory />
-      <Switch />
-      <StartButton />
-      <StopButton />
-      <InputArea />
-      <OutputArea />
-      <NetPeripheral />
-      <USBPeripheral />
+      <div className="layout-column">
+        <TextArea />
+        <Switch />
+        <div className="btn-grp">
+          <StartButton />
+          <StopButton />
+        </div>
+      </div>
+      <div className="layout-column">
+        <Memory />
+        <div className="peripheral-icon-grp">
+          <NetPeripheral />
+          <USBPeripheral />
+        </div>
+        <OutputArea />
+        <InputArea />
+      </div>
     </div>
   </DisplayProvider>
 );

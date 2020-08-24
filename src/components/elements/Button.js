@@ -53,12 +53,13 @@ const StartButton = () => {
 
   return (
     <button
-      className="startButton btn-sm btn-outline-secondary"
+      id="start-button"
       onClick={start}
       type="button"
       disabled={!!display.running}
+      className="primary-btn"
     >
-      start
+      Start
     </button>
   );
 };
@@ -96,12 +97,13 @@ const StopButton = () => {
 
   return (
     <button
-      className="stopButton btn-sm btn-outline-secondary"
+      id="stop-button"
       onClick={stop}
       type="button"
       disabled={!display.running}
+      className="secondary-btn"
     >
-      stop
+      Stop
     </button>
   );
 };
