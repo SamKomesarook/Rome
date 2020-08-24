@@ -182,6 +182,7 @@ button:disabled {
 .memory-cell {
     flex: 1 1 25%;
     background-color: #1E272E;
+    padding: 0.5rem;
 }
 
 .memory-cell:first-child {
