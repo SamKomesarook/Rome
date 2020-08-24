@@ -9,18 +9,6 @@ import SubmitButton from './components/elements/SubmitButton';
 import bcrypt from 'bcryptjs';
 
 
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-// // If you want your app to work offline and load faster, you can change
-// // unregister() to register() below. Note this comes with some pitfalls.
-// // Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
-// //serviceWorker.register();
-
-
-
-
 class LoginControl extends React.Component {
 
     
@@ -32,15 +20,10 @@ class LoginControl extends React.Component {
       this.state = {isLoggedIn: false};
       
     }
-    
    
 
     handleLoginClick() {
 
-
-        //let inPswrd = this.state.password;
-        //let check = bcrypt.hashSync(inPswrd ,9);
-        //let hash = bcrypt.hashSync(inPswrd, 9);
         let hash = "$2b$09$xL3tXFifu0DWY/OYGvRD4eiDE0atzsOIWHtyL99fY/7WXYNSt0Z7a";
         let check = bcrypt.compareSync(this.state.password, hash);
 
