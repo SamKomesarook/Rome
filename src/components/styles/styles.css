@@ -261,19 +261,21 @@ button:disabled {
     display: flex;
     align-items: center;
     height: 5rem;
-    
+    width: 100%;
+    justify-content: flex-end;
+    border-right: 0.1rem solid transparent;
 }
 
 .sidebar-item-text {
     display: none;
     margin-inline-start: 1rem;
-    color: var(--bg-contrast-primary);
+    color: var(--bg-contrast-secondary);
 }
 
 .sidebar-item svg {
     width: 2rem;
-    margin: 0 1.5rem;
-    color: var(--bg-contrast-primary);
+    margin: 0 1.4rem;
+    color: var(--bg-contrast-secondary);
 }
 
 .sidebar:hover {
@@ -282,4 +284,12 @@ button:disabled {
 
 .sidebar:hover .sidebar-item-text {
     display: block;
+}
+
+.sidebar-item:hover{
+    border-right: 0.1rem solid white;
+}
+
+.sidebar-item:hover svg, .sidebar-item:hover .sidebar-item-text {
+    color: var(--bg-contrast-primary);
 }
