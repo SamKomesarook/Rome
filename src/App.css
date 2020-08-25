@@ -1,9 +1,10 @@
-.App {
+.main {
     height: 100%;
-    width: 100%;
-    background-color: #384047;
+    width: auto;
+    background-color: var(--bg-primary);
     color: white;
     text-align: center;
+    margin-inline-end: 5rem;
     padding: 5rem;
     display: flex;
     justify-content: space-evenly;

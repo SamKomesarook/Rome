@@ -22,6 +22,11 @@ html, body {
 #root {
     height: 100%;
     width: 100%;
+    --bg-primary: #384047;
+    --bg-secondary: #1E272E;
+    --border-line: #9583FF;
+    --bg-contrast-primary: #ececec;
+    --bg-contrast-secondary: #b6b6b6;
 }
 
 /* code {
