@@ -242,7 +242,7 @@ button:disabled {
 
 /** SIDEBAR **/
 
-.sidebar {
+.sidebar-item-list {
     width: 5rem;
     height: 100vh;
     position: fixed;
@@ -278,11 +278,11 @@ button:disabled {
     color: var(--bg-contrast-secondary);
 }
 
-.sidebar:hover {
+.sidebar-item-list:hover {
     width: 16rem;
 }
 
-.sidebar:hover .sidebar-item-text {
+.sidebar-item-list:hover .sidebar-item-text {
     display: block;
 }
 
@@ -292,4 +292,5 @@ button:disabled {
 
 .sidebar-item:hover svg, .sidebar-item:hover .sidebar-item-text {
     color: var(--bg-contrast-primary);
+    cursor: pointer; /* TODO: Nick - Expand the range so that the cursor will be pointer when it is on the left of the sidebar item as well */
 }
