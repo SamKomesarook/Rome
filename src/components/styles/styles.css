@@ -242,55 +242,74 @@ button:disabled {
 
 /** SIDEBAR **/
 
-.sidebar-item-list {
+aside {
     width: 5rem;
     height: 100vh;
     position: fixed;
     top: 0;
     right: 0;
+    background-color: var(--bg-secondary);
+}
+
+.sidebar-item-list {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    background-color: var(--bg-secondary);
 }
 
 .sidebar-item {
+    width: 100%;
+    border-right: 0.1rem solid transparent;
+}
+
+.sidebar-link {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: 5rem;
-    width: 100%;
-    justify-content: flex-end;
-    border-right: 0.1rem solid transparent;
+    color: var(--bg-contrast-secondary);
+    text-decoration: none;
 }
 
 .sidebar-item-text {
     display: none;
-    margin-inline-start: 1rem;
-    color: var(--bg-contrast-secondary);
+    margin-left: 1rem;
 }
 
 .sidebar-item svg {
     width: 2rem;
     margin: 0 1.4rem;
-    color: var(--bg-contrast-secondary);
 }
 
-.sidebar-item-list:hover {
+aside:hover {
     width: 16rem;
 }
 
-.sidebar-item-list:hover .sidebar-item-text {
+aside:hover .sidebar-item-text {
     display: block;
 }
 
 .sidebar-item:hover{
-    border-right: 0.1rem solid white;
+    border-right: 0.1rem solid var(--bg-contrast-primary);
 }
 
-.sidebar-item:hover svg, .sidebar-item:hover .sidebar-item-text {
+.sidebar-link:hover {
     color: var(--bg-contrast-primary);
-    cursor: pointer; /* TODO: Nick - Expand the range so that the cursor will be pointer when it is on the left of the sidebar item as well */
+}
+
+/** DISTANCE LEARNING **/
+
+.distance-learning-pane {
+    position: fixed;
+    right: 5rem;
+    top: 0;
+    width: 11rem;
+    height: 100vh;
+    background-color: var(--bg-contrast-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
