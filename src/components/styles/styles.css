@@ -290,6 +290,7 @@ aside:hover {
 
 aside:hover .sidebar-item-text {
     display: block;
+    margin: 1px;
 }
 
 .sidebar-item:hover{
@@ -312,4 +313,8 @@ aside:hover .sidebar-item-text {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.hidden {
+    display: none;
 }
