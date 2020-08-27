@@ -4,14 +4,35 @@ import DistanceLearning from './DistanceLearning';
 const Sidebar = () => {
   const [isDistLearnActive, setDistLearnActive] = useState(false);
 
+  // TODO: Nick - Extract this function to a separate class
+  const hasParentID = (child, parentID) => {
+    if (child.parentNode === null || child.parentNode === undefined) {
+      return false;
+    }
+    if (child.parentNode.id === parentID) {
+      return true;
+    }
+    return hasParentID(child.parentNode, parentID);
+  };
+
+  window.onclick = (e) => {
+    // If user click an area outside the sidebar and distance learning tab while the tab is opened
+    // then close it.
+    if (!(e.target.id === 'sidebar' || hasParentID(e.target, 'sidebar')) && e.target.id !== 'distance-learning' && isDistLearnActive) {
+      console.log(!hasParentID(e.target, 'sidebar'));
+      setDistLearnActive(false);
+    }
+  };
+
   const handleToggleDistLearn = (e) => {
+    console.log('toggle');
     e.preventDefault();
     setDistLearnActive(!isDistLearnActive);
   };
   //   function onType(event) { }
 
   return (
-    <aside>
+    <aside id="sidebar">
       <ul className="sidebar-item-list">
         <li className="sidebar-item">
           <a href="#" className="sidebar-link" onClick={handleToggleDistLearn}>

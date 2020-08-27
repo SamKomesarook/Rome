@@ -4,8 +4,8 @@ const DistanceLearning = (props) => {
   const isActiveClass = props.isActive ? '' : ' hidden';
 
   return (
-    <div className={`distance-learning-pane${isActiveClass}`}>
-      <input type="text" id="dl-search-bar" placeholder="Search for names.." />
+    <div id="distance-learning" className={`distance-learning-pane${isActiveClass}`}>
+      <input type="text" id="dist-learn-search-bar" placeholder="Search for names.." />
     </div>
   );
 };
