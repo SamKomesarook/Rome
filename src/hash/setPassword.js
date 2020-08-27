@@ -10,5 +10,9 @@ const id = '"id":1,';
 
 const file = `[{${id}${strHash}}]`;
 
-fs.writeFileSync('hash.json', file);
+if(process.argv[3] === "true"){
+    fs.writeFileSync('./src/hash/hash.json', file);
+}else{
+    fs.writeFileSync('hash.json', file);
+}
 console.log('new password has been set');
