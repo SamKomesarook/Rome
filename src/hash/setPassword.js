@@ -1,14 +1,14 @@
-var bcrypt = require('bcryptjs');
-var fs = require('fs');
+const bcrypt = require('bcryptjs');
+const fs = require('fs');
 
-pass = process.argv[2];
+const pass = process.argv[2];
 
-var hash = bcrypt.hashSync(pass, 9);
+const hash = bcrypt.hashSync(pass, 9);
 
-var strHash = '"value":"' + hash + '"';
-var id = '"id":1,';
+const strHash = `"value":"${hash}"`;
+const id = '"id":1,';
 
-var file = "[{" + id + strHash + "}]";
+const file = `[{${id}${strHash}}]`;
 
 fs.writeFileSync('hash.json', file);
-console.log("new password has been set");
+console.log('new password has been set');
