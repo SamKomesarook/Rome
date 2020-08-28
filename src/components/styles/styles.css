@@ -25,7 +25,7 @@ input[type=text], textarea {
     margin: 5px 1px 3px 0px;
     border: 1px solid #DDDDDD;
 }
-   
+
 input[type=text]:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
@@ -293,7 +293,7 @@ aside:hover .sidebar-item-text {
     margin: 1px;
 }
 
-.sidebar-item:hover{
+.sidebar-item:hover {
     border-right: 0.1rem solid var(--bg-contrast-primary);
 }
 
@@ -309,7 +309,7 @@ aside:hover .sidebar-item-text {
     top: 0;
     width: 20rem;
     height: 100vh;
-    background-color: var(--bg-contrast-secondary);
+    background-color: var(--bg-secondary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -319,6 +319,17 @@ aside:hover .sidebar-item-text {
     display: none;
 }
 
-iframe {
-    
+#dist-learn-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dist-learn-content {
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-radius: 0;
+    border-bottom: 1px solid #cdcdcd;
+    color: var(--bg-contrast-primary);
+    font-weight: normal ;
 }
