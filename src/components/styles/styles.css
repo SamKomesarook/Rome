@@ -35,6 +35,32 @@ input[type=text]:focus, textarea:focus {
 
 /* Glowing Blue Input Highlights <End> */
 
+.textfield-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.textfield-container > svg {
+    height: 1rem;
+    color: var(--bg-contrast-primary);
+}
+
+.textfield-container > input {
+    height: 2rem;
+    width: 100%;
+    background-color: transparent;
+    color: var(--bg-contrast-primary);
+    border: none;
+    border-bottom: 1px solid var(--bg-contrast-secondary);
+}
+
+.textfield-container > input:hover, .textfield-container > input:focus {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid var(--bg-contrast-primary);
+}
+
 /** CODING AREA **/
 
 #coding-area-wrapper {
@@ -303,7 +329,7 @@ aside:hover .sidebar-item-text {
 
 /** DISTANCE LEARNING **/
 
-.distance-learning-pane {
+.sidebar-item-pane {
     position: fixed;
     right: 5rem;
     top: 0;
@@ -313,10 +339,17 @@ aside:hover .sidebar-item-text {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-right: 2px solid #3c3c3c;
 }
 
 .hidden {
     display: none;
+}
+
+#filter-control {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 2px solid #3c3c3c;
 }
 
 #dist-learn-content-container {
@@ -329,7 +362,7 @@ aside:hover .sidebar-item-text {
     width: 100%;
     background-color: var(--bg-secondary);
     border-radius: 0;
-    border-bottom: 1px solid #cdcdcd;
+    border-bottom: 0.5px solid #3c3c3c;
     color: var(--bg-contrast-primary);
-    font-weight: normal ;
+    font-weight: normal;
 }
