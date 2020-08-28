@@ -307,7 +307,7 @@ aside:hover .sidebar-item-text {
     position: fixed;
     right: 5rem;
     top: 0;
-    width: 11rem;
+    width: 20rem;
     height: 100vh;
     background-color: var(--bg-contrast-secondary);
     display: flex;
@@ -317,4 +317,8 @@ aside:hover .sidebar-item-text {
 
 .hidden {
     display: none;
+}
+
+iframe {
+    
 }
