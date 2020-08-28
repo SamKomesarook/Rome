@@ -52,6 +52,8 @@ NUMBER: ('0' .. '9')+;
 
 STRLIT: '"' ~ ["\r\n]* '"';
 
+ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
+
 // Rules
 
 strargs : STRLIT #Str ;
