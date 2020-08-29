@@ -35,30 +35,62 @@ input[type=text]:focus, textarea:focus {
 
 /* Glowing Blue Input Highlights <End> */
 
-.textfield-container {
+.control-container {
     display: flex;
+    gap: 3%;
     align-items: center;
-    gap: 0.5rem;
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+    /* padding: 0.5rem 1rem; */
+    padding: 1rem 1rem;
+    height: 3rem;
+    width: 100%;
 }
 
-.textfield-container > svg {
+.control-container > svg {
     height: 1rem;
     color: var(--bg-contrast-primary);
 }
 
-.textfield-container > input {
+.control-container > .control {
     height: 2rem;
     width: 100%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    border-bottom: 1px solid var(--bg-contrast-secondary);
+    /* border-bottom: 1px solid var(--bg-contrast-secondary); */
 }
 
-.textfield-container > input:hover, .textfield-container > input:focus {
+.control-container > .control:hover, .control-container > .control:focus {
     border: none;
     box-shadow: none;
-    border-bottom: 2px solid var(--bg-contrast-primary);
+    /* border-bottom: 2px solid var(--bg-contrast-primary); */
+}
+
+.control-container > label {
+    color: var(--bg-contrast-primary);
+    font-size: 14px;
+    /* font-family: 'Open Sans', sans-serif; */
+}
+
+/* TODO: Nick - Update style to selectbox/dropdown list */
+.control-container > select {
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    /* border: 1px solid #dfdfdf; */
+    /* border-radius: 2px; */
+    /* margin-right: 2rem; */
+    /* padding: 1rem; */
+    padding-right: 1rem;
 }
 
 /** CODING AREA **/
@@ -316,7 +348,7 @@ aside:hover {
 
 aside:hover .sidebar-item-text {
     display: block;
-    margin: 1px;
+    margin: 3px;
 }
 
 .sidebar-item:hover {
@@ -350,6 +382,9 @@ aside:hover .sidebar-item-text {
     width: 100%;
     padding: 1rem;
     border-bottom: 2px solid #3c3c3c;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 #dist-learn-content-container {
