@@ -1,0 +1,63 @@
+body, html, #root, .app, .container {
+    width: 100%;
+    height: 100%;
+    background-color: #384047;
+  }
+
+.container {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginScreen {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    color: grey;
+}
+
+.inputField {
+    padding-top: 16px;
+}
+
+.input {
+    margin-top: 15%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    color: grey;
+    width: 100%;
+    font-size: 24px;
+    background: #384047;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    border-bottom: solid 1px grey;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.submitButton {
+    padding-top: 16px;
+}
+
+
+.btn {
+    font-family: "Times New Roman", Times, serif;
+    width: 75%;
+    min-width: 280px;
+    color: grey;
+    padding: 8px;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 8px;
+    background: #384047;
+    cursor: pointer;
+    border: solid 1px grey;
+}
