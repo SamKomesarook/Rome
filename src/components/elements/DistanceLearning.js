@@ -4,16 +4,17 @@ import DistanceLearningContent from './DistanceLearningContent';
 const DistanceLearning = (props) => {
   const DATA = [
     {
-      id: 'dl-1', week: 1, level: 'toddler', title: 'Why are there Four Firefoxes?', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
+      id: 'dl-1', week: 'w1', level: 'toddler', title: 'Why are there Four Firefoxes?', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
     },
     {
-      id: 'dl-2', week: 1, level: 'primary', title: 'Where do Browser Styles Come From?', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
+      id: 'dl-2', week: 'w1', level: 'primary', title: 'Where do Browser Styles Come From?', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
     },
   ];
 
   const [level, setLevel] = useState('all');
+  const [week, setWeek] = useState('all');
 
-  const FILTER_MAP = {
+  const LEVEL_FILTER_MAP = {
     all: () => true,
     toddler: (content) => content.level === 'toddler',
     primary: (content) => content.level === 'primary',
@@ -21,8 +22,17 @@ const DistanceLearning = (props) => {
     junior: (content) => content.level === 'junior',
   };
 
+  const WEEK_FILTER_MAP = {
+    all: () => true,
+    w1: (content) => content.week === 'w1',
+    w2: (content) => content.week === 'w2',
+    w3: (content) => content.week === 'w3',
+    w4: (content) => content.week === 'w4',
+  };
+
   const contentList = DATA
-    .filter(FILTER_MAP[level])
+    .filter(LEVEL_FILTER_MAP[level])
+    .filter(WEEK_FILTER_MAP[week])
     .map((content) => (
       <DistanceLearningContent
         id={content.id}
@@ -37,6 +47,10 @@ const DistanceLearning = (props) => {
 
   const handleChangeLevel = (e) => {
     setLevel(e.target.value);
+  };
+
+  const handleChangeWeek = (e) => {
+    setWeek(e.target.value);
   };
 
   return (
@@ -59,12 +73,12 @@ const DistanceLearning = (props) => {
         </div>
         <div className="control-container">
           <label forHtml="weeks">Week:</label>
-          <select name="weeks" id="weeks" className="control">
+          <select name="weeks" id="weeks" className="control" onChange={handleChangeWeek}>
             <option value="all">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="w1">1</option>
+            <option value="w2">2</option>
+            <option value="w3">3</option>
+            <option value="w4">4</option>
           </select>
         </div>
         {/* </div> */}
