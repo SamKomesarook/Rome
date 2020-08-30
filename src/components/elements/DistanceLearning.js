@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import DistanceLearningContent from './DistanceLearningContent';
 
-const DistanceLearning = (props) => {
+const DistanceLearning = ({ isActive }) => {
   const DATA = [
     {
       id: 'dl-1', week: 'w1', level: 'toddler', title: 'Why are there Four Firefoxes?', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
@@ -58,7 +59,7 @@ const DistanceLearning = (props) => {
     setSearchInput(e.target.value);
   };
 
-  const isActiveClass = props.isActive ? '' : ' hidden';
+  const isActiveClass = isActive ? '' : ' hidden';
 
   return (
     <div id="distance-learning" className={`sidebar-item-pane${isActiveClass}`}>
@@ -68,24 +69,28 @@ const DistanceLearning = (props) => {
           <input type="text" placeholder="Search for names.." className="control" onKeyUp={handleSearchInput} />
         </div>
         <div className="control-container">
-          <label forhtml="levels">Level:</label>
-          <select name="levels" id="levels" className="control" onChange={handleChangeLevel}>
-            <option value="all">All</option>
-            <option value="toddler">Toddler</option>
-            <option value="primary">Primary</option>
-            <option value="kindergarten">Kindergarten</option>
-            <option value="junior">Junior</option>
-          </select>
+          <label htmlFor="levels">
+            Level:
+            <select name="levels" id="levels" className="control" onChange={handleChangeLevel}>
+              <option value="all">All</option>
+              <option value="toddler">Toddler</option>
+              <option value="primary">Primary</option>
+              <option value="kindergarten">Kindergarten</option>
+              <option value="junior">Junior</option>
+            </select>
+          </label>
         </div>
         <div className="control-container">
-          <label forhtml="weeks">Week:</label>
-          <select name="weeks" id="weeks" className="control" onChange={handleChangeWeek}>
-            <option value="all">All</option>
-            <option value="w1">1</option>
-            <option value="w2">2</option>
-            <option value="w3">3</option>
-            <option value="w4">4</option>
-          </select>
+          <label htmlFor="weeks">
+            Week:
+            <select name="weeks" id="weeks" className="control" onChange={handleChangeWeek}>
+              <option value="all">All</option>
+              <option value="w1">1</option>
+              <option value="w2">2</option>
+              <option value="w3">3</option>
+              <option value="w4">4</option>
+            </select>
+          </label>
         </div>
       </div>
       <div id="dist-learn-content-container">
@@ -93,6 +98,10 @@ const DistanceLearning = (props) => {
       </div>
     </div>
   );
+};
+
+DistanceLearning.propTypes = {
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default DistanceLearning;
