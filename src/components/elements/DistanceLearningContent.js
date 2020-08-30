@@ -16,7 +16,11 @@ const DistanceLearningContent = ({ title, link }) => {
 
   return (
     <div>
-      <button type="button" className="dist-learn-content-result" onClick={handleSelectVideo}>
+      <button
+        type="button"
+        className="dist-learn-content-result"
+        onClick={handleSelectVideo}
+      >
         {title}
       </button>
     </div>

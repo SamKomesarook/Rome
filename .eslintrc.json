@@ -27,7 +27,7 @@
         "no-constant-condition": ["error", { "checkLoops": false }],
         "no-underscore-dangle": "off",
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-        "func-names": ["warn", "as-needed"]
-        
+        "func-names": ["warn", "as-needed"],
+        "no-unused-expressions": ["error", { "allowTernary": true }]
     }
 }

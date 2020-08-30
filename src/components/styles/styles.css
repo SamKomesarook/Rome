@@ -354,10 +354,9 @@ aside {
 
 .sidebar-item {
     width: 100%;
-    border-right: 0.1rem solid transparent;
 }
 
-.sidebar-link {
+.sidebar-btn {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -366,6 +365,7 @@ aside {
     padding: 0;
     color: var(--bg-contrast-secondary);
     background-color: var(--bg-secondary);
+    border-right: 0.1rem solid transparent;
 }
 
 .sidebar-item-text {
@@ -387,12 +387,9 @@ aside:hover .sidebar-item-text {
     margin: 3px;
 }
 
-.sidebar-item:hover {
-    border-right: 0.1rem solid var(--bg-contrast-primary);
-}
-
-.sidebar-link:hover {
+.sidebar-btn:hover, .sidebar-btn.toggle-btn[aria-pressed="true"] {
     color: var(--bg-contrast-primary);
+    border-right: 0.1rem solid var(--bg-contrast-primary);
 }
 
 /** DISTANCE LEARNING **/
