@@ -4,7 +4,7 @@ export const UiContext = React.createContext();
 
 export const UiProvider = (props) => {
   const [ui, setUi] = useState({
-    ctxIsVideoPlayerActivated: false,
+    ctxIsVideoPlayerActive: false,
     ctxYoutubeContentID: '',
   });
 

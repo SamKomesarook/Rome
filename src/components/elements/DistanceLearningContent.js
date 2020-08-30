@@ -7,7 +7,7 @@ const DistanceLearningContent = (props) => {
   const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeContentID}`;
 
   const handleSelectVideo = (e) => {
-    setUi((ui) => ({ ...ui, ctxIsVideoPlayerActivated: true, ctxYoutubeContentID: youtubeContentID }));
+    setUi((ui) => ({ ...ui, ctxIsVideoPlayerActive: true, ctxYoutubeContentID: youtubeContentID }));
   };
 
   //   const content = file_get_contents(`http://youtube.com/get_video_info?video_id=${youtubeContentID}`);

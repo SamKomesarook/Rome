@@ -102,7 +102,7 @@ input[type=text]:focus, textarea:focus {
 
 #coding-area-wrapper {
     width: 100%;
-    height: 50%;
+    height: 100%;
 }
 
 #coding-area {
@@ -403,7 +403,7 @@ aside:hover .sidebar-item-text {
 #video-player {
     background-color: black;
     width: 100%;
-    height: 50%;
+    height: 100%; /* CodingArea is also 100% so VideoPlayer will take up as much height as CodingArea */
     position: relative;
 }
 
@@ -426,5 +426,5 @@ aside:hover .sidebar-item-text {
 }
 
 .hidden {
-    /* display: none; */
+    display: none;
 }
