@@ -7,7 +7,7 @@ const DistanceLearningContent = (props) => {
   const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeContentID}`;
 
   const handleSelectVideo = (e) => {
-    setUi((ui) => ({ ...ui, ctxIsVideoOpen: true, ctxYoutubeContentID: youtubeContentID }));
+    setUi((ui) => ({ ...ui, ctxIsVideoPlayerActivated: true, ctxYoutubeContentID: youtubeContentID }));
   };
 
   //   const content = file_get_contents(`http://youtube.com/get_video_info?video_id=${youtubeContentID}`);
@@ -18,7 +18,7 @@ const DistanceLearningContent = (props) => {
   return (
     <div>
       {/* <iframe width="560" height="315" src={embedSrc} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> */}
-      <button type="button" className="dist-learn-content" onClick={handleSelectVideo}>
+      <button type="button" className="dist-learn-content-result" onClick={handleSelectVideo}>
         {props.title}
         {/* <iframe src={embedSrc} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> */}
       </button>

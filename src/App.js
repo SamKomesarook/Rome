@@ -9,15 +9,17 @@ import { InputArea, OutputArea } from './components/elements/IOArea';
 import { NetPeripheral, USBPeripheral } from './components/elements/Peripherals';
 import Switch from './components/elements/Switch';
 import Sidebar from './components/elements/Sidebar';
+import VideoPlayer from './components/elements/VideoPlayer';
 
 const App = () => (
   <UiProvider>
     <DisplayProvider>
       <div className="main">
         <div className="layout-column">
+          <VideoPlayer />
           <TextArea />
           <Switch />
-          <div className="btn-grp">
+          <div className="hflex">
             <StartButton />
             <StopButton />
           </div>
