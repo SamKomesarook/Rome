@@ -7,7 +7,11 @@ const DistanceLearningContent = ({ title, link }) => {
   const youtubeContentID = link.split('=')[1];
 
   const handleSelectVideo = () => {
-    setUi((ui) => ({ ...ui, ctxIsVideoPlayerActive: true, ctxYoutubeContentID: youtubeContentID }));
+    setUi((prevUI) => ({
+      ...prevUI,
+      ctxIsVideoPlayerActive: true,
+      ctxYoutubeContentID: youtubeContentID,
+    }));
   };
 
   return (

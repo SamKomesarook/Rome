@@ -8,7 +8,7 @@ const VideoPlayer = () => {
   const embedSrc = `https://www.youtube-nocookie.com/embed/${ui.ctxYoutubeContentID}`;
 
   const closeVideoPlayer = () => {
-    setUi((ui) => ({ ...ui, ctxIsVideoPlayerActive: false, ctxYoutubeContentID: '' }));
+    setUi((prevUI) => ({ ...prevUI, ctxIsVideoPlayerActive: false, ctxYoutubeContentID: '' }));
   };
 
   return (
