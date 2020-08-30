@@ -25,6 +25,8 @@ html, body {
     --bg-primary: #384047;
     --bg-secondary: #1E272E;
     --border-line: #9583FF;
+    --border-line-light: #4d5864;
+    --border-line-dark: #3c3c3c;
     --bg-contrast-primary: #ececec;
     --bg-contrast-secondary: #b6b6b6;
 }
