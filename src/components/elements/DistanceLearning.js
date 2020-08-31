@@ -8,7 +8,7 @@ const DistanceLearning = ({ isActive }) => {
       id: 'dl-1', week: 'w1', level: 'toddler', title: 'Why are there Four Firefoxes?', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
     },
     {
-      id: 'dl-2', week: 'w1', level: 'primary', title: 'Where do Browser Styles Come From?', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
+      id: 'dl-2', week: 'w3', level: 'primary', title: 'Where do Browser Styles Come From?', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
     },
   ];
 
@@ -93,7 +93,7 @@ const DistanceLearning = ({ isActive }) => {
           </label>
         </div>
       </div>
-      <div id="dist-learn-content-container">
+      <div className="list">
         {contentList}
       </div>
     </div>

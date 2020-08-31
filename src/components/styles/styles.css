@@ -254,7 +254,7 @@ input:checked + .slider:before {
 
 .secondary-btn {
     background-color: #D3D3D3;
-    color: black;
+    color: dimgray;
 }
 
 /** MEMORY **/
@@ -416,15 +416,16 @@ aside:hover .sidebar-item-text {
     gap: 0.5rem;
 }
 
-#dist-learn-content-container {
+.list {
     display: flex;
     flex-direction: column;
     width: 100%;
+    overflow: auto;
 }
 
-.dist-learn-content-result {
+.list-item {
     width: 100%;
-    height: 3rem;
+    padding: 0.75rem 0.75rem;
     background-color: var(--bg-secondary);
     border-radius: 0;
     border-bottom: 0.5px solid var(--border-line-dark);
