@@ -58,10 +58,10 @@ input[type=text]:focus, textarea:focus {
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    /* border-bottom: 1px solid var(--bg-contrast-secondary); */
+    cursor: pointer;
 }
 
-.control-container .control:hover, .control-container .control:focus {
+.control:hover, .control:focus {
     border: none;
     box-shadow: none;
 }
@@ -75,8 +75,7 @@ input[type=text]:focus, textarea:focus {
     gap: 0.5rem;
 }
 
-.control-container select {
-    width: 100%;
+select.control {
     -webkit-appearance: none;
     -moz-appearance: none;
     background: transparent;
@@ -86,11 +85,10 @@ input[type=text]:focus, textarea:focus {
     background-position-y: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-    cursor: pointer;
     padding-right: 1rem;
 }
 
-.control-container select > option {
+select.control > option {
     background-color: var(--bg-secondary);
 }
 
@@ -125,12 +123,12 @@ button:disabled {
     position: relative;
 }
 
-#video-player iframe {
+#video-player > iframe {
     height: 100%;
     width: 80%;
 }
 
-#video-player button {
+#video-player > button {
     position: absolute;
     right: 0;
     width: 2.5rem;
@@ -138,7 +136,7 @@ button:disabled {
     background: transparent;
 }
 
-#video-player button svg {
+#video-player > button > svg {
     width: 1rem;
     color: var(--bg-contrast-secondary);
 }
@@ -392,8 +390,6 @@ aside:hover .sidebar-item-text {
     border-right: 0.1rem solid var(--bg-contrast-primary);
 }
 
-/** DISTANCE LEARNING **/
-
 .sidebar-item-pane {
     position: fixed;
     right: 5rem;
@@ -406,6 +402,8 @@ aside:hover .sidebar-item-text {
     align-items: center;
     border-right: 2px solid var(--border-line-dark);
 }
+
+/** DISTANCE LEARNING **/
 
 #filter-control {
     width: 100%;
