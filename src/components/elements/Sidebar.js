@@ -1,28 +1,19 @@
 import React, { useState } from 'react';
 import DistanceLearning from './DistanceLearning';
 import SidebarButton from './SidebarButton';
+import HtmlElementUtil from '../../utils/HtmlElementUtil';
 
 const Sidebar = () => {
   const [activeSidebarItem, setActiveSidebarItem] = useState('');
   const DISTANCE_LEARNING = 'distance-learning';
   const HELP = 'help';
 
-  // TODO: Nick - Extract this function to a separate class
-  const hasParentID = (child, parentID) => {
-    if (child.parentNode === null || child.parentNode === undefined) {
-      return false;
-    }
-    if (child.parentNode.id === parentID) {
-      return true;
-    }
-    return hasParentID(child.parentNode, parentID);
-  };
-
   /* If user click an area outside the sidebar and distance learning tab while the tab is opened then close it. */
   window.onclick = (e) => {
-    if (!(e.target.id === 'sidebar' || hasParentID(e.target, 'sidebar'))
-    && e.target.id !== 'distance-learning'
-    && activeSidebarItem !== '') {
+    if (activeSidebarItem !== ''
+    && !(e.target.id === 'sidebar')
+    && !HtmlElementUtil.hasParentWithId(e.target, 'sidebar')
+    ) {
       setActiveSidebarItem('');
     }
   };
