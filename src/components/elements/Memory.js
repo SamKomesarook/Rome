@@ -12,6 +12,8 @@ const Memory = () => {
       <div
         className={`memory-cell${selectedMemoryCell}`}
         key={display.memory[id].key}
+        // style={{ background: `${display.memory[id].backgroundColor}` }}
+        style={{ background: `${display.memory[id].backgroundColor}` }}
       >
         {display.memory[id].content}
       </div>

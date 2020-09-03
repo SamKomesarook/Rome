@@ -24,6 +24,7 @@ export const DisplayProvider = (props) => {
           content: '', // defined content
           special: '', //
           name: '', //
+          backgroundColor: '', // Style: background color
         },
         {
           key: 1,
@@ -31,6 +32,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 2,
@@ -38,6 +40,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 3,
@@ -45,6 +48,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 4,
@@ -52,6 +56,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 5,
@@ -59,6 +64,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 6,
@@ -66,6 +72,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 7,
@@ -73,6 +80,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 8,
@@ -80,6 +88,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 9,
@@ -87,6 +96,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 10,
@@ -94,6 +104,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 11,
@@ -101,6 +112,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: 'usb',
           name: '',
+          backgroundColor: '',
         },
         {
           key: 12,
@@ -108,6 +120,7 @@ export const DisplayProvider = (props) => {
           content: '',
           special: 'net',
           name: '',
+          backgroundColor: '',
         },
 
       ],

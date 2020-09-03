@@ -11,6 +11,8 @@ class RVisitor extends RomeVisitor {
     this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
   }
 
+  getStrContent = (str) => str.slice(1, str.length - 1);
+
   visitChildren(ctx) {
     if (!ctx) {
       return;
@@ -257,6 +259,10 @@ class RVisitor extends RomeVisitor {
       return;
     }
     this.display.memory[this.display.selected].name = arg;
+  }
+
+  visitPaint(ctx) {
+    this.display.memory[this.display.selected].backgroundColor = this.getStrContent(ctx.children[2].getText());
   }
 }
 
