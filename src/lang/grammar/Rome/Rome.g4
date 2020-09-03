@@ -42,6 +42,9 @@ LEFT: 'last';
 
 LOOP: 'loop';
 
+STYLE: 'style';
+PAINT: 'paint';
+
 NEWLINE: '\n';
 
 WS: ' ';
@@ -74,6 +77,10 @@ expressions: expression NEWLINE;
 
 conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
+stylingExpressions: stylingExpression NEWLINE;
+
+stylingExpression: PAINT '(' STRLIT ')' # Paint;
+
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
@@ -88,4 +95,5 @@ expression:
 	| KREAD													# Kread
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
+	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
 	;

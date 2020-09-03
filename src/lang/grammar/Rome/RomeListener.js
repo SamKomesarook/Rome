@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.7.2
+// Generated from Rome.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -89,6 +89,24 @@ RomeListener.prototype.enterCond = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Cond.
 RomeListener.prototype.exitCond = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#stylingExpressions.
+RomeListener.prototype.enterStylingExpressions = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#stylingExpressions.
+RomeListener.prototype.exitStylingExpressions = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Paint.
+RomeListener.prototype.enterPaint = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Paint.
+RomeListener.prototype.exitPaint = function(ctx) {
 };
 
 
@@ -188,6 +206,15 @@ RomeListener.prototype.enterName = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Name.
 RomeListener.prototype.exitName = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Style.
+RomeListener.prototype.enterStyle = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Style.
+RomeListener.prototype.exitStyle = function(ctx) {
 };
 
 
