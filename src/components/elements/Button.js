@@ -79,6 +79,8 @@ const StopButton = () => {
         mem.name = '';
         mem.bgColor = '';
         mem.txtColor = '';
+        mem.txtSize = '';
+        mem.txtAlign = '';
       }
     }
 

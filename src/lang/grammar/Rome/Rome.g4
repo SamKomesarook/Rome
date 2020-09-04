@@ -46,8 +46,11 @@ STYLE: 'style';
 PAINT: 'paint';
 TEXTCOLOR: 'text_color';
 TEXTSIZE: 'text_size';
+TEXTALIGN: 'text_align';
+
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
+ALIGNPROP: 'left' | 'center' | 'right';
 
 NEWLINE: '\n';
 
@@ -85,7 +88,8 @@ stylingExpressions: stylingExpression NEWLINE;
 
 stylingExpression: PAINT '(' COLOR ')' 	# Paint
 	| TEXTCOLOR '(' COLOR ')' 			# TextColor
-	| TEXTSIZE '(' SIZE ')'				# TextSize;
+	| TEXTSIZE '(' SIZE ')'				# TextSize
+	| TEXTALIGN '(' ALIGNPROP ')'		# TextAlign;
 
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 

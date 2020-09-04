@@ -272,6 +272,10 @@ class RVisitor extends RomeVisitor {
   visitTextSize(ctx) {
     this.display.memory[this.display.selected].txtSize = ctx.children[2].getText();
   }
+
+  visitTextAlign(ctx) {
+    this.display.memory[this.display.selected].txtAlign = ctx.children[2].getText();
+  }
 }
 
 export {

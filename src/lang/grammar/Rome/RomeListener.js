@@ -128,6 +128,15 @@ RomeListener.prototype.exitTextSize = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#TextAlign.
+RomeListener.prototype.enterTextAlign = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextAlign.
+RomeListener.prototype.exitTextAlign = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

@@ -17,6 +17,7 @@ const Memory = () => {
           'background-color': `${display.memory[id].bgColor}`,
           color: `${display.memory[id].txtColor}`,
           'font-size': `${display.memory[id].txtSize}`,
+          'text-align': `${display.memory[id].txtAlign}`,
         }}
       >
         {display.memory[id].content}
