@@ -78,6 +78,7 @@ const StopButton = () => {
         mem.content = '';
         mem.name = '';
         mem.backgroundColor = '';
+        mem.color = '';
       }
     }
 

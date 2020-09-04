@@ -110,6 +110,15 @@ RomeListener.prototype.exitPaint = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#TextColor.
+RomeListener.prototype.enterTextColor = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextColor.
+RomeListener.prototype.exitTextColor = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

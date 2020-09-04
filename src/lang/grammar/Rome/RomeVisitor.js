@@ -78,6 +78,12 @@ RomeVisitor.prototype.visitPaint = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#TextColor.
+RomeVisitor.prototype.visitTextColor = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Set.
 RomeVisitor.prototype.visitSet = function(ctx) {
   return this.visitChildren(ctx);

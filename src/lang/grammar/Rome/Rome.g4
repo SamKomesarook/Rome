@@ -44,6 +44,7 @@ LOOP: 'loop';
 
 STYLE: 'style';
 PAINT: 'paint';
+TEXTCOLOR: 'text_color';
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 
 NEWLINE: '\n';
@@ -80,7 +81,8 @@ conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
 stylingExpressions: stylingExpression NEWLINE;
 
-stylingExpression: PAINT '(' COLOR ')' # Paint;
+stylingExpression: PAINT '(' COLOR ')' 	# Paint
+	| TEXTCOLOR '(' COLOR ')' 			# TextColor;
 
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
