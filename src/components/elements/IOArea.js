@@ -3,15 +3,16 @@ import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs } from '../../lang/Common';
 import { NetToggle, USBToggle } from './Peripherals';
 
-// TODO no updates use setDisplay. Should we?
 const InputArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
   const handleKey = (event) => {
     if (event.keyCode === 13) {
       const newMem = display.memory;
-      const netMemoryKey = display.specialMemoryCells.find((element) => element.specialContent === 'net').key;
-      const usbMemoryKey = display.specialMemoryCells.find((element) => element.specialContent === 'usb').key;
+
+      // Get the keys of special memory cells
+      const netMemoryKey = display.specialKeys.find((element) => element.specialContent === 'net').key;
+      const usbMemoryKey = display.specialKeys.find((element) => element.specialContent === 'usb').key;
       if (display.selected === netMemoryKey) {
         NetToggle();
       } else if (display.selected === usbMemoryKey) {
@@ -19,8 +20,8 @@ const InputArea = () => {
       } else {
         newMem[display.selected].content = display.input;
       }
-      setDisplay((display) => ({
-        ...display,
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
         memory: newMem,
         reading: false,
       }));
@@ -28,11 +29,11 @@ const InputArea = () => {
     }
   };
 
-  const onChange = (event) => {
+  const handleChange = (event) => {
     event.preventDefault();
-    const { value } = event.target;
-    setDisplay((display) => ({
-      ...display,
+    const value = event.target;
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
       input: value,
     }));
   };
@@ -43,7 +44,7 @@ const InputArea = () => {
       size="60"
       type="text"
       onKeyDown={handleKey}
-      onChange={onChange}
+      onChange={handleChange}
       disabled={!display.reading}
       value={!display.reading ? '' : display.input}
     />

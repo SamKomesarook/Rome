@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './components/styles/styles.css';
 import TextArea from './components/elements/TextArea';
 import { DisplayProvider } from './state/DisplayState';
 import { UiProvider } from './state/UiContext';

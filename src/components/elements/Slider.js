@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 
 const Slider = () => {
-  const [setDisplay] = useContext(DisplayContext);
+  const [display, setDisplay] = useContext(DisplayContext);
 
   function onChange(event) {
     event.preventDefault();
     const { value } = event.target;
-    setDisplay((display) => ({
-      ...display,
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
       delay: value,
     }));
   }

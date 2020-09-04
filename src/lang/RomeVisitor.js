@@ -89,7 +89,7 @@ class RVisitor extends RomeVisitor {
 
   visitMove(ctx) {
     if (ctx.children[2].getText() === 'next') {
-      const maxUsableMemoryKey = this.display.memorySize - this.display.specialMemoryCells.length - 1;
+      const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
       if (this.display.selected === maxUsableMemoryKey) {
         this.reporter.generalError('No more memory');
         return;
@@ -127,8 +127,9 @@ class RVisitor extends RomeVisitor {
       return;
     }
 
-    const netMemoryKey = this.display.specialMemoryCells.find((element) => element.specialContent === 'net').key;
-    const usbMemoryKey = this.display.specialMemoryCells.find((element) => element.specialContent === 'usb').key;
+    // Get the keys of special memory cells
+    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
+    const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
     if (this.display.selected === netMemoryKey) {
       NetToggle();
     } else if (this.display.selected === usbMemoryKey) {

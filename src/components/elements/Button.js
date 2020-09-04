@@ -8,13 +8,12 @@ const { RomeParser } = require('../../lang/grammar/Rome/RomeParser');
 const { MachineLexer } = require('../../lang/grammar/Machine/MachineLexer');
 const { MachineParser } = require('../../lang/grammar/Machine/MachineParser');
 
-// TODO no updates use setDisplay. Should we?
 const StartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  const start = (event) => {
-    setDisplay((display) => ({
-      ...display,
+  const handleStart = () => {
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
       running: true,
     }));
     const chars = new antlr4.InputStream(display.text);
@@ -38,12 +37,11 @@ const StartButton = () => {
             display.commands.push(child);
           }
         }
-        setDisplay((display) => ({
-          ...display,
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
           errors: false,
         }));
         processInstrs(display, setDisplay);
-        return true;
       } catch (e) {
         console.log(e);
         // TODO print error messages
@@ -54,7 +52,7 @@ const StartButton = () => {
   return (
     <button
       id="start-button"
-      onClick={start}
+      onClick={handleStart}
       type="button"
       disabled={!!display.running}
       className="std-btn primary-btn"
@@ -66,11 +64,11 @@ const StartButton = () => {
 
 const StopButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const stop = (event) => {
+  const handleStop = () => {
     const newMem = display.memory;
     if (display.machine) {
-      for (const memory of newMem) {
-        memory.content = 0;
+      for (const mem of newMem) {
+        mem.content = 0;
       }
     } else {
       for (const mem of newMem) {
@@ -87,8 +85,8 @@ const StopButton = () => {
       }
     }
 
-    setDisplay((display) => ({
-      ...display,
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
       running: false,
       output: '',
       input: '',
@@ -105,7 +103,7 @@ const StopButton = () => {
   return (
     <button
       id="stop-button"
-      onClick={stop}
+      onClick={handleStop}
       type="button"
       disabled={!display.running}
       className="std-btn secondary-btn"

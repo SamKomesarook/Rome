@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
-import '../styles/styles.css';
 
 const Memory = () => {
-  const [display] = useContext(DisplayContext);
+  const [display, setDisplay] = useContext(DisplayContext);
 
   const getMemory = (id) => {
     const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
@@ -27,9 +26,10 @@ const Memory = () => {
     );
   };
 
-  const memoryCellList = (numCells) => {
+  // Construct an array of memory cells with [numCells] size
+  const memoryCellList = (memorySize) => {
     const tempMemoryCellList = [];
-    for (let i = 0; i < numCells; i++) {
+    for (let i = 0; i < memorySize; i++) {
       tempMemoryCellList.push(getMemory(i));
     }
     return tempMemoryCellList;
@@ -37,7 +37,7 @@ const Memory = () => {
 
   return (
     <div className="memory-section">
-      {memoryCellList(12)}
+      {memoryCellList(display.memorySize)}
     </div>
   );
 };

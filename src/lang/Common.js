@@ -33,8 +33,8 @@ const processInstrs = (display, setDisplay) => {
         errors.generalError("Unknown function 'k_read'");
         break;
       }
-      setDisplay((display) => ({
-        ...display,
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
         reading: true,
       }));
       break;

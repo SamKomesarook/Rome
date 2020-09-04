@@ -4,7 +4,7 @@ export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {
   const localMemorySize = 12;
-  const localSpecialMemoryCells = [
+  const localSpecialKeys = [
     { key: localMemorySize - 2, specialContent: 'usb' },
     { key: localMemorySize - 1, specialContent: 'net' },
   ];
@@ -27,8 +27,9 @@ export const DisplayProvider = (props) => {
         underline: '', // Style: underline font
       });
     }
-    for (const cell of localSpecialMemoryCells) {
-      memoryArray[cell.key].special = memoryArray[cell.key].specialContent;
+    // Set special content for special memory cell
+    for (const specialKey of localSpecialKeys) {
+      memoryArray[specialKey.key].special = memoryArray[specialKey.key].specialContent;
     }
     return memoryArray;
   };
@@ -48,7 +49,7 @@ export const DisplayProvider = (props) => {
       importIO: false, // If the user has imported the IO package
       importNet: false, // If the user has imported the Net package
       memorySize: localMemorySize,
-      specialMemoryCells: localSpecialMemoryCells,
+      specialKeys: localSpecialKeys,
       memory: createMemoryArray(),
     },
   );
