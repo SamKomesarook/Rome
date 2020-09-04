@@ -155,6 +155,15 @@ RomeListener.prototype.exitItalic = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#Underline.
+RomeListener.prototype.enterUnderline = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Underline.
+RomeListener.prototype.exitUnderline = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

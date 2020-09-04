@@ -284,6 +284,11 @@ class RVisitor extends RomeVisitor {
     const isItalic = (ctx.children[2].getText() === 'true');
     this.display.memory[this.display.selected].italic = isItalic ? 'italic' : '';
   }
+
+  visitUnderline(ctx) {
+    const isUnderline = (ctx.children[2].getText() === 'true');
+    this.display.memory[this.display.selected].underline = isUnderline ? 'underline' : '';
+  }
 }
 
 export {

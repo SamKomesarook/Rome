@@ -49,6 +49,7 @@ TEXT_SIZE: 'text_size';
 TEXT_ALIGN: 'text_align';
 BOLD: 'bold';
 ITALIC: 'italic';
+UNDERLINE: 'underline';
 
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
@@ -96,6 +97,7 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
 	| BOLD '(' BOOLEAN_PROP ')'			# Bold
 	| ITALIC '(' BOOLEAN_PROP ')'		# Italic
+	| UNDERLINE '(' BOOLEAN_PROP ')'	# Underline 
 	;
 	
 

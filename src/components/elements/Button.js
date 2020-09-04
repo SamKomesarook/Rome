@@ -83,6 +83,7 @@ const StopButton = () => {
         mem.txtAlign = '';
         mem.bold = '';
         mem.italic = '';
+        mem.underline = '';
       }
     }
 

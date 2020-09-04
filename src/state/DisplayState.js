@@ -17,6 +17,7 @@ export const DisplayProvider = (props) => {
       txtAlign: '', // Style: text alignment
       bold: '', // Style: bold font
       italic: '', // Style: italic font
+      underline: '', // Style: underline font
     });
 
     if (i === 11) {
