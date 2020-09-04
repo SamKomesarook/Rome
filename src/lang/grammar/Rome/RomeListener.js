@@ -146,6 +146,15 @@ RomeListener.prototype.exitBold = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#Italic.
+RomeListener.prototype.enterItalic = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Italic.
+RomeListener.prototype.exitItalic = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

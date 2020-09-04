@@ -48,6 +48,7 @@ TEXT_COLOR: 'text_color';
 TEXT_SIZE: 'text_size';
 TEXT_ALIGN: 'text_align';
 BOLD: 'bold';
+ITALIC: 'italic';
 
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
@@ -94,6 +95,7 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 	| TEXT_SIZE '(' SIZE ')'			# TextSize
 	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
 	| BOLD '(' BOOLEAN_PROP ')'			# Bold
+	| ITALIC '(' BOOLEAN_PROP ')'		# Italic
 	;
 	
 

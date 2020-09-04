@@ -19,6 +19,7 @@ const Memory = () => {
           'font-size': `${display.memory[id].txtSize}`,
           'text-align': `${display.memory[id].txtAlign}`,
           'font-weight': `${display.memory[id].bold}`,
+          'font-style': `${display.memory[id].italic}`,
         }}
       >
         {display.memory[id].content}

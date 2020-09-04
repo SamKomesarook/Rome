@@ -276,9 +276,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    console.log(ctx.children[2].getText());
     const isBold = (ctx.children[2].getText() === 'true');
     this.display.memory[this.display.selected].bold = isBold ? 'bold' : '';
+  }
+
+  visitItalic(ctx) {
+    const isItalic = (ctx.children[2].getText() === 'true');
+    this.display.memory[this.display.selected].italic = isItalic ? 'italic' : '';
   }
 }
 
