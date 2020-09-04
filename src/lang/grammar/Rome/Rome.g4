@@ -44,6 +44,7 @@ LOOP: 'loop';
 
 STYLE: 'style';
 PAINT: 'paint';
+COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 
 NEWLINE: '\n';
 
@@ -79,7 +80,7 @@ conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
 stylingExpressions: stylingExpression NEWLINE;
 
-stylingExpression: PAINT '(' STRLIT ')' # Paint;
+stylingExpression: PAINT '(' COLOR ')' # Paint;
 
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 

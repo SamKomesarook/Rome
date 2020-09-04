@@ -262,7 +262,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitPaint(ctx) {
-    this.display.memory[this.display.selected].backgroundColor = this.getStrContent(ctx.children[2].getText());
+    this.display.memory[this.display.selected].backgroundColor = ctx.children[2].getText();
   }
 }
 
