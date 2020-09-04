@@ -24,8 +24,8 @@ export const DisplayProvider = (props) => {
           content: '', // defined content
           special: '', //
           name: '', //
-          backgroundColor: '', // Style: background color
-          color: '', // Style: text color
+          bgColor: '', // Style: background color
+          txtColor: '', // Style: text color
         },
         {
           key: 1,
@@ -33,8 +33,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 2,
@@ -42,8 +42,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 3,
@@ -51,8 +51,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 4,
@@ -60,8 +60,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 5,
@@ -69,8 +69,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 6,
@@ -78,8 +78,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 7,
@@ -87,8 +87,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 8,
@@ -96,8 +96,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 9,
@@ -105,8 +105,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 10,
@@ -114,8 +114,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: '',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 11,
@@ -123,8 +123,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: 'usb',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
         {
           key: 12,
@@ -132,8 +132,8 @@ export const DisplayProvider = (props) => {
           content: '',
           special: 'net',
           name: '',
-          backgroundColor: '',
-          color: '', // Style: text color
+          bgColor: '',
+          txtColor: '',
         },
 
       ],
