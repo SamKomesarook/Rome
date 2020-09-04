@@ -13,7 +13,11 @@ const Memory = () => {
         className={`memory-cell${selectedMemoryCell}`}
         key={display.memory[id].key}
         // style={{ background: `${display.memory[id].backgroundColor}` }}
-        style={{ background: `${display.memory[id].bgColor}`, color: `${display.memory[id].txtColor}` }}
+        style={{
+          'background-color': `${display.memory[id].bgColor}`,
+          color: `${display.memory[id].txtColor}`,
+          'font-size': `${display.memory[id].txtSize}`,
+        }}
       >
         {display.memory[id].content}
       </div>

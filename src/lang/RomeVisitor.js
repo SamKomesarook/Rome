@@ -268,6 +268,10 @@ class RVisitor extends RomeVisitor {
   visitTextColor(ctx) {
     this.display.memory[this.display.selected].txtColor = ctx.children[2].getText();
   }
+
+  visitTextSize(ctx) {
+    this.display.memory[this.display.selected].txtSize = ctx.children[2].getText();
+  }
 }
 
 export {

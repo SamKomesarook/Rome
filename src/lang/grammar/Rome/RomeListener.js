@@ -119,6 +119,15 @@ RomeListener.prototype.exitTextColor = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#TextSize.
+RomeListener.prototype.enterTextSize = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextSize.
+RomeListener.prototype.exitTextSize = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

@@ -45,7 +45,9 @@ LOOP: 'loop';
 STYLE: 'style';
 PAINT: 'paint';
 TEXTCOLOR: 'text_color';
+TEXTSIZE: 'text_size';
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
+SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
 
 NEWLINE: '\n';
 
@@ -82,7 +84,8 @@ conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 stylingExpressions: stylingExpression NEWLINE;
 
 stylingExpression: PAINT '(' COLOR ')' 	# Paint
-	| TEXTCOLOR '(' COLOR ')' 			# TextColor;
+	| TEXTCOLOR '(' COLOR ')' 			# TextColor
+	| TEXTSIZE '(' SIZE ')'				# TextSize;
 
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 

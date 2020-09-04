@@ -13,6 +13,7 @@ export const DisplayProvider = (props) => {
       name: '', //
       bgColor: '', // Style: background color
       txtColor: '', // Style: text color
+      txtSize: '', // Style: text size
     });
 
     if (i === 11) {
