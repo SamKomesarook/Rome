@@ -3,29 +3,35 @@ import React, { useState } from 'react';
 export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {
-  const memoryArray = [];
-  for (let i = 0; i <= 12; i++) {
-    memoryArray.push({
-      key: i, // Unique key
-      type: '', // Type 'numbers or letters'
-      content: '', // defined content
-      special: '', //
-      name: '', //
-      bgColor: '', // Style: background color
-      txtColor: '', // Style: text color
-      txtSize: '', // Style: text size
-      txtAlign: '', // Style: text alignment
-      bold: '', // Style: bold font
-      italic: '', // Style: italic font
-      underline: '', // Style: underline font
-    });
+  const localMemorySize = 12;
+  const localSpecialMemoryCells = [
+    { key: localMemorySize - 2, specialContent: 'usb' },
+    { key: localMemorySize - 1, specialContent: 'net' },
+  ];
 
-    if (i === 11) {
-      memoryArray[i].special = 'usb';
-    } else if (i === 12) {
-      memoryArray[i].special = 'net';
+  const createMemoryArray = () => {
+    const memoryArray = [];
+    for (let i = 0; i < localMemorySize; i++) {
+      memoryArray.push({
+        key: i, // Unique key
+        type: '', // Type 'numbers or letters'
+        content: '', // defined content
+        special: '', //
+        name: '', //
+        bgColor: '', // Style: background color
+        txtColor: '', // Style: text color
+        txtSize: '', // Style: text size
+        txtAlign: '', // Style: text alignment
+        bold: '', // Style: bold font
+        italic: '', // Style: italic font
+        underline: '', // Style: underline font
+      });
     }
-  }
+    for (const cell of localSpecialMemoryCells) {
+      memoryArray[cell.key].special = memoryArray[cell.key].specialContent;
+    }
+    return memoryArray;
+  };
 
   const [display, setDisplay] = useState(
     {
@@ -41,7 +47,9 @@ export const DisplayProvider = (props) => {
       commands: [], // The saved list of commands while the program is reading user input
       importIO: false, // If the user has imported the IO package
       importNet: false, // If the user has imported the Net package
-      memory: memoryArray,
+      memorySize: localMemorySize,
+      specialMemoryCells: localSpecialMemoryCells,
+      memory: createMemoryArray(),
     },
   );
 

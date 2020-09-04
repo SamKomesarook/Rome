@@ -10,9 +10,11 @@ const InputArea = () => {
   const handleKey = (event) => {
     if (event.keyCode === 13) {
       const newMem = display.memory;
-      if (display.selected === 10) {
+      const netMemoryKey = display.specialMemoryCells.find((element) => element.specialContent === 'net').key;
+      const usbMemoryKey = display.specialMemoryCells.find((element) => element.specialContent === 'usb').key;
+      if (display.selected === netMemoryKey) {
         NetToggle();
-      } else if (display.selected === 11) {
+      } else if (display.selected === usbMemoryKey) {
         USBToggle();
       } else {
         newMem[display.selected].content = display.input;

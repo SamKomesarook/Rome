@@ -100,7 +100,6 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 	| UNDERLINE '(' BOOLEAN_PROP ')'	# Underline 
 	;
 	
-
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
