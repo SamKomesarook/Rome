@@ -137,6 +137,15 @@ RomeListener.prototype.exitTextAlign = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#Bold.
+RomeListener.prototype.enterBold = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Bold.
+RomeListener.prototype.exitBold = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };

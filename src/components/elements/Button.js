@@ -81,6 +81,7 @@ const StopButton = () => {
         mem.txtColor = '';
         mem.txtSize = '';
         mem.txtAlign = '';
+        mem.bold = '';
       }
     }
 

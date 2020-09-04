@@ -15,6 +15,7 @@ export const DisplayProvider = (props) => {
       txtColor: '', // Style: text color
       txtSize: '', // Style: text size
       txtAlign: '', // Style: text alignment
+      bold: '', // Style: bold font
     });
 
     if (i === 11) {

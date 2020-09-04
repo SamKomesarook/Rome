@@ -96,6 +96,12 @@ RomeVisitor.prototype.visitTextAlign = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#Bold.
+RomeVisitor.prototype.visitBold = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Set.
 RomeVisitor.prototype.visitSet = function(ctx) {
   return this.visitChildren(ctx);

@@ -11,8 +11,6 @@ class RVisitor extends RomeVisitor {
     this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
   }
 
-  getStrContent = (str) => str.slice(1, str.length - 1);
-
   visitChildren(ctx) {
     if (!ctx) {
       return;
@@ -275,6 +273,12 @@ class RVisitor extends RomeVisitor {
 
   visitTextAlign(ctx) {
     this.display.memory[this.display.selected].txtAlign = ctx.children[2].getText();
+  }
+
+  visitBold(ctx) {
+    console.log(ctx.children[2].getText());
+    const isBold = (ctx.children[2].getText() === 'true');
+    this.display.memory[this.display.selected].bold = isBold ? 'bold' : '';
   }
 }
 

@@ -44,17 +44,20 @@ LOOP: 'loop';
 
 STYLE: 'style';
 PAINT: 'paint';
-TEXTCOLOR: 'text_color';
-TEXTSIZE: 'text_size';
-TEXTALIGN: 'text_align';
+TEXT_COLOR: 'text_color';
+TEXT_SIZE: 'text_size';
+TEXT_ALIGN: 'text_align';
+BOLD: 'bold';
 
 COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
 SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
-ALIGNPROP: 'left' | 'center' | 'right';
+ALIGN_PROP: 'left' | 'center' | 'right';
 
 NEWLINE: '\n';
 
 WS: ' ';
+
+BOOLEAN_PROP: 'true' | 'false';
 
 IDENTIFIER: [a-zA-Z]+;
 
@@ -87,9 +90,12 @@ conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 stylingExpressions: stylingExpression NEWLINE;
 
 stylingExpression: PAINT '(' COLOR ')' 	# Paint
-	| TEXTCOLOR '(' COLOR ')' 			# TextColor
-	| TEXTSIZE '(' SIZE ')'				# TextSize
-	| TEXTALIGN '(' ALIGNPROP ')'		# TextAlign;
+	| TEXT_COLOR '(' COLOR ')' 			# TextColor
+	| TEXT_SIZE '(' SIZE ')'			# TextSize
+	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
+	| BOLD '(' BOOLEAN_PROP ')'			# Bold
+	;
+	
 
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
