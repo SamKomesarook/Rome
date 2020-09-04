@@ -3,6 +3,25 @@ import React, { useState } from 'react';
 export const DisplayContext = React.createContext();
 
 export const DisplayProvider = (props) => {
+  const memoryArray = [];
+  for (let i = 0; i <= 12; i++) {
+    memoryArray.push({
+      key: i, // Unique key
+      type: '', // Type 'numbers or letters'
+      content: '', // defined content
+      special: '', //
+      name: '', //
+      bgColor: '', // Style: background color
+      txtColor: '', // Style: text color
+    });
+
+    if (i === 11) {
+      memoryArray[i].special = 'usb';
+    } else if (i === 12) {
+      memoryArray[i].special = 'net';
+    }
+  }
+
   const [display, setDisplay] = useState(
     {
       machine: false, // If the user is using the Machine language
@@ -17,126 +36,7 @@ export const DisplayProvider = (props) => {
       commands: [], // The saved list of commands while the program is reading user input
       importIO: false, // If the user has imported the IO package
       importNet: false, // If the user has imported the Net package
-      memory: [ // Memory array
-        {
-          key: 0, // Unique key
-          type: '', // Type 'numbers or letters'
-          content: '', // defined content
-          special: '', //
-          name: '', //
-          bgColor: '', // Style: background color
-          txtColor: '', // Style: text color
-        },
-        {
-          key: 1,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 2,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 3,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 4,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 5,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 6,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 7,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 8,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 9,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 10,
-          type: '',
-          content: '',
-          special: '',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 11,
-          type: '',
-          content: '',
-          special: 'usb',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-        {
-          key: 12,
-          type: '',
-          content: '',
-          special: 'net',
-          name: '',
-          bgColor: '',
-          txtColor: '',
-        },
-
-      ],
+      memory: memoryArray,
     },
   );
 
