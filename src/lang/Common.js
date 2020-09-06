@@ -39,7 +39,7 @@ const processInstrs = (display, setDisplay) => {
       }));
       break;
     } else {
-      instr.accept(display.machine ? new MVisitor(setDisplay, display) : new RVisitor(setDisplay, display));
+      instr.accept(display.machine ? new MVisitor(display, setDisplay) : new RVisitor(display, setDisplay));
     }
   }
 };

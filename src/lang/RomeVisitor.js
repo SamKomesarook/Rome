@@ -4,10 +4,10 @@ import { ErrorReporter } from './Common';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(set, display) {
+  constructor(display, setDisplay) {
     super();
-    this.set = set;
     this.display = display;
+    this.setDisplay = setDisplay;
     this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
   }
 
@@ -44,7 +44,7 @@ class RVisitor extends RomeVisitor {
   visitSet(ctx) {
     const newMemory = this.display.memory;
     newMemory[this.display.selected].type = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
-    this.set((display) => ({
+    this.setDisplay((display) => ({
       ...display,
       memory: newMemory,
     }));

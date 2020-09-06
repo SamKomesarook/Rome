@@ -1,9 +1,9 @@
 import { MachineVisitor } from './grammar/Machine/MachineVisitor';
 
 class MVisitor extends MachineVisitor {
-  constructor(set, display) {
+  constructor(display, setDisplay) {
     super();
-    this.set = set;
+    this.setDisplay = setDisplay;
     this.display = display;
   }
 
