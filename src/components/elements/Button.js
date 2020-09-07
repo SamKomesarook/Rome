@@ -65,31 +65,11 @@ const StartButton = () => {
 const StopButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const handleStop = () => {
-    const newMem = display.memory;
-    if (display.machine) {
-      for (const mem of newMem) {
-        mem.content = 0;
-      }
-    } else {
-      for (const mem of newMem) {
-        mem.type = '';
-        mem.content = '';
-        mem.name = '';
-      }
-    }
-
+    // Reset to the default value but keep machine and text value
     setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      running: false,
-      output: '',
-      input: '',
-      errors: false,
-      reading: false,
-      selected: 0,
-      commands: [],
-      importIO: false,
-      importNet: false,
-      memory: newMem,
+      ...DisplayContext.DEFAULT(),
+      machine: prevDisplay.machine,
+      text: prevDisplay.text,
     }));
   };
 
