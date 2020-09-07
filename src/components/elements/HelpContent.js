@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { UiContext } from '../../state/UiContext';
 
-const HelpContent = ({ title, link }) => {
+const HelpContent = ({ topic, link }) => {
   const [ui, setUi] = useContext(UiContext);
   const youtubeContentID = link.split('=')[1];
 
@@ -20,13 +20,13 @@ const HelpContent = ({ title, link }) => {
       className="list-item"
       onClick={handleSelectVideo}
     >
-      {title}
+      {topic}
     </button>
   );
 };
 
 HelpContent.propTypes = {
-  title: PropTypes.string.isRequired,
+  topic: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
 };
 
