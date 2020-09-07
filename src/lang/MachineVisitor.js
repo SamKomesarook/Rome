@@ -3,8 +3,8 @@ import { MachineVisitor } from './grammar/Machine/MachineVisitor';
 class MVisitor extends MachineVisitor {
   constructor(display, setDisplay) {
     super();
-    this.setDisplay = setDisplay;
     this.display = display;
+    this.setDisplay = setDisplay;
   }
 
   // TODO move the method below to common file

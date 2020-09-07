@@ -75,13 +75,6 @@ const StopButton = () => {
         mem.type = '';
         mem.content = '';
         mem.name = '';
-        mem.bgColor = '';
-        mem.txtColor = '';
-        mem.txtSize = '';
-        mem.txtAlign = '';
-        mem.bold = '';
-        mem.italic = '';
-        mem.underline = '';
       }
     }
 

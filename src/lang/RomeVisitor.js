@@ -265,34 +265,90 @@ class RVisitor extends RomeVisitor {
   }
 
   visitPaint(ctx) {
-    this.display.memory[this.display.selected].bgColor = ctx.children[2].getText();
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        bgColor: newValue,
+      },
+    }));
   }
 
   visitTextColor(ctx) {
-    this.display.memory[this.display.selected].txtColor = ctx.children[2].getText();
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtColor: newValue,
+      },
+    }));
   }
 
   visitTextSize(ctx) {
-    this.display.memory[this.display.selected].txtSize = ctx.children[2].getText();
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtSize: newValue,
+      },
+    }));
   }
 
   visitTextAlign(ctx) {
-    this.display.memory[this.display.selected].txtAlign = ctx.children[2].getText();
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtAlign: newValue,
+      },
+    }));
   }
 
   visitBold(ctx) {
     const isBold = (ctx.children[2].getText() === 'true');
-    this.display.memory[this.display.selected].bold = isBold ? 'bold' : '';
+    const newValue = isBold ? 'bold' : '';
+    // Update display.outputStyle.bold
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        bold: newValue,
+      },
+    }));
   }
 
   visitItalic(ctx) {
     const isItalic = (ctx.children[2].getText() === 'true');
-    this.display.memory[this.display.selected].italic = isItalic ? 'italic' : '';
+    const newValue = isItalic ? 'italic' : '';
+    // Update display.outputStyle.italic
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        italic: newValue,
+      },
+    }));
   }
 
   visitUnderline(ctx) {
     const isUnderline = (ctx.children[2].getText() === 'true');
-    this.display.memory[this.display.selected].underline = isUnderline ? 'underline' : '';
+    const newValue = isUnderline ? 'underline' : '';
+    // Update display.outputStyle.underline
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        underline: newValue,
+      },
+    }));
   }
 }
 

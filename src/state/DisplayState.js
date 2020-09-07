@@ -18,13 +18,6 @@ export const DisplayProvider = (props) => {
         content: '', // defined content
         special: '', //
         name: '', //
-        bgColor: '', // Style: background color
-        txtColor: '', // Style: text color
-        txtSize: '', // Style: text size
-        txtAlign: '', // Style: text alignment
-        bold: '', // Style: bold font
-        italic: '', // Style: italic font
-        underline: '', // Style: underline font
       });
     }
     // Set special content for special memory cell
@@ -48,6 +41,15 @@ export const DisplayProvider = (props) => {
       commands: [], // The saved list of commands while the program is reading user input
       importIO: false, // If the user has imported the IO package
       importNet: false, // If the user has imported the Net package
+      outputStyle: {
+        bgColor: '', // Style: background color
+        txtColor: '', // Style: text color
+        txtSize: '', // Style: text size
+        txtAlign: '', // Style: text alignment
+        bold: '', // Style: bold font
+        italic: '', // Style: italic font
+        underline: '', // Style: underline font
+      },
       memorySize: localMemorySize,
       specialKeys: localSpecialKeys,
       memory: createMemoryArray(),

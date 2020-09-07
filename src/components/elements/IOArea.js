@@ -54,7 +54,19 @@ const InputArea = () => {
 const OutputArea = () => {
   const [display] = useContext(DisplayContext);
   return (
-    <div contentEditable="false" id="output-area">
+    <div
+      contentEditable="false"
+      id="output-area"
+      style={{
+        'background-color': `${display.outputStyle.bgColor}`,
+        color: `${display.outputStyle.txtColor}`,
+        'font-size': `${display.outputStyle.txtSize}`,
+        'text-align': `${display.outputStyle.txtAlign}`,
+        'font-weight': `${display.outputStyle.bold}`,
+        'font-style': `${display.outputStyle.italic}`,
+        'text-decoration-line': `${display.outputStyle.underline}`,
+      }}
+    >
       {display.output}
     </div>
   );
