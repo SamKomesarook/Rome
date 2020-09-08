@@ -32,24 +32,24 @@ describe('test keyboard read', () => {
     await driver.get(url);
   }, 30000);
 
-  // afterAll(async () => {
-  //   await driver.quit();
-  // }, 40000);
+  afterAll(async () => {
+    await driver.quit();
+  }, 40000);
 
-  // afterEach(async () => {
-  //   const codingArea = await getElementById(driver, 'coding-area');
-  //   await codingArea.clear();
+  afterEach(async () => {
+    const codingArea = await getElementById(driver, 'coding-area');
+    await codingArea.clear();
 
-  //   const stopBtn = await getElementById(driver, 'stop-button');
-  //   stopBtn.click();
-  // });
+    const stopBtn = await getElementById(driver, 'stop-button');
+    stopBtn.click();
+  });
 
   test(testName.testKeyboardRead, async () => {
     const codingArea = await getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
     const startBtn = await getElementById(driver, 'start-button');
-    startBtn.click();
+    await startBtn.click();
 
     const inputArea = await getElementById(driver, 'input-bar');
     await inputArea.sendKeys('hello!');
@@ -58,31 +58,31 @@ describe('test keyboard read', () => {
     const outputArea = await getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
 
-    const writtenMemoryCell = await getElementById(driver, 'memory-0');
-    const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(writtenMemoryCellRes).toEqual('hello!');
+    expect(memoryCell0Res).toEqual('hello!');
   }, 35000);
 
-  // test(testName.testKeyboardReadEmpty, async () => {
-  //   const codingArea = await getElementById(driver, 'coding-area');
-  //   await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
+  test(testName.testKeyboardReadEmpty, async () => {
+    const codingArea = await getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
-  //   const startBtn = await getElementById(driver, 'start-button');
-  //   startBtn.click();
+    const startBtn = await getElementById(driver, 'start-button');
+    await startBtn.click();
 
-  //   const inputArea = await getElementById(driver, 'input-area');
-  //   await inputArea.sendKeys('');
-  //   await inputArea.sendKeys
+    const inputArea = await getElementById(driver, 'input-bar');
+    await inputArea.sendKeys('');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-  //   const outputArea = await getElementById(driver, 'output-area');
-  //   const outputAreaRes = await outputArea.getText();
+    const outputArea = await getElementById(driver, 'output-area');
+    const outputAreaRes = await outputArea.getText();
 
-  //   const writtenMemoryCell = await getElementById(driver, 'memory-0');
-  //   const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
-  //   expect(outputAreaRes).toEqual('');
-  //   expect(writtenMemoryCellRes).toEqual('hello!');
-  // }, 35000);
+    expect(outputAreaRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
+  }, 35000);
 });

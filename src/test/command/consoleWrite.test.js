@@ -50,16 +50,16 @@ describe('test console write', () => {
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 
     const startBtn = await getElementById(driver, 'start-button');
-    startBtn.click();
+    await startBtn.click();
 
     const outputArea = await getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
 
-    const writtenMemoryCell = await getElementById(driver, 'memory-0');
-    const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('hello!');
-    expect(writtenMemoryCellRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
   }, 35000);
 
   test(testName.testConsoleWriteNumbers, async () => {
@@ -67,16 +67,16 @@ describe('test console write', () => {
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
 
     const startBtn = await getElementById(driver, 'start-button');
-    startBtn.click();
+    await startBtn.click();
 
     const outputArea = await getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
 
-    const writtenMemoryCell = await getElementById(driver, 'memory-0');
-    const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('1');
-    expect(writtenMemoryCellRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
   }, 35000);
 
   test(testName.testConsoleWriteEmpty, async () => {
@@ -84,16 +84,16 @@ describe('test console write', () => {
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
 
     const startBtn = await getElementById(driver, 'start-button');
-    startBtn.click();
+    await startBtn.click();
 
     const outputArea = await getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
 
-    const writtenMemoryCell = await getElementById(driver, 'memory-0');
-    const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(writtenMemoryCellRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
   }, 35000);
 
   test(testName.testConsoleWriteNoQuote, async () => {
@@ -101,15 +101,15 @@ describe('test console write', () => {
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
 
     const startBtn = await getElementById(driver, 'start-button');
-    startBtn.click();
+    await startBtn.click();
 
     const outputArea = await getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
 
-    const writtenMemoryCell = await getElementById(driver, 'memory-0');
-    const writtenMemoryCellRes = await writtenMemoryCell.getText();
+    const memoryCell0 = await getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, STRLIT}");
-    expect(writtenMemoryCellRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
   }, 35000);
 });
