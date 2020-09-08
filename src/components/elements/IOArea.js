@@ -31,7 +31,7 @@ const InputArea = () => {
 
   const handleChange = (event) => {
     event.preventDefault();
-    const value = event.target;
+    const { value } = event.target;
     setDisplay((prevDisplay) => ({
       ...prevDisplay,
       input: value,
