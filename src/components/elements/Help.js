@@ -5,7 +5,7 @@ import HelpContent from './HelpContent';
 const Help = ({ isActive }) => {
   const DATA = [
     {
-      topic: 'syntax', content: 'Choose a syntax keywords in the selection box',
+      topic: 'general', content: 'All program must have start and end command. \n\nPlease select syntax keywords in the selection box for specification.',
     },
     {
       topic: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates. \n\nExample 1:\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n} \n\nExample 2:\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}',
@@ -26,39 +26,24 @@ const Help = ({ isActive }) => {
       topic: 'move', content: 'Changes the selected memory cell to the immediate right `last` or left `next`. \n\nExample:',
     },
 	{
-      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`. \n\nExample:',
+      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`. \n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
 	{
-      topic: 'free', content: 'Remove content saved in selected memory cell. \n\nExample:',
+      topic: 'free', content: 'Remove content saved in selected memory cell. \n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
 	{
-      topic: 'import', content: 'Import a library within the arguments. \n\nExample:',
+      topic: 'import', content: 'Import a library within the arguments. \n\nExample:\nstart\nimport(IO)\n//do something\nend',
     },
 	{
-      topic: 'k_read', content: 'Read in a line of input from the input line. requires IO library. \n\nExample:',
+      topic: 'k_read', content: 'Read in a line of input from the input line. requires IO library. \n\nExample:\nstart\nimport(IO)\nk_read\nend',
     },
 	{
-      topic: 's_write', content: 'Write the argument to the output window. requires IO library. \n\nExample:',
+      topic: 's_write', content: 'Write the argument to the output window. requires IO library. \n\nExample:\nstart\nimport(IO)\nk_read\ns_write("write something here")\nend',
     },
   ];
 
-  const [topic, setTopic] = useState('syntax');
+  const [topic, setTopic] = useState('general');
   
-  /*
-  const contentList = DATA
-    .filter((content) => content.topic.toLowerCase().includes(searchInput.toLowerCase()))
-    .filter(Topic_FILTER_MAP[topic])
-	.map((content) => (
-      <HelpContent
-        id={content.id}
-        key={content.id}
-        topic={content.topic}
-        link={content.link}
-      />const contentList
-    ));
-  */
-  
-  //use this control content
   const content = DATA.find(element => element.topic == topic).content;
   
   const handleChangeTopic = (e) => {
@@ -74,7 +59,7 @@ const Help = ({ isActive }) => {
         <div className="control-container">
           <label htmlFor="topics">
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
-			  <option value="syntax">syntax</option>
+			  <option value="general">general</option>
 			  <option value="start">start</option>
 			  <option value="end">end</option>
 			  <option value="set">set</option>
