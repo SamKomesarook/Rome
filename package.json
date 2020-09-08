@@ -5,16 +5,20 @@
   "dependencies": {
     "antlr4": "^4.8.0",
     "bcryptjs": "^2.4.3",
-    "jest": "^24.9.0",
     "css-loader": "^4.2.1",
     "file-loader": "^6.0.0",
+    "fs": "0.0.1-security",
+    "jest": "^24.9.0",
+    "js-cookie": "^2.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-typed": "^1.2.0",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "style-loader": "^1.2.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "yarn": "^1.22.5"
   },
   "scripts": {
     "start": "react-scripts start",
