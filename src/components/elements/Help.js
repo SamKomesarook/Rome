@@ -5,23 +5,45 @@ import HelpContent from './HelpContent';
 const Help = ({ isActive }) => {
   const DATA = [
     {
-      id: 'dl-1', topic: 'general', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
+      topic: 'syntax', content: 'Choose a syntax keywords in the selection box',
     },
     {
-      id: 'dl-2', topic: 'loop', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
+      topic: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates. \n\nExample 1:\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n} \n\nExample 2:\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}',
+    },
+	{
+      topic: 'if', content: 'Executes the arguments in the curly brackets if the condition is true. \nThe condition is made up of `is` / `not` + `equal` / `less` / `greater` + *int or string*. \n\nExample 1:\nset(numbers)\nwrite(3)\nif(is equal 3){\n//do something\n} \n\nExample 2:\nset(numbers)\nwrite(3)\nif(not less 3){\n//do something\n} \n\nExample 3:\nset(numbers)\nwrite(3)\nif(is greater 3){\n//do something\n}',
+    },
+	{
+      topic: 'write', content: 'Writes arguments to the selected memory cell. \nArguments must be either numbers, or a string enclosed by parenthesis. \n\nExample:\nstart\nset(letters)\nwrite("write something here")\nend',
+    },
+	{
+      topic: 'start', content: 'Indicates the start of the program. \nAll programs must begin with this command. \n\nExample: \nstart\n//do something\nend',
+    },
+	{
+      topic: 'end', content: 'Indicates the end of the program. \nAll programs must end with this command. \n\nExample: \nstart\n//do something\nend',
+    },
+	{
+      topic: 'move', content: 'Changes the selected memory cell to the immediate right `last` or left `next`. \n\nExample:',
+    },
+	{
+      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`. \n\nExample:',
+    },
+	{
+      topic: 'free', content: 'Remove content saved in selected memory cell. \n\nExample:',
+    },
+	{
+      topic: 'import', content: 'Import a library within the arguments. \n\nExample:',
+    },
+	{
+      topic: 'k_read', content: 'Read in a line of input from the input line. requires IO library. \n\nExample:',
+    },
+	{
+      topic: 's_write', content: 'Write the argument to the output window. requires IO library. \n\nExample:',
     },
   ];
 
-  const [searchInput, setSearchInput] = useState('');
-  const [topic, setTopic] = useState('General');
-
-  const Topic_FILTER_MAP = {
-    all: () => true,
-    general: (content) => content.topic === 'general',
-    loop: (content) => content.topic === 'loop',
-    kindergarten: (content) => content.topic === 'kindergarten',
-    junior: (content) => content.topic === 'junior',
-  };
+  const [topic, setTopic] = useState('syntax');
+  
   /*
   const contentList = DATA
     .filter((content) => content.topic.toLowerCase().includes(searchInput.toLowerCase()))
@@ -32,16 +54,17 @@ const Help = ({ isActive }) => {
         key={content.id}
         topic={content.topic}
         link={content.link}
-      />
+      />const contentList
     ));
   */
+  
+  //use this control content
+  const content = DATA.find(element => element.topic == topic).content;
+  
   const handleChangeTopic = (e) => {
     setTopic(e.target.value);
   };
 
-  const handleSearchInput = (e) => {
-    setSearchInput(e.target.value);
-  };
 
   const isActiveClass = isActive ? '' : ' hidden';
 
@@ -49,24 +72,26 @@ const Help = ({ isActive }) => {
     <div id="help" className={`sidebar-item-pane${isActiveClass}`}>
       <div id="filter-control">
         <div className="control-container">
-          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" className="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" /></svg>
-          <input type="text" placeholder="Search for topic.." className="control" onKeyUp={handleSearchInput} />
-        </div>
-        <div className="control-container">
           <label htmlFor="topics">
-            Topic:
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
-			  <option value="general">General</option>
-              <option value="loop">Loop</option>
-              <option value="primary">xxxx</option>
-              <option value="kindergarten">xxxx</option>
-              <option value="junior">xxxx</option>
+			  <option value="syntax">syntax</option>
+			  <option value="start">start</option>
+			  <option value="end">end</option>
+			  <option value="set">set</option>
+			  <option value="write">write</option>
+			  <option value="free">free</option>
+              <option value="loop">loop</option>
+              <option value="if">if</option>
+              <option value="import">import</option>
+			  <option value="k_read">k_read</option>
+			  <option value="s_write">s_write</option>
             </select>
           </label>
         </div>
-		
       </div>
-
+      <div className="help-content">
+        {content}
+      </div>
     </div>
   );
 };
