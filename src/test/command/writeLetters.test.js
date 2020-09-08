@@ -1,8 +1,9 @@
+import TestConfig from '../TestConfig';
+
 const webdriver = require('selenium-webdriver');
 const { until } = require('selenium-webdriver');
 const { By } = require('selenium-webdriver');
 
-const url = 'http://localhost:3000/';
 const testName = {
   testWriteLetters: 'test write letters correctly in memory',
   testWriteNumbers: 'test write numbers in letters field in memory',
@@ -30,7 +31,7 @@ describe('test write letters', () => {
 
   beforeAll(async () => {
     driver = new webdriver.Builder().forBrowser('chrome').build();
-    await driver.get(url);
+    await driver.get(TestConfig.URL);
   }, 30000);
 
   afterAll(async () => {

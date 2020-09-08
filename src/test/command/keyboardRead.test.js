@@ -1,9 +1,10 @@
+import TestConfig from '../TestConfig';
+
 const webdriver = require('selenium-webdriver');
 const { until } = require('selenium-webdriver');
 const { By } = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const url = 'http://localhost:3000/';
 const testName = {
   testKeyboardRead: 'test keyboard read input correctly',
   testKeyboardReadEmpty: 'test keyboard read empty letters',
@@ -29,7 +30,7 @@ describe('test keyboard read', () => {
 
   beforeAll(async () => {
     driver = new webdriver.Builder().forBrowser('chrome').build();
-    await driver.get(url);
+    await driver.get(TestConfig.URL);
   }, 30000);
 
   afterAll(async () => {
