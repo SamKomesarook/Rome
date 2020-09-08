@@ -5,9 +5,11 @@ on:
     branches: [ nicko/test-rename-periphs ]
 
 jobs:
-  test_pull_request:
+  test_selenium:
     runs-on: ubuntu-latest
     steps:
+      - name: Start selenoid
+        uses: Xotabu4/selenoid-github-action@v1
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
