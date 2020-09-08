@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import LoginScreentest from './LoginScreentest';
+import LoginScreen from './LoginScreen';
 
-ReactDOM.render(<LoginScreentest />, document.getElementById('root'));
+ReactDOM.render(<LoginScreen />, document.getElementById('root'));
 
 serviceWorker.unregister();
