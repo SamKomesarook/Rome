@@ -4,6 +4,10 @@ const { By } = require('selenium-webdriver');
 class TestConfig {
     static URL = 'http://localhost:3000/';
 
+    static CAPABILITIES = {
+      browserName: 'chrome',
+    };
+
     static getElementById = async (driver, id, timeout = 2000) => {
       const el = await driver.wait(until.elementLocated(By.id(id)), timeout);
       return await driver.wait(until.elementIsVisible(el), timeout);

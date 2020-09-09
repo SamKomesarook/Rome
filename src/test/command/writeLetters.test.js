@@ -13,7 +13,7 @@ describe('test write letters', () => {
   let driver;
 
   beforeAll(async () => {
-    driver = new webdriver.Builder().forBrowser('chrome').build();
+    driver = new webdriver.Builder().withCapabilities(TestConfig.CAPABILITIES).build();
     await driver.get(TestConfig.URL);
   }, 30000);
 
