@@ -1,41 +1,4 @@
 {
-  "name": "rome",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "antlr4": "^4.8.0",
-    "bcryptjs": "^2.4.3",
-    "css-loader": "^4.2.1",
-    "file-loader": "^6.0.0",
-    "fs": "0.0.1-security",
-    "jest": "^24.9.0",
-    "js-cookie": "^2.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
-    "react-typed": "^1.2.0",
-    "selenium-webdriver": "^4.0.0-alpha.7",
-    "style-loader": "^1.2.1",
-    "typescript": "^3.9.2",
-    "yarn": "^1.22.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",
-    "eject": "react-scripts eject",
-    "webpack-dev-server": "webpack-dev-server",
-    "dev": "webpack-dev-server --mode=development",
-    "prod": "webpack --mode=production"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/test/jest/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/src/test/jest/__mocks__/styleMock.js"
     "name": "rome",
     "version": "0.1.0",
     "private": true,
@@ -45,6 +8,7 @@
         "css-loader": "^4.2.1",
         "file-loader": "^6.0.0",
         "jest": "^24.9.0",
+        "js-cookie": "^2.2.1",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
