@@ -15,6 +15,7 @@ describe('test write letters', () => {
   beforeAll(async () => {
     driver = new webdriver.Builder().withCapabilities(TestConfig.CAPABILITIES).build();
     await driver.get(TestConfig.URL);
+    TestConfig.loginPass(driver);
   }, 30000);
 
   afterAll(async () => {

@@ -22,6 +22,13 @@ class TestConfig {
       const el = await driver.wait(until.elementLocated(By.xpath(xpath)), timeout);
       return await driver.wait(until.elementIsVisible(el), timeout);
     };
+
+    static loginPass = async (driver) => {
+      const passwordField = await this.getElementByXpath(driver, '/html/body/div/div/div/input');
+      await passwordField.sendKeys('rome0000');
+      const goBtn = await this.getElementByXpath(driver, '/html/body/div/div/div/button');
+      await goBtn.click();
+    };
 }
 
 export default TestConfig;
