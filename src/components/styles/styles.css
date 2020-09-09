@@ -437,7 +437,6 @@ aside:hover .sidebar-item-text {
     padding: 0.75rem 0.75rem;
     background-color: var(--bg-secondary);
     border-radius: 0;
-
     color: var(--bg-contrast-primary);
     font-weight: normal;
 	white-space: pre-line;
