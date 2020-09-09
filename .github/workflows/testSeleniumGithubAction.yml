@@ -14,8 +14,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name:  Install Google Chrome # Using shell script to install Google Chrome
+        run:   |
+              chmod +x ./scripts/InstallChrome.sh
+                          ./scripts/InstallChrome.sh 
       - run: npm ci
-      - run: npm install chrome
-      - run: npm start
       - run: npm test
       - run: npm run prod
