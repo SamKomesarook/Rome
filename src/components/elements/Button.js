@@ -57,7 +57,7 @@ const StartButton = () => {
       onClick={start}
       type="button"
       disabled={!!display.running}
-      className="primary-btn"
+      className="std-btn primary-btn"
     >
       Start
     </button>
@@ -101,7 +101,7 @@ const StopButton = () => {
       onClick={stop}
       type="button"
       disabled={!display.running}
-      className="secondary-btn"
+      className="std-btn secondary-btn"
     >
       Stop
     </button>

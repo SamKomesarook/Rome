@@ -38,7 +38,7 @@ function LoginScreen() {
       // set cookie with 1 day expiry
       Cookies.set('user', hashValue.value, { expires: 1 });
     } else {
-      window.alert('Wrong password, please try again');
+      window.alert('wrong password, please try again.');
     }
   };
 
@@ -53,19 +53,20 @@ function LoginScreen() {
   // <div className="app">
     <div className="container">
       <div className="loginScreen">
-        Please Login
+          Welcome to Rome.
         <input
           type="password"
           className="input"
           value={password}
           onChange={setInput}
+          placeholder="password"
         />
         <button
           type="submit"
           onClick={login}
           className="btn"
         >
-          Login
+          Go
         </button>
       </div>
     </div>
