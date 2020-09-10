@@ -55,6 +55,7 @@ function LoginScreen() {
       <div className="loginScreen">
           Welcome to Rome.
         <input
+          name="password-field"
           type="password"
           className="input"
           value={password}
