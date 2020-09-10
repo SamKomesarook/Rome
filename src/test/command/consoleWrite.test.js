@@ -28,7 +28,7 @@ describe('test console write', () => {
 
     const stopBtn = await TestConfig.getElementById(driver, 'stop-button');
     stopBtn.click();
-  });
+  }, 30000);
 
   test(testName.testConsoleWriteLetters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');

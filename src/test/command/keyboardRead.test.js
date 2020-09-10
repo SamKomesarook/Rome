@@ -27,7 +27,7 @@ describe('test keyboard read', () => {
 
     const stopBtn = await TestConfig.getElementById(driver, 'stop-button');
     stopBtn.click();
-  });
+  }, 30000);
 
   test(testName.testKeyboardRead, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
