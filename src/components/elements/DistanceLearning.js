@@ -16,26 +16,20 @@ const DistanceLearning = ({ isActive }) => {
   const [level, setLevel] = useState('all');
   const [week, setWeek] = useState('all');
 
-  const LEVEL_FILTER_MAP = {
-    all: () => true,
-    toddler: (content) => content.level === 'toddler',
-    primary: (content) => content.level === 'primary',
-    kindergarten: (content) => content.level === 'kindergarten',
-    junior: (content) => content.level === 'junior',
-  };
+  const LEVELS = ['all', 'toddler', 'primary', 'kindergarten', 'junior'];
 
-  const WEEK_FILTER_MAP = {
-    all: () => true,
-    w1: (content) => content.week === 'w1',
-    w2: (content) => content.week === 'w2',
-    w3: (content) => content.week === 'w3',
-    w4: (content) => content.week === 'w4',
+  const contentFilter = (filter, selectedItem) => {
+    if (selectedItem === 'all') {
+      return () => true;
+    }
+
+    return (content) => content[filter] === selectedItem;
   };
 
   const contentList = DATA
     .filter((content) => content.title.toLowerCase().includes(searchInput.toLowerCase()))
-    .filter(LEVEL_FILTER_MAP[level])
-    .filter(WEEK_FILTER_MAP[week])
+    .filter(contentFilter('level', level))
+    .filter(contentFilter('week', week))
     .map((content) => (
       <DistanceLearningContent
         id={content.id}
