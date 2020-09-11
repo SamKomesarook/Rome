@@ -26,7 +26,7 @@ describe('test write letters', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
 
-    const stopBtn = await TestConfig.getElementById(driver, 'stop-button');
+    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
     stopBtn.click();
   }, 30000);
 

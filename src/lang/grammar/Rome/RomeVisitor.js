@@ -66,6 +66,54 @@ RomeVisitor.prototype.visitCond = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#stylingExpressions.
+RomeVisitor.prototype.visitStylingExpressions = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Paint.
+RomeVisitor.prototype.visitPaint = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextColor.
+RomeVisitor.prototype.visitTextColor = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextSize.
+RomeVisitor.prototype.visitTextSize = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextAlign.
+RomeVisitor.prototype.visitTextAlign = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Bold.
+RomeVisitor.prototype.visitBold = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Italic.
+RomeVisitor.prototype.visitItalic = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Underline.
+RomeVisitor.prototype.visitUnderline = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Set.
 RomeVisitor.prototype.visitSet = function(ctx) {
   return this.visitChildren(ctx);
@@ -128,6 +176,12 @@ RomeVisitor.prototype.visitSwrite = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Name.
 RomeVisitor.prototype.visitName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Style.
+RomeVisitor.prototype.visitStyle = function(ctx) {
   return this.visitChildren(ctx);
 };
 

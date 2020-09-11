@@ -33,13 +33,13 @@ const processInstrs = (display, setDisplay) => {
         errors.generalError("Unknown function 'k_read'");
         break;
       }
-      setDisplay((display) => ({
-        ...display,
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
         reading: true,
       }));
       break;
     } else {
-      instr.accept(display.machine ? new MVisitor(setDisplay, display) : new RVisitor(setDisplay, display));
+      instr.accept(display.machine ? new MVisitor(display, setDisplay) : new RVisitor(display, setDisplay));
     }
   }
 };

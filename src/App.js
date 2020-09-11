@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import './components/styles/styles.css';
 import TextArea from './components/elements/TextArea';
 import { DisplayProvider } from './state/DisplayState';
 import { UiProvider } from './state/UiContext';
 import Memory from './components/elements/Memory';
-import { StartButton, StopButton } from './components/elements/Button';
+import { StartButton, ResetButton } from './components/elements/Button';
 import { InputArea, OutputArea } from './components/elements/IOArea';
 import { NetPeripheral, USBPeripheral } from './components/elements/Peripherals';
 import Switch from './components/elements/Switch';
@@ -21,7 +22,7 @@ const App = () => (
           <Switch />
           <div className="hflex">
             <StartButton />
-            <StopButton />
+            <ResetButton />
           </div>
         </div>
         <div className="layout-column">

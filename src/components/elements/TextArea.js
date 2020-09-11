@@ -5,12 +5,12 @@ import { DisplayContext } from '../../state/DisplayState';
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  function onChange(event) {
+  function handleChange(event) {
     event.preventDefault();
     const { value } = event.target;
     // TODO ensure the below includes newline breaks and shit...
-    setDisplay((display) => ({
-      ...display,
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
       text: value,
     }));
   }
@@ -40,7 +40,7 @@ const TextArea = () => {
         loop
         showCursor={false}
       >
-        <textarea id="coding-area" onChange={onChange.bind(this)} spellCheck={false} />
+        <textarea id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
       </Typed>
     </div>
   );
