@@ -62,9 +62,9 @@ const StartButton = () => {
   );
 };
 
-const StopButton = () => {
+const ResetButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const handleStop = () => {
+  const handleReset = () => {
     // Reset to the default value but keep machine and text value
     setDisplay((prevDisplay) => ({
       ...DisplayContext.DEFAULT(),
@@ -75,18 +75,18 @@ const StopButton = () => {
 
   return (
     <button
-      id="stop-button"
-      onClick={handleStop}
+      id="reset-button"
+      onClick={handleReset}
       type="button"
       disabled={!display.running}
       className="std-btn secondary-btn"
     >
-      Stop
+      Reset
     </button>
   );
 };
 
 export {
   StartButton,
-  StopButton,
+  ResetButton,
 };
