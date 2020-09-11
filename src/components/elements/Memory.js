@@ -7,7 +7,7 @@ const Memory = () => {
   const getMemory = (id) => {
     const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
     return (
-      <div className={`memory-cell${selectedMemoryCell}`} key={display.memory[id].key}>
+      <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}`} key={display.memory[id].key}>
         {display.memory[id].content}
       </div>
     );

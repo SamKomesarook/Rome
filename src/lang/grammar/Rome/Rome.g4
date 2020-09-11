@@ -15,8 +15,8 @@ LET: 'letters';
 
 FREE: 'free';
 MEM: 'memory';
-KREAD: 'k_read';
-SWRITE: 's_write';
+KREAD: 'keyboardRead';
+SWRITE: 'consoleWrite';
 WRITE: 'write';
 NAME: 'name';
 
@@ -33,8 +33,8 @@ GRE: 'greater';
 AND: 'and';
 OR: 'or';
 
-NWRITE: 'n_write';
-NREAD: 'n_read';
+NWRITE: 'networkWrite';
+NREAD: 'networkRead';
 
 MOVE: 'move';
 RIGHT: 'next';

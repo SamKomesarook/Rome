@@ -141,13 +141,13 @@ var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "'('", "')'", "'{'", "'}'", "'start'", "'end'", 
                      "'set'", "'numbers'", "'letters'", "'free'", "'memory'", 
-                     "'k_read'", "'s_write'", "'write'", "'name'", "'import'", 
-                     "'network'", "'IO'", "'if'", "'is'", "'not'", "'equal'", 
-                     "'less'", "'greater'", "'and'", "'or'", "'n_write'", 
-                     "'n_read'", "'move'", "'next'", "'last'", "'loop'", 
-                     "'style'", "'paint'", "'text_color'", "'text_size'", 
-                     "'text_align'", "'bold'", "'italic'", "'underline'", 
-                     null, null, null, "'\n'", "' '" ];
+                     "'keyboardRead'", "'consoleWrite'", "'write'", "'name'", 
+                     "'import'", "'network'", "'IO'", "'if'", "'is'", "'not'", 
+                     "'equal'", "'less'", "'greater'", "'and'", "'or'", 
+                     "'networkWrite'", "'networkRead'", "'move'", "'next'", 
+                     "'last'", "'loop'", "'style'", "'paint'", "'text_color'", 
+                     "'text_size'", "'text_align'", "'bold'", "'italic'", 
+                     "'underline'", null, null, null, "'\n'", "' '" ];
 
 var symbolicNames = [ null, null, null, null, null, "START", "END", "SET", 
                       "NUM", "LET", "FREE", "MEM", "KREAD", "SWRITE", "WRITE", 
