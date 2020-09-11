@@ -3,25 +3,22 @@ import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs } from '../../lang/Common';
 import { NetToggle, USBToggle } from './Peripherals';
 
+// TODO no updates use setDisplay. Should we?
 const InputArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
   const handleKey = (event) => {
     if (event.keyCode === 13) {
       const newMem = display.memory;
-
-      // Get the keys of special memory cells
-      const netMemoryKey = display.specialKeys.find((element) => element.specialContent === 'net').key;
-      const usbMemoryKey = display.specialKeys.find((element) => element.specialContent === 'usb').key;
-      if (display.selected === netMemoryKey) {
+      if (display.selected === 10) {
         NetToggle();
-      } else if (display.selected === usbMemoryKey) {
+      } else if (display.selected === 11) {
         USBToggle();
       } else {
         newMem[display.selected].content = display.input;
       }
-      setDisplay((prevDisplay) => ({
-        ...prevDisplay,
+      setDisplay((display) => ({
+        ...display,
         memory: newMem,
         reading: false,
       }));
@@ -29,11 +26,11 @@ const InputArea = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const onChange = (event) => {
     event.preventDefault();
     const { value } = event.target;
-    setDisplay((prevDisplay) => ({
-      ...prevDisplay,
+    setDisplay((display) => ({
+      ...display,
       input: value,
     }));
   };
@@ -44,7 +41,7 @@ const InputArea = () => {
       size="60"
       type="text"
       onKeyDown={handleKey}
-      onChange={handleChange}
+      onChange={onChange}
       disabled={!display.reading}
       value={!display.reading ? '' : display.input}
     />
@@ -54,19 +51,7 @@ const InputArea = () => {
 const OutputArea = () => {
   const [display] = useContext(DisplayContext);
   return (
-    <div
-      contentEditable="false"
-      id="output-area"
-      style={{
-        'background-color': `${display.outputStyle.bgColor}`,
-        color: `${display.outputStyle.txtColor}`,
-        'font-size': `${display.outputStyle.txtSize}`,
-        'text-align': `${display.outputStyle.txtAlign}`,
-        'font-weight': `${display.outputStyle.bold}`,
-        'font-style': `${display.outputStyle.italic}`,
-        'text-decoration-line': `${display.outputStyle.underline}`,
-      }}
-    >
+    <div contentEditable="false" id="output-area">
       {display.output}
     </div>
   );

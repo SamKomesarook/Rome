@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import '../styles/styles.css';
 import { DisplayContext } from '../../state/DisplayState';
 
 const Switch = () => {
@@ -10,8 +11,8 @@ const Switch = () => {
     for (const mem of newMem) {
       !value ? mem.content = 0 : mem.content = '';
     }
-    setDisplay((prevDisplay) => ({
-      ...prevDisplay,
+    setDisplay((display) => ({
+      ...display,
       machine: !value,
     }));
   }

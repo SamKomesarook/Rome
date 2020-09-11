@@ -8,12 +8,13 @@ const { RomeParser } = require('../../lang/grammar/Rome/RomeParser');
 const { MachineLexer } = require('../../lang/grammar/Machine/MachineLexer');
 const { MachineParser } = require('../../lang/grammar/Machine/MachineParser');
 
+// TODO no updates use setDisplay. Should we?
 const StartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  const handleStart = () => {
-    setDisplay((prevDisplay) => ({
-      ...prevDisplay,
+  const start = (event) => {
+    setDisplay((display) => ({
+      ...display,
       running: true,
     }));
     const chars = new antlr4.InputStream(display.text);
@@ -37,11 +38,12 @@ const StartButton = () => {
             display.commands.push(child);
           }
         }
-        setDisplay((prevDisplay) => ({
-          ...prevDisplay,
+        setDisplay((display) => ({
+          ...display,
           errors: false,
         }));
         processInstrs(display, setDisplay);
+        return true;
       } catch (e) {
         console.log(e);
         // TODO print error messages
@@ -52,7 +54,7 @@ const StartButton = () => {
   return (
     <button
       id="start-button"
-      onClick={handleStart}
+      onClick={start}
       type="button"
       disabled={!!display.running}
       className="std-btn primary-btn"
@@ -62,31 +64,51 @@ const StartButton = () => {
   );
 };
 
-const ResetButton = () => {
+const StopButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const handleReset = () => {
-    // Reset to the default value but keep machine and text value
-    setDisplay((prevDisplay) => ({
-      ...DisplayContext.DEFAULT(),
-      machine: prevDisplay.machine,
-      text: prevDisplay.text,
+  const stop = (event) => {
+    const newMem = display.memory;
+    if (display.machine) {
+      for (const memory of newMem) {
+        memory.content = 0;
+      }
+    } else {
+      for (const mem of newMem) {
+        mem.type = '';
+        mem.content = '';
+        mem.name = '';
+      }
+    }
+
+    setDisplay((display) => ({
+      ...display,
+      running: false,
+      output: '',
+      input: '',
+      errors: false,
+      reading: false,
+      selected: 0,
+      commands: [],
+      importIO: false,
+      importNet: false,
+      memory: newMem,
     }));
   };
 
   return (
     <button
-      id="reset-button"
-      onClick={handleReset}
+      id="stop-button"
+      onClick={stop}
       type="button"
       disabled={!display.running}
       className="std-btn secondary-btn"
     >
-      Reset
+      Stop
     </button>
   );
 };
 
 export {
   StartButton,
-  ResetButton,
+  StopButton,
 };

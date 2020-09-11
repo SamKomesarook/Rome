@@ -4,10 +4,10 @@ import { ErrorReporter } from './Common';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(display, setDisplay) {
+  constructor(set, display) {
     super();
+    this.set = set;
     this.display = display;
-    this.setDisplay = setDisplay;
     this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
   }
 
@@ -44,7 +44,7 @@ class RVisitor extends RomeVisitor {
   visitSet(ctx) {
     const newMemory = this.display.memory;
     newMemory[this.display.selected].type = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
-    this.setDisplay((display) => ({
+    this.set((display) => ({
       ...display,
       memory: newMemory,
     }));
@@ -89,8 +89,7 @@ class RVisitor extends RomeVisitor {
 
   visitMove(ctx) {
     if (ctx.children[2].getText() === 'next') {
-      const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
-      if (this.display.selected === maxUsableMemoryKey) {
+      if (this.display.selected === 10) { // TODO replace magic number
         this.reporter.generalError('No more memory');
         return;
       }
@@ -126,13 +125,9 @@ class RVisitor extends RomeVisitor {
       this.reporter.generalError('Wrong memory type for writing');
       return;
     }
-
-    // Get the keys of special memory cells
-    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
-    const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (this.display.selected === netMemoryKey) {
+    if (this.display.selected === 10) {
       NetToggle();
-    } else if (this.display.selected === usbMemoryKey) {
+    } else if (this.display.selected === 11) {
       USBToggle();
     } else {
       this.display.memory[this.display.selected].content = arg;
@@ -262,93 +257,6 @@ class RVisitor extends RomeVisitor {
       return;
     }
     this.display.memory[this.display.selected].name = arg;
-  }
-
-  visitPaint(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        bgColor: newValue,
-      },
-    }));
-  }
-
-  visitTextColor(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtColor: newValue,
-      },
-    }));
-  }
-
-  visitTextSize(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtSize: newValue,
-      },
-    }));
-  }
-
-  visitTextAlign(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtAlign: newValue,
-      },
-    }));
-  }
-
-  visitBold(ctx) {
-    const isBold = (ctx.children[2].getText() === 'true');
-    const newValue = isBold ? 'bold' : '';
-    // Update display.outputStyle.bold
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        bold: newValue,
-      },
-    }));
-  }
-
-  visitItalic(ctx) {
-    const isItalic = (ctx.children[2].getText() === 'true');
-    const newValue = isItalic ? 'italic' : '';
-    // Update display.outputStyle.italic
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        italic: newValue,
-      },
-    }));
-  }
-
-  visitUnderline(ctx) {
-    const isUnderline = (ctx.children[2].getText() === 'true');
-    const newValue = isUnderline ? 'underline' : '';
-    // Update display.outputStyle.underline
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        underline: newValue,
-      },
-    }));
   }
 }
 
