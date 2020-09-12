@@ -72,7 +72,7 @@ const Help = ({ isActive }) => {
           </label>
         </div>
       </div>
-      <div className="help-content">
+      <div id="help-content">
         {contents}
       </div>
     </div>
