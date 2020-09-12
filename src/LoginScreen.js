@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import bcrypt from 'bcryptjs';
+import Cookies from 'js-cookie';
 import App from './App';
 import './LoginScreen.css';
 
@@ -12,13 +13,30 @@ function LoginScreen() {
   // password
   const [password, setPassword] = useState('');
   const setInput = (e) => setPassword(e.target.value);
+
   // login button
-  const [log, setLog] = useState(false);
+  // set the state to false 
+  const [log, setLog] = React.useState(false);
+
+  // read from cookie
+  const readCookie = () => {
+    const user = Cookies.get('user');
+    if (user) {
+      setLog(true);
+    }
+  };
+
+  React.useEffect(() => {
+    readCookie();
+  }, []);
+
   const login = () => {
     // const hash = fs.readFileSync('hash.txt');
     const check = bcrypt.compareSync(password, hashValue.value);
     if (check) {
       setLog(true);
+      // set cookie with 1 day expiry
+      Cookies.set('user', hashValue.value, { expires: 1 });
     } else {
       window.alert('wrong password, please try again.');
     }
@@ -37,6 +55,7 @@ function LoginScreen() {
       <div className="loginScreen">
           Welcome to Rome.
         <input
+          name="password-field"
           type="password"
           className="input"
           value={password}

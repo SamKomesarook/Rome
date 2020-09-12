@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.7.2
+// Generated from Rome.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -282,7 +282,6 @@ RomeLexer.prototype.ruleNames = [ "T__0", "T__1", "T__2", "T__3", "START",
                                   "STRLIT", "ONE_LINE_COMMENT" ];
 
 RomeLexer.prototype.grammarFileName = "Rome.g4";
-
 
 
 exports.RomeLexer = RomeLexer;
