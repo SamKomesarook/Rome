@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SidebarButton = ({
-  name, text, isPressed, icon, onClick,
+  name, isPressed, icon, onClick,
 }) => (
   <li className="sidebar-item">
     <button
@@ -12,7 +12,7 @@ const SidebarButton = ({
       name={name}
       aria-pressed={isPressed}
     >
-      <span className="sidebar-item-text">{text}</span>
+      <span className="sidebar-item-text">{name}</span>
       {icon}
     </button>
   </li>
@@ -20,7 +20,6 @@ const SidebarButton = ({
 
 SidebarButton.propTypes = {
   name: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   isPressed: PropTypes.bool.isRequired,
   icon: PropTypes.element.isRequired,
   onClick: PropTypes.func.isRequired,

@@ -13,6 +13,7 @@ const DistanceLearning = ({ isActive }) => {
     },
   ];
 
+  // Level options for dropdown field
   const LEVELS = [
     { id: 'all', name: 'All' },
     { id: 'toddler', name: 'Toddler' },
@@ -21,6 +22,7 @@ const DistanceLearning = ({ isActive }) => {
     { id: 'junior', name: 'Junior' },
   ];
 
+  // Week options for dropdown field
   const WEEKS = [
     { id: 'all', name: 'All' },
     { id: 'w1', name: '1' },
@@ -33,6 +35,7 @@ const DistanceLearning = ({ isActive }) => {
   const [level, setLevel] = useState('all');
   const [week, setWeek] = useState('all');
 
+  // Filter content based on selectedItem
   const contentFilter = (filter, selectedItem) => {
     if (selectedItem === 'all') {
       return () => true;
