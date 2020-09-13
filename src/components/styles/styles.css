@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-/* 
+/*
 Glowing Blue Input Highlights <Start>
 Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
 */
@@ -298,16 +298,15 @@ input:checked + .slider:before {
 /** PERIPHERAL **/
 
 .peripheral-icon-grp {
-    align-self: flex-end;
+    align-self: center;
     width: 50%;
     display: flex;
     justify-content: space-around;
 }
 
 .periph-icon {
-    background-color: white;
-    border-radius: 10px;
-    height: 30px;
+    background-color:  #384047;
+    height: 60px;
 }
 
 /** IO AREA **/
