@@ -442,6 +442,10 @@ aside:hover .sidebar-item-text {
 	white-space: pre-line;
 }
 
+.highlight {
+    color:red
+}
+
 /** GENERAL (Overrides above css rules) **/
 
 .hidden {

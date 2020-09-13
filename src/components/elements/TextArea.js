@@ -6,14 +6,23 @@ const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [editor, setEditor] = useContext(DisplayContext);
 
-  const test = () => {
+  const test = (editor) => {
   
-  //editor.addEventListener('input', updateEditor);
-     //setEditor = (document.getElementById('coding-area'));
-     console.log("print me");
-	 console.log(document.getElementById('coding-area'));
-     //updateEditor();
-	 
+	console.log(editor.currentTarget.textContent);
+	const textSegment = editor.currentTarget.textContent.split(" ");
+	console.log(textSegment);
+	console.log(renderText(editor.currentTarget.textContent));
+	
+	// this one return span as a string
+	//editor.currentTarget.textContent = renderText(editor.currentTarget.textContent); 
+	
+	// this one not work
+	//editor.innerHTML = renderText(editor.currentTarget.textContent); 
+	
+	// this one reversed the input, but can highlight
+	editor.currentTarget.innerHTML = renderText(editor.currentTarget.textContent);
+
+	
   }
   
   
@@ -26,10 +35,10 @@ const TextArea = () => {
       ...display,
       text: value,
     }));
-	console.Log(event.target);
-	updateEditor();
   }
  
+ 
+ /* not use
   //const editor = document.getElementById('coding-area');
   const selectionOutput = document.getElementById('selection');
   
@@ -39,6 +48,10 @@ const TextArea = () => {
 
 function updateEditor(editor) {
 	console.log(editor.currentTarget.textContent);
+	const textSegment = editor.currentTarget.textContent.split(" ");
+	console.log(textSegment);
+
+	
     const sel = window.getSelection();
 	console.log(sel);
     const textSegments = getTextSegments(editor);
@@ -107,6 +120,8 @@ function restoreSelection(absoluteAnchorIndex, absoluteFocusIndex) {
     sel.setBaseAndExtent(anchorNode,anchorIndex,focusNode,focusIndex);
 }
 
+*/
+
 function renderText(text) {
     const words = text.split(/(\s+)/);
     const output = words.map((word) => {
@@ -114,7 +129,7 @@ function renderText(text) {
             return `<strong>${word}</strong>`;
         }
         else if (word === 'red') {
-            return `<span style='color:red'>${word}</span>`;
+            return `<span class="highlight">${word}</span>`;
         }
         else {
             return word;
@@ -152,7 +167,7 @@ function renderText(text) {
         loop
         showCursor={false}
       >
-      <div id="coding-area" contentEditable="true" onInput={e => updateEditor(e)} spellCheck={false} ></div>
+      <div id="coding-area" contentEditable="true" onInput={e => test(e)} spellCheck={false} ></div>
 	  </Typed>
 	  
 	  
