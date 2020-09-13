@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import Typed from 'react-typed';
+import PropTypes from 'prop-types';
 import { DisplayContext } from '../../state/DisplayState';
 
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [editor, setEditor] = useContext(DisplayContext);
 
+/*
   const test = (editor) => {
   
 	console.log(editor.currentTarget.textContent);
@@ -25,7 +27,7 @@ const TextArea = () => {
 	
   }
   
-  
+  */
   
   function onChange(event) {
     event.preventDefault();
@@ -37,23 +39,23 @@ const TextArea = () => {
     }));
   }
  
- 
- /* not use
+
   //const editor = document.getElementById('coding-area');
   const selectionOutput = document.getElementById('selection');
   
 
+function start(editor){
+setEditor(editor);
+updateEditor(editor);
 
+}
 
 
 function updateEditor(editor) {
-	console.log(editor.currentTarget.textContent);
-	const textSegment = editor.currentTarget.textContent.split(" ");
-	console.log(textSegment);
 
-	
+
     const sel = window.getSelection();
-	console.log(sel);
+	//console.log(sel);
     const textSegments = getTextSegments(editor);
     const textContent = textSegments.map(({text}) => text).join('');
     let anchorIndex = null;
@@ -76,10 +78,14 @@ function updateEditor(editor) {
 
 function getTextSegments(element) {
     const textSegments = [];
-	console.log(element.childNodes);
+	
     Array.from(element.childNodes).forEach((node) => {
+
+		console.log(node);
         switch(node.nodeType) {
+			
             case Node.TEXT_NODE:
+			//console.log(node.nodeType);
                 textSegments.push({text: node.nodeValue, node});
                 break;
                 
@@ -91,6 +97,7 @@ function getTextSegments(element) {
                 throw new Error(`Unexpected node type: ${node.nodeType}`);
         }
     });
+	
     return textSegments;
 }
 
@@ -120,7 +127,6 @@ function restoreSelection(absoluteAnchorIndex, absoluteFocusIndex) {
     sel.setBaseAndExtent(anchorNode,anchorIndex,focusNode,focusIndex);
 }
 
-*/
 
 function renderText(text) {
     const words = text.split(/(\s+)/);
@@ -167,7 +173,7 @@ function renderText(text) {
         loop
         showCursor={false}
       >
-      <div id="coding-area" contentEditable="true" onInput={e => test(e)} spellCheck={false} ></div>
+      <div id="coding-area" contentEditable="true" onInput={editor => start(editor.currentTarget)} spellCheck={false} ></div>
 	  </Typed>
 	  
 	  
@@ -176,5 +182,11 @@ function renderText(text) {
     </div>
   );
 };
+
+
+TextArea.propTypes = {
+  childNodes: PropTypes.array.isRequired,
+};
+
 
 export default TextArea;
