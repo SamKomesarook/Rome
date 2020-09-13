@@ -24,7 +24,7 @@ const App = () => (
             <StopButton />
           </div>
         </div>
-        <div className="computer-column">
+        <div className="layout-column" id="computer-column">
           <Memory />
           <div className="peripheral-icon-grp">
               <Processor />

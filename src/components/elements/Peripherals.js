@@ -29,7 +29,6 @@ const USBPeripheral = () => (<img className="periph-icon" src={fiusb} id="fiusb"
 
 const Processor = () => {
     const [display, setDisplay] = useContext(DisplayContext);
-
     return <img className="periph-icon" src={display.running ? chipActivated : chipDormant} id="chip" alt="chip symbol" />
 
 };
