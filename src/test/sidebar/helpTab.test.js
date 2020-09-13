@@ -1,6 +1,7 @@
 import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
+const { Key } = require('selenium-webdriver');
 
 const testName = {
   testFirstEntry: 'test first entry of help tab',
@@ -25,13 +26,13 @@ describe('test help tab', () => {
   }, 30000);
 
   test(testName.testFirstEntry, async () => {
-    const help = await TestConfig.getElementByName(driver, 'help');
+    const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
     const dropdownField = await TestConfig.getElementById(driver, 'topics');
     const selectedTopic = await dropdownField.getAttribute('value');
 
-    const helpContent = await TestConfig.getElementById('help-content');
+    const helpContent = await TestConfig.getElementById(driver, 'help-content');
     const helpContentInfo = await helpContent.getText();
 
     expect(selectedTopic).toEqual('general');
@@ -39,15 +40,18 @@ describe('test help tab', () => {
   }, 35000);
 
   test(testName.testSelectSet, async () => {
-    const help = await TestConfig.getElementByName(driver, 'help');
+    const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
     const dropdownField = await TestConfig.getElementById(driver, 'topics');
-    await dropdownField.click().sendKeys('set');
+    await dropdownField.click();
+    await dropdownField.sendKeys('set', Key.ENTER);
+    const selectedTopic = await dropdownField.getAttribute('value');
 
-    const helpContent = await TestConfig.getElementById('help-content');
+    const helpContent = await TestConfig.getElementById(driver, 'help-content');
     const helpContentInfo = await helpContent.getText();
 
+    expect(selectedTopic).toEqual('set');
     expect(helpContentInfo).toEqual('Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend');
   }, 35000);
 });
