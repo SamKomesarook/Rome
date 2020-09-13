@@ -4,23 +4,6 @@ import { MVisitor } from './MachineVisitor';
 const antlr4 = require('antlr4');
 
 const processInstrs = (display, setDisplay) => {
-  // var delayCount = 0;
-  /*
-    if (display.commands.length == 0) {
-        break
-    }
-
-    for(var i=0; i<display.commands.length; i++){
-        var instr = display.commands[i]
-        if (instr.children[0].constructor.name == "KreadContext") {
-            display.reading = true
-            display.commands.splice(0, i)
-            break
-        } else {
-            setTimeout(instr.accept(new Visitor(setDisplay, display)), delayCount)
-        }
-    }
-    */
   while (true) {
     if (display.commands.length === 0 || display.errors) {
       break;
