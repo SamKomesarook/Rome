@@ -7,7 +7,7 @@ const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [editor, setEditor] = useContext(DisplayContext);
 
-/*
+/* cursor bug with the test, but it can highlight
   const test = (editor) => {
   
 	console.log(editor.currentTarget.textContent);
@@ -44,7 +44,7 @@ const TextArea = () => {
   const selectionOutput = document.getElementById('selection');
   
 
-function start(editor){
+function startColoring(editor){
 setEditor(editor);
 updateEditor(editor);
 
@@ -79,9 +79,10 @@ function updateEditor(editor) {
 function getTextSegments(element) {
     const textSegments = [];
 	
+	// bugs happen here: undefined is not iterable
     Array.from(element.childNodes).forEach((node) => {
 
-		console.log(node);
+		//console.log(node);
         switch(node.nodeType) {
 			
             case Node.TEXT_NODE:
@@ -173,11 +174,8 @@ function renderText(text) {
         loop
         showCursor={false}
       >
-      <div id="coding-area" contentEditable="true" onInput={editor => start(editor.currentTarget)} spellCheck={false} ></div>
+      <div id="coding-area" contentEditable="true" onInput={e => startColoring(e.currentTarget)} spellCheck={false} ></div>
 	  </Typed>
-	  
-	  
-        
       
     </div>
   );
