@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import firss from '../../icons/firss.svg';
 import fiusb from '../../icons/fiusb.svg';
-import chip from '../../icons/chip.svg';
+import chipActivated from '../../icons/chipActivated.svg';
+import chipDormant from '../../icons/chipDormant.svg';
+import { DisplayContext } from '../../state/DisplayState';
 
 const NetToggle = (event) => {
   const elem = document.getElementById('firss');
@@ -25,7 +27,12 @@ const USBToggle = (event) => {
 
 const USBPeripheral = () => (<img className="periph-icon" src={fiusb} id="fiusb" alt="usb symbol" />);
 
-const Processor = () => (<img className="periph-icon" src={chip} id="chip" alt="chip symbol" />);
+const Processor = () => {
+    const [display, setDisplay] = useContext(DisplayContext);
+
+    return <img className="periph-icon" src={display.running ? chipActivated : chipDormant} id="chip" alt="chip symbol" />
+
+};
 
 
 export {
