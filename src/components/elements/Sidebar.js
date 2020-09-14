@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DistanceLearning from './DistanceLearning';
+import Help from './Help';
 import SidebarButton from './SidebarButton';
 import HtmlElementUtil from '../../utils/HtmlElementUtil';
 
@@ -43,6 +44,7 @@ const Sidebar = () => {
         { sidebarItemList }
       </ul>
       <DistanceLearning isActive={activeSidebarItem === DISTANCE_LEARNING} />
+	  <Help isActive={activeSidebarItem === HELP} />
     </aside>
   );
 };

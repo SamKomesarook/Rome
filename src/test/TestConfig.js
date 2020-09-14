@@ -8,25 +8,34 @@ class TestConfig {
       browserName: 'chrome',
     };
 
-    static getElementById = async (driver, id, timeout = 2000) => {
+    static getElementById = async (driver, id, shouldBeVisible = true, timeout = 2000) => {
       const el = await driver.wait(until.elementLocated(By.id(id)), timeout);
-      return await driver.wait(until.elementIsVisible(el), timeout);
+      if (shouldBeVisible) {
+        return await driver.wait(until.elementIsVisible(el), timeout);
+      }
+      return el;
     };
 
-    static getElementByName = async (driver, name, timeout = 2000) => {
+    static getElementByName = async (driver, name, shouldBeVisible = true, timeout = 2000) => {
       const el = await driver.wait(until.elementLocated(By.name(name)), timeout);
-      return await driver.wait(until.elementIsVisible(el), timeout);
+      if (shouldBeVisible) {
+        return await driver.wait(until.elementIsVisible(el), timeout);
+      }
+      return el;
     };
 
-    static getElementByXpath = async (driver, xpath, timeout = 2000) => {
+    static getElementByXpath = async (driver, xpath, shouldBeVisible = true, timeout = 2000) => {
       const el = await driver.wait(until.elementLocated(By.xpath(xpath)), timeout);
-      return await driver.wait(until.elementIsVisible(el), timeout);
+      if (shouldBeVisible) {
+        return await driver.wait(until.elementIsVisible(el), timeout);
+      }
+      return el;
     };
 
     static loginPass = async (driver) => {
-      const passwordField = await this.getElementByXpath(driver, '/html/body/div/div/div/input');
+      const passwordField = await this.getElementByName(driver, 'password-field');
       await passwordField.sendKeys('rome0000');
-      const goBtn = await this.getElementByXpath(driver, '/html/body/div/div/div/button');
+      const goBtn = await this.getElementByXpath(driver, '//*[@id="root"]/div/div/button');
       await goBtn.click();
     };
 }

@@ -4,10 +4,10 @@ import { ErrorReporter } from './Common';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(set, display) {
+  constructor(display, setDisplay) {
     super();
-    this.set = set;
     this.display = display;
+    this.setDisplay = setDisplay;
     this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
   }
 
@@ -26,25 +26,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitR(ctx) {
-    /*
-        var comms = this.display.commands
-        for (var child of ctx.children) {
-            if (child.toString() == "[45]") { //TODO change this to compare the 'constructor.name' property
-                comms.push(child)
-            }
-        }
-        this.set(display => ({
-            ...display,
-            commands: comms
-        }))
-*/
     return this.visitChildren(ctx);
   }
 
   visitSet(ctx) {
     const newMemory = this.display.memory;
     newMemory[this.display.selected].type = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
-    this.set((display) => ({
+    this.setDisplay((display) => ({
       ...display,
       memory: newMemory,
     }));
@@ -89,7 +77,8 @@ class RVisitor extends RomeVisitor {
 
   visitMove(ctx) {
     if (ctx.children[2].getText() === 'next') {
-      if (this.display.selected === 10) { // TODO replace magic number
+      const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
+      if (this.display.selected === maxUsableMemoryKey) {
         this.reporter.generalError('No more memory');
         return;
       }
@@ -125,9 +114,13 @@ class RVisitor extends RomeVisitor {
       this.reporter.generalError('Wrong memory type for writing');
       return;
     }
-    if (this.display.selected === 10) {
+
+    // Get the keys of special memory cells
+    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
+    const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
+    if (this.display.selected === netMemoryKey) {
       NetToggle();
-    } else if (this.display.selected === 11) {
+    } else if (this.display.selected === usbMemoryKey) {
       USBToggle();
     } else {
       this.display.memory[this.display.selected].content = arg;
@@ -189,34 +182,6 @@ class RVisitor extends RomeVisitor {
     }
   }
 
-  visitSnet(ctx) {
-    if (!this.display.importNet) {
-      this.reporter.generalError("Unknown function 'n_write'");
-      return;
-    }
-    NetToggle();
-  }
-
-  visitRnet(ctx) {
-    if (!this.display.importNet) {
-      this.reporter.generalError("Unknown function 'n_read'");
-      return;
-    }
-    if (this.display.memory[this.display.selected].content !== '') {
-      this.reporter.generalError('Memory cell not empty');
-      return;
-    }
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < Math.floor((Math.random() * 10) + 1); i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    this.display.memory[this.display.selected].content = result;
-    NetToggle();
-    return result;
-  }
-
   visitKread(ctx) {
     if (!this.display.importIO) {
       this.reporter.generalError("Unknown function 'k_read'");
@@ -239,10 +204,6 @@ class RVisitor extends RomeVisitor {
     this.display.output = this.display.output.concat(arg.replace('"', '').replace('"', ''), '\n');
   }
 
-  visitNet(ctx) {
-    this.display.importNet = true;
-  }
-
   visitIo(ctx) {
     this.display.importIO = true;
   }
@@ -257,6 +218,93 @@ class RVisitor extends RomeVisitor {
       return;
     }
     this.display.memory[this.display.selected].name = arg;
+  }
+
+  visitPaint(ctx) {
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        bgColor: newValue,
+      },
+    }));
+  }
+
+  visitTextColor(ctx) {
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtColor: newValue,
+      },
+    }));
+  }
+
+  visitTextSize(ctx) {
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtSize: newValue,
+      },
+    }));
+  }
+
+  visitTextAlign(ctx) {
+    const newValue = ctx.children[2].getText();
+    // Update display.outputStyle.bgColor
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        txtAlign: newValue,
+      },
+    }));
+  }
+
+  visitBold(ctx) {
+    const isBold = (ctx.children[2].getText() === 'true');
+    const newValue = isBold ? 'bold' : '';
+    // Update display.outputStyle.bold
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        bold: newValue,
+      },
+    }));
+  }
+
+  visitItalic(ctx) {
+    const isItalic = (ctx.children[2].getText() === 'true');
+    const newValue = isItalic ? 'italic' : '';
+    // Update display.outputStyle.italic
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        italic: newValue,
+      },
+    }));
+  }
+
+  visitUnderline(ctx) {
+    const isUnderline = (ctx.children[2].getText() === 'true');
+    const newValue = isUnderline ? 'underline' : '';
+    // Update display.outputStyle.underline
+    this.setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      outputStyle: {
+        ...prevDisplay.outputStyle,
+        underline: newValue,
+      },
+    }));
   }
 }
 

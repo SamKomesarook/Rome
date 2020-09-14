@@ -4,23 +4,6 @@ import { MVisitor } from './MachineVisitor';
 const antlr4 = require('antlr4');
 
 const processInstrs = (display, setDisplay) => {
-  // var delayCount = 0;
-  /*
-    if (display.commands.length == 0) {
-        break
-    }
-
-    for(var i=0; i<display.commands.length; i++){
-        var instr = display.commands[i]
-        if (instr.children[0].constructor.name == "KreadContext") {
-            display.reading = true
-            display.commands.splice(0, i)
-            break
-        } else {
-            setTimeout(instr.accept(new Visitor(setDisplay, display)), delayCount)
-        }
-    }
-    */
   while (true) {
     if (display.commands.length === 0 || display.errors) {
       break;
@@ -33,13 +16,13 @@ const processInstrs = (display, setDisplay) => {
         errors.generalError("Unknown function 'k_read'");
         break;
       }
-      setDisplay((display) => ({
-        ...display,
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
         reading: true,
       }));
       break;
     } else {
-      instr.accept(display.machine ? new MVisitor(setDisplay, display) : new RVisitor(setDisplay, display));
+      instr.accept(display.machine ? new MVisitor(display, setDisplay) : new RVisitor(display, setDisplay));
     }
   }
 };
