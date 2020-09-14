@@ -21,7 +21,6 @@ WRITE: 'write';
 NAME: 'name';
 
 IMP: 'import';
-NET: 'network';
 IO: 'IO';
 
 IF: 'if';
@@ -32,9 +31,6 @@ LESS: 'less';
 GRE: 'greater';
 AND: 'and';
 OR: 'or';
-
-NWRITE: 'networkWrite';
-NREAD: 'networkRead';
 
 MOVE: 'move';
 RIGHT: 'next';
@@ -58,9 +54,7 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 strargs : STRLIT #Str ;
 
-imp: IMP '(' NET ')' # Net
-	| IMP '(' IO ')' # Io
-	;
+imp:  IMP '(' IO ')' # Io ;
 
 mem: MEM '(' (intargs | strargs) ')';
 
@@ -83,8 +77,6 @@ expression:
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
 	| WRITE '(' (intargs | STRLIT) ')'					# Write
-	| NWRITE '(' (intargs | STRLIT) ')'					# Snet
-	| NREAD													# Rnet
 	| KREAD													# Kread
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name

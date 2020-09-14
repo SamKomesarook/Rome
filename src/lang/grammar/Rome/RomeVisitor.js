@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.8
+// Generated from Rome.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -14,12 +14,6 @@ RomeVisitor.prototype.constructor = RomeVisitor;
 
 // Visit a parse tree produced by RomeParser#Str.
 RomeVisitor.prototype.visitStr = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Net.
-RomeVisitor.prototype.visitNet = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -98,18 +92,6 @@ RomeVisitor.prototype.visitLoop = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Write.
 RomeVisitor.prototype.visitWrite = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Snet.
-RomeVisitor.prototype.visitSnet = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Rnet.
-RomeVisitor.prototype.visitRnet = function(ctx) {
   return this.visitChildren(ctx);
 };
 
