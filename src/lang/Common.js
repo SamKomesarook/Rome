@@ -1,5 +1,7 @@
 import { RVisitor } from './RomeVisitor';
 import { MVisitor } from './MachineVisitor';
+import { KreadContext } from './grammar/Rome/RomeParser';
+import { ReadContext } from './grammar/Machine/MachineParser';
 
 const antlr4 = require('antlr4');
 
@@ -10,7 +12,8 @@ const processInstrs = (display, setDisplay) => {
     }
     const instr = display.commands[0];
     display.commands.splice(0, 1);
-    if (instr.children[0].constructor.name === 'KreadContext' || instr.children[0].constructor.name === 'ReadContext') {
+
+    if (instr.children[0].constructor === KreadContext || instr.children[0].constructor.name === ReadContext) {
       if (!display.importIO) {
         const errors = new ErrorReporter(display);
         errors.generalError("Unknown function 'k_read'");

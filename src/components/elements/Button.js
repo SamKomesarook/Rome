@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs, ErrorReporter } from '../../lang/Common';
 
@@ -33,7 +34,7 @@ const StartButton = () => {
     if (tree.exception === null && parser._syntaxErrors === 0) {
       try {
         for (const child of tree.children) {
-          if (child.constructor.name !== 'TerminalNodeImpl') {
+          if (child.constructor !== TerminalNodeImpl) {
             display.commands.push(child);
           }
         }
