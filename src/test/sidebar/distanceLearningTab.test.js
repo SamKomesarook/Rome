@@ -1,11 +1,11 @@
 import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
-const { By } = require('selenium-webdriver');
 
 const testName = {
-  testClickTab: 'test first entry of help tab',
-  testSearchInput: 'test the function of searching',
+  testTabInit: 'test initial state of distance tab when first entry',
+  testSearchInput1: 'test searching video using input "fox"',
+  testSearchInput2: 'test searching video using input "browser"',
   testLevelList: 'test the level dropdownfied',
   testWeekList: 'test the week dropdownfied',
   testVideo1: 'test the first video',
@@ -29,7 +29,7 @@ describe('test distance learing tab', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testClickTab, async () => {
+  test(testName.testTabInit, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
@@ -43,24 +43,42 @@ describe('test distance learing tab', () => {
     const week = await weekList.getAttribute('value');
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[1]');
-    await link1.click();
+    const title1 = await link1.getText();
+
+    const link2 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[2]');
+    const title2 = await link2.getText();
 
     expect(serachText).toEqual('');
     expect(level).toEqual('all');
     expect(week).toEqual('all');
-    // const serachArea = await TestConfig.getElementById(driver, 'dis-serach')
-    // await serachArea.sendKeys("fox");
+    expect(title1).toEqual('Why are there Four Firefoxes?');
+    expect(title2).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
-  test(testName.testSearchInput, async () => {
+  test(testName.testSearchInput1, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
     const serachArea = await TestConfig.getElementById(driver, 'dis-search');
     await serachArea.sendKeys('fox');
 
-    const v1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
-    await v1.click();
+    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
+    const title1 = await link1.getText();
+
+    expect(title1).toEqual('Why are there Four Firefoxes?');
+  }, 40000);
+
+  test(testName.testSearchInput2, async () => {
+    const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
+    await content.click();
+
+    const serachArea = await TestConfig.getElementById(driver, 'dis-search');
+    await serachArea.sendKeys('browser');
+
+    const link2 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
+    const title2 = await link2.getText();
+
+    expect(title2).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
   test(testName.testLevelList, async () => {
@@ -68,15 +86,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const levelList = await TestConfig.getElementById(driver, 'levels');
-    await levelList.click();
-    // const selectT = await TestConfig.getElementById(driver, 'Toddler');
-    // const T = levelList.findElement(By.id('toddler'));
-    const level = await levelList.getAttribute('value');
+    await levelList.sendKeys('Toddler');
+    
+    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
+    const title1 = await link1.getText();
 
-    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[1]');
-    await link1.click();
-
-    expect(level).toEqual('all');
+    expect(title1).toEqual('Why are there Four Firefoxes?');
   }, 40000);
 
   test(testName.testWeekList, async () => {
@@ -84,15 +99,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const weekList = await TestConfig.getElementById(driver, 'weeks');
-    await weekList.click();
-    // const selectT = await TestConfig.getElementById(driver, 'Toddler');
-    // const T = levelList.findElement(By.id('toddler'));
-    const level = await weekList.getAttribute('value');
+    await weekList.sendKeys('3');
 
-    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[1]');
-    await link1.click();
+    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
+    const title1 = await link1.getText();
 
-    expect(level).toEqual('all');
+    expect(title1).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
   test(testName.testVideo1, async () => {
@@ -101,13 +113,23 @@ describe('test distance learing tab', () => {
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[1]');
     await link1.click();
+
+    const video1 = await TestConfig.getElementById(driver, 'video-player', false);
+    const isVideo1Visible = await video1.isDisplayed();
+
+    expect(isVideo1Visible).toEqual(true);
   }, 35000);
 
   test(testName.testVideo2, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
-    const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[2]');
-    await link1.click();
+    const link2 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button[2]');
+    await link2.click();
+
+    const video2 = await TestConfig.getElementById(driver, 'video-player', false);
+    const isVideo2Visible = await video2.isDisplayed();
+
+    expect(isVideo2Visible).toEqual(true);
   }, 35000);
 });
