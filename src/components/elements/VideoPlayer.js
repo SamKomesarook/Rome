@@ -13,7 +13,7 @@ const VideoPlayer = () => {
 
   return (
     <div id="video-player" className={className}>
-      <iframe title="Distance-learning-video" src={embedSrc} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      <iframe id="video-frame" title="Distance-learning-video" src={embedSrc} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
         <p>
           <a href={`https://www.youtube.com/watch?v=${ui.ctxYoutubeContentID}`}>
             Fallback link for browsers that don't support iframes
