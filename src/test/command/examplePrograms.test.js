@@ -15,8 +15,6 @@ const testName = {
   testIfIsEqual: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend',
   testIfNotLess: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend',
   testIfIsGreater: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend',
-  testNetworkWrite: 'test the sample code: start\nimport(network)\nn_write("hello!")\nend',
-  testNetworkRead: 'test the sample code: start\nimport(network)\nn_read\nend',
   testKeyboardRead: 'test the sample code: start\nimport(IO)\nk_read\nend',
   testConsoleWrite: 'test the sample code: start\nimport(IO)\nk_write("hello!")\nend',
 };
@@ -38,7 +36,7 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
 
-    const stopBtn = await TestConfig.getElementById(driver, 'stop-button');
+    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
     stopBtn.click();
   }, 30000);
 
@@ -382,52 +380,6 @@ describe('test example programs', () => {
     expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
     expect(memoryCell1Res).toEqual('');
-  }, 40000);
-
-  // import network and networkWrite:
-  // start
-  // import(network)
-  // networkWrite("hello!")
-  // end
-
-  test(testName.testNetworkWrite, async () => {
-    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(network)\nnetworkWrite("hello!")\nend');
-
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
-
-    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
-    const memoryCell0Res = await memoryCell0.getText();
-
-    expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('');
-  }, 40000);
-
-  // import network and networkRead:
-  // start
-  // import(network)
-  // networkRead
-  // end
-
-  test(testName.testNetworkRead, async () => {
-    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(network)\nnetworkRead\nend');
-
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
-
-    // const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
-    // const memoryCell0Res = await memoryCell0.getText();
-
-    expect(outputAreaRes).toEqual('');
-    // expect(memoryCell0Res).toEqual('');
   }, 40000);
 
   // import IO and KeyboardRead:
