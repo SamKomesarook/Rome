@@ -26,7 +26,9 @@
         "webpack-dev-server": "webpack-dev-server",
         "dev": "webpack-dev-server --mode=development",
         "prod": "webpack --mode=production",
-        "setPassword": "node src/hash/setPassword $PASS true"
+        "setPassword": "node src/hash/setPassword $PASS true",
+
+        "serve": "http-server ./dist"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -65,6 +67,7 @@
         "eslint-plugin-react": "^7.20.5",
         "eslint-plugin-react-hooks": "^4.0.8",
         "html-webpack-plugin": "^4.3.0",
+        "http-server": "^0.12.3",
         "jest": "^24.9.0",
         "path": "^0.12.7",
         "webpack": "^4.44.1",
