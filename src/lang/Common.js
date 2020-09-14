@@ -1,6 +1,6 @@
 import { RVisitor } from './RomeVisitor';
 import { MVisitor } from './MachineVisitor';
-import { RomeParser, KreadContext } from './grammar/Rome/RomeParser';
+import { KreadContext } from './grammar/Rome/RomeParser';
 import { ReadContext } from './grammar/Machine/MachineParser';
 
 const antlr4 = require('antlr4');
@@ -29,20 +29,9 @@ const processInstrs = (display, setDisplay) => {
     }
     const instr = display.commands[0];
     display.commands.splice(0, 1);
-    console.log('inst', instr);
-    // console.log('inst.getChild(0)', instr.getChild(0));
-    console.log('inst.children[0]', instr.children[0]);
-    // console.log('inst.getChild(0).constructor', instr.getChild(0).constructor);
-    console.log('inst.children[0].constructor', instr.children[0].constructor);
-    // console.log('inst.getChild(0).constructor.name', instr.getChild(0).constructor.name);
-    console.log('inst.children[0].constructor.name', instr.children[0].constructor.name);
 
-    const romeParser = new RomeParser();
-    // if (instr.children[0].constructor.name === 'KreadContext' || instr.children[0].constructor.name === 'ReadContext') {
     if (instr.children[0].constructor === KreadContext || instr.children[0].constructor.name === ReadContext) {
-      console.log('WRITE READ CONTEXT');
       if (!display.importIO) {
-        console.log('no import IO');
         const errors = new ErrorReporter(display);
         errors.generalError("Unknown function 'k_read'");
         break;
