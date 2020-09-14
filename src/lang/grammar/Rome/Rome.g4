@@ -38,9 +38,24 @@ LEFT: 'last';
 
 LOOP: 'loop';
 
+STYLE: 'style';
+PAINT: 'paint';
+TEXT_COLOR: 'text_color';
+TEXT_SIZE: 'text_size';
+TEXT_ALIGN: 'text_align';
+BOLD: 'bold';
+ITALIC: 'italic';
+UNDERLINE: 'underline';
+
+COLOR: 'black' | 'white' | 'blue' | 'brown' | 'gray' | 'grey' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
+SIZE: 'xx-large' | 'x-large' | 'larger' | 'large' | 'medium' | 'small' | 'smaller' | 'x-small' | 'xx-small';
+ALIGN_PROP: 'left' | 'center' | 'right';
+
 NEWLINE: '\n';
 
 WS: ' ';
+
+BOOLEAN_PROP: 'true' | 'false';
 
 IDENTIFIER: [a-zA-Z]+;
 
@@ -68,6 +83,17 @@ expressions: expression NEWLINE;
 
 conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
 
+stylingExpressions: stylingExpression NEWLINE;
+
+stylingExpression: PAINT '(' COLOR ')' 	# Paint
+	| TEXT_COLOR '(' COLOR ')' 			# TextColor
+	| TEXT_SIZE '(' SIZE ')'			# TextSize
+	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
+	| BOLD '(' BOOLEAN_PROP ')'			# Bold
+	| ITALIC '(' BOOLEAN_PROP ')'		# Italic
+	| UNDERLINE '(' BOOLEAN_PROP ')'	# Underline 
+	;
+	
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
@@ -80,4 +106,5 @@ expression:
 	| KREAD													# Kread
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
+	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
 	;

@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.7.2
+// Generated from Rome.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -83,6 +83,78 @@ RomeListener.prototype.exitCond = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#stylingExpressions.
+RomeListener.prototype.enterStylingExpressions = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#stylingExpressions.
+RomeListener.prototype.exitStylingExpressions = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Paint.
+RomeListener.prototype.enterPaint = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Paint.
+RomeListener.prototype.exitPaint = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#TextColor.
+RomeListener.prototype.enterTextColor = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextColor.
+RomeListener.prototype.exitTextColor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#TextSize.
+RomeListener.prototype.enterTextSize = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextSize.
+RomeListener.prototype.exitTextSize = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#TextAlign.
+RomeListener.prototype.enterTextAlign = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#TextAlign.
+RomeListener.prototype.exitTextAlign = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Bold.
+RomeListener.prototype.enterBold = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Bold.
+RomeListener.prototype.exitBold = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Italic.
+RomeListener.prototype.enterItalic = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Italic.
+RomeListener.prototype.exitItalic = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Underline.
+RomeListener.prototype.enterUnderline = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Underline.
+RomeListener.prototype.exitUnderline = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Set.
 RomeListener.prototype.enterSet = function(ctx) {
 };
@@ -161,6 +233,15 @@ RomeListener.prototype.enterName = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Name.
 RomeListener.prototype.exitName = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Style.
+RomeListener.prototype.enterStyle = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Style.
+RomeListener.prototype.exitStyle = function(ctx) {
 };
 
 
