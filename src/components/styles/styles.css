@@ -36,7 +36,7 @@ input[type=text]:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid rgba(81, 203, 238, 1);
+    border: 1px solid var(--light-blue);
 }
 
 /* Glowing Blue Input Highlights <End> */
@@ -200,7 +200,7 @@ Ref: https://www.w3schools.com/howto/howto_css_switch.asp
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--grey);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -218,11 +218,11 @@ Ref: https://www.w3schools.com/howto/howto_css_switch.asp
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: var(--blue);
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px var(--blue);
 }
 
 input:checked + .slider:before {
@@ -252,12 +252,12 @@ input:checked + .slider:before {
 }
 
 .primary-btn {
-    background-color: #4873FF;
+    background-color: var(--baby-blue);
     color: white;
 }
 
 .secondary-btn {
-    background-color: #D3D3D3;
+    background-color: var(--light-grey);
     color: dimgray;
 }
 
@@ -298,7 +298,7 @@ input:checked + .slider:before {
 }
 
 .selected-memory-cell {
-    background: #30383F;
+    background: var(--dark-grey);
 }
 
 /** PERIPHERAL **/
@@ -414,7 +414,7 @@ aside:hover .sidebar-item-text {
 #filter-control {
     width: 100%;
     padding: 1rem;
-    border-bottom: 2px solid #3c3c3c;
+    border-bottom: 2px solid var(--border-line-dark);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
