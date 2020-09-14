@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.8
+// Generated from Rome.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -17,15 +17,6 @@ RomeListener.prototype.enterStr = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Str.
 RomeListener.prototype.exitStr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Net.
-RomeListener.prototype.enterNet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Net.
-RomeListener.prototype.exitNet = function(ctx) {
 };
 
 
@@ -143,24 +134,6 @@ RomeListener.prototype.enterWrite = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Write.
 RomeListener.prototype.exitWrite = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Snet.
-RomeListener.prototype.enterSnet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Snet.
-RomeListener.prototype.exitSnet = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Rnet.
-RomeListener.prototype.enterRnet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Rnet.
-RomeListener.prototype.exitRnet = function(ctx) {
 };
 
 
