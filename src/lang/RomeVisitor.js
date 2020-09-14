@@ -26,18 +26,6 @@ class RVisitor extends RomeVisitor {
   }
 
   visitR(ctx) {
-    /*
-        var comms = this.display.commands
-        for (var child of ctx.children) {
-            if (child.toString() == "[45]") { //TODO change this to compare the 'constructor.name' property
-                comms.push(child)
-            }
-        }
-        this.set(display => ({
-            ...display,
-            commands: comms
-        }))
-*/
     return this.visitChildren(ctx);
   }
 
@@ -194,34 +182,6 @@ class RVisitor extends RomeVisitor {
     }
   }
 
-  visitSnet(ctx) {
-    if (!this.display.importNet) {
-      this.reporter.generalError("Unknown function 'n_write'");
-      return;
-    }
-    NetToggle();
-  }
-
-  visitRnet(ctx) {
-    if (!this.display.importNet) {
-      this.reporter.generalError("Unknown function 'n_read'");
-      return;
-    }
-    if (this.display.memory[this.display.selected].content !== '') {
-      this.reporter.generalError('Memory cell not empty');
-      return;
-    }
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < Math.floor((Math.random() * 10) + 1); i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    this.display.memory[this.display.selected].content = result;
-    NetToggle();
-    return result;
-  }
-
   visitKread(ctx) {
     if (!this.display.importIO) {
       this.reporter.generalError("Unknown function 'k_read'");
@@ -242,10 +202,6 @@ class RVisitor extends RomeVisitor {
     }
     // TODO if string, print with parenthesis?
     this.display.output = this.display.output.concat(arg.replace('"', '').replace('"', ''), '\n');
-  }
-
-  visitNet(ctx) {
-    this.display.importNet = true;
   }
 
   visitIo(ctx) {

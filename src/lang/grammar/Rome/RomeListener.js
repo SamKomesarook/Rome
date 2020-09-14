@@ -20,15 +20,6 @@ RomeListener.prototype.exitStr = function(ctx) {
 };
 
 
-// Enter a parse tree produced by RomeParser#Net.
-RomeListener.prototype.enterNet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Net.
-RomeListener.prototype.exitNet = function(ctx) {
-};
-
-
 // Enter a parse tree produced by RomeParser#Io.
 RomeListener.prototype.enterIo = function(ctx) {
 };
@@ -215,24 +206,6 @@ RomeListener.prototype.enterWrite = function(ctx) {
 
 // Exit a parse tree produced by RomeParser#Write.
 RomeListener.prototype.exitWrite = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Snet.
-RomeListener.prototype.enterSnet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Snet.
-RomeListener.prototype.exitSnet = function(ctx) {
-};
-
-
-// Enter a parse tree produced by RomeParser#Rnet.
-RomeListener.prototype.enterRnet = function(ctx) {
-};
-
-// Exit a parse tree produced by RomeParser#Rnet.
-RomeListener.prototype.exitRnet = function(ctx) {
 };
 
 

@@ -18,12 +18,6 @@ RomeVisitor.prototype.visitStr = function(ctx) {
 };
 
 
-// Visit a parse tree produced by RomeParser#Net.
-RomeVisitor.prototype.visitNet = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by RomeParser#Io.
 RomeVisitor.prototype.visitIo = function(ctx) {
   return this.visitChildren(ctx);
@@ -146,18 +140,6 @@ RomeVisitor.prototype.visitLoop = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Write.
 RomeVisitor.prototype.visitWrite = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Snet.
-RomeVisitor.prototype.visitSnet = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Rnet.
-RomeVisitor.prototype.visitRnet = function(ctx) {
   return this.visitChildren(ctx);
 };
 
