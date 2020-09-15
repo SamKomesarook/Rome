@@ -76,7 +76,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitMove(ctx) {
-    if (ctx.children[2].getText() === 'next') {
+    if (this.visitChildren(ctx)[2] === 'next') {
       const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
       if (this.display.selected === maxUsableMemoryKey) {
         this.reporter.generalError('No more memory');
@@ -132,6 +132,9 @@ class RVisitor extends RomeVisitor {
   }
 
   visitIf(ctx) {
+    console.log('ctx', ctx);
+    console.log('ctx.intargs', ctx.conditional());
+    console.log('visitChildren', this.visitChildren(ctx));
     let condArg1;
     let condArg2;
     const args = this.visitChildren(ctx.conditional());
@@ -221,7 +224,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitPaint(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -233,7 +236,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextColor(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -245,7 +248,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextSize(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -257,7 +260,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextAlign(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -269,7 +272,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    const isBold = (ctx.children[2].getText() === 'true');
+    const isBold = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isBold ? 'bold' : '';
     // Update display.outputStyle.bold
     this.setDisplay((prevDisplay) => ({
@@ -282,7 +285,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitItalic(ctx) {
-    const isItalic = (ctx.children[2].getText() === 'true');
+    const isItalic = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isItalic ? 'italic' : '';
     // Update display.outputStyle.italic
     this.setDisplay((prevDisplay) => ({
@@ -295,7 +298,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (ctx.children[2].getText() === 'true');
+    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isUnderline ? 'underline' : '';
     // Update display.outputStyle.underline
     this.setDisplay((prevDisplay) => ({
