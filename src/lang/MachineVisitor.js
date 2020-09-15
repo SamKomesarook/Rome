@@ -1,10 +1,11 @@
 import { MachineVisitor } from './grammar/Machine/MachineVisitor';
 
 class MVisitor extends MachineVisitor {
-  constructor(display, setDisplay) {
+  constructor(display, setDisplay, errorReporter) {
     super();
     this.display = display;
     this.setDisplay = setDisplay;
+    this.errorReporter = errorReporter;
   }
 
   // TODO move the method below to common file

@@ -1,14 +1,13 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { ErrorReporter } from './Common';
 import { USBToggle } from '../components/elements/Peripherals';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(display, setDisplay) {
+  constructor(display, setDisplay, errorReporter) {
     super();
     this.display = display;
     this.setDisplay = setDisplay;
-    this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
+    this.errorReporter = errorReporter;
   }
 
   visitChildren(ctx) {
@@ -39,12 +38,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitLoop(ctx) {
+    // Ensure there are expressions inside the for loop
     if (ctx.expressions().length < 1) {
       return;
     }
     const upperBound = parseInt(this.visitChildren(ctx.intargs()));
     if (isNaN(upperBound)) {
-      this.reporter.generalError('Non-number loop argument');
+      this.errorReporter.generalError('Non-number loop argument');
       return;
     }
     for (let i = 0; i < upperBound; i++) {
@@ -62,12 +62,12 @@ class RVisitor extends RomeVisitor {
           return mem.content;
         }
       }
-      this.reporter.generalError('No memory with that name');
+      this.errorReporter.generalError('No memory with that name');
     } else if (ctx.intargs().constructor.name === 'NumContext') {
       try {
         return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content;
       } catch (e) {
-        this.reporter.generalError('Cannot parse memory argument');
+        this.errorReporter.generalError('Cannot parse memory argument');
         return null;
       }
     } else {
@@ -79,13 +79,13 @@ class RVisitor extends RomeVisitor {
     if (this.visitChildren(ctx)[2] === 'next') {
       const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
       if (this.display.selected === maxUsableMemoryKey) {
-        this.reporter.generalError('No more memory');
+        this.errorReporter.generalError('No more memory');
         return;
       }
       this.display.selected += 1;
     } else {
       if (this.display.selected === 0) {
-        this.reporter.generalError('No more memory');
+        this.errorReporter.generalError('No more memory');
         return;
       }
       this.display.selected -= 1;
@@ -95,11 +95,11 @@ class RVisitor extends RomeVisitor {
   visitWrite(ctx) {
     // TODO check for maximum length (or spillover to the next memory cell?
     if (this.display.memory[this.display.selected].content !== '') {
-      this.reporter.generalError('Memory cell not empty');
+      this.errorReporter.generalError('Memory cell not empty');
       return;
     }
     if (this.display.memory[this.display.selected].type === '') {
-      this.reporter.generalError('Memory type not set');
+      this.errorReporter.generalError('Memory type not set');
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
@@ -107,11 +107,11 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'numbers') {
-      this.reporter.generalError('Wrong memory type for writing');
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
     if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'letters') {
-      this.reporter.generalError('Wrong memory type for writing');
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
 
@@ -143,7 +143,7 @@ class RVisitor extends RomeVisitor {
       // Strip off the double quotes and convert string to int
       leftValue = parseInt(memoryCell.content.slice(1, -1));
       if (isNaN(leftValue)) {
-        this.reporter.generalError('Wrong conditional argument type');
+        this.errorReporter.generalError('Wrong conditional argument type');
         return;
       }
     }
@@ -169,7 +169,7 @@ class RVisitor extends RomeVisitor {
 
   visitKread(ctx) {
     if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 'k_read'");
+      this.errorReporter.generalError("Unknown function 'k_read'");
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
@@ -178,7 +178,7 @@ class RVisitor extends RomeVisitor {
 
   visitSwrite(ctx) {
     if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 's_write'");
+      this.errorReporter.generalError("Unknown function 's_write'");
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
@@ -199,7 +199,7 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     if (arg[0] !== '"') {
-      this.reporter.generalError('Cannot name a memory area as a number');
+      this.errorReporter.generalError('Cannot name a memory area as a number');
       return;
     }
     this.display.memory[this.display.selected].name = arg;
