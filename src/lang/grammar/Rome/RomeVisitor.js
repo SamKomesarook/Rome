@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.7.2
+// Generated from Rome.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -14,12 +14,6 @@ RomeVisitor.prototype.constructor = RomeVisitor;
 
 // Visit a parse tree produced by RomeParser#Str.
 RomeVisitor.prototype.visitStr = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Net.
-RomeVisitor.prototype.visitNet = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -66,6 +60,54 @@ RomeVisitor.prototype.visitCond = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#stylingExpressions.
+RomeVisitor.prototype.visitStylingExpressions = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Paint.
+RomeVisitor.prototype.visitPaint = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextColor.
+RomeVisitor.prototype.visitTextColor = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextSize.
+RomeVisitor.prototype.visitTextSize = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#TextAlign.
+RomeVisitor.prototype.visitTextAlign = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Bold.
+RomeVisitor.prototype.visitBold = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Italic.
+RomeVisitor.prototype.visitItalic = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Underline.
+RomeVisitor.prototype.visitUnderline = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Set.
 RomeVisitor.prototype.visitSet = function(ctx) {
   return this.visitChildren(ctx);
@@ -102,18 +144,6 @@ RomeVisitor.prototype.visitWrite = function(ctx) {
 };
 
 
-// Visit a parse tree produced by RomeParser#Snet.
-RomeVisitor.prototype.visitSnet = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by RomeParser#Rnet.
-RomeVisitor.prototype.visitRnet = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by RomeParser#Kread.
 RomeVisitor.prototype.visitKread = function(ctx) {
   return this.visitChildren(ctx);
@@ -128,6 +158,12 @@ RomeVisitor.prototype.visitSwrite = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Name.
 RomeVisitor.prototype.visitName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Style.
+RomeVisitor.prototype.visitStyle = function(ctx) {
   return this.visitChildren(ctx);
 };
 

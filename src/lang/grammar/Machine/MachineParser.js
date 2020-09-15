@@ -626,5 +626,5 @@ MachineParser.prototype.expression = function() {
     return localctx;
 };
 
-
+exports.ReadContext = ReadContext;
 exports.MachineParser = MachineParser;
