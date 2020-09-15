@@ -1,6 +1,6 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { NetToggle, USBToggle } from '../components/elements/Peripherals';
 import { ErrorReporter } from './Common';
+import { USBToggle } from '../components/elements/Peripherals';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -116,11 +116,8 @@ class RVisitor extends RomeVisitor {
     }
 
     // Get the keys of special memory cells
-    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
     const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (this.display.selected === netMemoryKey) {
-      NetToggle();
-    } else if (this.display.selected === usbMemoryKey) {
+    if (this.display.selected === usbMemoryKey) {
       USBToggle();
     } else {
       this.display.memory[this.display.selected].content = arg;

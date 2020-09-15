@@ -16,8 +16,7 @@ export const DisplayProvider = (props) => {
 DisplayContext.DEFAULT = () => {
   const localMemorySize = 12;
   const localSpecialKeys = [
-    { key: localMemorySize - 2, specialContent: 'usb' },
-    { key: localMemorySize - 1, specialContent: 'net' },
+    { key: localMemorySize - 1, specialContent: 'usb' },
   ];
 
   const createMemoryArray = () => {
@@ -33,7 +32,7 @@ DisplayContext.DEFAULT = () => {
     }
     // Set special content for special memory cell
     for (const specialKey of localSpecialKeys) {
-      memoryArray[specialKey.key].special = memoryArray[specialKey.key].specialContent;
+      memoryArray[specialKey.key].special = specialKey.specialContent;
     }
     return memoryArray;
   };
