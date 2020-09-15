@@ -132,56 +132,41 @@ class RVisitor extends RomeVisitor {
   }
 
   visitIf(ctx) {
-    console.log('ctx', ctx);
-    console.log('ctx.intargs', ctx.conditional());
-    console.log('visitChildren', this.visitChildren(ctx));
-    let condArg1;
-    let condArg2;
-    const args = this.visitChildren(ctx.conditional());
-    const mem = this.display.memory[this.display.selected];
-    if (mem.type === 'letters') {
-      condArg1 = mem.content;
+    const condInput = this.visitChildren(ctx.conditional());
+    const memoryCell = this.display.memory[this.display.selected];
+
+    let leftValue;
+    const rightValue = condInput[4][0];
+    const compareKeyword = condInput[2];
+
+    // Assign left value based on content type
+    if (memoryCell.type === 'numbers') {
+      leftValue = memoryCell.content;
     } else {
-      try {
-        condArg1 = parseInt(mem.content);
-      } catch (e) {
+      // Strip off the double quotes and convert string to int
+      leftValue = parseInt(memoryCell.content.slice(1, -1));
+      if (isNaN(leftValue)) {
         this.reporter.generalError('Wrong conditional argument type');
         return;
       }
     }
-    if (this.display.memory[this.display.selected].type === 'letters') {
-      condArg2 = args[4];
-    } else {
-      condArg2 = args[4][0];
-    }
-    if (args[0] === 'is') {
-      if (args[2] === 'less') {
-        if (condArg1 < condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (args[2] === 'greater') {
-        if (condArg1 > condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (condArg1 === condArg2) {
+
+    if (condInput[0] === 'is') {
+      if ((compareKeyword === 'less' && leftValue < rightValue)
+      || (compareKeyword === 'greater' && leftValue > rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue == rightValue)) {
         this.display.commands.unshift(ctx.expressions());
         this.display.commands = this.display.commands.flat(Infinity);
       }
-    } else if (args[2] === 'less') {
-      if (condArg1 >= condArg2) {
+    } else if (condInput[0] === 'not') {
+      if ((compareKeyword === 'less' && leftValue >= rightValue)
+      || (compareKeyword === 'greater' && leftValue <= rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue != rightValue)) {
         this.display.commands.unshift(ctx.expressions());
         this.display.commands = this.display.commands.flat(Infinity);
       }
-    } else if (args[2] === 'greater') {
-      if (condArg1 <= condArg2) {
-        this.display.commands.unshift(ctx.expressions());
-        this.display.commands = this.display.commands.flat(Infinity);
-      }
-    } else if (condArg1 !== condArg2) {
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity);
     }
   }
 
