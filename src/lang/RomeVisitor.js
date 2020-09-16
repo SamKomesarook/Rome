@@ -1,5 +1,6 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
 import { USBToggle } from '../components/elements/Peripherals';
+import { NumContext } from './grammar/Rome/RomeParser';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -63,7 +64,7 @@ class RVisitor extends RomeVisitor {
         }
       }
       this.errorReporter.generalError('No memory with that name');
-    } else if (ctx.intargs().constructor.name === 'NumContext') {
+    } else if (ctx.intargs().constructor === NumContext) {
       try {
         return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content;
       } catch (e) {
