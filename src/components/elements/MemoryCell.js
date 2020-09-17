@@ -57,7 +57,7 @@ const MemoryCell = ({ id }) => {
   };
 
   return (
-    <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onClick={handleClickCell}>
+    <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onDoubleClick={handleClickCell}>
       {shouldBinaryDisplayed ? binaryContent : memoryCell.content}
     </div>
   );
