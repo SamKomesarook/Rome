@@ -15,37 +15,46 @@ const MemoryCell = ({ id }) => {
   let binaryCellList;
   const [binaryContent, setBinaryContent] = useState('');
 
+  const [registeredContent, setRegisteredContent] = useState('');
+
   const handleClickCell = () => {
     let newShouldBinaryDisplayed = !shouldBinaryDisplayed;
 
-    // Check if there is content to switch to binary view
-    if (memoryCell.content.length > 0 && newShouldBinaryDisplayed) {
-      let binary;
+    console.log('content length', memoryCell.content.length);
+    console.log('type', memoryCell.type);
 
+    // Check if there is content to switch to binary view
+    if (newShouldBinaryDisplayed) {
       if (memoryCell.type === 'letters') {
-        binary = BinaryUtil.text2Bin(memoryCell.content);
       } else if (memoryCell.type === 'numbers') {
-        binary = BinaryUtil.dec2Bin(memoryCell.content);
         setByteCellClass(' memory-2-byte-cell');
       }
-
-      binaryCellList = binary.split('').map((bit) => (<div>{bit}</div>));
-      setBinaryContent(binaryCellList);
     } else {
-      newShouldBinaryDisplayed = false;
-      setBinaryContent(memoryCell.content);
+    //   newShouldBinaryDisplayed = false;
       setByteCellClass('');
     }
 
-    setBinaryDisplayed((prevValue) => newShouldBinaryDisplayed);
-
-    // if (shouldBinaryDisplayed) {
-    //   setContentView(binaryCellList);
-    // } else {
-    //   setContentView(memoryCell.content);
-    //   setByteCellClass('');
-    // }
+    console.log('newShouldBinaryDisplayed', newShouldBinaryDisplayed);
+    setBinaryDisplayed(newShouldBinaryDisplayed);
   };
+
+  const generateBinaryView = () => {
+    let binary = '';
+
+    if (memoryCell.type === 'letters') {
+      binary = BinaryUtil.text2Bin(memoryCell.content);
+    } else if (memoryCell.type === 'numbers') {
+      binary = BinaryUtil.dec2Bin(memoryCell.content);
+    }
+
+    binaryCellList = binary.split('').map((bit, index) => (<div key={index}>{bit}</div>));
+    setBinaryContent(binaryCellList);
+  };
+
+  if (registeredContent !== memoryCell.content) {
+    generateBinaryView();
+    setRegisteredContent(memoryCell.content);
+  }
 
   return (
     <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onClick={handleClickCell}>
