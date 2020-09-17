@@ -2192,5 +2192,6 @@ RomeParser.prototype.expression = function() {
     return localctx;
 };
 
+exports.NumContext = NumContext;
 exports.KreadContext = KreadContext;
 exports.RomeParser = RomeParser;

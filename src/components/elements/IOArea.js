@@ -11,11 +11,8 @@ const InputArea = () => {
       const newMem = display.memory;
 
       // Get the keys of special memory cells
-      const netMemoryKey = display.specialKeys.find((element) => element.specialContent === 'net').key;
       const usbMemoryKey = display.specialKeys.find((element) => element.specialContent === 'usb').key;
-      if (display.selected === netMemoryKey) {
-        NetToggle();
-      } else if (display.selected === usbMemoryKey) {
+      if (display.selected === usbMemoryKey) {
         USBToggle();
       } else {
         newMem[display.selected].content = display.input;
