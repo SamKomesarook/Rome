@@ -1,14 +1,14 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { NetToggle, USBToggle } from '../components/elements/Peripherals';
-import { ErrorReporter } from './Common';
+import { USBToggle } from '../components/elements/Peripherals';
+import { NumContext } from './grammar/Rome/RomeParser';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(display, setDisplay) {
+  constructor(display, setDisplay, errorReporter) {
     super();
     this.display = display;
     this.setDisplay = setDisplay;
-    this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
+    this.errorReporter = errorReporter;
   }
 
   visitChildren(ctx) {
@@ -39,12 +39,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitLoop(ctx) {
+    // Ensure there are expressions inside the for loop
     if (ctx.expressions().length < 1) {
       return;
     }
     const upperBound = parseInt(this.visitChildren(ctx.intargs()));
     if (isNaN(upperBound)) {
-      this.reporter.generalError('Non-number loop argument');
+      this.errorReporter.generalError('Non-number loop argument');
       return;
     }
     for (let i = 0; i < upperBound; i++) {
@@ -62,12 +63,12 @@ class RVisitor extends RomeVisitor {
           return mem.content;
         }
       }
-      this.reporter.generalError('No memory with that name');
-    } else if (ctx.intargs().constructor.name === 'NumContext') {
+      this.errorReporter.generalError('No memory with that name');
+    } else if (ctx.intargs().constructor === NumContext) {
       try {
         return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content;
       } catch (e) {
-        this.reporter.generalError('Cannot parse memory argument');
+        this.errorReporter.generalError('Cannot parse memory argument');
         return null;
       }
     } else {
@@ -76,16 +77,16 @@ class RVisitor extends RomeVisitor {
   }
 
   visitMove(ctx) {
-    if (ctx.children[2].getText() === 'next') {
+    if (this.visitChildren(ctx)[2] === 'next') {
       const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
       if (this.display.selected === maxUsableMemoryKey) {
-        this.reporter.generalError('No more memory');
+        this.errorReporter.generalError('No more memory');
         return;
       }
       this.display.selected += 1;
     } else {
       if (this.display.selected === 0) {
-        this.reporter.generalError('No more memory');
+        this.errorReporter.generalError('No more memory');
         return;
       }
       this.display.selected -= 1;
@@ -95,11 +96,11 @@ class RVisitor extends RomeVisitor {
   visitWrite(ctx) {
     // TODO check for maximum length (or spillover to the next memory cell?
     if (this.display.memory[this.display.selected].content !== '') {
-      this.reporter.generalError('Memory cell not empty');
+      this.errorReporter.generalError('Memory cell not empty');
       return;
     }
     if (this.display.memory[this.display.selected].type === '') {
-      this.reporter.generalError('Memory type not set');
+      this.errorReporter.generalError('Memory type not set');
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
@@ -107,20 +108,17 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'numbers') {
-      this.reporter.generalError('Wrong memory type for writing');
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
     if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'letters') {
-      this.reporter.generalError('Wrong memory type for writing');
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
 
     // Get the keys of special memory cells
-    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
     const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (this.display.selected === netMemoryKey) {
-      NetToggle();
-    } else if (this.display.selected === usbMemoryKey) {
+    if (this.display.selected === usbMemoryKey) {
       USBToggle();
     } else {
       this.display.memory[this.display.selected].content = arg;
@@ -132,59 +130,47 @@ class RVisitor extends RomeVisitor {
   }
 
   visitIf(ctx) {
-    let condArg1;
-    let condArg2;
-    const args = this.visitChildren(ctx.conditional());
-    const mem = this.display.memory[this.display.selected];
-    if (mem.type === 'letters') {
-      condArg1 = mem.content;
+    const condInput = this.visitChildren(ctx.conditional());
+    const memoryCell = this.display.memory[this.display.selected];
+
+    let leftValue;
+    const rightValue = condInput[4][0];
+    const compareKeyword = condInput[2];
+
+    // Assign left value based on content type
+    if (memoryCell.type === 'numbers') {
+      leftValue = memoryCell.content;
     } else {
-      try {
-        condArg1 = parseInt(mem.content);
-      } catch (e) {
-        this.reporter.generalError('Wrong conditional argument type');
+      // Strip off the double quotes and convert string to int
+      leftValue = parseInt(memoryCell.content.slice(1, -1));
+      if (isNaN(leftValue)) {
+        this.errorReporter.generalError('Wrong conditional argument type');
         return;
       }
     }
-    if (this.display.memory[this.display.selected].type === 'letters') {
-      condArg2 = args[4];
-    } else {
-      condArg2 = args[4][0];
-    }
-    if (args[0] === 'is') {
-      if (args[2] === 'less') {
-        if (condArg1 < condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (args[2] === 'greater') {
-        if (condArg1 > condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (condArg1 === condArg2) {
+
+    if (condInput[0] === 'is') {
+      if ((compareKeyword === 'less' && leftValue < rightValue)
+      || (compareKeyword === 'greater' && leftValue > rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue == rightValue)) {
         this.display.commands.unshift(ctx.expressions());
         this.display.commands = this.display.commands.flat(Infinity);
       }
-    } else if (args[2] === 'less') {
-      if (condArg1 >= condArg2) {
+    } else if (condInput[0] === 'not') {
+      if ((compareKeyword === 'less' && leftValue >= rightValue)
+      || (compareKeyword === 'greater' && leftValue <= rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue != rightValue)) {
         this.display.commands.unshift(ctx.expressions());
         this.display.commands = this.display.commands.flat(Infinity);
       }
-    } else if (args[2] === 'greater') {
-      if (condArg1 <= condArg2) {
-        this.display.commands.unshift(ctx.expressions());
-        this.display.commands = this.display.commands.flat(Infinity);
-      }
-    } else if (condArg1 !== condArg2) {
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity);
     }
   }
 
   visitKread(ctx) {
     if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 'k_read'");
+      this.errorReporter.generalError("Unknown function 'k_read'");
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
@@ -193,7 +179,7 @@ class RVisitor extends RomeVisitor {
 
   visitSwrite(ctx) {
     if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 's_write'");
+      this.errorReporter.generalError("Unknown function 's_write'");
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
@@ -214,14 +200,14 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     if (arg[0] !== '"') {
-      this.reporter.generalError('Cannot name a memory area as a number');
+      this.errorReporter.generalError('Cannot name a memory area as a number');
       return;
     }
     this.display.memory[this.display.selected].name = arg;
   }
 
   visitPaint(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -233,7 +219,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextColor(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -245,7 +231,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextSize(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -257,7 +243,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitTextAlign(ctx) {
-    const newValue = ctx.children[2].getText();
+    const newValue = this.visitChildren(ctx)[2];
     // Update display.outputStyle.bgColor
     this.setDisplay((prevDisplay) => ({
       ...prevDisplay,
@@ -269,7 +255,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    const isBold = (ctx.children[2].getText() === 'true');
+    const isBold = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isBold ? 'bold' : '';
     // Update display.outputStyle.bold
     this.setDisplay((prevDisplay) => ({
@@ -282,7 +268,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitItalic(ctx) {
-    const isItalic = (ctx.children[2].getText() === 'true');
+    const isItalic = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isItalic ? 'italic' : '';
     // Update display.outputStyle.italic
     this.setDisplay((prevDisplay) => ({
@@ -295,7 +281,7 @@ class RVisitor extends RomeVisitor {
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (ctx.children[2].getText() === 'true');
+    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isUnderline ? 'underline' : '';
     // Update display.outputStyle.underline
     this.setDisplay((prevDisplay) => ({
