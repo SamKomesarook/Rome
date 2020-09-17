@@ -12,9 +12,9 @@ const MemoryCell = ({ id }) => {
   const [shouldBinaryDisplayed, setBinaryDisplayed] = useState(false);
   const [byteCellClass, setByteCellClass] = useState(''); // Class that determines the gridlayout of binary view
   const [binaryContent, setBinaryContent] = useState('');
-  const [registeredContent, setRegisteredContent] = useState(''); // Register cell's content to track changes
+  const [registeredContent, setRegisteredContent] = useState({ type: '', content: '' }); // Register cell's content to track changes
 
-  const generateBinaryView = () => {
+  const generateBinaryContent = () => {
     let binary = '';
 
     // Convert content to binary
@@ -28,30 +28,31 @@ const MemoryCell = ({ id }) => {
     setBinaryContent(binaryCellList);
   };
 
+  const generateBinaryGrid = (localShouldBinaryDisplayed) => {
+    console.log('localShouldBinaryDisplayed', localShouldBinaryDisplayed);
+    if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
+      setByteCellClass('');
+    } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
+      setByteCellClass(' memory-6-bytes-cell');
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
+      setByteCellClass(' memory-2-bytes-cell');
+    } else if (memoryCell.type === 'char') {
+      setByteCellClass(' memory-1-byte-cell');
+    }
+  };
+
   // If the content in memory has been updated, then update the binary view
-  if (registeredContent !== memoryCell.content) {
-    generateBinaryView();
-    setRegisteredContent(memoryCell.content);
+  if (registeredContent.type !== memoryCell.type
+    || registeredContent.content !== memoryCell.content) {
+    generateBinaryContent();
+    generateBinaryGrid(shouldBinaryDisplayed);
+    setRegisteredContent({ type: memoryCell.type, content: memoryCell.content });
   }
 
   const handleClickCell = () => {
-    let newShouldBinaryDisplayed = !shouldBinaryDisplayed;
-
-    // Check if there is content to switch to binary view
-    if (newShouldBinaryDisplayed && memoryCell.type !== '') {
-      if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
-        setByteCellClass(' memory-6-bytes-cell');
-      } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
-        setByteCellClass(' memory-2-bytes-cell');
-      } else if (memoryCell.type === 'char'){
-        setByteCellClass(' memory-1-byte-cell');
-      }
-    } else {
-      // Always switch off binary view when there is no content in cell
-      newShouldBinaryDisplayed = false;
-      setByteCellClass('');
-    }
-
+    const newShouldBinaryDisplayed = !shouldBinaryDisplayed;
+    // Show or hide the binary view based on newShouldBinaryDisplay
+    generateBinaryGrid(newShouldBinaryDisplayed);
     setBinaryDisplayed(newShouldBinaryDisplayed);
   };
 
