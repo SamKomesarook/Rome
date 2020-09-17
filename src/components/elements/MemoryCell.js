@@ -18,10 +18,9 @@ const MemoryCell = ({ id }) => {
     let binary = '';
 
     // Convert content to binary
-    if (memoryCell.type === 'letters') {
+    if (memoryCell.type === 'letters' || memoryCell.type === 'string' || memoryCell.type === 'char') { // TODO - Nick: Remove letters after data types are updated
       binary = BinaryUtil.text2Bin(memoryCell.content);
-      console.log('txt binary', binary);
-    } else if (memoryCell.type === 'numbers') {
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
       binary = BinaryUtil.dec2Bin(memoryCell.content);
     }
 
@@ -40,10 +39,12 @@ const MemoryCell = ({ id }) => {
 
     // Check if there is content to switch to binary view
     if (newShouldBinaryDisplayed && memoryCell.type !== '') {
-      if (memoryCell.type === 'letters') {
-        setByteCellClass(' memory-6-byte-cell');
-      } else if (memoryCell.type === 'numbers') {
-        setByteCellClass(' memory-2-byte-cell');
+      if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
+        setByteCellClass(' memory-6-bytes-cell');
+      } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
+        setByteCellClass(' memory-2-bytes-cell');
+      } else if (memoryCell.type === 'char'){
+        setByteCellClass(' memory-1-byte-cell');
       }
     } else {
       // Always switch off binary view when there is no content in cell
