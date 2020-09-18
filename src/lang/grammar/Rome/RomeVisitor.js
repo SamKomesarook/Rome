@@ -138,6 +138,11 @@ RomeVisitor.prototype.visitLoop = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#While.
+RomeVisitor.prototype.visitWhile = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
 // Visit a parse tree produced by RomeParser#Write.
 RomeVisitor.prototype.visitWrite = function(ctx) {
   return this.visitChildren(ctx);

@@ -29,6 +29,7 @@ null
 'next'
 'last'
 'loop'
+'while'
 'style'
 'paint'
 'text_color'
@@ -79,6 +80,7 @@ MOVE
 RIGHT
 LEFT
 LOOP
+WHILE
 STYLE
 PAINT
 TEXT_COLOR

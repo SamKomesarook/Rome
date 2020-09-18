@@ -53,6 +53,22 @@ class RVisitor extends RomeVisitor {
       this.display.commands = this.display.commands.flat(Infinity); // TODO is the assignment really necessary?
     }
   }
+  
+    visitWhile(ctx) {
+    // Ensure there are expressions inside the for loop
+    if (ctx.expressions().length < 1) {
+      return;
+    }
+    const upperBound = parseInt(this.visitChildren(ctx.intargs()));
+    if (isNaN(upperBound)) {
+      this.errorReporter.generalError('Non-number loop argument');
+      return;
+    }
+    for (let i = 0; i < upperBound; i++) {
+      this.display.commands.unshift(ctx.expressions());
+      this.display.commands = this.display.commands.flat(Infinity); // TODO is the assignment really necessary?
+    }
+  }
 
   visitMem(ctx) {
     if (ctx.strargs() != null) {

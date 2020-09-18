@@ -37,6 +37,7 @@ RIGHT: 'next';
 LEFT: 'last';
 
 LOOP: 'loop';
+WHILE: 'while';
 
 STYLE: 'style';
 PAINT: 'paint';
@@ -102,6 +103,7 @@ expression:
 	| MOVE '(' (RIGHT | LEFT) ')'							# Move
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
+	| WHILE '(' intargs ')' '{' NEWLINE expressions* '}'	# While	
 	| WRITE '(' (intargs | STRLIT) ')'					# Write
 	| KREAD													# Kread
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
