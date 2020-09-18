@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DisplayContext } from '../../state/DisplayState';
 import BinaryUtil from '../../utils/BinaryUtil';
@@ -12,7 +12,7 @@ const MemoryCell = ({ id }) => {
   const [shouldBinaryDisplayed, setBinaryDisplayed] = useState(false);
   const [byteCellClass, setByteCellClass] = useState(''); // Class that determines the gridlayout of binary view
   const [binaryContent, setBinaryContent] = useState('');
-  const [registeredContent, setRegisteredContent] = useState({ type: '', content: '' }); // Register cell's content to track changes
+  const prevContent = useRef({ type: '', content: '' }); // Register cell's content to track changes
 
   const generateBinaryContent = () => {
     let binary = '';
@@ -29,7 +29,6 @@ const MemoryCell = ({ id }) => {
   };
 
   const generateBinaryGrid = (localShouldBinaryDisplayed) => {
-    console.log('localShouldBinaryDisplayed', localShouldBinaryDisplayed);
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
     } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
@@ -42,11 +41,11 @@ const MemoryCell = ({ id }) => {
   };
 
   // If the content in memory has been updated, then update the binary view
-  if (registeredContent.type !== memoryCell.type
-    || registeredContent.content !== memoryCell.content) {
+  if (prevContent.current.type !== memoryCell.type
+    || prevContent.current.content !== memoryCell.content) {
     generateBinaryContent();
     generateBinaryGrid(shouldBinaryDisplayed);
-    setRegisteredContent({ type: memoryCell.type, content: memoryCell.content });
+    prevContent.current = ({ type: memoryCell.type, content: memoryCell.content });
   }
 
   const handleClickCell = () => {
