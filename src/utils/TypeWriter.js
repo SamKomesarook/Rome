@@ -22,7 +22,7 @@ const TypeWriter = function (txtElementArg, wordsArg, waitArg = 3000) {
     }
 
     // Insert txt into element
-    txtElement.innerHTML = `<span class="txt">${txt}</span>`;
+    txtElement.setAttribute('data-placeholder', txt);
 
     // Initial Type Speed
     let typeSpeed = 40;

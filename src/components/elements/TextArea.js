@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
 // import TypingEffect from '../../utils/TypingEffect';
@@ -157,6 +157,10 @@ const TextArea = () => {
   // Init On DOM Load
   document.addEventListener('DOMContentLoaded', init);
 
+  useEffect(() => {
+    console.log(textArea.current);
+  },[textArea]);
+
   return (
     <div id="coding-area-wrapper">
       {/* <Typed
@@ -195,10 +199,9 @@ const TextArea = () => {
         spellCheck={false}
         contentEditable="true"
         data-words='[ "Hi, Im Si.", "I am Creative.", "I Love Design.", "I Love to Develop." ]'
-        data-wait="3000"
-      >
-        <span className="wrap" />
-      </div>
+        data-wait="1000"
+        data-placeholder=""
+      />
       {/* </Typed> */}
     </div>
   );
