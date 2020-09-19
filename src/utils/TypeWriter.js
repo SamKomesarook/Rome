@@ -1,4 +1,4 @@
-const TypeWriter = function (txtElementArg, wordsArg, waitArg = 3000) {
+const TypeWriter = function (txtElementArg, wordsArg, waitArg = 1000) {
   const txtElement = txtElementArg;
   const words = wordsArg;
   let txt = '';
@@ -22,7 +22,11 @@ const TypeWriter = function (txtElementArg, wordsArg, waitArg = 3000) {
     }
 
     // Insert txt into element
-    txtElement.setAttribute('data-placeholder', txt);
+    if (txtElement.innerText.length === 0 || txtElement.innerText === '\n') {
+      txtElement.setAttribute('data-placeholder', txt);
+    } else {
+      txtElement.setAttribute('data-placeholder', '');
+    }
 
     // Initial Type Speed
     let typeSpeed = 40;

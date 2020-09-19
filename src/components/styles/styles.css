@@ -164,13 +164,16 @@ button:disabled {
     color: white;
     font-size: 1rem;
     resize: none;
+    text-align: left;
 }
 
-div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+div[data-placeholder]:not(:focus):before {
     content: attr(data-placeholder);
     float: left;
     margin-left: 2px;
     color: #b3b3b3;
+    white-space: pre-wrap;
+    text-align: left;
 }
 
 /** SWITCH **/
