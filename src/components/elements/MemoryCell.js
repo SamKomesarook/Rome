@@ -17,11 +17,16 @@ const MemoryCell = ({ id }) => {
   const generateBinaryContent = () => {
     let binary = '';
 
+    // TODO - Nick: Use bytes storage var after datatypes are updated
     // Convert content to binary
-    if (memoryCell.type === 'letters' || memoryCell.type === 'string' || memoryCell.type === 'char') { // TODO - Nick: Remove letters after data types are updated
-      binary = BinaryUtil.text2Bin(memoryCell.content);
-    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
-      binary = BinaryUtil.num2Bin(memoryCell.content);
+    if (memoryCell.type === 'letters' || memoryCell.type === 'string' || memoryCell.type === 'char') {
+      binary = BinaryUtil.text2Bin(memoryCell.content, 6);
+    } else if (memoryCell.type === 'char') {
+      binary = BinaryUtil.text2Bin(memoryCell.content, 1);
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') {
+      binary = BinaryUtil.num2Bin(memoryCell.content, 2);
+    } else if (memoryCell.type === 'long') {
+      binary = BinaryUtil.num2Bin(memoryCell.content, 4);
     } else if (memoryCell.type === 'float') {
       binary = BinaryUtil.dec2Bin(memoryCell.content, 2);
     }
@@ -31,11 +36,14 @@ const MemoryCell = ({ id }) => {
   };
 
   const generateBinaryGrid = (localShouldBinaryDisplayed) => {
+    // TODO - Nick: Use bytes storage var after datatypes are updated
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
-    } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
+    } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') {
       setByteCellClass(' memory-6-bytes-cell');
-    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int' || memoryCell.type === 'float') { // TODO - Nick: Remove numbers after data types are updated
+    } else if (memoryCell.type === 'long') {
+      setByteCellClass(' memory-4-bytes-cell');
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int' || memoryCell.type === 'float') {
       setByteCellClass(' memory-2-bytes-cell');
     } else if (memoryCell.type === 'char') {
       setByteCellClass(' memory-1-byte-cell');
