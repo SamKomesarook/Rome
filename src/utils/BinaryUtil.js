@@ -1,8 +1,8 @@
 class BinaryUtil {
     // static text2Bin = (string) => string.split('').map((char) => char.charCodeAt(0).toString(2)).join(' ');
-    static text2Bin = (input, byte = 6) => {
+    static text2Bin = (text, byte = 6) => {
       const bit = byte * 8;
-      const characters = input.split('');
+      const characters = text.split('');
 
       const binary = characters.map((char) => {
         const binary = char.charCodeAt(0).toString(2);
@@ -19,9 +19,9 @@ class BinaryUtil {
       return remainingBits.concat(binary);
     }
 
-    static dec2Bin = (dec, byte = 2) => {
+    static num2Bin = (num, byte = 2) => {
       const bit = byte * 8;
-      const binary = (dec >>> 0).toString(2);
+      const binary = (num >>> 0).toString(2);
 
       const remainingBitsLength = bit - binary.length;
       let remainingBits = '';
@@ -30,6 +30,34 @@ class BinaryUtil {
       }
       return remainingBits.concat(binary);
     };
+
+    static dec2Bin = (dec, byte = 4) => {
+      const exponentMemoryAllocation = 8;
+      const significantMemoryAllocaiton = byte * 8 - exponentMemoryAllocation - 1;
+
+      // Convert the input into binary
+      const binary = dec.toString(2);
+
+      // Find the exponent required for normalization
+      const exponent = binary.indexOf('.') - 1;
+
+      // Find the exponent binary form with bias component
+      const biasExponent = Math.pow(2, exponentMemoryAllocation - 1) - 1 + exponent;
+      const biasExponentBinary = biasExponent.toString(2);
+
+      // Get the signification part
+      const significant = binary.replace('.', '').slice(1);
+
+      const sign = dec >= 0 ? 0 : 1;
+
+      const decBinary = sign + biasExponentBinary + significant;
+
+      let remainingBits = '';
+      for (let i = 0; i < significantMemoryAllocaiton; i++) {
+        remainingBits = remainingBits.concat('0');
+      }
+      return decBinary + remainingBits;
+    }
 }
 
 export default BinaryUtil;

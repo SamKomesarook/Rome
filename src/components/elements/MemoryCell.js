@@ -21,7 +21,9 @@ const MemoryCell = ({ id }) => {
     if (memoryCell.type === 'letters' || memoryCell.type === 'string' || memoryCell.type === 'char') { // TODO - Nick: Remove letters after data types are updated
       binary = BinaryUtil.text2Bin(memoryCell.content);
     } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
-      binary = BinaryUtil.dec2Bin(memoryCell.content);
+      binary = BinaryUtil.num2Bin(memoryCell.content);
+    } else if (memoryCell.type === 'float') {
+      binary = BinaryUtil.dec2Bin(memoryCell.content, 2);
     }
 
     const binaryCellList = binary.split('').map((bit, index) => (<div key={index}>{bit}</div>));
@@ -33,7 +35,7 @@ const MemoryCell = ({ id }) => {
       setByteCellClass('');
     } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') { // TODO - Nick: Remove letters after data types are updated
       setByteCellClass(' memory-6-bytes-cell');
-    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') { // TODO - Nick: Remove numbers after data types are updated
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int' || memoryCell.type === 'float') { // TODO - Nick: Remove numbers after data types are updated
       setByteCellClass(' memory-2-bytes-cell');
     } else if (memoryCell.type === 'char') {
       setByteCellClass(' memory-1-byte-cell');
