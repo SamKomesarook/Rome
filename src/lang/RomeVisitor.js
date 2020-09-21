@@ -107,13 +107,59 @@ class RVisitor extends RomeVisitor {
     if (typeof arg === 'object') {
       arg = arg[0];
     }
-    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'numbers') {
-      this.errorReporter.generalError('Wrong memory type for writing');
+    // range of int:
+    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'integer') {
+      this.errorReporter.generalError('Wrong memory type for writing'); // write letters in numbers type
       return;
     }
-    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'letters') {
-      this.errorReporter.generalError('Wrong memory type for writing');
+    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'integer') {
+      const inNum = Number(arg);
+      if (inNum > 65535) {
+        this.errorReporter.generalError('out of maximun memory');
+        return;
+      }
+    }
+
+    // range of long:
+    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'long') {
+      this.errorReporter.generalError('Wrong memory type for writing'); // write letters in numbers type
       return;
+    }
+    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'long') {
+      const inNum = Number(arg);
+      if (inNum > 4294967295) {
+        this.errorReporter.generalError('out of maximun memory');
+        return;
+      }
+    }
+
+    // char:
+    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'character') {
+      this.errorReporter.generalError('Wrong memory type for writing'); // write numbers in letters type
+      return;
+    }
+    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'character') {
+      if (arg.length > 3) {
+        this.errorReporter.generalError('out of maximun memory');
+        return;
+      }
+    }
+
+    // string: upper-bond 6 bytes per cell, up to 12*6 72 bytes
+    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'string') {
+      this.errorReporter.generalError('Wrong memory type for writing'); // write numbers in letters type
+      return;
+    }
+
+    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'string') {
+      if (arg.length > 72) {
+        this.errorReporter.generalError('out of maximun memory');
+        return;
+      }
+      if (arg.length > (72 - this.display.memory[this.display.selected].key * 6)) {
+        this.errorReporter.generalError('out of maximun memory');
+        return;
+      }
     }
 
     // Get the keys of special memory cells
@@ -121,7 +167,23 @@ class RVisitor extends RomeVisitor {
     if (this.display.selected === usbMemoryKey) {
       USBToggle();
     } else {
-      this.display.memory[this.display.selected].content = arg;
+      if (arg[0] !== '"') {
+        this.display.memory[this.display.selected].content = arg;
+      }
+      if (arg[0] === '"') {
+        arg = arg.substr(0, arg.length - 1);
+        arg = arg.substr(1, arg.length - 1);
+
+        if (this.display.memory[this.display.selected].type === 'string') {
+          const pos = this.display.memory[this.display.selected].key;
+          const base = Math.floor(arg.length / 6);
+          for (let i = 0; i < base + 1; i++) {
+            this.display.memory[pos + i * 1].content = arg.substr(i * 6, 6);
+          }
+          return;
+        }
+        this.display.memory[this.display.selected].content = arg;
+      }
     }
   }
 

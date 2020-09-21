@@ -12,6 +12,10 @@ END: 'end';
 SET: 'set';
 NUM: 'numbers';
 LET: 'letters';
+INT: 'integer';
+LONG: 'long';
+CHAR: 'character';
+STR: 'string';
 
 FREE: 'free';
 MEM: 'memory';
@@ -97,7 +101,7 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
-	SET '(' (NUM | LET) ')'								# Set
+	SET '(' (NUM | LET | INT | LONG | CHAR | STR) ')'								# Set
 	| FREE													# Free
 	| MOVE '(' (RIGHT | LEFT) ')'							# Move
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
