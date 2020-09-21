@@ -37,7 +37,6 @@ RIGHT: 'next';
 LEFT: 'last';
 
 LOOP: 'loop';
-WHILE: 'while';
 
 STYLE: 'style';
 PAINT: 'paint';
@@ -65,6 +64,8 @@ NUMBER: ('0' .. '9')+;
 STRLIT: '"' ~ ["\r\n]* '"';
 
 ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
+
+WHILE: 'while';
 
 // Rules
 

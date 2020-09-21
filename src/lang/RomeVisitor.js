@@ -54,19 +54,58 @@ class RVisitor extends RomeVisitor {
     }
   }
   
-    visitWhile(ctx) {
-    // Ensure there are expressions inside the for loop
+  visitWhile(ctx) {
+    // Ensure there are expressions inside the while loop
     if (ctx.expressions().length < 1) {
       return;
     }
-    const upperBound = parseInt(this.visitChildren(ctx.intargs()));
-    if (isNaN(upperBound)) {
-      this.errorReporter.generalError('Non-number loop argument');
-      return;
+	
+	while (whileLoopCondition(ctx)){
+	  this.display.commands.unshift(ctx.expressions());
+      this.display.commands = this.display.commands.flat(Infinity);
+	  //how to update ctx?
+	}
+    
+  }
+  
+  whileLoopCondition(ctx){
+    const condInput = this.visitChildren(ctx.conditional());
+    const memoryCell = this.display.memory[this.display.selected];
+
+    let leftValue;
+    const rightValue = condInput[4][0];
+    const compareKeyword = condInput[2];
+
+    // Assign left value based on content type
+    if (memoryCell.type === 'numbers') {
+      leftValue = memoryCell.content;
+    } else {
+      // Strip off the double quotes and convert string to int
+      leftValue = parseInt(memoryCell.content.slice(1, -1));
+      if (isNaN(leftValue)) {
+        this.errorReporter.generalError('Wrong conditional argument type');
+        return;
+      }
     }
-    for (let i = 0; i < upperBound; i++) {
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity); // TODO is the assignment really necessary?
+
+    if (condInput[0] === 'is') {
+      if ((compareKeyword === 'less' && leftValue < rightValue)
+      || (compareKeyword === 'greater' && leftValue > rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue == rightValue)) {
+        return true;
+      } else {
+	    return false;
+	  }
+    } else if (condInput[0] === 'not') {
+      if ((compareKeyword === 'less' && leftValue >= rightValue)
+      || (compareKeyword === 'greater' && leftValue <= rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue != rightValue)) {
+        return true;
+      } else {
+	    return false;
+	  }
     }
   }
 
