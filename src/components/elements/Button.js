@@ -26,9 +26,10 @@ const StartButton = () => {
     const parser = (staticDisplay.machine)
       ? new MachineParser(tokens)
       : new RomeParser(tokens);
+    const errorReporter = new ErrorReporter(staticDisplay);
     parser.buildParseTrees = true;
     parser.removeErrorListeners();
-    parser.addErrorListener(new ErrorReporter(staticDisplay));
+    parser.addErrorListener(errorReporter);
 
     const tree = parser.r();
 
@@ -40,7 +41,7 @@ const StartButton = () => {
           }
         }
         staticDisplay.errors = false;
-        processInstrs(staticDisplay);
+        processInstrs(staticDisplay, errorReporter);
       } catch (e) {
         console.log(e);
         // TODO print error messages

@@ -22,8 +22,7 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 }
 
-const processInstrs = (staticDisplay) => {
-  const errorReporter = new ErrorReporter(staticDisplay);
+const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
   while (true) {
     if (staticDisplay.commands.length === 0 || staticDisplay.errors) {
       break;
