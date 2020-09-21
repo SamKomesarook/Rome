@@ -39,6 +39,27 @@ const Help = ({ isActive }) => {
     {
       topic: 's_write', content: 'Write the argument to the output window. requires IO library.\n\nExample:\nstart\nimport(IO)\nk_read\ns_write("write something here")\nend',
     },
+	{
+      topic: 'paint', content: 'Paint the background color of the console window. ',
+    },
+	{
+      topic: 'text_color', content: 'Set the color of the text in console window. ',
+    },
+	{
+      topic: 'text_size', content: 'Set the size of the text in console window. ',
+    },
+	{
+      topic: 'text_align', content: 'Set the align of the text in console window. ',
+    },
+	{
+      topic: 'bold', content: 'Bold the text in console window. ',
+    },
+	{
+      topic: 'italic', content: 'Italic the text in console window. ',
+    },
+	{
+      topic: 'underline', content: 'Underline the text in console window. ',
+    },
   ];
 
   const [topic, setTopic] = useState('general');
@@ -68,6 +89,13 @@ const Help = ({ isActive }) => {
               <option value="import">import</option>
               <option value="k_read">k_read</option>
               <option value="s_write">s_write</option>
+			  <option value="paint">paint</option>
+			  <option value="text_color">text_color</option>
+			  <option value="text_size">text_size</option>
+			  <option value="text_align">text_align</option>
+			  <option value="bold">bold</option>
+			  <option value="italic">italic</option>
+			  <option value="underline">underline</option>
             </select>
           </label>
         </div>
