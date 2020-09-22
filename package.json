@@ -26,8 +26,12 @@
         "webpack-dev-server": "webpack-dev-server",
         "dev": "webpack-dev-server --mode=development",
         "prod": "webpack --mode=production",
+<<<<<<< Updated upstream
         "setPassword": "node src/hash/setPassword",
 
+=======
+        "setPassword": "node src/hash/setPassword $PASS true",
+>>>>>>> Stashed changes
         "serve": "http-server ./dist"
     },
     "eslintConfig": {

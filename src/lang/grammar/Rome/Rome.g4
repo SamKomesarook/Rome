@@ -10,12 +10,19 @@ START: 'start';
 END: 'end';
 
 SET: 'set';
+<<<<<<< Updated upstream
 NUM: 'numbers';
 LET: 'letters';
+=======
+>>>>>>> Stashed changes
 INT: 'integer';
 LONG: 'long';
 CHAR: 'character';
 STR: 'string';
+<<<<<<< Updated upstream
+=======
+FLO: 'float';
+>>>>>>> Stashed changes
 
 FREE: 'free';
 MEM: 'memory';
@@ -63,7 +70,9 @@ BOOLEAN_PROP: 'true' | 'false';
 
 IDENTIFIER: [a-zA-Z]+;
 
-NUMBER: ('0' .. '9')+;
+NUMBER: '-'?('0' .. '9')+;
+
+FLOAT: '-'?('0' .. '9')+ '.' ('0' .. '9')*;
 
 STRLIT: '"' ~ ["\r\n]* '"';
 
@@ -75,7 +84,9 @@ strargs : STRLIT #Str ;
 
 imp:  IMP '(' IO ')' # Io ;
 
-mem: MEM '(' (intargs | strargs) ')';
+mem: MEM '(' (intargs | strargs | floatargs) ')';
+
+floatargs: FLOAT #Float;
 
 intargs: NUMBER # Num
 	| mem # Memory
@@ -101,14 +112,14 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
-	SET '(' (NUM | LET | INT | LONG | CHAR | STR) ')'								# Set
+	SET '(' (INT | LONG | CHAR | STR | FLO) ')'								# Set
 	| FREE													# Free
 	| MOVE '(' (RIGHT | LEFT) ')'							# Move
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
-	| WRITE '(' (intargs | STRLIT) ')'					# Write
+	| WRITE '(' (intargs | floatargs | STRLIT) ')'					# Write
 	| KREAD													# Kread
-	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
+	| SWRITE '(' (intargs | floatargs | STRLIT) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
 	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
 	;
