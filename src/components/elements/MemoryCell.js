@@ -28,7 +28,7 @@ const MemoryCell = ({ id }) => {
     } else if (memoryCell.type === 'long') {
       binary = BinaryUtil.num2Bin(memoryCell.content, 4);
     } else if (memoryCell.type === 'float') {
-      binary = BinaryUtil.dec2Bin(memoryCell.content, 2);
+      binary = BinaryUtil.dec2Bin(memoryCell.content, 4);
     }
 
     const binaryCellList = binary.split('').map((bit, index) => (<div key={index}>{bit}</div>));
@@ -41,9 +41,9 @@ const MemoryCell = ({ id }) => {
       setByteCellClass('');
     } else if (memoryCell.type === 'letters' || memoryCell.type === 'string') {
       setByteCellClass(' memory-6-bytes-cell');
-    } else if (memoryCell.type === 'long') {
+    } else if (memoryCell.type === 'long' || memoryCell.type === 'float') {
       setByteCellClass(' memory-4-bytes-cell');
-    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int' || memoryCell.type === 'float') {
+    } else if (memoryCell.type === 'numbers' || memoryCell.type === 'int') {
       setByteCellClass(' memory-2-bytes-cell');
     } else if (memoryCell.type === 'char') {
       setByteCellClass(' memory-1-byte-cell');

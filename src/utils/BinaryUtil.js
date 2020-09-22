@@ -32,28 +32,45 @@ class BinaryUtil {
 
       if (num >= 0) {
         return this.getFilling(remainingBitsLength, '0') + binary;
-      } else {
-        const invertedBinary = binary.replace(/1/g, '2').replace(/0/g, '1').replace(/2/g, '0');
-        return this.getFilling(remainingBitsLength, '1') + invertedBinary;
       }
+      const invertedBinary = binary.replace(/1/g, '2').replace(/0/g, '1').replace(/2/g, '0');
+      return this.getFilling(remainingBitsLength, '1') + invertedBinary;
     };
 
     static dec2Bin = (dec, byte = 4) => {
+      // Positize number to maintain the length of binary to only the significant part
+      let positiveValue;
+      if (dec >= 0) {
+        positiveValue = dec;
+      } else {
+        positiveValue = dec * -1;
+      }
+
       const exponentMemoryAllocation = 8;
       const significantMemoryAllocation = byte * 8 - exponentMemoryAllocation - 1;
 
       // Convert the input into binary
-      const binary = dec.toString(2);
+      const binary = parseFloat(positiveValue).toString(2);
 
       // Find the exponent required for normalization
-      const exponent = binary.indexOf('.') - 1;
+      const exponent = binary.includes('.') ? binary.indexOf('.') - 1 : 0;
 
       // Find the exponent binary form with bias component
-      const biasExponent = Math.pow(2, exponentMemoryAllocation - 1) - 1 + exponent;
-      const biasExponentBinary = biasExponent.toString(2);
+      const biasExponent = 127 + exponent;
+      let biasExponentBinary = parseInt(biasExponent).toString(2);
+      biasExponentBinary = this.getFilling(8 - biasExponentBinary.length, '0') + biasExponentBinary;
 
       // Get the signification part
-      const significant = binary.replace('.', '').slice(1);
+      let significant = binary.replace('.', '').slice(1);
+
+      while (true) {
+        const lastChar = significant.charAt(significant.length - 1);
+        if (lastChar === '0') {
+          significant = significant.slice(0, -1);
+        } else {
+          break;
+        }
+      }
 
       const sign = dec >= 0 ? 0 : 1;
 
