@@ -82,7 +82,7 @@ class Utility {
       currMem.props.contentType
     );
 
-    if (memObj.contentType === "letters") {
+    if (memObj.contentType === "string") {
       if (comparison === "is") {
         return type === "equal" &amp;&amp; memObj.content === indicator;
       } else {
@@ -148,11 +148,11 @@ class Utility {
    * @return {Boolean} true if type matches, false otherwise
    */
   contentTypeMatch(contentType, arg) {
-    if (contentType === "letters") {
+    if (contentType === "string") {
       if (!isNaN(arg)) {
         return false;
       }
-    } else if (contentType === "numbers") {
+    } else if (contentType === "integer") {
       if (isNaN(arg)) {
         return false;
       }
@@ -231,7 +231,7 @@ class Utility {
       var num = command.match(numRegex)[0];
       var tempMem = memArr[num];
 
-      if (tempMem.props.contentType === "letters") {
+      if (tempMem.props.contentType === "string") {
         throw new Error("Memory content is not a number!");
       }
       var value = tempMem.props.content;

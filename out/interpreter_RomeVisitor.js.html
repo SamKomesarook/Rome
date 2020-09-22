@@ -262,7 +262,7 @@ class RVisitor extends RomeVisitor {
     // if arg is a number, get memory block using the number
     if (!isNaN(arg)) {
       var tempMem = this.memArr[arg];
-      if (tempMem.props.contentType === "letters") {
+      if (tempMem.props.contentType === "string") {
         // alert("Memory Content is not a number");
         console.log("Memory content is not a number");
       } else {

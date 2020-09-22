@@ -6,7 +6,7 @@ const testName = {
   testCommentBetweenLines: 'test comment in between lines',
 };
 
-describe('test write letters', () => {
+describe('test write string', () => {
   let driver;
 
   beforeAll(async () => {
@@ -29,7 +29,7 @@ describe('test write letters', () => {
 
   test(testName.testCommentBetweenLines, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(letters)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
+    await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(string)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();

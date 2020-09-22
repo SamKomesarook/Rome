@@ -56,7 +56,7 @@ export class TextArea extends Component {
 
   render() {
 
-    const lineNumberStyle = {
+    const lineintegertyle = {
       display: "block",
       background: "url(http://i.imgur.com/2cOaJ.png)",
       backgroundAttachment: "local",
@@ -76,7 +76,7 @@ export class TextArea extends Component {
     //change different style according to showLineNumber,in order to hide/show line number
     var textAreaStyle;
     if (this.state.showLineNumber) {
-      textAreaStyle = lineNumberStyle;
+      textAreaStyle = lineintegertyle;
     } else {
       textAreaStyle = defaultStyle;
     }
@@ -86,11 +86,11 @@ export class TextArea extends Component {
         &lt;div className="form-group shadow-textarea" id="codingWrapper" >
           &lt;Typed
             strings={[
-              "start\nset(numbers)\nwrite(4)\nprint\nend",
-              "start\nset(letters)\nwrite(“Hello!”)\nprint\nend",
+              "start\nset(integer)\nwrite(4)\nprint\nend",
+              "start\nset(string)\nwrite(“Hello!”)\nprint\nend",
               "start\nmove(next)\nmove(last)\nend",
 		          "start\nloop(4){\nmove(next)\n}\nend",
-		          "start\nset(numbers)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
+		          "start\nset(integer)\nwrite(4)\nif(is equal 4){\nloop(memory(1))\n{\nmove(next)\n}\nend}"
             ]}
             typeSpeed={40}
             backSpeed={30}

@@ -7,13 +7,13 @@ const Help = ({ isActive }) => {
       topic: 'general', content: 'All program must have start and end command.\n\nPlease select syntax keywords in the selection box for specification.',
     },
     {
-      topic: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.\n\nExample 1:\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\n\nExample 2:\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}',
+      topic: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.\n\nExample 1:\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("content")\nmove(next)\n}\n\nExample 2:\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("content")\nmove(next)\n}',
     },
     {
-      topic: 'if', content: 'Executes the arguments in the curly brackets if the condition is true.\nThe condition is made up of `is` / `not` + `equal` / `less` / `greater` + *int or string*.\n\nExample 1:\nset(numbers)\nwrite(3)\nif(is equal 3){\n//do something\n}\n\nExample 2:\nset(numbers)\nwrite(3)\nif(not less 3){\n//do something\n}\n\nExample 3:\nset(numbers)\nwrite(3)\nif(is greater 3){\n//do something\n}',
+      topic: 'if', content: 'Executes the arguments in the curly brackets if the condition is true.\nThe condition is made up of `is` / `not` + `equal` / `less` / `greater` + *int or string*.\n\nExample 1:\nset(integer)\nwrite(3)\nif(is equal 3){\n//do something\n}\n\nExample 2:\nset(integer)\nwrite(3)\nif(not less 3){\n//do something\n}\n\nExample 3:\nset(integer)\nwrite(3)\nif(is greater 3){\n//do something\n}',
     },
     {
-      topic: 'write', content: 'Writes arguments to the selected memory cell.\nArguments must be either numbers, or a string enclosed by parenthesis.\n\nExample:\nstart\nset(letters)\nwrite("write something here")\nend',
+      topic: 'write', content: 'Writes arguments to the selected memory cell.\nArguments must be either integer, or a string enclosed by parenthesis.\n\nExample:\nstart\nset(string)\nwrite("write something here")\nend',
     },
     {
       topic: 'start', content: 'Indicates the start of the program.\nAll programs must begin with this command.\n\nExample:\nstart\n//do something\nend',
@@ -25,10 +25,10 @@ const Help = ({ isActive }) => {
       topic: 'move', content: 'Changes the selected memory cell to the immediate right `last` or left `next`.\n\nExample:',
     },
     {
-      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
+      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `integer` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
     {
-      topic: 'free', content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
+      topic: 'free', content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
     {
       topic: 'import', content: 'Import a library within the arguments.\n\nExample:\nstart\nimport(IO)\n//do something\nend',

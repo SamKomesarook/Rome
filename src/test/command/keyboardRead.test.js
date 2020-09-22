@@ -5,7 +5,7 @@ const { Key } = require('selenium-webdriver');
 
 const testName = {
   testKeyboardRead: 'test keyboard read input correctly',
-  testKeyboardReadEmpty: 'test keyboard read empty letters',
+  testKeyboardReadEmpty: 'test keyboard read empty string',
 };
 
 describe('test keyboard read', () => {

@@ -3,13 +3,13 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 
 const testName = {
-  testWriteLetters: 'test write letters correctly in memory',
-  testWriteNumbers: 'test write numbers in letters field in memory',
-  testWriteEmpty: 'test write empty letters in memory',
-  testWriteNoQuote: 'test write letters without quote in memory',
+  testWritestring: 'test write string correctly in memory',
+  testWriteinteger: 'test write integer in string field in memory',
+  testWriteEmpty: 'test write empty string in memory',
+  testWriteNoQuote: 'test write string without quote in memory',
 };
 
-describe('test write letters', () => {
+describe('test write string', () => {
   let driver;
 
   beforeAll(async () => {
@@ -30,9 +30,9 @@ describe('test write letters', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testWriteLetters, async () => {
+  test(testName.testWritestring, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite("hello!")\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite("hello!")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -47,9 +47,9 @@ describe('test write letters', () => {
     expect(memoryCell0Res).toEqual('"hello!"');
   }, 35000);
 
-  test(testName.testWriteNumbers, async () => {
+  test(testName.testWriteinteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite(1)\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite(1)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -66,7 +66,7 @@ describe('test write letters', () => {
 
   test(testName.testWriteEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite("")\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite("")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -83,7 +83,7 @@ describe('test write letters', () => {
 
   test(testName.testWriteNoQuote, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite()\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite()\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();

@@ -35,7 +35,7 @@ class MemoryBlock {
     this.type = type;
     this.selected = selected;
     this.content = "";
-    this.contentType = "letters";
+    this.contentType = "string";
     this.animated = false;
   }
 
@@ -65,7 +65,7 @@ class MemoryBlock {
 
   /**
    * get content type of the memory can hold
-   * @return {String} content type the the memory can hold, either letters of numbers
+   * @return {String} content type the the memory can hold, either string of integer
    */
   getContentType() {
     return this.contentType;
@@ -97,7 +97,7 @@ class MemoryBlock {
 
   /**
    * set the type of value that a memory can hold
-   * @param {String} contentType specific content type that the memory can hold, either letters of numbers
+   * @param {String} contentType specific content type that the memory can hold, either string of integer
    */
   setContentType(contentType) {
     this.contentType = contentType;

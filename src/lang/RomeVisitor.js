@@ -197,7 +197,7 @@ class RVisitor extends RomeVisitor {
 
     // string:
     if (arg[0] !== '"' && this.staticDisplay.memory[this.staticDisplay.selected].type === 'string') {
-      this.errorReporter.generalError('Wrong memory type for writing'); // write numbers in letters type
+      this.errorReporter.generalError('Wrong memory type for writing'); // write integer in string type
       return;
     }
     if (arg[0] === '"' && this.staticDisplay.memory[this.staticDisplay.selected].type === 'string') {
@@ -247,7 +247,7 @@ class RVisitor extends RomeVisitor {
     const compareKeyword = condInput[2];
 
     // Assign left value based on content type
-    if (memoryCell.type === 'numbers') {
+    if (memoryCell.type === 'integer') {
       leftValue = memoryCell.content;
     } else {
       // Strip off the double quotes and convert string to int
