@@ -8,120 +8,6 @@ var grammarFileName = "Rome.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-<<<<<<< Updated upstream
-    "\u00035\u00b4\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
-    "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
-    "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0003\u0002\u0003",
-    "\u0002\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0005\u0004\"\n\u0004\u0003",
-    "\u0004\u0003\u0004\u0003\u0005\u0003\u0005\u0005\u0005(\n\u0005\u0003",
-    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u0006/",
-    "\n\u0006\f\u0006\u000e\u00062\u000b\u0006\u0003\u0006\u0007\u00065\n",
-    "\u0006\f\u0006\u000e\u00068\u000b\u0006\u0003\u0006\u0003\u0006\u0007",
-    "\u0006<\n\u0006\f\u0006\u000e\u0006?\u000b\u0006\u0003\u0007\u0003\u0007",
-    "\u0003\u0007\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0005\b",
-    "J\n\b\u0003\t\u0003\t\u0003\t\u0003\n\u0003\n\u0003\n\u0003\n\u0003",
-    "\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003",
-    "\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003",
-    "\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0005\nk\n\n\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0003\u000b\u0007\u000b}\n\u000b\f\u000b\u000e",
-    "\u000b\u0080\u000b\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0007\u000b",
-    "\u008b\n\u000b\f\u000b\u000e\u000b\u008e\u000b\u000b\u0003\u000b\u0003",
-    "\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0005\u000b\u0096",
-    "\n\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\u000b\u0005\u000b\u009e\n\u000b\u0003\u000b\u0003\u000b\u0003",
-    "\u000b\u0003\u000b\u0003\u000b\u0005\u000b\u00a5\n\u000b\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b\u0007\u000b\u00ac\n",
-    "\u000b\f\u000b\u000e\u000b\u00af\u000b\u000b\u0003\u000b\u0005\u000b",
-    "\u00b2\n\u000b\u0003\u000b\u0002\u0002\f\u0002\u0004\u0006\b\n\f\u000e",
-    "\u0010\u0012\u0014\u0002\u0006\u0003\u0002\u0019\u001a\u0003\u0002\u001b",
-    "\u001d\u0003\u0002\n\u000f\u0003\u0002!\"\u0002\u00c4\u0002\u0016\u0003",
-    "\u0002\u0002\u0002\u0004\u0018\u0003\u0002\u0002\u0002\u0006\u001d\u0003",
-    "\u0002\u0002\u0002\b\'\u0003\u0002\u0002\u0002\n)\u0003\u0002\u0002",
-    "\u0002\f@\u0003\u0002\u0002\u0002\u000eC\u0003\u0002\u0002\u0002\u0010",
-    "K\u0003\u0002\u0002\u0002\u0012j\u0003\u0002\u0002\u0002\u0014\u00b1",
-    "\u0003\u0002\u0002\u0002\u0016\u0017\u00074\u0002\u0002\u0017\u0003",
-    "\u0003\u0002\u0002\u0002\u0018\u0019\u0007\u0016\u0002\u0002\u0019\u001a",
-    "\u0007\u0003\u0002\u0002\u001a\u001b\u0007\u0017\u0002\u0002\u001b\u001c",
-    "\u0007\u0004\u0002\u0002\u001c\u0005\u0003\u0002\u0002\u0002\u001d\u001e",
-    "\u0007\u0011\u0002\u0002\u001e!\u0007\u0003\u0002\u0002\u001f\"\u0005",
-    "\b\u0005\u0002 \"\u0005\u0002\u0002\u0002!\u001f\u0003\u0002\u0002\u0002",
-    "! \u0003\u0002\u0002\u0002\"#\u0003\u0002\u0002\u0002#$\u0007\u0004",
-    "\u0002\u0002$\u0007\u0003\u0002\u0002\u0002%(\u00073\u0002\u0002&(\u0005",
-    "\u0006\u0004\u0002\'%\u0003\u0002\u0002\u0002\'&\u0003\u0002\u0002\u0002",
-    "(\t\u0003\u0002\u0002\u0002)*\u0007\u0007\u0002\u0002*0\u0007/\u0002",
-    "\u0002+,\u0005\u0004\u0003\u0002,-\u0007/\u0002\u0002-/\u0003\u0002",
-    "\u0002\u0002.+\u0003\u0002\u0002\u0002/2\u0003\u0002\u0002\u00020.\u0003",
-    "\u0002\u0002\u000201\u0003\u0002\u0002\u000216\u0003\u0002\u0002\u0002",
-    "20\u0003\u0002\u0002\u000235\u0005\f\u0007\u000243\u0003\u0002\u0002",
-    "\u000258\u0003\u0002\u0002\u000264\u0003\u0002\u0002\u000267\u0003\u0002",
-    "\u0002\u000279\u0003\u0002\u0002\u000286\u0003\u0002\u0002\u00029=\u0007",
-    "\b\u0002\u0002:<\u0007/\u0002\u0002;:\u0003\u0002\u0002\u0002<?\u0003",
-    "\u0002\u0002\u0002=;\u0003\u0002\u0002\u0002=>\u0003\u0002\u0002\u0002",
-    ">\u000b\u0003\u0002\u0002\u0002?=\u0003\u0002\u0002\u0002@A\u0005\u0014",
-    "\u000b\u0002AB\u0007/\u0002\u0002B\r\u0003\u0002\u0002\u0002CD\t\u0002",
-    "\u0002\u0002DE\u00070\u0002\u0002EF\t\u0003\u0002\u0002FI\u00070\u0002",
-    "\u0002GJ\u0005\b\u0005\u0002HJ\u00074\u0002\u0002IG\u0003\u0002\u0002",
-    "\u0002IH\u0003\u0002\u0002\u0002J\u000f\u0003\u0002\u0002\u0002KL\u0005",
-    "\u0012\n\u0002LM\u0007/\u0002\u0002M\u0011\u0003\u0002\u0002\u0002N",
-    "O\u0007%\u0002\u0002OP\u0007\u0003\u0002\u0002PQ\u0007,\u0002\u0002",
-    "Qk\u0007\u0004\u0002\u0002RS\u0007&\u0002\u0002ST\u0007\u0003\u0002",
-    "\u0002TU\u0007,\u0002\u0002Uk\u0007\u0004\u0002\u0002VW\u0007\'\u0002",
-    "\u0002WX\u0007\u0003\u0002\u0002XY\u0007-\u0002\u0002Yk\u0007\u0004",
-    "\u0002\u0002Z[\u0007(\u0002\u0002[\\\u0007\u0003\u0002\u0002\\]\u0007",
-    ".\u0002\u0002]k\u0007\u0004\u0002\u0002^_\u0007)\u0002\u0002_`\u0007",
-    "\u0003\u0002\u0002`a\u00071\u0002\u0002ak\u0007\u0004\u0002\u0002bc",
-    "\u0007*\u0002\u0002cd\u0007\u0003\u0002\u0002de\u00071\u0002\u0002e",
-    "k\u0007\u0004\u0002\u0002fg\u0007+\u0002\u0002gh\u0007\u0003\u0002\u0002",
-    "hi\u00071\u0002\u0002ik\u0007\u0004\u0002\u0002jN\u0003\u0002\u0002",
-    "\u0002jR\u0003\u0002\u0002\u0002jV\u0003\u0002\u0002\u0002jZ\u0003\u0002",
-    "\u0002\u0002j^\u0003\u0002\u0002\u0002jb\u0003\u0002\u0002\u0002jf\u0003",
-    "\u0002\u0002\u0002k\u0013\u0003\u0002\u0002\u0002lm\u0007\t\u0002\u0002",
-    "mn\u0007\u0003\u0002\u0002no\t\u0004\u0002\u0002o\u00b2\u0007\u0004",
-    "\u0002\u0002p\u00b2\u0007\u0010\u0002\u0002qr\u0007 \u0002\u0002rs\u0007",
-    "\u0003\u0002\u0002st\t\u0005\u0002\u0002t\u00b2\u0007\u0004\u0002\u0002",
-    "uv\u0007\u0018\u0002\u0002vw\u0007\u0003\u0002\u0002wx\u0005\u000e\b",
-    "\u0002xy\u0007\u0004\u0002\u0002yz\u0007\u0005\u0002\u0002z~\u0007/",
-    "\u0002\u0002{}\u0005\f\u0007\u0002|{\u0003\u0002\u0002\u0002}\u0080",
-    "\u0003\u0002\u0002\u0002~|\u0003\u0002\u0002\u0002~\u007f\u0003\u0002",
-    "\u0002\u0002\u007f\u0081\u0003\u0002\u0002\u0002\u0080~\u0003\u0002",
-    "\u0002\u0002\u0081\u0082\u0007\u0006\u0002\u0002\u0082\u00b2\u0003\u0002",
-    "\u0002\u0002\u0083\u0084\u0007#\u0002\u0002\u0084\u0085\u0007\u0003",
-    "\u0002\u0002\u0085\u0086\u0005\b\u0005\u0002\u0086\u0087\u0007\u0004",
-    "\u0002\u0002\u0087\u0088\u0007\u0005\u0002\u0002\u0088\u008c\u0007/",
-    "\u0002\u0002\u0089\u008b\u0005\f\u0007\u0002\u008a\u0089\u0003\u0002",
-    "\u0002\u0002\u008b\u008e\u0003\u0002\u0002\u0002\u008c\u008a\u0003\u0002",
-    "\u0002\u0002\u008c\u008d\u0003\u0002\u0002\u0002\u008d\u008f\u0003\u0002",
-    "\u0002\u0002\u008e\u008c\u0003\u0002\u0002\u0002\u008f\u0090\u0007\u0006",
-    "\u0002\u0002\u0090\u00b2\u0003\u0002\u0002\u0002\u0091\u0092\u0007\u0014",
-    "\u0002\u0002\u0092\u0095\u0007\u0003\u0002\u0002\u0093\u0096\u0005\b",
-    "\u0005\u0002\u0094\u0096\u00074\u0002\u0002\u0095\u0093\u0003\u0002",
-    "\u0002\u0002\u0095\u0094\u0003\u0002\u0002\u0002\u0096\u0097\u0003\u0002",
-    "\u0002\u0002\u0097\u00b2\u0007\u0004\u0002\u0002\u0098\u00b2\u0007\u0012",
-    "\u0002\u0002\u0099\u009a\u0007\u0013\u0002\u0002\u009a\u009d\u0007\u0003",
-    "\u0002\u0002\u009b\u009e\u0005\b\u0005\u0002\u009c\u009e\u00074\u0002",
-    "\u0002\u009d\u009b\u0003\u0002\u0002\u0002\u009d\u009c\u0003\u0002\u0002",
-    "\u0002\u009e\u009f\u0003\u0002\u0002\u0002\u009f\u00b2\u0007\u0004\u0002",
-    "\u0002\u00a0\u00a1\u0007\u0015\u0002\u0002\u00a1\u00a4\u0007\u0003\u0002",
-    "\u0002\u00a2\u00a5\u00074\u0002\u0002\u00a3\u00a5\u0005\u0006\u0004",
-    "\u0002\u00a4\u00a2\u0003\u0002\u0002\u0002\u00a4\u00a3\u0003\u0002\u0002",
-    "\u0002\u00a5\u00a6\u0003\u0002\u0002\u0002\u00a6\u00b2\u0007\u0004\u0002",
-    "\u0002\u00a7\u00a8\u0007$\u0002\u0002\u00a8\u00a9\u0007\u0005\u0002",
-    "\u0002\u00a9\u00ad\u0007/\u0002\u0002\u00aa\u00ac\u0005\u0010\t\u0002",
-    "\u00ab\u00aa\u0003\u0002\u0002\u0002\u00ac\u00af\u0003\u0002\u0002\u0002",
-    "\u00ad\u00ab\u0003\u0002\u0002\u0002\u00ad\u00ae\u0003\u0002\u0002\u0002",
-    "\u00ae\u00b0\u0003\u0002\u0002\u0002\u00af\u00ad\u0003\u0002\u0002\u0002",
-    "\u00b0\u00b2\u0007\u0006\u0002\u0002\u00b1l\u0003\u0002\u0002\u0002",
-    "\u00b1p\u0003\u0002\u0002\u0002\u00b1q\u0003\u0002\u0002\u0002\u00b1",
-    "u\u0003\u0002\u0002\u0002\u00b1\u0083\u0003\u0002\u0002\u0002\u00b1",
-    "\u0091\u0003\u0002\u0002\u0002\u00b1\u0098\u0003\u0002\u0002\u0002\u00b1",
-    "\u0099\u0003\u0002\u0002\u0002\u00b1\u00a0\u0003\u0002\u0002\u0002\u00b1",
-    "\u00a7\u0003\u0002\u0002\u0002\u00b2\u0015\u0003\u0002\u0002\u0002\u0010",
-    "!\'06=Ij~\u008c\u0095\u009d\u00a4\u00ad\u00b1"].join("");
-=======
     "\u00035\u00bb\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0003",
@@ -237,7 +123,6 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002\u00b8\u00a7\u0003\u0002\u0002\u0002\u00b8\u00ae\u0003",
     "\u0002\u0002\u0002\u00b9\u0017\u0003\u0002\u0002\u0002\u0010$,5;BNo",
     "\u0083\u0091\u009b\u00a4\u00ab\u00b4\u00b8"].join("");
->>>>>>> Stashed changes
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -247,13 +132,8 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "'('", "')'", "'{'", "'}'", "'start'", "'end'", 
-<<<<<<< Updated upstream
-                     "'set'", "'numbers'", "'letters'", "'integer'", "'long'", 
-                     "'character'", "'string'", "'free'", "'memory'", "'keyboardRead'", 
-=======
                      "'set'", "'integer'", "'long'", "'character'", "'string'", 
                      "'float'", "'free'", "'memory'", "'keyboardRead'", 
->>>>>>> Stashed changes
                      "'consoleWrite'", "'write'", "'name'", "'import'", 
                      "'IO'", "'if'", "'is'", "'not'", "'equal'", "'less'", 
                      "'greater'", "'and'", "'or'", "'move'", "'next'", "'last'", 
@@ -262,19 +142,6 @@ var literalNames = [ null, "'('", "')'", "'{'", "'}'", "'start'", "'end'",
                      null, null, null, "'\n'", "' '" ];
 
 var symbolicNames = [ null, null, null, null, null, "START", "END", "SET", 
-<<<<<<< Updated upstream
-                      "NUM", "LET", "INT", "LONG", "CHAR", "STR", "FREE", 
-                      "MEM", "KREAD", "SWRITE", "WRITE", "NAME", "IMP", 
-                      "IO", "IF", "IS", "NOT", "EQL", "LESS", "GRE", "AND", 
-                      "OR", "MOVE", "RIGHT", "LEFT", "LOOP", "STYLE", "PAINT", 
-                      "TEXT_COLOR", "TEXT_SIZE", "TEXT_ALIGN", "BOLD", "ITALIC", 
-                      "UNDERLINE", "COLOR", "SIZE", "ALIGN_PROP", "NEWLINE", 
-                      "WS", "BOOLEAN_PROP", "IDENTIFIER", "NUMBER", "STRLIT", 
-                      "ONE_LINE_COMMENT" ];
-
-var ruleNames =  [ "strargs", "imp", "mem", "intargs", "r", "expressions", 
-                   "conditional", "stylingExpressions", "stylingExpression", 
-=======
                       "INT", "LONG", "CHAR", "STR", "FLO", "FREE", "MEM", 
                       "KREAD", "SWRITE", "WRITE", "NAME", "IMP", "IO", "IF", 
                       "IS", "NOT", "EQL", "LESS", "GRE", "AND", "OR", "MOVE", 
@@ -285,7 +152,6 @@ var ruleNames =  [ "strargs", "imp", "mem", "intargs", "r", "expressions",
 
 var ruleNames =  [ "strargs", "imp", "mem", "floatargs", "intargs", "r", 
                    "expressions", "conditional", "stylingExpressions", "stylingExpression", 
->>>>>>> Stashed changes
                    "expression" ];
 
 function RomeParser (input) {
@@ -314,50 +180,6 @@ RomeParser.T__3 = 4;
 RomeParser.START = 5;
 RomeParser.END = 6;
 RomeParser.SET = 7;
-<<<<<<< Updated upstream
-RomeParser.NUM = 8;
-RomeParser.LET = 9;
-RomeParser.INT = 10;
-RomeParser.LONG = 11;
-RomeParser.CHAR = 12;
-RomeParser.STR = 13;
-RomeParser.FREE = 14;
-RomeParser.MEM = 15;
-RomeParser.KREAD = 16;
-RomeParser.SWRITE = 17;
-RomeParser.WRITE = 18;
-RomeParser.NAME = 19;
-RomeParser.IMP = 20;
-RomeParser.IO = 21;
-RomeParser.IF = 22;
-RomeParser.IS = 23;
-RomeParser.NOT = 24;
-RomeParser.EQL = 25;
-RomeParser.LESS = 26;
-RomeParser.GRE = 27;
-RomeParser.AND = 28;
-RomeParser.OR = 29;
-RomeParser.MOVE = 30;
-RomeParser.RIGHT = 31;
-RomeParser.LEFT = 32;
-RomeParser.LOOP = 33;
-RomeParser.STYLE = 34;
-RomeParser.PAINT = 35;
-RomeParser.TEXT_COLOR = 36;
-RomeParser.TEXT_SIZE = 37;
-RomeParser.TEXT_ALIGN = 38;
-RomeParser.BOLD = 39;
-RomeParser.ITALIC = 40;
-RomeParser.UNDERLINE = 41;
-RomeParser.COLOR = 42;
-RomeParser.SIZE = 43;
-RomeParser.ALIGN_PROP = 44;
-RomeParser.NEWLINE = 45;
-RomeParser.WS = 46;
-RomeParser.BOOLEAN_PROP = 47;
-RomeParser.IDENTIFIER = 48;
-RomeParser.NUMBER = 49;
-=======
 RomeParser.INT = 8;
 RomeParser.LONG = 9;
 RomeParser.CHAR = 10;
@@ -400,7 +222,6 @@ RomeParser.BOOLEAN_PROP = 46;
 RomeParser.IDENTIFIER = 47;
 RomeParser.NUMBER = 48;
 RomeParser.FLOAT = 49;
->>>>>>> Stashed changes
 RomeParser.STRLIT = 50;
 RomeParser.ONE_LINE_COMMENT = 51;
 
@@ -1029,11 +850,6 @@ RomeParser.prototype.r = function() {
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(((((_la - 7)) & ~0x1f) == 0 && ((1 << (_la - 7)) & ((1 << (RomeParser.SET - 7)) | (1 << (RomeParser.FREE - 7)) | (1 << (RomeParser.KREAD - 7)) | (1 << (RomeParser.SWRITE - 7)) | (1 << (RomeParser.WRITE - 7)) | (1 << (RomeParser.NAME - 7)) | (1 << (RomeParser.IF - 7)) | (1 << (RomeParser.MOVE - 7)) | (1 << (RomeParser.LOOP - 7)) | (1 << (RomeParser.STYLE - 7)))) !== 0)) {
-<<<<<<< Updated upstream
-            this.state = 49;
-            this.expressions();
-=======
->>>>>>> Stashed changes
             this.state = 54;
             this.expressions();
             this.state = 59;
@@ -1939,22 +1755,6 @@ SetContext.prototype.STR = function() {
 SetContext.prototype.FLO = function() {
     return this.getToken(RomeParser.FLO, 0);
 };
-
-SetContext.prototype.INT = function() {
-    return this.getToken(RomeParser.INT, 0);
-};
-
-SetContext.prototype.LONG = function() {
-    return this.getToken(RomeParser.LONG, 0);
-};
-
-SetContext.prototype.CHAR = function() {
-    return this.getToken(RomeParser.CHAR, 0);
-};
-
-SetContext.prototype.STR = function() {
-    return this.getToken(RomeParser.STR, 0);
-};
 SetContext.prototype.enterRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.enterSet(this);
@@ -2304,11 +2104,7 @@ RomeParser.prototype.expression = function() {
             this.match(RomeParser.T__0);
             this.state = 113;
             _la = this._input.LA(1);
-<<<<<<< Updated upstream
-            if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.NUM) | (1 << RomeParser.LET) | (1 << RomeParser.INT) | (1 << RomeParser.LONG) | (1 << RomeParser.CHAR) | (1 << RomeParser.STR))) !== 0))) {
-=======
             if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << RomeParser.INT) | (1 << RomeParser.LONG) | (1 << RomeParser.CHAR) | (1 << RomeParser.STR) | (1 << RomeParser.FLO))) !== 0))) {
->>>>>>> Stashed changes
             this._errHandler.recoverInline(this);
             }
             else {
@@ -2362,11 +2158,6 @@ RomeParser.prototype.expression = function() {
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(((((_la - 7)) & ~0x1f) == 0 && ((1 << (_la - 7)) & ((1 << (RomeParser.SET - 7)) | (1 << (RomeParser.FREE - 7)) | (1 << (RomeParser.KREAD - 7)) | (1 << (RomeParser.SWRITE - 7)) | (1 << (RomeParser.WRITE - 7)) | (1 << (RomeParser.NAME - 7)) | (1 << (RomeParser.IF - 7)) | (1 << (RomeParser.MOVE - 7)) | (1 << (RomeParser.LOOP - 7)) | (1 << (RomeParser.STYLE - 7)))) !== 0)) {
-<<<<<<< Updated upstream
-                this.state = 121;
-                this.expressions();
-=======
->>>>>>> Stashed changes
                 this.state = 126;
                 this.expressions();
                 this.state = 131;
@@ -2395,11 +2186,6 @@ RomeParser.prototype.expression = function() {
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(((((_la - 7)) & ~0x1f) == 0 && ((1 << (_la - 7)) & ((1 << (RomeParser.SET - 7)) | (1 << (RomeParser.FREE - 7)) | (1 << (RomeParser.KREAD - 7)) | (1 << (RomeParser.SWRITE - 7)) | (1 << (RomeParser.WRITE - 7)) | (1 << (RomeParser.NAME - 7)) | (1 << (RomeParser.IF - 7)) | (1 << (RomeParser.MOVE - 7)) | (1 << (RomeParser.LOOP - 7)) | (1 << (RomeParser.STYLE - 7)))) !== 0)) {
-<<<<<<< Updated upstream
-                this.state = 135;
-                this.expressions();
-=======
->>>>>>> Stashed changes
                 this.state = 140;
                 this.expressions();
                 this.state = 145;
@@ -2509,13 +2295,8 @@ RomeParser.prototype.expression = function() {
             this.state = 178;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-<<<<<<< Updated upstream
-            while(((((_la - 35)) & ~0x1f) == 0 && ((1 << (_la - 35)) & ((1 << (RomeParser.PAINT - 35)) | (1 << (RomeParser.TEXT_COLOR - 35)) | (1 << (RomeParser.TEXT_SIZE - 35)) | (1 << (RomeParser.TEXT_ALIGN - 35)) | (1 << (RomeParser.BOLD - 35)) | (1 << (RomeParser.ITALIC - 35)) | (1 << (RomeParser.UNDERLINE - 35)))) !== 0)) {
-                this.state = 168;
-=======
             while(((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (RomeParser.PAINT - 34)) | (1 << (RomeParser.TEXT_COLOR - 34)) | (1 << (RomeParser.TEXT_SIZE - 34)) | (1 << (RomeParser.TEXT_ALIGN - 34)) | (1 << (RomeParser.BOLD - 34)) | (1 << (RomeParser.ITALIC - 34)) | (1 << (RomeParser.UNDERLINE - 34)))) !== 0)) {
                 this.state = 175;
->>>>>>> Stashed changes
                 this.stylingExpressions();
                 this.state = 180;
                 this._errHandler.sync(this);

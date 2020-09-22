@@ -10,19 +10,11 @@ START: 'start';
 END: 'end';
 
 SET: 'set';
-<<<<<<< Updated upstream
-NUM: 'numbers';
-LET: 'letters';
-=======
->>>>>>> Stashed changes
 INT: 'integer';
 LONG: 'long';
 CHAR: 'character';
 STR: 'string';
-<<<<<<< Updated upstream
-=======
 FLO: 'float';
->>>>>>> Stashed changes
 
 FREE: 'free';
 MEM: 'memory';
