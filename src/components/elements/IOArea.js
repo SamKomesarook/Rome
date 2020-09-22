@@ -8,21 +8,24 @@ const InputArea = () => {
 
   const handleKey = (event) => {
     if (event.keyCode === 13) {
-      const newMem = display.memory;
+      // Create a deep copy of display
+      const staticDisplay = JSON.parse(JSON.stringify(display));
+      const newMem = staticDisplay.memory;
 
       // Get the keys of special memory cells
-      const usbMemoryKey = display.specialKeys.find((element) => element.specialContent === 'usb').key;
-      if (display.selected === usbMemoryKey) {
+      const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+      if (staticDisplay.selected === usbMemoryKey) {
         USBToggle();
       } else {
-        newMem[display.selected].content = display.input;
+        newMem[staticDisplay.selected].content = staticDisplay.input;
+        newMem[staticDisplay.selected].type = 'letters';
       }
-      setDisplay((prevDisplay) => ({
-        ...prevDisplay,
-        memory: newMem,
-        reading: false,
-      }));
-      processInstrs(display, setDisplay);
+      staticDisplay.memory = newMem;
+      staticDisplay.reading = false;
+      processInstrs(staticDisplay);
+
+      // Render new display information
+      setDisplay(staticDisplay);
     }
   };
 

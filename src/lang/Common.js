@@ -22,30 +22,28 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 }
 
-const processInstrs = (display, setDisplay) => {
-  const errorReporter = new ErrorReporter(display);
+const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
   while (true) {
-    if (display.commands.length === 0 || display.errors) {
+    if (staticDisplay.commands.length === 0 || staticDisplay.errors) {
       break;
     }
-    const instr = display.commands[0];
-    display.commands.splice(0, 1);
+
+    const instr = staticDisplay.commands[0];
+    staticDisplay.commands.splice(0, 1);
 
     if (instr.children[0].constructor === KreadContext
        || instr.children[0].constructor === ReadContext) {
-      if (!display.importIO) {
+      if (!staticDisplay.importIO) {
         errorReporter.generalError("Unknown function 'keyboardRead'");
         break;
       }
-      setDisplay((prevDisplay) => ({
-        ...prevDisplay,
-        reading: true,
-      }));
+      // eslint-disable-next-line no-param-reassign
+      staticDisplay.reading = true;
       break;
     } else {
-      instr.accept(display.machine
-        ? new MVisitor(display, setDisplay, errorReporter)
-        : new RVisitor(display, setDisplay, errorReporter));
+      instr.accept(staticDisplay.machine
+        ? new MVisitor(staticDisplay, errorReporter)
+        : new RVisitor(staticDisplay, errorReporter));
     }
   }
 };
