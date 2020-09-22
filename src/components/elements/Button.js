@@ -14,7 +14,7 @@ const StartButton = () => {
 
   const handleStart = () => {
     // Create a deep copy of display
-    const staticDisplay = JSON.parse(JSON.stringify(display));
+    const staticDisplay = DisplayContext.createCustomClone(display);
 
     staticDisplay.running = true;
 
@@ -49,7 +49,7 @@ const StartButton = () => {
     }
 
     // Render new display information
-    setDisplay(staticDisplay);
+    setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
   return (
