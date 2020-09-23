@@ -7,7 +7,7 @@ const Challenge = ({ isActive }) => {
       topic: 'Challenge Title', content: 'Challenge content and solusion',
     },
     {
-      topic: 'Level 2', content: 'Level 2 content',
+      topic: 'Calculator', content: 'Create a program that asks a user for two numbers, then adds them together and displays the result.',
     }, 
   ];
 
@@ -22,19 +22,19 @@ const Challenge = ({ isActive }) => {
   const isActiveClass = isActive ? '' : ' hidden';
 
   return (
-    <div id="help" className={`sidebar-item-pane${isActiveClass}`}>
+    <div id="challenge" className={`sidebar-item-pane${isActiveClass}`}>
       <div id="filter-control">
         <div className="control-container">
           <label htmlFor="topics">
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
-              <option value="Challenge Title">Challenge Level - Title</option>
-              <option value="Level 2">Level 2 - xxx</option>
+              <option value="Challenge Title">Challenge Title</option>
+              <option value="Calculator">Calculator</option>
               
             </select>
           </label>
         </div>
       </div>
-      <div id="help-content">
+      <div id="challenge-content">
         {contents}
       </div>
     </div>
