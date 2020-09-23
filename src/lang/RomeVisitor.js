@@ -28,10 +28,6 @@ class RVisitor extends RomeVisitor {
     return this.visitChildren(ctx);
   }
 
-  visitEnd(ctx) {
-
-  }
-
   visitSet(ctx) {
     const { selected } = this.staticDisplay;
     const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args

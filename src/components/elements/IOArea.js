@@ -9,7 +9,7 @@ const InputArea = () => {
   const handleKey = (event) => {
     if (event.keyCode === 13) {
       // Create a deep copy of display
-      const staticDisplay = JSON.parse(JSON.stringify(display));
+      const staticDisplay = DisplayContext.createCustomClone(display);
       const newMem = staticDisplay.memory;
 
       // Get the keys of special memory cells
@@ -25,7 +25,7 @@ const InputArea = () => {
       processInstrs(staticDisplay);
 
       // Render new display information
-      setDisplay(staticDisplay);
+      setDisplay(DisplayContext.createCustomClone(staticDisplay));
     }
   };
 

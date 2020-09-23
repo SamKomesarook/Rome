@@ -6,6 +6,7 @@ const { Key } = require('selenium-webdriver');
 const testName = {
   testKeyboardRead: 'test keyboard read input correctly',
   testKeyboardReadEmpty: 'test keyboard read empty string',
+  testMoveKReadAndMove: 'test move then keyboard read and then move',
 };
 
 describe('test keyboard read', () => {
@@ -69,5 +70,30 @@ describe('test keyboard read', () => {
 
     expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('');
+  }, 35000);
+
+  test(testName.testKeyboardReadEmpty, async () => {
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nimport(IO)\nmove(next)\nkeyboardRead\nmove(next)\nend');
+
+    const startBtn = await TestConfig.getElementById(driver, 'start-button');
+    await startBtn.click();
+
+    const inputArea = await TestConfig.getElementById(driver, 'input-bar');
+    await inputArea.sendKeys('Hello');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
+    const outputArea = await TestConfig.getElementById(driver, 'output-area');
+    const outputAreaRes = await outputArea.getText();
+
+    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
+
+    const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
+    const memoryCell1Res = await memoryCell1.getText();
+
+    expect(outputAreaRes).toEqual('');
+    expect(memoryCell0Res).toEqual('');
+    expect(memoryCell1Res).toEqual('Hello');
   }, 35000);
 });
