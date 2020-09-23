@@ -30,8 +30,9 @@ const TextArea = () => {
 
   const getTextSegments = (element) => {
     const textSegments = [];
-
+    // console.log('textArea', element);
     Array.from(element.childNodes).forEach((node) => {
+      // console.log('node', node);
       switch (node.nodeType) {
         case Node.TEXT_NODE:
           textSegments.push({ text: node.nodeValue, node });
@@ -48,68 +49,50 @@ const TextArea = () => {
     return textSegments;
   };
 
-  function restoreSelection(absolateAnchorNode, absoluteAnchorIndex, absoluteFocusNode, absoluteFocusIndex, absoluteSelSegmentIndex) {
+  function restoreSelection(absoluteAnchorIndex, absoluteSelSegmentIndex) {
+    console.log('absoluteAnchorIndex', absoluteAnchorIndex);
+    console.log('absoluteSelSegmentIndex', absoluteSelSegmentIndex);
     const sel = window.getSelection();
     const textSegments = getTextSegments(textArea.current);
+
+    // console.log('textSegments', textSegments);
+    // console.log('innerHTML after updated', textArea.current.innerHTML);
+    // if (absoluteAnchorIndex === null) {
+    //   absoluteAnchorIndex = 0;
+    // }
+
+    if (absoluteSelSegmentIndex === null) {
+      absoluteSelSegmentIndex = textArea.current.innerHTML.match(/<div>/g).length - 1;
+    }
+    // console.log('update absoluteAnchorIndex', absoluteAnchorIndex);
+    // console.log('update absoluteSelSegmentIndex', absoluteSelSegmentIndex);
+
     let anchorNode = textArea.current;
     let anchorIndex = 0;
-    let focusNode = textArea.current;
-    let focusIndex = 0;
     let currentIndex = 0;
 
-    let hasAnchorIndex = false;
-    let hasFocusIndex = false;
-    let currentSegmentIndex = 0;
-    // textSegments.forEach(({ text, node }) => {
-    //   console.log('text in segment', text);
-    //   console.log('node in segment', node);
-    //   const startIndexOfNode = currentIndex;
-    //   const endIndexOfNode = startIndexOfNode + text.length;
-    //   if (startIndexOfNode <= absoluteAnchorIndex && absoluteAnchorIndex <= endIndexOfNode && currentSegmentIndex === absoluteSelSegmentIndex) {
-    //     console.log('absoluteAnchorIndex is in range');
-    //     anchorNode = node;
-    //     anchorIndex = absoluteAnchorIndex - startIndexOfNode;
-    //     // hasAnchorIndex = true;
-    //   }
-    //   if (startIndexOfNode <= absoluteFocusIndex && absoluteFocusIndex <= endIndexOfNode && currentSegmentIndex === absoluteSelSegmentIndex) {
-    //     console.log('absoluteFocusIndex is in range');
-    //     focusNode = node;
-    //     focusIndex = absoluteFocusIndex - startIndexOfNode;
-    //     // hasFocusIndex = true;
-    //   }
-    //   currentIndex += text.length;
-    // });
-    
     for (let i = 0; i < textSegments.length; i++) {
-      console.log('text in segment', textSegments[i].text);
-      console.log('node in segment', textSegments[i].node);
       const startIndexOfNode = currentIndex;
       const endIndexOfNode = startIndexOfNode + textSegments[i].text.length;
-      if (startIndexOfNode <= absoluteAnchorIndex && absoluteAnchorIndex <= endIndexOfNode && i === absoluteSelSegmentIndex) {
-        console.log('absoluteAnchorIndex is in range');
+
+      // console.log('i', i);
+      // console.log('anchorNode = textSegments[i].node', textSegments[i].node);
+      // console.log('anchorIndex = absoluteAnchorIndex - startIndexOfNode', absoluteAnchorIndex - startIndexOfNode)
+      // if (startIndexOfNode <= absoluteAnchorIndex
+      //   && absoluteAnchorIndex <= endIndexOfNode
+      //   && i === absoluteSelSegmentIndex) {
+      if (i === absoluteSelSegmentIndex) {
         anchorNode = textSegments[i].node;
-        anchorIndex = absoluteAnchorIndex - startIndexOfNode;
-        // hasAnchorIndex = true;
+        anchorIndex = absoluteAnchorIndex === null ? 0 : absoluteAnchorIndex - startIndexOfNode;
+        break;
       }
-      if (startIndexOfNode <= absoluteFocusIndex && absoluteFocusIndex <= endIndexOfNode && i === absoluteSelSegmentIndex) {
-        console.log('absoluteFocusIndex is in range');
-        focusNode = textSegments[i].node;
-        focusIndex = absoluteFocusIndex - startIndexOfNode;
-        // hasFocusIndex = true;
-      }
+
       currentIndex += textSegments[i].text.length;
     }
 
-    console.log('To focus: anchorNode', anchorNode);
-    console.log('To focus: abosulateAnchorNode', absolateAnchorNode);
-    console.log('To focus: anchorIndex', anchorIndex);
-    console.log('To focus: focusNode', focusNode);
-    console.log('To focus: focusIndex', focusIndex);
-    console.log('To focus: absoluteFocusNode', absoluteFocusNode);
-
-    console.log(`anchorNode and absoluteAnchorNode is the same ${anchorNode === absolateAnchorNode}`);
-    sel.setBaseAndExtent(anchorNode, anchorIndex, focusNode, focusIndex);
-    // sel.setBaseAndExtent(absolateAnchorNode, anchorIndex, absoluteFocusNode, focusIndex);
+    console.log('setPos anchorNode', anchorNode);
+    console.log('setPos anchorIndex', anchorIndex);
+    sel.setPosition(anchorNode, anchorIndex);
   }
 
   function renderText(text) {
@@ -129,82 +112,49 @@ const TextArea = () => {
 
   const updateColor = () => {
     const lines = textArea.current.innerText.split('\n');
-
-    console.log('lines', lines);
-    const output = lines.map((line) => {
+    let output = lines.map((line) => {
       const words = line.split(' ');
-      console.log('words', words);
       const lineOutput = words.map((word) => {
-        if (word === 'start') {
-          // return `<div style='color: ${colorCode.macroWrapper}'>${word}</div>`;
-          return `<span style='color: red'>${word}</span>`;
+        if (word === 'start' || word === 'end') {
+          return `<span style='color: ${colorCode.macroWrapper}'>${word}</span>`;
         }
         return word;
       });
+
       return `<div>${lineOutput.join('')}</div>`;
     });
+
+    const lastLineIndex = output.length - 1;
+    if (output[lastLineIndex] === output[lastLineIndex - 1] && output[lastLineIndex] === '<div></div>') {
+      output = output.slice(0, -1);
+      output[output.length - 1] = '<div>&zwnj;</div>';
+    }
 
     return output.join('');
   };
 
   function updateEditor() {
-    console.log('window', window);
     const sel = window.getSelection();
-    console.log('sel', sel);
-
     const textSegments = getTextSegments(textArea.current);
     console.log('textSegments', textSegments);
-
     const textContent = textSegments.map(({ text }) => text).join('');
-    console.log('textContent', textContent);
 
     let anchorIndex = null;
-    let focusIndex = null;
     let currentIndex = 0;
+    let selSegmentIndex = null;
 
-    let selSegmentIndex = 0;
-
-    const anchorNode = sel.anchorNode;
-    const focusNode = sel.focusNode;
-    // anchorIndex = sel.anchorOffset;
-    console.log('anchorNode', anchorNode);
-    console.log('focusNode', focusNode);
-
-    // textSegments.forEach(({ text, node }) => {
-    //   if (node === sel.anchorNode) {
-    //     anchorIndex = currentIndex + sel.anchorOffset;
-    //     // break;
-    //   }
-    //   if (node === sel.focusNode) {
-    //     focusIndex = currentIndex + sel.focusOffset;
-    //   }
-    //   currentIndex += text.length;
-
-    //   selSegmentIndex++;
-    // });
     for (let i = 0; i < textSegments.length; i++) {
       if (textSegments[i].node === sel.anchorNode) {
         anchorIndex = currentIndex + sel.anchorOffset;
         selSegmentIndex = i;
-      }
-      if (textSegments[i].node === sel.focusNode) {
-        focusIndex = currentIndex + sel.focusOffset;
+        break;
       }
       currentIndex += textSegments[i].text.length;
     }
 
-    console.log('anchorIndex', anchorIndex);
-    console.log('focusIndex', focusIndex);
-
     textArea.current.innerHTML = updateColor(textContent);
 
-    
-    // console.log('after anchorNode', anchorNode);
-    // console.log('after anchorIndex', anchorIndex);
-    // sel.setPosition(anchorNode, anchorIndex);
-    // sel.setBaseAndExtent()
-    // sel.setBaseAndExtent(anchorNode, sel.anchorOffset, focusNode, sel.focusOffset);
-    restoreSelection(anchorNode, anchorIndex, focusNode, focusIndex, selSegmentIndex);
+    restoreSelection(anchorIndex, selSegmentIndex);
   }
 
   const diff = (newText, oldText) => {
@@ -276,9 +226,9 @@ const TextArea = () => {
     //   // updateColor();
     // }
 
-    if (diff(textArea.current.innerText, prevInput.current)) {
+    // if (diff(textArea.current.innerText, prevInput.current)) {
       updateEditor();
-    }
+    // }
 
     const value = event.target.innerText;
     // TODO ensure the below includes newline breaks and shit...
