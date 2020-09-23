@@ -34,31 +34,31 @@ const Help = ({ isActive }) => {
       topic: 'import', content: 'Import a library within the arguments.\n\nExample:\nstart\nimport(IO)\n//do something\nend',
     },
     {
-      topic: 'k_read', content: 'Read in a line of input from the input line. requires IO library.\n\nExample:\nstart\nimport(IO)\nk_read\nend',
-    },
-    {
-      topic: 's_write', content: 'Write the argument to the output window. requires IO library.\n\nExample:\nstart\nimport(IO)\nk_read\ns_write("write something here")\nend',
+      topic: 'keyboardRead', content: 'Read in a line of input from the input line. requires IO library.\n\nExample:\nstart\nimport(IO)\nkeyboardRead\nend',
     },
 	{
-      topic: 'paint', content: 'Paint the background color of the console window. ',
+      topic: 'consoleWrite', content: 'Print the argument to the console window. requires IO library.\n\nExample:\nstart\nimport(IO)\nconsoleWrite("Hello")\nend',
     },
 	{
-      topic: 'text_color', content: 'Set the color of the text in console window. ',
+      topic: 'paint', content: 'Paint the background color of the console window. \n\nExample:\nstyle{\npaint(pink)\n} \n\nAvailable colors: black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow',
     },
 	{
-      topic: 'text_size', content: 'Set the size of the text in console window. ',
+      topic: 'text_color', content: 'Set the color of the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_color(brown)\n} \n\nAvailable colors: black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow',
     },
 	{
-      topic: 'text_align', content: 'Set the align of the text in console window. ',
+      topic: 'text_size', content: 'Set the size of the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_size(x-large)\n} \n\nAvailable size: xx-large, x-large, larger, large, medium, small, smaller, x-small, xx-small',
     },
 	{
-      topic: 'bold', content: 'Bold the text in console window. ',
+      topic: 'text_align', content: 'Set the align of the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_align(right)\n} \n\nAvailable align: left, center, right',
     },
 	{
-      topic: 'italic', content: 'Italic the text in console window. ',
+      topic: 'bold', content: 'Bold the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nbold(true)\n}',
     },
 	{
-      topic: 'underline', content: 'Underline the text in console window. ',
+      topic: 'italic', content: 'Italic the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nitalic(true)\n}',
+    },
+	{
+      topic: 'underline', content: 'Underline the text in console window. \n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nunderline(true)\n}',
     },
   ];
 
@@ -87,8 +87,8 @@ const Help = ({ isActive }) => {
               <option value="loop">loop</option>
               <option value="if">if</option>
               <option value="import">import</option>
-              <option value="k_read">k_read</option>
-              <option value="s_write">s_write</option>
+              <option value="keyboardRead">keyboardRead</option>
+			  <option value="consoleWrite">consoleWrite</option>
 			  <option value="paint">paint</option>
 			  <option value="text_color">text_color</option>
 			  <option value="text_size">text_size</option>
