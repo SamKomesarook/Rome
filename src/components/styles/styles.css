@@ -409,6 +409,19 @@ aside:hover .sidebar-item-text {
     border-right: 2px solid var(--border-line-dark);
 }
 
+.sidebar-about-pane {
+    position: fixed;
+    right: 5rem;
+    top: 0;
+    width: 45rem;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid var(--border-line-dark);
+}
+
 /** DISTANCE LEARNING **/
 
 #filter-control {
