@@ -113,7 +113,7 @@ const TextArea = () => {
   const updateColor = () => {
     const lines = textArea.current.innerText.split('\n');
     let output = lines.map((line) => {
-      const words = line.split(' ');
+      const words = line.replace(/\u200C/g, '').split(' ');
       const lineOutput = words.map((word) => {
         if (word === 'start' || word === 'end') {
           return `<span style='color: ${colorCode.macroWrapper}'>${word}</span>`;
