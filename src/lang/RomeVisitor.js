@@ -89,21 +89,6 @@ class RVisitor extends RomeVisitor {
     }
   }
 
-  // search for decimal point:
-  checkDec(ctx) {
-    let arg = this.visitChildren(ctx)[2];
-    let dec = 0;
-    if (typeof arg === 'object') {
-      arg = arg[0];
-    }
-    for (let i = 0; i < arg.length + 1; i++) {
-      if (arg[i] === '.') {
-        dec += 1;
-      }
-    }
-    return dec;
-  }
-
   visitWrite(ctx) {
     // TODO check for maximum length (or spillover to the next memory cell?
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
@@ -130,7 +115,7 @@ class RVisitor extends RomeVisitor {
         this.errorReporter.generalError('out of maximun memory');
         return;
       }
-      if (this.checkDec(ctx) > 0) {
+      if (arg.includes('.')) {
         this.errorReporter.generalError('Wrong memory type of writing');
         return;
       }
@@ -147,7 +132,7 @@ class RVisitor extends RomeVisitor {
         this.errorReporter.generalError('out of maximun memory');
         return;
       }
-      if (this.checkDec(ctx) > 0) {
+      if (arg.includes('.')) {
         this.errorReporter.generalError('Wrong memory type of writing');
         return;
       }
@@ -164,17 +149,21 @@ class RVisitor extends RomeVisitor {
         this.errorReporter.generalError('out of maximun memory');
         return;
       }
-      if (this.checkDec(ctx) === 0) {
+      if (!arg.includes('.')) {
         arg += '.00';
       }
-      if (this.checkDec(ctx) > 1) {
-        this.errorReporter.generalError('Wrong memory type of writing');
-        return;
-      }
-      if (this.checkDec(ctx) === 1) {
-        if (arg.split('.')[1].length > 16) {
-          this.errorReporter.generalError('out of maximun memory');
+
+      else {
+        const dec = arg.match(/\./g);
+        if (dec.length > 1) {
+          this.errorReporter.generalError('Wrong memory type of writing');
           return;
+        }
+        if (dec.length === 1) {
+          if (arg.split('.')[1].length > 16) {
+            this.errorReporter.generalError('out of maximun memory');
+            return;
+          }
         }
       }
     }
