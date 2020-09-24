@@ -6,8 +6,8 @@ const { Key } = require('selenium-webdriver');
 const testName = {
   testMoveNext: 'test the sample code: start\nmove(next)\nmove(last)\nend',
   testMoveLast: 'test the sample code: start\nmove(next)\nmove(last)\nend',
-  testSetstring: 'test the sample code: start\nset(string)\nwrite("hello!")\nend',
-  testSetinteger: 'test the sample code: start\nset(integer)\nwrite(4)\nend',
+  testSetString: 'test the sample code: start\nset(string)\nwrite("hello!")\nend',
+  testSetInteger: 'test the sample code: start\nset(integer)\nwrite(4)\nend',
   testFree: 'test the sample code: start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
   testLoop: 'test the sample code: start\nloop(3){\nset(string)\nwrite("content")\nmove(next)\n}\nend',
   testMemoryAccess: 'test the sample code: start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("content")\nmove(next)\n}\nend',
@@ -90,7 +90,7 @@ describe('test example programs', () => {
   // write("hello!")
   // end
 
-  test(testName.testSetstring, async () => {
+  test(testName.testSetString, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("hello!")\nend');
 
@@ -113,7 +113,7 @@ describe('test example programs', () => {
   //   write(4)
   //   end
 
-  test(testName.testSetinteger, async () => {
+  test(testName.testSetInteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(4)\nend');
 

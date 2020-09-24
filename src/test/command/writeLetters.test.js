@@ -3,8 +3,8 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 
 const testName = {
-  testWritestring: 'test write string correctly in memory',
-  testWriteinteger: 'test write integer in string field in memory',
+  testWriteString: 'test write string correctly in memory',
+  testWriteInteger: 'test write integer in string field in memory',
   testWriteEmpty: 'test write empty string in memory',
   testWriteNoQuote: 'test write string without quote in memory',
 };
@@ -30,7 +30,7 @@ describe('test write string', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testWritestring, async () => {
+  test(testName.testWriteString, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("hello!")\nend');
 
@@ -47,7 +47,7 @@ describe('test write string', () => {
     expect(memoryCell0Res).toEqual('"hello!"');
   }, 35000);
 
-  test(testName.testWriteinteger, async () => {
+  test(testName.testWriteInteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite(1)\nend');
 
