@@ -104,7 +104,7 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
 
-    const type = this.staticDisplay.memory[this.staticDisplay.selected].type;
+    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
     if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
       this.errorReporter.generalError('Wrong memory type for writing');
       return;
@@ -142,19 +142,19 @@ class RVisitor extends RomeVisitor {
             return;
           }
         }
-      } 
+      }
     }
-    
+
     if ((arg[0] !== '"' || arg[arg.length - 1] !== '"') && (type === 'character' || type === 'string')) {
       this.errorReporter.generalError('Wrong memory type of writing');
       return;
-    } 
-    
+    }
+
     if (arg[0] === '"' || arg[arg.length - 1] === '"') {
       const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
       if ((type === 'character' && arg.length > 3) || (type === 'string' && (arg.length > (72 - pos * 6)))) {
-          this.errorReporter.generalError('out of maximun memory');
-          return;
+        this.errorReporter.generalError('out of maximun memory');
+        return;
       }
     }
 
@@ -194,7 +194,7 @@ class RVisitor extends RomeVisitor {
     const compareKeyword = condInput[2];
 
     // Assign left value based on content type
-    if (memoryCell.type === 'integer') {
+    if (memoryCell.type === 'integer' || memoryCell.type === 'long' || memoryCell.type === 'float') {
       leftValue = memoryCell.content;
     } else {
       // Strip off the double quotes and convert string to int

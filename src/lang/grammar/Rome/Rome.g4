@@ -88,7 +88,7 @@ r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
 
 expressions: expression NEWLINE;
 
-conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
+conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT |floatargs) # Cond;
 
 stylingExpressions: stylingExpression NEWLINE;
 
