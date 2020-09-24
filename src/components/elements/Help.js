@@ -25,7 +25,10 @@ const Help = ({ isActive }) => {
       topic: 'move', content: 'Changes the selected memory cell to the immediate right `last` or left `next`.\n\nExample:',
     },
     {
-      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `integer` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
+      topic: 'set', content: 'Sets the type that can be written to the memory cell. the args could be `integer`, `long`, `float`, `character` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
+    },
+    {
+      topic: 'data type', content: 'The type which could use in `set` include `integer`, `long`, `float`, `character` or `string`.\nThe size of each type are:\n\ninteger - 2bytes\nlong - 4bytes\nfloat - 4bytes with integer and 2bytes for decimal\ncharacter - 1bytes\nstring - up to 6bytes for one memory cell(adjustable with memory)',
     },
     {
       topic: 'free', content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
@@ -61,6 +64,7 @@ const Help = ({ isActive }) => {
               <option value="start">start</option>
               <option value="end">end</option>
               <option value="set">set</option>
+              <option value="data type">data type</option>
               <option value="write">write</option>
               <option value="free">free</option>
               <option value="loop">loop</option>
