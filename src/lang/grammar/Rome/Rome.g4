@@ -76,7 +76,7 @@ strargs : STRLIT #Str ;
 
 imp:  IMP '(' IO ')' # Io ;
 
-mem: MEM '(' (intargs | strargs | floatargs) ')';
+mem: MEM '(' (intargs | strargs) ')';
 
 floatargs: FLOAT #Float;
 
