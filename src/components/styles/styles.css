@@ -39,8 +39,8 @@ input[type=text]:focus, textarea:focus {
 }
 
 input[type=text]:enabled, textarea:enabled {
-    border: 3px solid #81b1ff;
-    background-color: #262d33;
+    border: 3px solid var(--border-line-editable);
+    background-color: var(--bg-editable);
 }
 
 /* Glowing Blue Input Highlights <End> */
