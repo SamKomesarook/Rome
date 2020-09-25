@@ -13,8 +13,14 @@ const Feedback = ({ isActive }) => {
   
   return (
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
-      <div id="feedback-content">
-        
+      <div className="control-container">
+	      Email: <input id="emailInput" type="text" placeholder="input your email" className="control"/>
+	  </div>
+	  <div className="control-container">
+	      Feedback: <input id="feedbackInput" type="text" placeholder="input your feedback for us" className="control"/>
+      </div>
+	  <div id="feedback-content">
+         12345
       </div>
     </div>
   );
