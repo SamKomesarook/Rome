@@ -6,6 +6,7 @@ import { DisplayProvider } from './state/DisplayState';
 import { UiProvider } from './state/UiContext';
 import Memory from './components/elements/Memory';
 import { StartButton, ResetButton } from './components/elements/Button';
+import Console from './components/elements/Console';
 import { InputArea, OutputArea } from './components/elements/IOArea';
 import { NetPeripheral, USBPeripheral, Processor } from './components/elements/Peripherals';
 import Switch from './components/elements/Switch';
@@ -30,8 +31,7 @@ const App = () => (
           <div className="peripheral-icon-grp">
             <Processor />
           </div>
-          <OutputArea />
-          <InputArea />
+          <Console />
         </div>
       </div>
       <Sidebar />

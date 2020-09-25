@@ -43,6 +43,7 @@ DisplayContext.DEFAULT = () => {
     text: '', // Content of the programming section
     output: '', // Content of the output bar
     input: '', // Content of the input bar
+    consoleHistory: [],
     running: false, // If there is a program running
     reading: false, // If the program is reading user input
     errors: false, // If there are any runtime errors

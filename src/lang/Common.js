@@ -12,12 +12,12 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-    this.display.output = this.display.output.concat(`${msg}\n`);
+    this.display.consoleHistory.push(msg);
     this.display.errors = true;
   }
 
   generalError(msg) {
-    this.display.output = this.display.output.concat(`${msg}\n`);
+    this.display.consoleHistory.push(msg);
     this.display.errors = true;
   }
 }

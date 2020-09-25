@@ -182,8 +182,8 @@ class RVisitor extends RomeVisitor {
     if (typeof arg === 'object') {
       arg = arg[0];
     }
-    // TODO if string, print with parenthesis?
-    this.staticDisplay.output = this.staticDisplay.output.concat(arg.replace('"', '').replace('"', ''), '\n');
+
+    this.staticDisplay.consoleHistory.push(arg.slice(1, -1));
   }
 
   visitIo(ctx) {

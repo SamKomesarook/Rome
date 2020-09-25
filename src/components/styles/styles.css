@@ -101,6 +101,7 @@ select.control > option {
 .hflex {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 button {
@@ -334,6 +335,29 @@ input:checked + .slider:before {
     border: 3px solid var(--border-line);
     border-radius: 10px;
     color: white;
+}
+
+#console {
+    background-color: var(--bg-secondary);
+    width: 100%;
+    height: 30%;
+    border: 3px solid var(--border-line);
+    border-radius: 10px;
+    color: white;
+    padding: 1rem;
+    overflow: auto;
+}
+
+#console input {
+    /* all: initial; */
+    background-color: inherit;
+    width: 100%;
+    color: white;
+    border: none;
+}
+
+#console input:focus {
+    box-shadow: none;
 }
 
 /** SIDEBAR **/

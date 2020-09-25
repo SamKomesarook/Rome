@@ -73,6 +73,7 @@ const ResetButton = () => {
       ...DisplayContext.DEFAULT(),
       machine: prevDisplay.machine,
       text: prevDisplay.text,
+      consoleHistory: prevDisplay.consoleHistory,
     }));
   };
 
