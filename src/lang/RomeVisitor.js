@@ -166,7 +166,7 @@ class RVisitor extends RomeVisitor {
 
   visitKread(ctx) {
     if (!this.staticDisplay.importIO) {
-      this.errorReporter.generalError("Unknown function 'k_read'");
+      this.errorReporter.generalError("Unknown function 'keyboardRead'");
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
@@ -175,7 +175,7 @@ class RVisitor extends RomeVisitor {
 
   visitSwrite(ctx) {
     if (!this.staticDisplay.importIO) {
-      this.errorReporter.generalError("Unknown function 's_write'");
+      this.errorReporter.generalError("Unknown function 'consoleWrite'");
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
