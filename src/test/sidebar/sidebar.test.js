@@ -53,7 +53,7 @@ describe('test sidebar', () => {
   }, 35000);
 
   test(testName.testSelectHelp, async () => {
-    const helpSidebarBtn = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[2]/button');
+    const helpSidebarBtn = await TestConfig.getElementByName(driver, 'Help');
     await helpSidebarBtn.click();
 
     const distanceLeanring = await TestConfig.getElementById(driver, 'distance-learning', false);
