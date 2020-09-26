@@ -1,6 +1,7 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
 import { USBToggle } from '../components/elements/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
+import { ConsoleErrorListener } from 'antlr4/error/ErrorListener';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -113,13 +114,13 @@ class RVisitor extends RomeVisitor {
       const inNum = Number(arg);
       if (type === 'integer') {
         if (inNum > 65535 || inNum < -65535) {
-          this.errorReporter.generalError('out of maximun memory');
+          this.errorReporter.generalError('out of maximum memory');
           return;
         }
       }
       if (type === 'long' || type === 'float') {
         if (inNum > 4294967295 || inNum < -4294967295) {
-          this.errorReporter.generalError('out of maximun memory');
+          this.errorReporter.generalError('out of maximum memory');
           return;
         }
       }
@@ -138,7 +139,7 @@ class RVisitor extends RomeVisitor {
         }
         if (dec.length === 1) {
           if (arg.split('.')[1].length > 16) {
-            this.errorReporter.generalError('out of maximun memory');
+            this.errorReporter.generalError('out of maximum memory');
             return;
           }
         }
@@ -152,7 +153,7 @@ class RVisitor extends RomeVisitor {
 
     if (arg[0] === '"' || arg[arg.length - 1] === '"') {
       const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-      if ((type === 'character' && arg.length > 3) || (type === 'string' && (arg.length > (72 - pos * 6)))) {
+      if ((type === 'character' && arg.length > 3) || (type === 'string' && (arg.length > (68 - pos * 6)))) {
         this.errorReporter.generalError('out of maximun memory');
         return;
       }
@@ -168,7 +169,7 @@ class RVisitor extends RomeVisitor {
         arg = arg.substr(0, arg.length - 1);
         arg = arg.substr(1, arg.length - 1);
 
-        if (this.staticDisplay.memory[this.staticDisplay.selected].type === 'string') {
+        if (type === 'string') {
           const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
           const base = Math.floor(arg.length / 6);
           for (let i = 0; i < base + 1; i++) {
