@@ -114,13 +114,13 @@ class RVisitor extends RomeVisitor {
       const inNum = Number(arg);
       if (type === 'integer') {
         if (inNum > 65535 || inNum < -65535) {
-          this.errorReporter.generalError('out of maximum memory');
+          this.errorReporter.generalError('Out of memory');
           return;
         }
       }
       if (type === 'long' || type === 'float') {
         if (inNum > 4294967295 || inNum < -4294967295) {
-          this.errorReporter.generalError('out of maximum memory');
+          this.errorReporter.generalError('Out of memory');
           return;
         }
       }
@@ -139,7 +139,7 @@ class RVisitor extends RomeVisitor {
         }
         if (dec.length === 1) {
           if (arg.split('.')[1].length > 16) {
-            this.errorReporter.generalError('out of maximum memory');
+            this.errorReporter.generalError('Out of memory');
             return;
           }
         }
@@ -154,7 +154,7 @@ class RVisitor extends RomeVisitor {
     if (arg[0] === '"' || arg[arg.length - 1] === '"') {
       const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
       if ((type === 'character' && arg.length > 3) || (type === 'string' && (arg.length > (68 - pos * 6)))) {
-        this.errorReporter.generalError('out of maximun memory');
+        this.errorReporter.generalError('Out of memory');
         return;
       }
     }
