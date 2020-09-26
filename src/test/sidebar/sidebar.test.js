@@ -2,13 +2,11 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testInitalState: 'test initial state of sidebar',
-  testSelectDistLearn: 'test select distance learning',
-  testSelectHelp: 'test select help',
-  testSelectTabTwice: 'test select tab twice',
-  testSelectBackground: 'test select background to dismiss tab',
-};
+const testInitalState = 'test initial state of sidebar';
+const testSelectDistLearn = 'test select distance learning';
+const testSelectHelp = 'test select help';
+const testSelectTabTwice = 'test select tab twice';
+const testSelectBackground = 'test select background to dismiss tab';
 
 describe('test sidebar', () => {
   let driver;
@@ -27,7 +25,7 @@ describe('test sidebar', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testInitalState, async () => {
+  test(testInitalState, async () => {
     const distanceLeanring = await TestConfig.getElementById(driver, 'distance-learning', false);
     const isDistLearnVisible = await distanceLeanring.isDisplayed();
 
@@ -38,7 +36,7 @@ describe('test sidebar', () => {
     expect(isHelpVisible).toEqual(false);
   }, 35000);
 
-  test(testName.testSelectDistLearn, async () => {
+  test(testSelectDistLearn, async () => {
     const distLearnSidebarBtn = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await distLearnSidebarBtn.click();
 
@@ -52,8 +50,8 @@ describe('test sidebar', () => {
     expect(isHelpVisible).toEqual(false);
   }, 35000);
 
-  test(testName.testSelectHelp, async () => {
-    const helpSidebarBtn = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[2]/button');
+  test(testSelectHelp, async () => {
+    const helpSidebarBtn = await TestConfig.getElementByName(driver, 'Help');
     await helpSidebarBtn.click();
 
     const distanceLeanring = await TestConfig.getElementById(driver, 'distance-learning', false);
@@ -66,7 +64,7 @@ describe('test sidebar', () => {
     expect(isHelpVisible).toEqual(true);
   }, 35000);
 
-  test(testName.testSelectTabTwice, async () => {
+  test(testSelectTabTwice, async () => {
     const distLearnSidebarBtn = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await distLearnSidebarBtn.click();
 
@@ -84,7 +82,7 @@ describe('test sidebar', () => {
     expect(isHelpVisible).toEqual(false);
   }, 35000);
 
-  test(testName.testSelectBackground, async () => {
+  test(testSelectBackground, async () => {
     const distLearnSidebarBtn = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await distLearnSidebarBtn.click();
 

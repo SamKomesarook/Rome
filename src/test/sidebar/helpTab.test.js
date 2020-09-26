@@ -3,10 +3,8 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const testName = {
-  testFirstEntry: 'test first entry of help tab',
-  testSelectSet: 'test select set',
-};
+const testFirstEntry = 'test first entry of help tab';
+const testSelectSet = 'test select set';
 
 describe('test help tab', () => {
   let driver;
@@ -25,33 +23,33 @@ describe('test help tab', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testFirstEntry, async () => {
+  test(testFirstEntry, async () => {
     const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
-    const dropdownField = await TestConfig.getElementById(driver, 'topics');
-    const selectedTopic = await dropdownField.getAttribute('value');
+    const dropdownField = await TestConfig.getElementById(driver, 'keywords');
+    const selectedKeyword = await dropdownField.getAttribute('value');
 
-    const helpContent = await TestConfig.getElementById(driver, 'help-content');
+    const helpContent = await TestConfig.getElementByXpath(driver, '//*[@id="help"]/div[2]');
     const helpContentInfo = await helpContent.getText();
 
-    expect(selectedTopic).toEqual('general');
+    expect(selectedKeyword).toEqual('general');
     expect(helpContentInfo).toEqual('All program must have start and end command.\n\nPlease select syntax keywords in the selection box for specification.');
   }, 35000);
 
-  test(testName.testSelectSet, async () => {
+  test(testSelectSet, async () => {
     const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
-    const dropdownField = await TestConfig.getElementById(driver, 'topics');
+    const dropdownField = await TestConfig.getElementById(driver, 'keywords');
     await dropdownField.click();
     await dropdownField.sendKeys('set', Key.ENTER);
-    const selectedTopic = await dropdownField.getAttribute('value');
+    const selectedKeyword = await dropdownField.getAttribute('value');
 
-    const helpContent = await TestConfig.getElementById(driver, 'help-content');
+    const helpContent = await TestConfig.getElementByXpath(driver, '//*[@id="help"]/div[2]');
     const helpContentInfo = await helpContent.getText();
 
-    expect(selectedTopic).toEqual('set');
+    expect(selectedKeyword).toEqual('set');
     expect(helpContentInfo).toEqual('Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend');
   }, 35000);
 });

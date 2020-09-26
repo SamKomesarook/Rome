@@ -2,9 +2,7 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testCommentBetweenLines: 'test comment in between lines',
-};
+const testCommentBetweenLines = 'test comment in between lines';
 
 describe('test write letters', () => {
   let driver;
@@ -27,7 +25,7 @@ describe('test write letters', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testCommentBetweenLines, async () => {
+  test(testCommentBetweenLines, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(letters)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
 

@@ -2,12 +2,10 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testWriteLetters: 'test write letters correctly in memory',
-  testWriteNumbers: 'test write numbers in letters field in memory',
-  testWriteEmpty: 'test write empty letters in memory',
-  testWriteNoQuote: 'test write letters without quote in memory',
-};
+const testWriteLetters = 'test write letters correctly in memory';
+const testWriteNumbers = 'test write numbers in letters field in memory';
+const testWriteEmpty = 'test write empty letters in memory';
+const testWriteNoQuote = 'test write letters without quote in memory';
 
 describe('test write letters', () => {
   let driver;
@@ -30,7 +28,7 @@ describe('test write letters', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testWriteLetters, async () => {
+  test(testWriteLetters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite("hello!")\nend');
 
@@ -47,7 +45,7 @@ describe('test write letters', () => {
     expect(memoryCell0Res).toEqual('"hello!"');
   }, 35000);
 
-  test(testName.testWriteNumbers, async () => {
+  test(testWriteNumbers, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite(1)\nend');
 
@@ -64,7 +62,7 @@ describe('test write letters', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testWriteEmpty, async () => {
+  test(testWriteEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite("")\nend');
 
@@ -81,7 +79,7 @@ describe('test write letters', () => {
     expect(memoryCell0Res).toEqual('""');
   }, 35000);
 
-  test(testName.testWriteNoQuote, async () => {
+  test(testWriteNoQuote, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite()\nend');
 
