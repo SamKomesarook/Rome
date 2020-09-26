@@ -134,7 +134,7 @@ class RVisitor extends RomeVisitor {
         }
         const dec = arg.match(/\./g);
         if (dec.length > 1) {
-          this.errorReporter.generalError('Wrong memory type of writing');
+          this.errorReporter.generalError('Wrong memory type for writing');
           return;
         }
         if (dec.length === 1) {
@@ -147,7 +147,7 @@ class RVisitor extends RomeVisitor {
     }
 
     if ((arg[0] !== '"' || arg[arg.length - 1] !== '"') && (type === 'character' || type === 'string')) {
-      this.errorReporter.generalError('Wrong memory type of writing');
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
 
