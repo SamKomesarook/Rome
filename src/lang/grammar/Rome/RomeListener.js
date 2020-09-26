@@ -200,6 +200,15 @@ RomeListener.prototype.exitLoop = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#While.
+RomeListener.prototype.enterWhile = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#While.
+RomeListener.prototype.exitWhile = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Write.
 RomeListener.prototype.enterWrite = function(ctx) {
 };
