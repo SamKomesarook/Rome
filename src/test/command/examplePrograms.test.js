@@ -15,8 +15,8 @@ const testName = {
   testIfIsEqual: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend',
   testIfNotLess: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend',
   testIfIsGreater: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend',
-  testKeyboardRead: 'test the sample code: start\nimport(IO)\nk_read\nend',
-  testConsoleWrite: 'test the sample code: start\nimport(IO)\nk_write("hello!")\nend',
+  testKeyboardRead: 'test the sample code: start\nimport(IO)\nkeyboardRead\nend',
+  testConsoleWrite: 'test the sample code: start\nimport(IO)\nconsoleWrite("hello!")\nend',
 };
 
 describe('test example programs', () => {

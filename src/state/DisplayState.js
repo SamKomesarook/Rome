@@ -65,3 +65,13 @@ DisplayContext.DEFAULT = () => {
 
   return initialDisplay;
 };
+
+DisplayContext.createCustomClone = (display) => {
+  const deepClone = {
+    ...display,
+    outputStyle: { ...display.outputStyle },
+    memory: JSON.parse(JSON.stringify(display.memory)),
+  };
+
+  return deepClone;
+};

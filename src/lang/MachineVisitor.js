@@ -1,10 +1,9 @@
 import { MachineVisitor } from './grammar/Machine/MachineVisitor';
 
 class MVisitor extends MachineVisitor {
-  constructor(display, setDisplay, errorReporter) {
+  constructor(staticDisplay, errorReporter) {
     super();
-    this.display = display;
-    this.setDisplay = setDisplay;
+    this.staticDisplay = staticDisplay;
     this.errorReporter = errorReporter;
   }
 
@@ -24,16 +23,16 @@ class MVisitor extends MachineVisitor {
   }
 
   visitMoveR(ctx) {
-    this.display.selected += 1;
+    this.staticDisplay.selected += 1;
   }
 
   visitMoveL(ctx) {
-    this.display.selected -= 1;
+    this.staticDisplay.selected -= 1;
   }
 
   visitPrint(ctx) {
     // TODO convert to ascii
-    this.display.output = this.display.output.concat(this.display.memory[this.display.selected].content, '\n');
+    this.staticDisplay.output = this.staticDisplay.output.concat(this.staticDisplay.memory[this.staticDisplay.selected].content, '\n');
   }
 
   visitRead(ctx) {
@@ -41,11 +40,11 @@ class MVisitor extends MachineVisitor {
   }
 
   visitInc(ctx) {
-    this.display.memory[this.display.selected].content += 1;
+    this.staticDisplay.memory[this.staticDisplay.selected].content += 1;
   }
 
   visitDec(ctx) {
-    this.display.memory[this.display.selected].content -= 1;
+    this.staticDisplay.memory[this.staticDisplay.selected].content -= 1;
   }
 
   visitLoop(ctx) {
@@ -53,10 +52,10 @@ class MVisitor extends MachineVisitor {
     if (ctx.expressions().length < 1) {
       return;
     }
-    if (this.display.memory[this.display.selected].content !== 0) {
-      this.display.commands.unshift(ctx);
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity);
+    if (this.staticDisplay.memory[this.staticDisplay.selected].content !== 0) {
+      this.staticDisplay.commands.unshift(ctx);
+      this.staticDisplay.commands.unshift(ctx.expressions());
+      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
     }
   }
 }
