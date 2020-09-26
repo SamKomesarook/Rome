@@ -8,3 +8,4 @@ pjfc/frontend/static/frontend/main.js
 debug.log
 dist/
 build/
+out/
