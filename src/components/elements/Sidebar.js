@@ -44,7 +44,7 @@ const Sidebar = () => {
         { sidebarItemList }
       </ul>
       <DistanceLearning isActive={activeSidebarItem === DISTANCE_LEARNING} />
-	  <Help isActive={activeSidebarItem === HELP} />
+      <Help isActive={activeSidebarItem === HELP} />
     </aside>
   );
 };
