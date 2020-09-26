@@ -8,7 +8,7 @@ const Challenge = ({ isActive }) => {
     },
     {
       topic: 'Calculator', content: 'Create a program that asks a user for two numbers, then adds them together and displays the result.',
-    }, 
+    },
   ];
 
   const [topic, setTopic] = useState('Challenge Title');
@@ -29,7 +29,6 @@ const Challenge = ({ isActive }) => {
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
               <option value="Challenge Title">Challenge Title</option>
               <option value="Calculator">Calculator</option>
-              
             </select>
           </label>
         </div>
