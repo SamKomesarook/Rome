@@ -2,12 +2,10 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testConsoleWriteLetters: 'test keyboard write letters correctly',
-  testConsoleWriteNumbers: 'test keyboard write numbers',
-  testConsoleWriteEmpty: 'test keyboard write empty letters',
-  testConsoleWriteNoQuote: 'test keyboard write letters without quote',
-};
+const testConsoleWriteLetters = 'test keyboard write letters correctly';
+const testConsoleWriteNumbers = 'test keyboard write numbers';
+const testConsoleWriteEmpty = 'test keyboard write empty letters';
+const testConsoleWriteNoQuote = 'test keyboard write letters without quote';
 
 describe('test console write', () => {
   let driver;
@@ -30,7 +28,7 @@ describe('test console write', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testConsoleWriteLetters, async () => {
+  test(testConsoleWriteLetters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 
@@ -47,7 +45,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNumbers, async () => {
+  test(testConsoleWriteNumbers, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
 
@@ -64,7 +62,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteEmpty, async () => {
+  test(testConsoleWriteEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
 
@@ -81,7 +79,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNoQuote, async () => {
+  test(testConsoleWriteNoQuote, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
 

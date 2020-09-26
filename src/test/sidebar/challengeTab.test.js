@@ -3,10 +3,8 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const testName = {
-  testFirstEntry: 'test first entry of challenge tab',
-  testSelectCalculator: 'test select calculator',
-};
+const testFirstEntry = 'test first entry of challenge tab';
+const testSelectCalculator = 'test select calculator';
 
 describe('test challenge tab', () => {
   let driver;
@@ -25,7 +23,7 @@ describe('test challenge tab', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testFirstEntry, async () => {
+  test(testFirstEntry, async () => {
     const challenge = await TestConfig.getElementByName(driver, 'Challenge');
     await challenge.click();
 
@@ -39,7 +37,7 @@ describe('test challenge tab', () => {
     expect(challengeContentInfo).toEqual('Challenge content and solution');
   }, 35000);
 
-  test(testName.testSelectSet, async () => {
+  test(testSelectCalculator, async () => {
     const challenge = await TestConfig.getElementByName(driver, 'Challenge');
     await challenge.click();
 

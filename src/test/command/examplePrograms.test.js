@@ -3,21 +3,19 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const testName = {
-  testMoveNext: 'test the sample code: start\nmove(next)\nmove(last)\nend',
-  testMoveLast: 'test the sample code: start\nmove(next)\nmove(last)\nend',
-  testSetLetters: 'test the sample code: start\nset(letters)\nwrite("hello!")\nend',
-  testSetNumbers: 'test the sample code: start\nset(numbers)\nwrite(4)\nend',
-  testFree: 'test the sample code: start\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
-  testLoop: 'test the sample code: start\nloop(3){\nset(letters)\nwrite("content")\nmove(next)\n}\nend',
-  testMemoryAccess: 'test the sample code: start\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\nend',
-  testNameAndMemoryAccess: 'test the sample code: start\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}\nend',
-  testIfIsEqual: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend',
-  testIfNotLess: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend',
-  testIfIsGreater: 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend',
-  testKeyboardRead: 'test the sample code: start\nimport(IO)\nkeyboardRead\nend',
-  testConsoleWrite: 'test the sample code: start\nimport(IO)\nconsoleWrite("hello!")\nend',
-};
+const testMoveNext = 'test the sample code: start\nmove(next)\nmove(last)\nend';
+const testMoveLast = 'test the sample code: start\nmove(next)\nmove(last)\nend';
+const testSetLetters = 'test the sample code: start\nset(letters)\nwrite("hello!")\nend';
+const testSetNumbers = 'test the sample code: start\nset(numbers)\nwrite(4)\nend';
+const testFree = 'test the sample code: start\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend';
+const testLoop = 'test the sample code: start\nloop(3){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
+const testMemoryAccess = 'test the sample code: start\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
+const testNameAndMemoryAccess = 'test the sample code: start\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
+const testIfIsEqual = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend';
+const testIfNotLess = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend';
+const testIfIsGreater = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend';
+const testKeyboardRead = 'test the sample code: start\nimport(IO)\nkeyboardRead\nend';
+const testConsoleWrite = 'test the sample code: start\nimport(IO)\nconsoleWrite("hello!")\nend';
 
 describe('test example programs', () => {
   let driver;
@@ -41,7 +39,7 @@ describe('test example programs', () => {
   }, 30000);
 
   // move next write 1
-  test(testName.testMoveNext, async () => {
+  test(testMoveNext, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nmove(next)\nset(numbers)\nwrite(1)\nend');
 
@@ -63,7 +61,7 @@ describe('test example programs', () => {
   }, 40000);
 
   // move next than move last and write 1
-  test(testName.testMoveLast, async () => {
+  test(testMoveLast, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nmove(next)\nmove(last)\nset(numbers)\nwrite(1)\nend');
 
@@ -90,7 +88,7 @@ describe('test example programs', () => {
   // write("hello!")
   // end
 
-  test(testName.testSetLetters, async () => {
+  test(testSetLetters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite("hello!")\nend');
 
@@ -113,7 +111,7 @@ describe('test example programs', () => {
   //   write(4)
   //   end
 
-  test(testName.testSetNumbers, async () => {
+  test(testSetNumbers, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(numbers)\nwrite(4)\nend');
 
@@ -138,7 +136,7 @@ describe('test example programs', () => {
   // write("world!")
   // end
 
-  test(testName.testFree, async () => {
+  test(testFree, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend');
 
@@ -164,7 +162,7 @@ describe('test example programs', () => {
   // }
   // end
 
-  test(testName.testLoop, async () => {
+  test(testLoop, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nloop(3){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
 
@@ -205,7 +203,7 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  test(testName.testLoop, async () => {
+  test(testLoop, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
 
@@ -251,7 +249,7 @@ describe('test example programs', () => {
   // }
   // end
 
-  test(testName.testNameAndMemoryAccess, async () => {
+  test(testNameAndMemoryAccess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
 
@@ -297,7 +295,7 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  //   test(testName.testIfIsEqual, async () => {
+  //   test(testIfIsEqual, async () => {
   //     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
   //     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend');
 
@@ -329,7 +327,7 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  test(testName.testIfNotLess, async () => {
+  test(testIfNotLess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend');
 
@@ -361,7 +359,7 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  test(testName.testIfIsGreater, async () => {
+  test(testIfIsGreater, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend');
 
@@ -388,7 +386,7 @@ describe('test example programs', () => {
   // keyboardRead
   // end
 
-  test(testName.testKeyboardRead, async () => {
+  test(testKeyboardRead, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
@@ -415,7 +413,7 @@ describe('test example programs', () => {
   // consoleWrite("hello!")
   // end
 
-  test(testName.testConsoleWrite, async () => {
+  test(testConsoleWrite, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 

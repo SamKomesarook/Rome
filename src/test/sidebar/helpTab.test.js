@@ -3,10 +3,8 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const testName = {
-  testFirstEntry: 'test first entry of help tab',
-  testSelectSet: 'test select set',
-};
+const testFirstEntry = 'test first entry of help tab';
+const testSelectSet = 'test select set';
 
 describe('test help tab', () => {
   let driver;
@@ -25,7 +23,7 @@ describe('test help tab', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testFirstEntry, async () => {
+  test(testFirstEntry, async () => {
     const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
@@ -39,7 +37,7 @@ describe('test help tab', () => {
     expect(helpContentInfo).toEqual('All program must have start and end command.\n\nPlease select syntax keywords in the selection box for specification.');
   }, 35000);
 
-  test(testName.testSelectSet, async () => {
+  test(testSelectSet, async () => {
     const help = await TestConfig.getElementByName(driver, 'Help');
     await help.click();
 
