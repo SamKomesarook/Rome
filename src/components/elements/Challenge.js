@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Challenge = ({ isActive }) => {
   const DATA = [
     {
-      topic: 'Challenge Title', content: 'Challenge content and solusion',
+      topic: 'Challenge Title', content: 'Challenge content and solution',
     },
     {
       topic: 'Calculator', content: 'Create a program that asks a user for two numbers, then adds them together and displays the result.',
@@ -33,7 +33,7 @@ const Challenge = ({ isActive }) => {
           </label>
         </div>
       </div>
-      <div id="challenge-content">
+      <div className="dropdown-content">
         {contents}
       </div>
     </div>

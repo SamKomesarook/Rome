@@ -442,19 +442,8 @@ aside:hover .sidebar-item-text {
     font-weight: normal;
 }
 
-/** HELP TAB **/
-#help-content {
-    width: 100%;
-    padding: 0.75rem 0.75rem;
-    background-color: var(--bg-secondary);
-    border-radius: 0;
-    color: var(--bg-contrast-primary);
-    font-weight: normal;
-	white-space: pre-line;
-}
-
-/** CHALLENGE TAB **/
-#challenge-content {
+/** content content for sidebar **/
+.dropdown-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
     background-color: var(--bg-secondary);
