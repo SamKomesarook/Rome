@@ -63,23 +63,20 @@ describe('test string', () => {
     const memoryCell10Res = await memoryCell10.getText();
     const memoryCell11 = await TestConfig.getElementById(driver, 'memory-11');
     const memoryCell11Res = await memoryCell11.getText();
-    const memoryCell12 = await TestConfig.getElementById(driver, 'memory-12');
-    const memoryCell12Res = await memoryCell12.getText();
 
     expect(outputAreaRes).toEqual('Out of memory');
-    expect(memoryCell0Res).toEqual('123456');
-    expect(memoryCell1Res).toEqual('789012');
-    expect(memoryCell2Res).toEqual('345678');
-    expect(memoryCell3Res).toEqual('901234');
-    expect(memoryCell4Res).toEqual('567890');
-    expect(memoryCell5Res).toEqual('123456');
-    expect(memoryCell6Res).toEqual('789012');
-    expect(memoryCell7Res).toEqual('345678');
-    expect(memoryCell8Res).toEqual('901234');
-    expect(memoryCell9Res).toEqual('567890');
-    expect(memoryCell10Res).toEqual('123456');
-    expect(memoryCell11Res).toEqual('789012');
-    expect(memoryCell12Res).toEqual('');
+    expect(memoryCell0Res).toEqual('');
+    expect(memoryCell1Res).toEqual('');
+    expect(memoryCell2Res).toEqual('');
+    expect(memoryCell3Res).toEqual('');
+    expect(memoryCell4Res).toEqual('');
+    expect(memoryCell5Res).toEqual('');
+    expect(memoryCell6Res).toEqual('');
+    expect(memoryCell7Res).toEqual('');
+    expect(memoryCell8Res).toEqual('');
+    expect(memoryCell9Res).toEqual('');
+    expect(memoryCell10Res).toEqual('');
+    expect(memoryCell11Res).toEqual('');
   }, 35000);
 
   test(testOverflowMemorySection, async () => {
@@ -116,23 +113,20 @@ describe('test string', () => {
     const memoryCell10Res = await memoryCell10.getText();
     const memoryCell11 = await TestConfig.getElementById(driver, 'memory-11');
     const memoryCell11Res = await memoryCell11.getText();
-    const memoryCell12 = await TestConfig.getElementById(driver, 'memory-12');
-    const memoryCell12Res = await memoryCell12.getText();
 
     expect(outputAreaRes).toEqual('Out of memory');
-    expect(memoryCell0Res).toEqual('123456');
-    expect(memoryCell1Res).toEqual('789012');
-    expect(memoryCell2Res).toEqual('345678');
-    expect(memoryCell3Res).toEqual('901234');
-    expect(memoryCell4Res).toEqual('567890');
-    expect(memoryCell5Res).toEqual('123456');
-    expect(memoryCell6Res).toEqual('789012');
-    expect(memoryCell7Res).toEqual('345678');
-    expect(memoryCell8Res).toEqual('901234');
-    expect(memoryCell9Res).toEqual('567890');
-    expect(memoryCell10Res).toEqual('123456');
-    expect(memoryCell11Res).toEqual('789012');
-    expect(memoryCell12Res).toEqual('');
+    expect(memoryCell0Res).toEqual('');
+    expect(memoryCell1Res).toEqual('');
+    expect(memoryCell2Res).toEqual('');
+    expect(memoryCell3Res).toEqual('');
+    expect(memoryCell4Res).toEqual('');
+    expect(memoryCell5Res).toEqual('');
+    expect(memoryCell6Res).toEqual('');
+    expect(memoryCell7Res).toEqual('');
+    expect(memoryCell8Res).toEqual('');
+    expect(memoryCell9Res).toEqual('');
+    expect(memoryCell10Res).toEqual('');
+    expect(memoryCell11Res).toEqual('');
   }, 35000);
 
   test(testEmptyString, async () => {

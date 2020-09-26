@@ -66,7 +66,7 @@ describe('test long', () => {
 
   test(testValidLong, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(long)\nwrite(4294967295)\nmove(next)\nset(long)\nwrite(-4294967295)\nmove(next)\nset(long)\nwrite(0.0)\nend');
+    await codingArea.sendKeys('start\nset(long)\nwrite(4294967295)\nmove(next)\nset(long)\nwrite(-4294967295)\nmove(next)\nset(long)\nwrite(0)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();

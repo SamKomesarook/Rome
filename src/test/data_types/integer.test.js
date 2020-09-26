@@ -32,7 +32,7 @@ describe('test integer', () => {
 
   test(testIntMin, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(integer)\nwrite(-65537)\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(-65536)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -49,7 +49,7 @@ describe('test integer', () => {
 
   test(testIntMax, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(integer)\nwrite(65537)\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(65536)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -66,7 +66,7 @@ describe('test integer', () => {
 
   test(testValidInt, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(integer)\nwrite(65536)\nmove(next)\nset(integer)\nwrite(-65536)\nmove(next)\nset(integer)\nwrite(0)\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(65535)\nmove(next)\nset(integer)\nwrite(-65535)\nmove(next)\nset(integer)\nwrite(0)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -82,8 +82,8 @@ describe('test integer', () => {
     const memoryCell2Res = await memoryCell2.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('65536');
-    expect(memoryCell1Res).toEqual('-65536');
+    expect(memoryCell0Res).toEqual('65535');
+    expect(memoryCell1Res).toEqual('-65535');
     expect(memoryCell2Res).toEqual('0');
   }, 35000);
 
