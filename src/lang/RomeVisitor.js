@@ -1,7 +1,7 @@
+import { ConsoleErrorListener } from 'antlr4/error/ErrorListener';
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
 import { USBToggle } from '../components/elements/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
-import { ConsoleErrorListener } from 'antlr4/error/ErrorListener';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -112,13 +112,14 @@ class RVisitor extends RomeVisitor {
     }
     if (!isNaN(arg)) {
       const inNum = Number(arg);
+      // const maxFloat = 340282346638528859811704183484516925440;
       if (type === 'integer') {
         if (inNum > 65535 || inNum < -65535) {
           this.errorReporter.generalError('Out of memory');
           return;
         }
       }
-      if (type === 'long' || type === 'float') {
+      if (type === 'long') {
         if (inNum > 4294967295 || inNum < -4294967295) {
           this.errorReporter.generalError('Out of memory');
           return;
@@ -129,6 +130,11 @@ class RVisitor extends RomeVisitor {
         return;
       }
       if (type === 'float') {
+        // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+        if (inNum > (Number.MAX_SAFE_INTEGER) || inNum < Number.MIN_SAFE_INTEGER) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
         if (!arg.includes('.')) {
           arg += '.00';
         }
