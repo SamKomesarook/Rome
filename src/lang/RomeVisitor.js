@@ -121,6 +121,14 @@ class RVisitor extends RomeVisitor {
         return;
       }
       if (type === 'float') {
+        // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+        if (inNum > (Number.MAX_SAFE_INTEGER) || inNum < Number.MIN_SAFE_INTEGER) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
+        if (!arg.includes('.')) {
+          arg += '.00';
+        }
         const dec = arg.match(/\./g);
         if (dec.length === 0) {
           arg += '.00';
