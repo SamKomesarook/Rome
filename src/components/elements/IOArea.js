@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs } from '../../lang/Common';
-import { NetToggle, USBToggle } from './Peripherals';
+import { USBToggle } from './Peripherals';
 
 const InputArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);

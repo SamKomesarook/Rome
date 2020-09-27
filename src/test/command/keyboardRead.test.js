@@ -3,11 +3,9 @@ import TestConfig from '../TestConfig';
 const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
-const testName = {
-  testKeyboardRead: 'test keyboard read input correctly',
-  testKeyboardReadEmpty: 'test keyboard read empty string',
-  testMoveKReadAndMove: 'test move then keyboard read and then move',
-};
+const testKeyboardRead = 'test keyboard read input correctly';
+const testKeyboardReadEmpty = 'test keyboard read empty string';
+const testMoveKReadAndMove = 'test move then keyboard read and then move';
 
 describe('test keyboard read', () => {
   let driver;
@@ -30,7 +28,7 @@ describe('test keyboard read', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testKeyboardRead, async () => {
+  test(testKeyboardRead, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
@@ -51,7 +49,7 @@ describe('test keyboard read', () => {
     expect(memoryCell0Res).toEqual('hello!');
   }, 35000);
 
-  test(testName.testKeyboardReadEmpty, async () => {
+  test(testKeyboardReadEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
@@ -72,7 +70,7 @@ describe('test keyboard read', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testKeyboardReadEmpty, async () => {
+  test(testMoveKReadAndMove, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nmove(next)\nkeyboardRead\nmove(next)\nend');
 

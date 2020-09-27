@@ -21,7 +21,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "jest",
+        "test": "jest src/test/data_types",
         "eject": "react-scripts eject",
         "webpack-dev-server": "webpack-dev-server",
         "dev": "webpack-dev-server --mode=development",

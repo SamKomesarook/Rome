@@ -29,10 +29,8 @@ const TextArea = () => {
           'start\nset(integer)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(string)\nwrite("is equal to 3!")\n}\nend',
           'start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("is not less than 3!")\n}\nend',
           'start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("is greater than 3!")\n}\nend',
-          'start\nimport(network)\nn_write("hello!")\nend',
-          'start\nimport(network)\nn_read\nend',
-          'start\nimport(IO)\nk_read\nend',
-          'start\nimport(IO)\nk_write("hello!")\nend',
+          'start\nimport(IO)\nkeyboardRead\nend',
+          'start\nimport(IO)\nconsoleWrite("hello!")\nend',
         ]}
         typeSpeed={40}
         backSpeed={30}

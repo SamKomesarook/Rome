@@ -2,9 +2,7 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testCommentBetweenLines: 'test comment in between lines',
-};
+const testCommentBetweenLines = 'test comment in between lines';
 
 describe('test write string', () => {
   let driver;
@@ -27,7 +25,7 @@ describe('test write string', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testCommentBetweenLines, async () => {
+  test(testCommentBetweenLines, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(string)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
 
@@ -41,6 +39,6 @@ describe('test write string', () => {
     const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('"hello!"');
+    expect(memoryCell0Res).toEqual('hello!');
   }, 35000);
 });
