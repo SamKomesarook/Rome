@@ -413,7 +413,7 @@ aside:hover .sidebar-item-text {
     position: fixed;
     right: 5rem;
     top: 0;
-    width: 45rem;
+    width: 49rem;
     height: 100vh;
     background-color: var(--bg-secondary);
     display: flex;
@@ -459,6 +459,52 @@ aside:hover .sidebar-item-text {
     color: var(--bg-contrast-primary);
     font-weight: normal;
 	white-space: pre-line;
+}
+
+/** ABOUT TAB **/
+#about-content {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0;
+    color: var(--bg-contrast-primary);
+    font-weight: normal;
+	white-space: pre-line;
+}
+
+#about-title {
+    color: white;
+	font-style:oblique;
+	font-size: xx-large;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-weight: bold;
+}
+
+#about-heart {
+    font-size: x-large;	
+}
+
+#about-rome{
+    vertical-align: -45px;	
+}
+
+#about-thankTitle {
+	font-family: "Lucida Console", Monaco, monospace;
+	text-align: center;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+#about-thank {
+	font-family: "Lucida Console", Monaco, monospace;
+	text-align: center;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 /** GENERAL (Overrides above css rules) **/
