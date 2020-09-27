@@ -36,7 +36,11 @@ input[type=text]:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid var(--light-blue);
+}
+
+input[type=text]:enabled, textarea:enabled {
+    border: 3px solid var(--border-line-editable);
+    background-color: var(--bg-editable);
 }
 
 /* Glowing Blue Input Highlights <End> */
@@ -168,9 +172,7 @@ button:disabled {
     width: 100%;
     height: 100%;
     padding: 1rem 1.5rem;
-    border: 3px solid var(--border-line);
     border-radius: 10px;
-    background-color: var(--bg-secondary);
     color: white;
     font-size: 1rem;
     resize: none;
@@ -359,12 +361,15 @@ input:checked + .slider:before {
 }
 
 #input-bar {
-    background-color: var(--bg-secondary);
     width: 100%;
     height: 3rem;
-    border: 3px solid var(--border-line);
     border-radius: 10px;
     color: white;
+}
+
+#input-bar:disabled {
+    background-color: var(--bg-secondary);
+    border: 3px solid var(--border-line);
 }
 
 /** SIDEBAR **/
@@ -468,8 +473,8 @@ aside:hover .sidebar-item-text {
     font-weight: normal;
 }
 
-/** HELP TAB **/
-#help-content {
+/** content content for sidebar **/
+.dropdown-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
     background-color: var(--bg-secondary);
