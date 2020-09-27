@@ -32,6 +32,24 @@ class RVisitor extends RomeVisitor {
     const { selected } = this.staticDisplay;
     const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
     this.staticDisplay.memory[selected].type = newType;
+
+    switch (newType) {
+      case 'character':
+        this.staticDisplay.memory[selected.size] = 1;
+        break;
+      case 'integer':
+        this.staticDisplay.memory[selected].size = 2;
+        break;
+      case 'long':
+      case 'float':
+        this.staticDisplay.memory[selected].size = 4;
+        break;
+      case 'string':
+        this.staticDisplay.memory[selected].size = 6;
+        break;
+      default:
+        this.staticDisplay.memory[selected].size = 0;
+    }
   }
 
   visitLoop(ctx) {
