@@ -2,11 +2,9 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testCommentBetweenLines: 'test comment in between lines',
-};
+const testCommentBetweenLines = 'test comment in between lines';
 
-describe('test write letters', () => {
+describe('test write string', () => {
   let driver;
 
   beforeAll(async () => {
@@ -27,9 +25,9 @@ describe('test write letters', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testCommentBetweenLines, async () => {
+  test(testCommentBetweenLines, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(letters)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
+    await codingArea.sendKeys('# this is a comment\nstart\n# this is a comment\nset(string)\n# this is a comment\nwrite("hello!")\n# this is a comment\nend\n# this is a comment');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -41,6 +39,6 @@ describe('test write letters', () => {
     const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('"hello!"');
+    expect(memoryCell0Res).toEqual('hello!');
   }, 35000);
 });
