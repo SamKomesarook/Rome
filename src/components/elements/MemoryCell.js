@@ -20,7 +20,7 @@ const MemoryCell = ({ id }) => {
     // Convert content to binary
     switch (memoryCell.type) {
       case 'string':
-      case 'char':
+      case 'character':
         binary = BinaryUtil.text2Bin(memoryCell.content, memoryCell.size);
         break;
       case 'integer':
@@ -38,6 +38,7 @@ const MemoryCell = ({ id }) => {
   };
 
   const generateBinaryGrid = (localShouldBinaryDisplayed) => {
+    
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
     } else {

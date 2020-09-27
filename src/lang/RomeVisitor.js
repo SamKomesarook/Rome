@@ -35,7 +35,7 @@ class RVisitor extends RomeVisitor {
 
     switch (newType) {
       case 'character':
-        this.staticDisplay.memory[selected.size] = 1;
+        this.staticDisplay.memory[selected].size = 1;
         break;
       case 'integer':
         this.staticDisplay.memory[selected].size = 2;

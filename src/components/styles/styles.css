@@ -313,7 +313,7 @@ input:checked + .slider:before {
     background: var(--dark-grey);
 }
 
-.memory-1-byte-cell, .memory-2-bytes-cell, .memory-4-bytes-cell, .memory-6-bytes-cell {
+.memory-1-bytes-cell, .memory-2-bytes-cell, .memory-4-bytes-cell, .memory-6-bytes-cell {
     grid-template-columns: repeat(8, 1fr);
     align-items: center;
 }
