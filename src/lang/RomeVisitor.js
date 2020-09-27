@@ -110,36 +110,25 @@ class RVisitor extends RomeVisitor {
       return;
     }
     if (!isNaN(arg)) {
-      const inNum = Number(arg);
-      if ((type === 'integer' && (inNum > 65535 || inNum < -65535))
-      || ((type === 'long' || type === 'float') && (inNum > 4294967295 || inNum < -4294967295))) {
+      const number = Number(arg);
+      const dec = arg.match(/\./g);
+
+      if ((type === 'integer' && (number > 65535 || number < -65535))
+      || (type === 'long' && (number > 4294967295 || number < -4294967295))
+      || (type === 'float' && (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER))) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
         this.errorReporter.generalError('Out of memory');
         return;
       }
-      if (arg.includes('.') && (type === 'integer' || type === 'long')) {
+      if ((type === 'integer' || type === 'long') && dec !== null) {
         this.errorReporter.generalError('Wrong memory type for writing');
         return;
       }
       if (type === 'float') {
-        // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
-        if (inNum > (Number.MAX_SAFE_INTEGER) || inNum < Number.MIN_SAFE_INTEGER) {
-          this.errorReporter.generalError('Out of memory');
-          return;
-        }
-        if (!arg.includes('.')) {
-          arg += '.00';
-        }
-        const dec = arg.match(/\./g);
-        if (dec.length === 0) {
+        if (dec === null) {
           arg += '.00';
         } else if (dec.length > 1) {
           this.errorReporter.generalError('Wrong memory type for writing');
           return;
-        } else if (dec.length === 1) {
-          if (arg.split('.')[1].length > 16) {
-            this.errorReporter.generalError('Out of memory');
-            return;
-          }
         }
       }
     }

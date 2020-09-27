@@ -3,6 +3,7 @@ const { By } = require('selenium-webdriver');
 
 class TestConfig {
     static URL = 'http://localhost:3000/';
+    // static URL = 'http://192.168.0.9:8080';
 
     static CAPABILITIES = {
       browserName: 'chrome',

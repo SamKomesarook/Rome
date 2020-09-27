@@ -32,7 +32,7 @@ describe('test float', () => {
 
   test(testFloatMin, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(float)\nwrite(-340282346638528859811704183484516925441.0)\nend');
+    await codingArea.sendKeys('start\nset(float)\nwrite(-9007199254740992)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -49,7 +49,7 @@ describe('test float', () => {
 
   test(testFloatMax, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(float)\nwrite(340282346638528859811704183484516925441.0)\nend');
+    await codingArea.sendKeys('start\nset(float)\nwrite(9007199254740992)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -66,7 +66,7 @@ describe('test float', () => {
 
   test(testValidFloat, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(float)\nwrite(340282346638528859811704183484516925440.0)\nmove(next)\nset(float)\nwrite(-340282346638528859811704183484516925440.0)\nmove(next)\nset(float)\nwrite(0.0)\nend');
+    await codingArea.sendKeys('start\nset(float)\nwrite(9007199254740991)\nmove(next)\nset(float)\nwrite(-9007199254740991)\nmove(next)\nset(float)\nwrite(0.0)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -82,9 +82,9 @@ describe('test float', () => {
     const memoryCell2Res = await memoryCell2.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('340282346638528859811704183484516925440.00');
-    expect(memoryCell1Res).toEqual('-340282346638528859811704183484516925440.00');
-    expect(memoryCell2Res).toEqual('0');
+    expect(memoryCell0Res).toEqual('9007199254740991.00');
+    expect(memoryCell1Res).toEqual('-9007199254740991.00');
+    expect(memoryCell2Res).toEqual('0.0');
   }, 35000);
 
   test(testNonDecimal, async () => {
