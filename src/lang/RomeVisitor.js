@@ -182,6 +182,8 @@ class RVisitor extends RomeVisitor {
           const base = Math.floor(strVal.length / 6);
           for (let i = 0; i < base + 1; i++) {
             this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
+            this.staticDisplay.memory[pos + i * 1].type = 'string';
+            this.staticDisplay.memory[pos + i * 1].size = '6';
           }
           return;
         }
