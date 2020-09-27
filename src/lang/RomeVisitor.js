@@ -90,12 +90,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitWrite(ctx) {
-    // TODO check for maximum length (or spillover to the next memory cell?
+    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
       return;
     }
-    if (this.staticDisplay.memory[this.staticDisplay.selected].type === '') {
+    if (type === '') {
       this.errorReporter.generalError('Memory type not set');
       return;
     }
@@ -103,13 +104,49 @@ class RVisitor extends RomeVisitor {
     if (typeof arg === 'object') {
       arg = arg[0];
     }
-    if (arg[0] === '"' && this.staticDisplay.memory[this.staticDisplay.selected].type === 'numbers') {
+
+    if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
       this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
-    if (arg[0] !== '"' && this.staticDisplay.memory[this.staticDisplay.selected].type === 'letters') {
-      this.errorReporter.generalError('Wrong memory type for writing');
-      return;
+    if (!isNaN(arg)) {
+      const number = Number(arg);
+      const dec = arg.match(/\./g);
+
+      if ((type === 'integer' && (number > 65535 || number < -65535))
+      || (type === 'long' && (number > 4294967295 || number < -4294967295))
+      || (type === 'float' && (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER))) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+        this.errorReporter.generalError('Out of memory');
+        return;
+      }
+      if ((type === 'integer' || type === 'long') && dec !== null) {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
+      if (type === 'float') {
+        if (dec === null) {
+          arg += '.00';
+        } else if (dec.length > 1) {
+          this.errorReporter.generalError('Wrong memory type for writing');
+          return;
+        }
+      }
+    }
+
+    if (type === 'character' || type === 'string') {
+      if (arg[0] === '"' && arg[arg.length - 1] === '"') {
+        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        if ((type === 'character' && arg.length - 2 > 1)
+        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * 6 - pos * 6))) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
+      } else {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
     }
 
     // Get the keys of special memory cells
@@ -117,7 +154,22 @@ class RVisitor extends RomeVisitor {
     if (this.staticDisplay.selected === usbMemoryKey) {
       USBToggle();
     } else {
-      this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+      switch (type) {
+        case 'character':
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
+          return;
+        case 'string': {
+          const strVal = arg.slice(1, -1);
+          const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+          const base = Math.floor(strVal.length / 6);
+          for (let i = 0; i < base + 1; i++) {
+            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
+          }
+          return;
+        }
+        default:
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+      }
     }
   }
 
@@ -134,7 +186,7 @@ class RVisitor extends RomeVisitor {
     const compareKeyword = condInput[2];
 
     // Assign left value based on content type
-    if (memoryCell.type === 'numbers') {
+    if (memoryCell.type === 'integer' || memoryCell.type === 'long' || memoryCell.type === 'float') {
       leftValue = memoryCell.content;
     } else {
       // Strip off the double quotes and convert string to int

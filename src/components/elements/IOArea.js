@@ -18,7 +18,7 @@ const InputArea = () => {
         USBToggle();
       } else {
         newMem[staticDisplay.selected].content = staticDisplay.input;
-        newMem[staticDisplay.selected].type = 'letters';
+        newMem[staticDisplay.selected].type = 'string';
       }
       staticDisplay.memory = newMem;
       staticDisplay.reading = false;

@@ -2,12 +2,14 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testConsoleWriteString = 'test keyboard write string correctly';
-const testConsoleWriteInteger = 'test keyboard write integer';
-const testConsoleWriteEmpty = 'test keyboard write empty string';
-const testConsoleWriteNoQuote = 'test keyboard write string without quote';
+// Test names
+const testIntMax = 'test write int with value exceeds maximum';
+const testIntMin = 'test write int with value exceeds minumum';
+const testValidInt = 'test write valid int within acceptable range';
+const testDecimal = 'test write number with decimal point';
+const testDoubleQuotes = 'test write number in double quotes';
 
-describe('test console write', () => {
+describe('test integer', () => {
   let driver;
 
   beforeAll(async () => {
@@ -28,9 +30,9 @@ describe('test console write', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testConsoleWriteString, async () => {
+  test(testIntMin, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(-65536)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -41,13 +43,13 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('hello!');
+    expect(outputAreaRes).toEqual('Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testConsoleWriteInteger, async () => {
+  test(testIntMax, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(65536)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -58,13 +60,13 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('1');
+    expect(outputAreaRes).toEqual('Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testConsoleWriteEmpty, async () => {
+  test(testValidInt, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(65535)\nmove(next)\nset(integer)\nwrite(-65535)\nmove(next)\nset(integer)\nwrite(0)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -74,14 +76,20 @@ describe('test console write', () => {
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
+    const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
+    const memoryCell1Res = await memoryCell1.getText();
+    const memoryCell2 = await TestConfig.getElementById(driver, 'memory-2');
+    const memoryCell2Res = await memoryCell2.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('');
+    expect(memoryCell0Res).toEqual('65535');
+    expect(memoryCell1Res).toEqual('-65535');
+    expect(memoryCell2Res).toEqual('0');
   }, 35000);
 
-  test(testConsoleWriteNoQuote, async () => {
+  test(testDecimal, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(10.7)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -92,7 +100,24 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(outputAreaRes).toEqual('Wrong memory type for writing');
+    expect(memoryCell0Res).toEqual('');
+  }, 35000);
+
+  test(testDoubleQuotes, async () => {
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nset(integer)\nwrite("10")\nend');
+
+    const startBtn = await TestConfig.getElementById(driver, 'start-button');
+    await startBtn.click();
+
+    const outputArea = await TestConfig.getElementById(driver, 'output-area');
+    const outputAreaRes = await outputArea.getText();
+
+    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
+
+    expect(outputAreaRes).toEqual('Wrong memory type for writing');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

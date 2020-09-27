@@ -24,7 +24,7 @@ DisplayContext.DEFAULT = () => {
     for (let i = 0; i < localMemorySize; i++) {
       memoryArray.push({
         key: i, // Unique key
-        type: '', // Type 'numbers or letters'
+        type: '', // Type 'integer or string'
         content: '', // defined content
         special: '', //
         name: '', //

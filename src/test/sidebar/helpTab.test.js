@@ -50,6 +50,6 @@ describe('test help tab', () => {
     const helpContentInfo = await helpContent.getText();
 
     expect(selectedKeyword).toEqual('set');
-    expect(helpContentInfo).toEqual('Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend');
+    expect(helpContentInfo).toEqual('Sets the type that can be written to the memory cell. the args could be `integer`, `long`, `float`, `character` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend');
   }, 35000);
 });

@@ -7,13 +7,13 @@ const Help = ({ isActive }) => {
       keyword: 'general', content: 'All program must have start and end command.\n\nPlease select syntax keywords in the selection box for specification.',
     },
     {
-      keyword: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.\n\nExample 1:\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\n\nExample 2:\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}',
+      keyword: 'loop', content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.\n\nExample 1:\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("content")\nmove(next)\n}\n\nExample 2:\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("content")\nmove(next)\n}',
     },
     {
-      keyword: 'if', content: 'Executes the arguments in the curly brackets if the condition is true.\nThe condition is made up of `is` / `not` + `equal` / `less` / `greater` + *int or string*.\n\nExample 1:\nset(numbers)\nwrite(3)\nif(is equal 3){\n//do something\n}\n\nExample 2:\nset(numbers)\nwrite(3)\nif(not less 3){\n//do something\n}\n\nExample 3:\nset(numbers)\nwrite(3)\nif(is greater 3){\n//do something\n}',
+      keyword: 'if', content: 'Executes the arguments in the curly brackets if the condition is true.\nThe condition is made up of `is` / `not` + `equal` / `less` / `greater` + *int or string*.\n\nExample 1:\nset(integer)\nwrite(3)\nif(is equal 3){\n//do something\n}\n\nExample 2:\nset(integer)\nwrite(3)\nif(not less 3){\n//do something\n}\n\nExample 3:\nset(integer)\nwrite(3)\nif(is greater 3){\n//do something\n}',
     },
     {
-      keyword: 'write', content: 'Writes arguments to the selected memory cell.\nArguments must be either numbers, or a string enclosed by parenthesis.\n\nExample:\nstart\nset(letters)\nwrite("write something here")\nend',
+      keyword: 'write', content: 'Writes arguments to the selected memory cell.\nArguments must be either integer, or a string enclosed by parenthesis.\n\nExample:\nstart\nset(string)\nwrite("write something here")\nend',
     },
     {
       keyword: 'start', content: 'Indicates the start of the program.\nAll programs must begin with this command.\n\nExample:\nstart\n//do something\nend',
@@ -25,10 +25,13 @@ const Help = ({ isActive }) => {
       keyword: 'move', content: 'Changes the selected memory cell to the immediate right `last` or left `next`.\n\nExample:',
     },
     {
-      keyword: 'set', content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
+      keyword: 'set', content: 'Sets the type that can be written to the memory cell. the args could be `integer`, `long`, `float`, `character` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
     {
-      keyword: 'free', content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
+      keyword: 'data type', content: 'The type which could use in `set` include `integer`, `long`, `float`, `character` or `string`.\nThe size of each type are:\n\ninteger - 2bytes\nlong - 4bytes\nfloat - 4bytes with integer and 2bytes for decimal\ncharacter - 1bytes\nstring - up to 6bytes for one memory cell(adjustable with memory)',
+    },
+    {
+      keyword: 'free', content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
     },
     {
       keyword: 'import', content: 'Import a library within the arguments.\n\nExample:\nstart\nimport(IO)\n//do something\nend',
@@ -82,6 +85,7 @@ const Help = ({ isActive }) => {
               <option value="start">start</option>
               <option value="end">end</option>
               <option value="set">set</option>
+              <option value="data type">data type</option>
               <option value="write">write</option>
               <option value="free">free</option>
               <option value="loop">loop</option>
