@@ -1,7 +1,6 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
 import { USBToggle } from '../components/elements/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
-import { ConsoleErrorListener } from 'antlr4/error/ErrorListener';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
@@ -91,12 +90,13 @@ class RVisitor extends RomeVisitor {
   }
 
   visitWrite(ctx) {
-    // TODO check for maximum length (or spillover to the next memory cell?
+    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
       return;
     }
-    if (this.staticDisplay.memory[this.staticDisplay.selected].type === '') {
+    if (type === '') {
       this.errorReporter.generalError('Memory type not set');
       return;
     }
@@ -105,39 +105,29 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
 
-    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
     if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
       this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
     if (!isNaN(arg)) {
       const inNum = Number(arg);
-      if (type === 'integer') {
-        if (inNum > 65535 || inNum < -65535) {
-          this.errorReporter.generalError('Out of memory');
-          return;
-        }
-      }
-      if (type === 'long' || type === 'float') {
-        if (inNum > 4294967295 || inNum < -4294967295) {
-          this.errorReporter.generalError('Out of memory');
-          return;
-        }
+      if ((type === 'integer' && (inNum > 65535 || inNum < -65535))
+      || ((type === 'long' || type === 'float') && (inNum > 4294967295 || inNum < -4294967295))) {
+        this.errorReporter.generalError('Out of memory');
+        return;
       }
       if (arg.includes('.') && (type === 'integer' || type === 'long')) {
         this.errorReporter.generalError('Wrong memory type for writing');
         return;
       }
       if (type === 'float') {
-        if (!arg.includes('.')) {
-          arg += '.00';
-        }
         const dec = arg.match(/\./g);
-        if (dec.length > 1) {
+        if (dec.length === 0) {
+          arg += '.00';
+        } else if (dec.length > 1) {
           this.errorReporter.generalError('Wrong memory type for writing');
           return;
-        }
-        if (dec.length === 1) {
+        } else if (dec.length === 1) {
           if (arg.split('.')[1].length > 16) {
             this.errorReporter.generalError('Out of memory');
             return;
@@ -146,15 +136,18 @@ class RVisitor extends RomeVisitor {
       }
     }
 
-    if ((arg[0] !== '"' || arg[arg.length - 1] !== '"') && (type === 'character' || type === 'string')) {
-      this.errorReporter.generalError('Wrong memory type for writing');
-      return;
-    }
-
-    if (arg[0] === '"' || arg[arg.length - 1] === '"') {
-      const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-      if ((type === 'character' && arg.length > 3) || (type === 'string' && (arg.length > (68 - pos * 6)))) {
-        this.errorReporter.generalError('Out of memory');
+    if (type === 'character' || type === 'string') {
+      if (arg[0] === '"' && arg[arg.length - 1] === '"') {
+        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        if ((type === 'character' && arg.length - 2 > 1)
+        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * 6 - pos * 6))) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
+      } else {
+        this.errorReporter.generalError('Wrong memory type for writing');
         return;
       }
     }
@@ -164,20 +157,21 @@ class RVisitor extends RomeVisitor {
     if (this.staticDisplay.selected === usbMemoryKey) {
       USBToggle();
     } else {
-      this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
-      if (arg[0] === '"') {
-        arg = arg.substr(0, arg.length - 1);
-        arg = arg.substr(1, arg.length - 1);
-
-        if (type === 'string') {
+      switch (type) {
+        case 'character':
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
+          return;
+        case 'string': {
+          const strVal = arg.slice(1, -1);
           const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-          const base = Math.floor(arg.length / 6);
+          const base = Math.floor(strVal.length / 6);
           for (let i = 0; i < base + 1; i++) {
-            this.staticDisplay.memory[pos + i * 1].content = arg.substr(i * 6, 6);
+            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
           }
           return;
         }
-        this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+        default:
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
       }
     }
   }
