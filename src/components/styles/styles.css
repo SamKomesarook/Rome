@@ -337,6 +337,9 @@ input:checked + .slider:before {
     border: 3px solid var(--border-line);
     border-radius: 10px;
     overflow: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 #input-bar {
@@ -344,6 +347,9 @@ input:checked + .slider:before {
     height: 3rem;
     border-radius: 10px;
     color: white;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 #input-bar:disabled {
