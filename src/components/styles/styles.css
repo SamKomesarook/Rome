@@ -442,7 +442,7 @@ aside:hover .sidebar-item-text {
     font-weight: normal;
 }
 
-/** content content for sidebar **/
+/** Dropdown content for sidebar **/
 .dropdown-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
@@ -450,7 +450,49 @@ aside:hover .sidebar-item-text {
     border-radius: 0;
     color: var(--bg-contrast-primary);
     font-weight: normal;
-	white-space: pre-line;
+    white-space: pre-line;
+}
+
+/** ABOUT TAB **/
+
+#about {
+    width: 50rem;
+}
+
+#about-content {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    color: var(--bg-contrast-primary);
+    white-space: pre-line;
+}
+
+#about-title {
+    display: flex;
+    font-style: oblique;
+    font-size: 1.75rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center ;
+}
+
+#about-title > svg {
+    height: 1.5rem;
+}
+
+.about-heading {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 4rem;
+}
+
+.about-paragraph {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 /** GENERAL (Overrides above css rules) **/
