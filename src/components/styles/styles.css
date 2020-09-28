@@ -16,6 +16,15 @@
     padding: 10px;
 }
 
+/*Fonts*/
+
+/*Courier Prime*/
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+/*Open Sans*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
 /*
 Glowing Blue Input Highlights <Start>
 Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
@@ -451,6 +460,50 @@ aside:hover .sidebar-item-text {
     color: var(--bg-contrast-primary);
     font-weight: normal;
 	white-space: pre-line;
+    text-align: center;
+}
+
+.dropdown-example{
+    background-color: grey;
+    display:inline-block;
+    white-space: pre-line;
+    padding: 5px;
+    margin: 15px;
+    text-align: left;
+    color: black;
+}
+
+.argument-desc{
+    color: white;
+     display:inline; 
+}
+
+.argument-elem{
+    display:inline;
+}
+
+.argument-name{
+    display:inline;
+    font-family: 'Courier Prime';
+    font-style: italic;
+}
+
+.argument-container{
+    padding: 5px;
+    margin: 15px;
+    text-align: left;
+    background-color: grey;
+    display:inline-block;
+    color: black;
+    font-family: 'Courier Prime';
+}
+
+.style-content{
+    color: white;
+    font-family: 'Open Sans';
+    padding: 8px;
+    text-align: center;
+
 }
 
 /** GENERAL (Overrides above css rules) **/
