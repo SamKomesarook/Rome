@@ -26,7 +26,7 @@ describe('test app run view', () => {
     const appRunViewBtn = await TestConfig.getElementByName(driver, 'App Run View');
 
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    const switchBtn = await TestConfig.getElementById(driver, 'switch-container');
+    const switchBtn = await TestConfig.getElementByXpath(driver, '//*[@id="root"]/div/div[1]/div[3]');
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     const resetBtn = await TestConfig.getElementById(driver, 'reset-button');
     const memorySection = await TestConfig.getElementByXpath(driver, '//*[@id="computer-column"]/div[1]');
@@ -44,7 +44,7 @@ describe('test app run view', () => {
     const appRunViewBtn = await TestConfig.getElementByName(driver, 'App Run View');
 
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    const switchBtn = await TestConfig.getElementById(driver, 'switch-container');
+    const switchBtn = await TestConfig.getElementByXpath(driver, '//*[@id="root"]/div/div[1]/div[3]');
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     const resetBtn = await TestConfig.getElementById(driver, 'reset-button');
     const memorySection = await TestConfig.getElementByXpath(driver, '//*[@id="computer-column"]/div[1]');

@@ -17,7 +17,7 @@ const Switch = () => {
   }
 
   return (
-    <div id="switch-container">
+    <div className="switch-container">
       <label className="switch" htmlFor="machine-language-switch">
         <input type="checkbox" id="machine-language-switch" onChange={onChange.bind(this)} disabled={display.running ? 'disabled' : ''} />
         <span className="slider round" />
