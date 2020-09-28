@@ -7,7 +7,7 @@ const MemoryCell = ({ id }) => {
   const [display, setDisplay] = useContext(DisplayContext);
 
   const memoryCell = display.memory[id];
-  const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
+  const selectedMemoryCell = id === display.selected ? 'selected-memory-cell' : '';
 
   const [shouldBinaryDisplayed, setBinaryDisplayed] = useState(false);
   const [byteCellClass, setByteCellClass] = useState(''); // Class that determines the gridlayout of binary view
@@ -38,7 +38,6 @@ const MemoryCell = ({ id }) => {
   };
 
   const generateBinaryGrid = (localShouldBinaryDisplayed) => {
-    
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
     } else {
@@ -62,7 +61,7 @@ const MemoryCell = ({ id }) => {
   };
 
   return (
-    <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onDoubleClick={handleClickCell}>
+    <div id={`memory-${id}`} className={`memory-cell ${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onDoubleClick={handleClickCell}>
       {shouldBinaryDisplayed ? binaryContent : memoryCell.content}
     </div>
   );

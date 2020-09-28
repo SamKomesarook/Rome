@@ -67,6 +67,7 @@ const StartButton = () => {
 
 const ResetButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+
   const handleReset = () => {
     // Reset to the default value but keep machine and text value
     setDisplay((prevDisplay) => ({

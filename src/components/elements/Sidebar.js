@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DistanceLearning from './DistanceLearning';
 import Help from './Help';
 import About from './About';
 import Challenge from './Challenge';
 import SidebarButton from './SidebarButton';
 import HtmlElementUtil from '../../utils/HtmlElementUtil';
+import { UiContext } from '../../state/UiContext';
 
 const Sidebar = () => {
   const [activeSidebarItem, setActiveSidebarItem] = useState('');
+  const [ui, setUi] = useContext(UiContext);
   const DISTANCE_LEARNING = 'Distance Learning';
   const CHALLENGE = 'Challenge';
   const HELP = 'Help';
@@ -35,6 +37,14 @@ const Sidebar = () => {
     e.currentTarget.name === activeSidebarItem ? setActiveSidebarItem('') : setActiveSidebarItem(e.currentTarget.name);
   };
 
+  const handleAppRunView = () => {
+    setActiveSidebarItem('');
+    setUi((prevUI) => ({
+      ...prevUI,
+      ctxIsAppRunViewActive: !prevUI.ctxIsAppRunViewActive,
+    }));
+  };
+
   const sidebarItemList = SIDEBAR_ITEMS.map((item) => (
     <SidebarButton
       key={item.name}
@@ -49,6 +59,18 @@ const Sidebar = () => {
     <aside id="sidebar">
       <ul className="sidebar-item-list">
         { sidebarItemList }
+        <li className="sidebar-item">
+          <button
+            type="button"
+            className="sidebar-btn toggle-btn"
+            onClick={handleAppRunView}
+            name="App Run View"
+            // aria-pressed={isPressed}
+          >
+            <span className="sidebar-item-text">App Run View</span>
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2" /></svg> 
+          </button>
+        </li>
       </ul>
       <DistanceLearning isActive={activeSidebarItem === DISTANCE_LEARNING} />
       <Challenge isActive={activeSidebarItem === CHALLENGE} />
