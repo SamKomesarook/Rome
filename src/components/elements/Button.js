@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import { DisplayContext } from '../../state/DisplayState';
-import { UiContext } from '../../state/UiContext';
 import { processInstrs, ErrorReporter } from '../../lang/Common';
 
 const antlr4 = require('antlr4');
@@ -12,8 +11,6 @@ const { MachineParser } = require('../../lang/grammar/Machine/MachineParser');
 
 const StartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const [ui, setUi] = useContext(UiContext);
-  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   const handleStart = () => {
     // Create a deep copy of display
@@ -61,7 +58,7 @@ const StartButton = () => {
       onClick={handleStart}
       type="button"
       disabled={!!display.running}
-      className={`std-btn primary-btn ${isElementHidden}`}
+      className="std-btn primary-btn"
     >
       Start
     </button>
@@ -70,8 +67,6 @@ const StartButton = () => {
 
 const ResetButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const [ui, setUi] = useContext(UiContext);
-  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   const handleReset = () => {
     // Reset to the default value but keep machine and text value
@@ -88,7 +83,7 @@ const ResetButton = () => {
       onClick={handleReset}
       type="button"
       disabled={!display.running}
-      className={`std-btn secondary-btn ${isElementHidden}`}
+      className="std-btn secondary-btn"
     >
       Reset
     </button>

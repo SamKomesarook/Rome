@@ -8,9 +8,9 @@ const Memory = () => {
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   const getMemory = (id) => {
-    const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
+    const selectedMemoryCell = id === display.selected ? 'selected-memory-cell' : '';
     return (
-      <div id={`memory-${id}`} className={`memory-cell${selectedMemoryCell}`} key={display.memory[id].key}>
+      <div id={`memory-${id}`} className={`memory-cell ${selectedMemoryCell}`} key={display.memory[id].key}>
         {display.memory[id].content}
       </div>
     );

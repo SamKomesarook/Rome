@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
-import { UiContext } from '../../state/UiContext';
 
 const Switch = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const [ui, setUi] = useContext(UiContext);
-  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   function onChange(event) {
     const value = display.machine;
@@ -20,7 +17,7 @@ const Switch = () => {
   }
 
   return (
-    <div id="switch-container" className={isElementHidden}>
+    <div id="switch-container">
       <label className="switch" htmlFor="machine-language-switch">
         <input type="checkbox" id="machine-language-switch" onChange={onChange.bind(this)} disabled={display.running ? 'disabled' : ''} />
         <span className="slider round" />

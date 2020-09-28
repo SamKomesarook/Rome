@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
-import { UiContext } from '../../state/UiContext';
 
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const [ui, setUi] = useContext(UiContext);
-  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   function handleChange(event) {
     event.preventDefault();
@@ -19,7 +16,7 @@ const TextArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper" className={isElementHidden}>
+    <div id="coding-area-wrapper">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
