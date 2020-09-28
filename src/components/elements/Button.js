@@ -13,21 +13,23 @@ const StartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
   const handleStart = () => {
-    setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      running: true,
-    }));
-    const chars = new antlr4.InputStream(display.text);
-    const lexer = (display.machine)
+    // Create a deep copy of display
+    const staticDisplay = DisplayContext.createCustomClone(display);
+
+    staticDisplay.running = true;
+
+    const chars = new antlr4.InputStream(staticDisplay.text);
+    const lexer = (staticDisplay.machine)
       ? new MachineLexer(chars)
       : new RomeLexer(chars);
     const tokens = new antlr4.CommonTokenStream(lexer);
-    const parser = (display.machine)
+    const parser = (staticDisplay.machine)
       ? new MachineParser(tokens)
       : new RomeParser(tokens);
+    const errorReporter = new ErrorReporter(staticDisplay);
     parser.buildParseTrees = true;
     parser.removeErrorListeners();
-    parser.addErrorListener(new ErrorReporter(display));
+    parser.addErrorListener(errorReporter);
 
     const tree = parser.r();
 
@@ -35,19 +37,19 @@ const StartButton = () => {
       try {
         for (const child of tree.children) {
           if (child.constructor !== TerminalNodeImpl) {
-            display.commands.push(child);
+            staticDisplay.commands.push(child);
           }
         }
-        setDisplay((prevDisplay) => ({
-          ...prevDisplay,
-          errors: false,
-        }));
-        processInstrs(display, setDisplay);
+        staticDisplay.errors = false;
+        processInstrs(staticDisplay, errorReporter);
       } catch (e) {
         console.log(e);
         // TODO print error messages
       }
     }
+
+    // Render new display information
+    setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
   return (

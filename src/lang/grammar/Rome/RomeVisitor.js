@@ -30,6 +30,12 @@ RomeVisitor.prototype.visitMem = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#Float.
+RomeVisitor.prototype.visitFloat = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#Num.
 RomeVisitor.prototype.visitNum = function(ctx) {
   return this.visitChildren(ctx);

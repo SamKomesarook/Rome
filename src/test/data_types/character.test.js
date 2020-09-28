@@ -2,12 +2,13 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testConsoleWriteString = 'test keyboard write string correctly';
-const testConsoleWriteInteger = 'test keyboard write integer';
-const testConsoleWriteEmpty = 'test keyboard write empty string';
-const testConsoleWriteNoQuote = 'test keyboard write string without quote';
+// Test names
+const testValidCharacter = 'test write a character';
+const testEmptyCharacter = 'test write empty character';
+const testMultipleCharacters = 'test write multiples characters';
+const testWithoutQuotes = 'test write character without quotes';
 
-describe('test console write', () => {
+describe('test character', () => {
   let driver;
 
   beforeAll(async () => {
@@ -28,9 +29,9 @@ describe('test console write', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testConsoleWriteString, async () => {
+  test(testValidCharacter, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nset(character)\nwrite("u")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -41,30 +42,13 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('hello!');
-    expect(memoryCell0Res).toEqual('');
+    expect(outputAreaRes).toEqual('');
+    expect(memoryCell0Res).toEqual('u');
   }, 35000);
 
-  test(testConsoleWriteInteger, async () => {
+  test(testEmptyCharacter, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
-
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
-
-    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
-    const memoryCell0Res = await memoryCell0.getText();
-
-    expect(outputAreaRes).toEqual('1');
-    expect(memoryCell0Res).toEqual('');
-  }, 35000);
-
-  test(testConsoleWriteEmpty, async () => {
-    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
+    await codingArea.sendKeys('start\nset(character)\nwrite("")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -79,9 +63,9 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testConsoleWriteNoQuote, async () => {
+  test(testMultipleCharacters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
+    await codingArea.sendKeys('start\nset(character)\nwrite("ab")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -92,7 +76,24 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(outputAreaRes).toEqual('Out of memory');
+    expect(memoryCell0Res).toEqual('');
+  }, 35000);
+
+  test(testWithoutQuotes, async () => {
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nset(character)\nwrite(abc)\nend');
+
+    const startBtn = await TestConfig.getElementById(driver, 'start-button');
+    await startBtn.click();
+
+    const outputArea = await TestConfig.getElementById(driver, 'output-area');
+    const outputAreaRes = await outputArea.getText();
+
+    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
+
+    expect(outputAreaRes).toEqual("mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });
