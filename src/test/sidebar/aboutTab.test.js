@@ -26,8 +26,10 @@ describe('test about tab', () => {
     const aboutContent = await TestConfig.getElementById(driver, 'about-content');
     const aboutContentInfo = await aboutContent.getText();
 
-    const expectedInfo = 'Rome-Education + Julia Brown Schools +  = \n\nSpecial thanks to:\n\nNick On (programming)\nJiecong Zhang (programming)\nShujie Yang (programming)\nErina Ho (gorgeous logo)';
+    const expectedTopic = 'Rome-Education + Julia Brown Schools +';
+    const expectedThank = 'Special thanks to:\nTon Binh On - Nick (programming)\nJiecong Zhang (programming)\nShujie Yang (programming)\nErina Ho (gorgeous logo)';
 
-    expect(aboutContentInfo).toEqual(expectedInfo);
+    expect(aboutContentInfo).toContain(expectedTopic);
+    expect(aboutContentInfo).toContain(expectedThank);
   }, 35000);
 });
