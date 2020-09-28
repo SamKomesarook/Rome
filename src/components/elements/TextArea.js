@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
 import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
+import { RVContext } from '../../state/RVContext';
 
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+
+  const [on, setOn] = useContext(RVContext);
+
+  const className = on.show ? '' : 'hidden';
 
   function handleChange(event) {
     event.preventDefault();
@@ -16,7 +21,7 @@ const TextArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper">
+    <div id="coding-area-wrapper" className={className}>
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
