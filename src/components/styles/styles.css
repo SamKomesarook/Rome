@@ -263,6 +263,11 @@ input:checked + .slider:before {
     color: dimgray;
 }
 
+.run-view-btn {
+    background-color: #771ce0;
+    color: white;
+}
+
 /** MEMORY **/
 
 .memory-section {
