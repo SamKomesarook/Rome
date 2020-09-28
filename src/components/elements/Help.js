@@ -80,6 +80,7 @@ const Help = ({ isActive }) => {
       <div id="filter-control">
         <div className="control-container">
           <label htmlFor="keywords">
+            Keyword:
             <select name="keywords" id="keywords" className="control" onChange={handleChangeKeyword}>
               <option value="general">general</option>
               <option value="start">start</option>

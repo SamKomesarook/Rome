@@ -26,6 +26,7 @@ const Challenge = ({ isActive }) => {
       <div id="filter-control">
         <div className="control-container">
           <label htmlFor="topics">
+            Topic:
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
               <option value="Challenge Title">Challenge Title</option>
               <option value="Calculator">Calculator</option>

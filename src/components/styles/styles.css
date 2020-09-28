@@ -414,19 +414,6 @@ aside:hover .sidebar-item-text {
     border-right: 2px solid var(--border-line-dark);
 }
 
-.sidebar-about-pane {
-    position: fixed;
-    right: 5rem;
-    top: 0;
-    width: 49rem;
-    height: 100vh;
-    background-color: var(--bg-secondary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-right: 2px solid var(--border-line-dark);
-}
-
 /** DISTANCE LEARNING **/
 
 #filter-control {
@@ -455,7 +442,7 @@ aside:hover .sidebar-item-text {
     font-weight: normal;
 }
 
-/** content content for sidebar **/
+/** Dropdown content for sidebar **/
 .dropdown-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
@@ -463,53 +450,49 @@ aside:hover .sidebar-item-text {
     border-radius: 0;
     color: var(--bg-contrast-primary);
     font-weight: normal;
-	white-space: pre-line;
+    white-space: pre-line;
 }
 
 /** ABOUT TAB **/
+
+#about {
+    width: 50rem;
+}
+
 #about-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
     background-color: var(--bg-secondary);
-    border-radius: 0;
     color: var(--bg-contrast-primary);
-    font-weight: normal;
-	white-space: pre-line;
+    white-space: pre-line;
 }
 
 #about-title {
-    color: white;
-	font-style:oblique;
-	font-size: xx-large;
-	font-family: "Comic Sans MS", cursive, sans-serif;
-	font-weight: bold;
+    display: flex;
+    font-style: oblique;
+    font-size: 1.75rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center ;
 }
 
-#about-heart {
-    font-size: x-large;	
+#about-title > svg {
+    height: 1.5rem;
 }
 
-#about-rome{
-    vertical-align: -45px;	
+.about-heading {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 4rem;
 }
 
-#about-thankTitle {
-	font-family: "Lucida Console", Monaco, monospace;
-	text-align: center;
-	font-size: x-large;
-	font-weight: bold;
-}
-
-#about-thank {
-	font-family: "Lucida Console", Monaco, monospace;
-	text-align: center;
-}
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.about-paragraph {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 /** GENERAL (Overrides above css rules) **/
