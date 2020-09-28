@@ -32,6 +32,24 @@ class RVisitor extends RomeVisitor {
     const { selected } = this.staticDisplay;
     const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
     this.staticDisplay.memory[selected].type = newType;
+
+    switch (newType) {
+      case 'character':
+        this.staticDisplay.memory[selected].size = 1;
+        break;
+      case 'integer':
+        this.staticDisplay.memory[selected].size = 2;
+        break;
+      case 'long':
+      case 'float':
+        this.staticDisplay.memory[selected].size = 4;
+        break;
+      case 'string':
+        this.staticDisplay.memory[selected].size = 6;
+        break;
+      default:
+        this.staticDisplay.memory[selected].size = 0;
+    }
   }
 
   visitLoop(ctx) {
@@ -164,6 +182,8 @@ class RVisitor extends RomeVisitor {
           const base = Math.floor(strVal.length / 6);
           for (let i = 0; i < base + 1; i++) {
             this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
+            this.staticDisplay.memory[pos + i * 1].type = 'string';
+            this.staticDisplay.memory[pos + i * 1].size = '6';
           }
           return;
         }
