@@ -11,7 +11,6 @@ import { Processor } from './components/elements/Peripherals';
 import Switch from './components/elements/Switch';
 import Sidebar from './components/elements/Sidebar';
 import VideoPlayer from './components/elements/VideoPlayer';
-import RVButton from './components/elements/RVButton';
 
 const App = () => (
   <UiProvider>
@@ -24,7 +23,6 @@ const App = () => (
           <div className="hflex">
             <StartButton />
             <ResetButton />
-            <RVButton />
           </div>
         </div>
         <div className="layout-column" id="computer-column">

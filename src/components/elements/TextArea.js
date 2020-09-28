@@ -6,7 +6,7 @@ import { UiContext } from '../../state/UiContext';
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [ui, setUi] = useContext(UiContext);
-  const className = ui.ctxIsTextAreaActive ? '' : 'hidden';
+  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   function handleChange(event) {
     event.preventDefault();
@@ -19,7 +19,7 @@ const TextArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper" className={className}>
+    <div id="coding-area-wrapper" className={isElementHidden}>
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',

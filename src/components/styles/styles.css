@@ -263,16 +263,6 @@ input:checked + .slider:before {
     color: dimgray;
 }
 
-.run-view-btn {
-    background-color: #771ce0;
-    color: white;
-}
-
-.code-view-btn {
-    background-color: #00c3ff;
-    color: rgb(105, 100, 100);
-}
-
 /** MEMORY **/
 
 .memory-section {
@@ -369,6 +359,7 @@ aside {
 }
 
 .sidebar-item-list {
+    height: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -391,6 +382,10 @@ aside {
     color: var(--bg-contrast-secondary);
     background-color: var(--bg-secondary);
     border-right: 0.1rem solid transparent;
+}
+
+.sidebar-item:last-child {
+    margin-top: auto;
 }
 
 .sidebar-item-text {

@@ -5,7 +5,7 @@ import { UiContext } from '../../state/UiContext';
 const Memory = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [ui, setUi] = useContext(UiContext);
-  const className = ui.ctxIsMemoryActive ? 'memory-section' : 'hidden';
+  const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   const getMemory = (id) => {
     const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
@@ -26,7 +26,7 @@ const Memory = () => {
   };
 
   return (
-    <div className={className}>
+    <div className={`memory-section ${isElementHiddenClass}`}>
       {memoryCellList(display.memorySize)}
     </div>
   );
