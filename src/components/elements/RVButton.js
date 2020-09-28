@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 import { UiContext } from '../../state/UiContext';
 
 const RVButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [ui, setUi] = useContext(UiContext);
-  //let flag = true;
+
   const handleRunView = () => {
     setUi((prevUI) => ({
       ...prevUI,
-      ctxIsTextAreaActive: false,
-      ctxIsMemoryActive: false,
+      ctxIsTextAreaActive: !prevUI.ctxIsTextAreaActive,
+      ctxIsMemoryActive: !prevUI.ctxIsMemoryActive,
+      ctxIsSwitchActive: !prevUI.ctxIsSwitchActive,
     }));
   };
 

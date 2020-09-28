@@ -8,6 +8,7 @@ export const UiProvider = (props) => {
     ctxYoutubeContentID: '',
     ctxIsTextAreaActive: true,
     ctxIsMemoryActive: true,
+    ctxIsSwitchActive: true,
   });
 
   return (

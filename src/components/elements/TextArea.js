@@ -5,9 +5,7 @@ import { UiContext } from '../../state/UiContext';
 
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-
   const [ui, setUi] = useContext(UiContext);
-
   const className = ui.ctxIsTextAreaActive ? '' : 'hidden';
 
   function handleChange(event) {

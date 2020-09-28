@@ -12,7 +12,6 @@ import Switch from './components/elements/Switch';
 import Sidebar from './components/elements/Sidebar';
 import VideoPlayer from './components/elements/VideoPlayer';
 import RVButton from './components/elements/RVButton';
-import CodeButton from './components/elements/CodeButton';
 
 const App = () => (
   <UiProvider>
@@ -26,7 +25,6 @@ const App = () => (
             <StartButton />
             <ResetButton />
             <RVButton />
-            <CodeButton />
           </div>
         </div>
         <div className="layout-column" id="computer-column">
