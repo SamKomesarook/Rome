@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
+import { UiContext } from '../../state/UiContext';
 
 const Memory = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+  const [ui, setUi] = useContext(UiContext);
 
+  //const className = ui.ctxIsMemoryActive ? '' : 'hidden';
+  const className = ui.ctxIsTextAreaActive ? '' : 'hidden';
+  
   const getMemory = (id) => {
     const selectedMemoryCell = id === display.selected ? ' selected-memory-cell' : '';
     return (

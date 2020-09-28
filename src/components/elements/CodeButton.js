@@ -6,22 +6,22 @@ const RVButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [ui, setUi] = useContext(UiContext);
   //let flag = true;
-  const handleRunView = () => {
+  const handleCodeView = () => {
     setUi((prevUI) => ({
       ...prevUI,
-      ctxIsTextAreaActive: false,
-      ctxIsMemoryActive: false,
+      ctxIsTextAreaActive: true,
+      ctxIsMemoryActive: true,
     }));
   };
 
   return (
     <button
-      id="run-view-button"
+      id="code-view-button"
       type="button"
-      className="std-btn run-view-btn"
-      onClick={handleRunView}
+      className="std-btn code-view-btn"
+      onClick={handleCodeView}
     >
-      Run View
+      Code Mode
     </button>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
-import { RVContext } from '../../state/RVContext';
+import { UiContext } from '../../state/UiContext';
 
 const TextArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
-  const [on, setOn] = useContext(RVContext);
+  const [ui, setUi] = useContext(UiContext);
 
-  const className = on.show ? '' : 'hidden';
+  const className = ui.ctxIsTextAreaActive ? '' : 'hidden';
 
   function handleChange(event) {
     event.preventDefault();

@@ -6,6 +6,8 @@ export const UiProvider = (props) => {
   const [ui, setUi] = useState({
     ctxIsVideoPlayerActive: false,
     ctxYoutubeContentID: '',
+    ctxIsTextAreaActive: true,
+    ctxIsMemoryActive: true,
   });
 
   return (
