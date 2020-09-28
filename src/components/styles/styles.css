@@ -124,6 +124,16 @@ button:disabled {
     filter: brightness(125%);
 }
 
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
 /** VIDEO PLAYER **/
 
 #video-player {
@@ -278,9 +288,9 @@ input:checked + .slider:before {
 }
 
 .memory-cell {
-    flex: 1 1 25%;
     background-color: var(--bg-secondary);
     padding: 0.5rem;
+    display: grid;
 }
 
 .memory-cell:first-child {
@@ -301,6 +311,27 @@ input:checked + .slider:before {
 
 .selected-memory-cell {
     background: var(--dark-grey);
+}
+
+.memory-1-bytes-cell, .memory-2-bytes-cell, .memory-4-bytes-cell, .memory-6-bytes-cell {
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+}
+
+.memory-1-bytes-cell {
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.memory-2-bytes-cell {
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.memory-4-bytes-cell {
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.memory-6-bytes-cell {
+    grid-template-rows: repeat(6, 1fr);
 }
 
 /** PERIPHERAL **/
