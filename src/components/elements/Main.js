@@ -49,12 +49,12 @@ const Main = () => {
 
     for (let i = display.memorySize; i < combinedMemorySize; i++) {
       newMemory.push({
-        key: i, // Unique key
-        type: '', // Type 'integer, long, float, string or character'
-        size: '', // The available space taken based on the data type
-        content: '', // defined content
-        special: '', //
-        name: '', //
+        key: i,
+        type: '',
+        size: '',
+        content: '',
+        special: 'usb',
+        name: '',
       });
     }
 
