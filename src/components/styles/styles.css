@@ -133,6 +133,16 @@ button:disabled {
     filter: brightness(125%);
 }
 
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
 /** VIDEO PLAYER **/
 
 #video-player {
@@ -287,9 +297,9 @@ input:checked + .slider:before {
 }
 
 .memory-cell {
-    flex: 1 1 25%;
     background-color: var(--bg-secondary);
     padding: 0.5rem;
+    display: grid;
 }
 
 .memory-cell:first-child {
@@ -310,6 +320,27 @@ input:checked + .slider:before {
 
 .selected-memory-cell {
     background: var(--dark-grey);
+}
+
+.memory-1-bytes-cell, .memory-2-bytes-cell, .memory-4-bytes-cell, .memory-6-bytes-cell {
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+}
+
+.memory-1-bytes-cell {
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.memory-2-bytes-cell {
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.memory-4-bytes-cell {
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.memory-6-bytes-cell {
+    grid-template-rows: repeat(6, 1fr);
 }
 
 /** PERIPHERAL **/
@@ -336,6 +367,9 @@ input:checked + .slider:before {
     border: 3px solid var(--border-line);
     border-radius: 10px;
     overflow: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 3 1 auto;
 }
 
 #input-bar {
@@ -343,6 +377,9 @@ input:checked + .slider:before {
     height: 3rem;
     border-radius: 10px;
     color: white;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 #input-bar:disabled {
@@ -362,6 +399,7 @@ aside {
 }
 
 .sidebar-item-list {
+    height: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -384,6 +422,10 @@ aside {
     color: var(--bg-contrast-secondary);
     background-color: var(--bg-secondary);
     border-right: 0.1rem solid transparent;
+}
+
+.sidebar-item:last-child {
+    margin-top: auto;
 }
 
 .sidebar-item-text {
@@ -451,7 +493,7 @@ aside:hover .sidebar-item-text {
     font-weight: normal;
 }
 
-/** content content for sidebar **/
+/** Dropdown content for sidebar **/
 .dropdown-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
@@ -471,6 +513,7 @@ aside:hover .sidebar-item-text {
     margin: 15px;
     text-align: left;
     color: black;
+    font-family: 'Courier Prime';
 }
 
 .argument-desc{
@@ -503,7 +546,49 @@ aside:hover .sidebar-item-text {
     font-family: 'Open Sans';
     padding: 8px;
     text-align: center;
+    white-space: pre-line;
+}
 
+/** ABOUT TAB **/
+
+#about {
+    width: 50rem;
+}
+
+#about-content {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    color: var(--bg-contrast-primary);
+    white-space: pre-line;
+}
+
+#about-title {
+    display: flex;
+    font-style: oblique;
+    font-size: 1.75rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center ;
+}
+
+#about-title > svg {
+    height: 1.5rem;
+}
+
+.about-heading {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 4rem;
+}
+
+.about-paragraph {
+    font-family: "Lucida Console", Monaco, monospace;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 /** GENERAL (Overrides above css rules) **/

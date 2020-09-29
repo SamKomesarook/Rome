@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const DisplayContext = React.createContext();
 
@@ -24,7 +24,8 @@ DisplayContext.DEFAULT = () => {
     for (let i = 0; i < localMemorySize; i++) {
       memoryArray.push({
         key: i, // Unique key
-        type: '', // Type 'numbers or letters'
+        type: '', // Type 'integer, long, float, string or character'
+        size: '', // The available space taken based on the data type
         content: '', // defined content
         special: '', //
         name: '', //

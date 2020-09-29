@@ -5,15 +5,15 @@ const { Key } = require('selenium-webdriver');
 
 const testMoveNext = 'test the sample code: start\nmove(next)\nmove(last)\nend';
 const testMoveLast = 'test the sample code: start\nmove(next)\nmove(last)\nend';
-const testSetLetters = 'test the sample code: start\nset(letters)\nwrite("hello!")\nend';
-const testSetNumbers = 'test the sample code: start\nset(numbers)\nwrite(4)\nend';
-const testFree = 'test the sample code: start\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend';
-const testLoop = 'test the sample code: start\nloop(3){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
-const testMemoryAccess = 'test the sample code: start\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
-const testNameAndMemoryAccess = 'test the sample code: start\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}\nend';
-const testIfIsEqual = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend';
-const testIfNotLess = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend';
-const testIfIsGreater = 'test the sample code: start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend';
+const testSetString = 'test the sample code: start\nset(string)\nwrite("hello!")\nend';
+const testSetInteger = 'test the sample code: start\nset(integer)\nwrite(4)\nend';
+const testFree = 'test the sample code: start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend';
+const testLoop = 'test the sample code: start\nloop(3){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
+const testMemoryAccess = 'test the sample code: start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
+const testNameAndMemoryAccess = 'test the sample code: start\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
+const testIfIsEqual = 'test the sample code: start\nset(integer)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(string)\nwrite("is equal to 3!")\n}\nend';
+const testIfNotLess = 'test the sample code: start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("not < 3")\n}\nend';
+const testIfIsGreater = 'test the sample code: start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("> 3")\n}\nend';
 const testKeyboardRead = 'test the sample code: start\nimport(IO)\nkeyboardRead\nend';
 const testConsoleWrite = 'test the sample code: start\nimport(IO)\nconsoleWrite("hello!")\nend';
 
@@ -41,7 +41,7 @@ describe('test example programs', () => {
   // move next write 1
   test(testMoveNext, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nmove(next)\nset(numbers)\nwrite(1)\nend');
+    await codingArea.sendKeys('start\nmove(next)\nset(integer)\nwrite(1)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -63,7 +63,7 @@ describe('test example programs', () => {
   // move next than move last and write 1
   test(testMoveLast, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nmove(next)\nmove(last)\nset(numbers)\nwrite(1)\nend');
+    await codingArea.sendKeys('start\nmove(next)\nmove(last)\nset(integer)\nwrite(1)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -82,15 +82,15 @@ describe('test example programs', () => {
     expect(memoryCell1Res).toEqual('');
   }, 40000);
 
-  // test set letters and than write hello!:
+  // test set string and than write hello!:
   // start
-  // set(letters)
+  // set(string)
   // write("hello!")
   // end
 
-  test(testSetLetters, async () => {
+  test(testSetString, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite("hello!")\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite("hello!")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -102,18 +102,18 @@ describe('test example programs', () => {
     const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('"hello!"');
+    expect(memoryCell0Res).toEqual('hello!');
   }, 40000);
 
-  // test set numbers with 4
+  // test set integer with 4
   // start
-  //   set(numbers)
+  //   set(integer)
   //   write(4)
   //   end
 
-  test(testSetNumbers, async () => {
+  test(testSetInteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(numbers)\nwrite(4)\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(4)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -130,7 +130,7 @@ describe('test example programs', () => {
 
   // free
   // start
-  // set(letters)
+  // set(string)
   // write("hello")
   // free
   // write("world!")
@@ -138,7 +138,7 @@ describe('test example programs', () => {
 
   test(testFree, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -150,21 +150,21 @@ describe('test example programs', () => {
     const memoryCell0Res = await memoryCell0.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('"world!"');
+    expect(memoryCell0Res).toEqual('world!');
   }, 40000);
 
   // loop
   // start
   // loop(3){
-  // set(letters)
-  // write("content")
+  // set(string)
+  // write("data")
   // move(next)
   // }
   // end
 
   test(testLoop, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nloop(3){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
+    await codingArea.sendKeys('start\nloop(3){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -185,27 +185,27 @@ describe('test example programs', () => {
     const memoryCell3Res = await memoryCell3.getText();
 
     expect(outputAreaRes).toEqual('');
-    expect(memoryCell0Res).toEqual('"content"');
-    expect(memoryCell1Res).toEqual('"content"');
-    expect(memoryCell2Res).toEqual('"content"');
+    expect(memoryCell0Res).toEqual('data');
+    expect(memoryCell1Res).toEqual('data');
+    expect(memoryCell2Res).toEqual('data');
     expect(memoryCell3Res).toEqual('');
   }, 40000);
 
   // access memory:
   //   start
-  //   set(numbers)
+  //   set(integer)
   //   write(3)
   //   move(next)
   //   loop(memory(1)){
-  //   set(letters)
-  //   write("content")
+  //   set(string)
+  //   write("data")
   //   move(next)
   //   }
   //   end
 
   test(testLoop, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -230,28 +230,28 @@ describe('test example programs', () => {
 
     expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
-    expect(memoryCell1Res).toEqual('"content"');
-    expect(memoryCell2Res).toEqual('"content"');
-    expect(memoryCell3Res).toEqual('"content"');
+    expect(memoryCell1Res).toEqual('data');
+    expect(memoryCell2Res).toEqual('data');
+    expect(memoryCell3Res).toEqual('data');
     expect(memoryCell4Res).toEqual('');
   }, 40000);
 
   // name and memory access:
   // start
-  // set(numbers)
+  // set(integer)
   // write(3)
   // name("first")
   // move(next)
   // loop(memory("first")){
-  // set(letters)
-  // write("content")
+  // set(string)
+  // write("data")
   // move(next)
   // }
   // end
 
   test(testNameAndMemoryAccess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(letters)\nwrite("content")\nmove(next)\n}\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -276,9 +276,9 @@ describe('test example programs', () => {
 
     expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
-    expect(memoryCell1Res).toEqual('"content"');
-    expect(memoryCell2Res).toEqual('"content"');
-    expect(memoryCell3Res).toEqual('"content"');
+    expect(memoryCell1Res).toEqual('data');
+    expect(memoryCell2Res).toEqual('data');
+    expect(memoryCell3Res).toEqual('data');
     expect(memoryCell4Res).toEqual('');
   }, 40000);
 
@@ -286,18 +286,18 @@ describe('test example programs', () => {
   // So i comment this test
   // if is equal:
   //   start
-  //   set(numbers)
+  //   set(integer)
   //   write(3)
   //   if(is equal 3){
   //   move(next)
-  //   set(letters)
+  //   set(string)
   //   write("is equal to 3!")
   //   }
   //   end
 
   //   test(testIfIsEqual, async () => {
   //     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-  //     await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(letters)\nwrite("is equal to 3!")\n}\nend');
+  //     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(string)\nwrite("is equal to 3!")\n}\nend');
 
   //     const startBtn = await TestConfig.getElementById(driver, 'start-button');
   //     await startBtn.click();
@@ -318,18 +318,18 @@ describe('test example programs', () => {
 
   // if not less:
   //   start
-  //   set(numbers)
+  //   set(integer)
   //   write(3)
   //   if(not less 3){
   //   move(next)
-  //   set(letters)
+  //   set(string)
   //   write("is not less than 3!")
   //   }
   //   end
 
   test(testIfNotLess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(not less 3){\nmove(next)\nset(letters)\nwrite("is not less than 3!")\n}\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("not <3")\n}\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -345,23 +345,23 @@ describe('test example programs', () => {
 
     expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
-    expect(memoryCell1Res).toEqual('"is not less than 3!"');
+    expect(memoryCell1Res).toEqual('not <3');
   }, 40000);
 
   // if is greater:
   //   start
-  //   set(numbers)
+  //   set(integer)
   //   write(3)
   //   if(is greater 3){
   //   move(next)
-  //   set(letters)
+  //   set(string)
   //   write("is greater than 3!")
   //   }
   //   end
 
   test(testIfIsGreater, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(numbers)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(letters)\nwrite("is greater than 3!")\n}\nend');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("> 3")\n}\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
