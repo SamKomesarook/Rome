@@ -134,6 +134,11 @@ button:disabled {
                                     supported by Chrome and Opera */
 }
 
+.drag-hovered {
+    background-color: var(--bg-primary);
+    filter: brightness(125%);
+}
+
 /** VIDEO PLAYER **/
 
 #video-player {
@@ -176,6 +181,26 @@ button:disabled {
     color: white;
     font-size: 1rem;
     resize: none;
+}
+
+/** TOOLBAR **/
+
+#toolbar {
+    background-color: var(--bg-secondary);
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.toolbar-item {
+
+}
+
+.toolbar-item > svg {
+    height: 2rem;
 }
 
 /** SWITCH **/
