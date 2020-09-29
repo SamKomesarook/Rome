@@ -64,6 +64,9 @@ const Main = () => {
       externalMemorySize: EXTERNAL_MEMORY_SIZE,
       memory: prevDisplay.memory.concat(newMemory),
     }));
+
+    setElementDragEnterClass('');
+    dragEventTargetRef.current = null;
   };
 
   return (
