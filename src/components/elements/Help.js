@@ -31,7 +31,7 @@ const Help = ({ isActive }) => {
       example: ['start\n#Only greets the user if his or her name is '],
     }, {
       keyword: 'write',
-      content: 'Writes arguments to the selected memory cell.\nArguments must be either numbers, or a string enclosed by parenthesis.\n\nExample:\nstart\nset(letters)\nwrite("write something here")\nend',
+      content: 'Writes arguments to the selected memory cell.\nArguments must be either numbers, or a string enclosed by parenthesis.',
       example: ['hello', 'goodbye'],
       argument: [{
         name: 'contents',
@@ -40,7 +40,7 @@ const Help = ({ isActive }) => {
     }, {
       keyword: 'start',
       content: 'Indicates the start of the program.\nAll programs must begin with this command.',
-      example: ['hello', 'goodbye'],
+      example: ['start\n#The simplest possible program!\nend'],
     }, {
       keyword: 'end',
       content: 'Indicates the end of the program.\nAll programs must end with this command.\n\nExample:\nstart\n//do something\nend',
