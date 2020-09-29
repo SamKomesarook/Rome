@@ -6,6 +6,8 @@
         "antlr4": "^4.8.0",
         "bcryptjs": "^2.4.3",
         "css-loader": "^4.2.1",
+        "csv": "^5.3.2",
+        "csv-writer": "^1.6.0",
         "file-loader": "^6.0.0",
         "jest": "^24.9.0",
         "js-cookie": "^2.2.1",
@@ -16,7 +18,8 @@
         "react-typed": "^1.2.0",
         "selenium-webdriver": "^4.0.0-alpha.7",
         "style-loader": "^1.2.1",
-        "typescript": "^3.9.2"
+        "typescript": "^3.9.2",
+        "ya-csv": "^1.0.0"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -27,7 +30,6 @@
         "dev": "webpack-dev-server --mode=development",
         "prod": "webpack --mode=production",
         "setPassword": "node src/hash/setPassword",
-
         "serve": "http-server ./dist"
     },
     "eslintConfig": {

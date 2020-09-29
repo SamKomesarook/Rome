@@ -48,8 +48,8 @@ input[type=text]:focus, textarea:focus {
     background-color: var(--bg-primary);
     border-radius: 5px;
     /* padding: 0.5rem 1rem; */
-    padding: 1rem 1rem;
-    height: 3rem;
+    padding: 0.5rem 0.5rem;
+    height: 100%;
     width: 100%;
 }
 
@@ -446,6 +446,41 @@ aside:hover .sidebar-item-text {
     color: var(--bg-contrast-primary);
     font-weight: normal;
 	white-space: pre-line;
+}
+
+
+/** FEEDBACK TAB **/
+#input-control {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-line-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#feedbackContent {
+    height: 25rem;
+    width: 120%;
+    background-color: transparent;
+    color: var(--bg-contrast-primary);
+    border: none;
+    cursor: pointer;
+	resize: none;
+}
+
+#feedbackSubmit {
+    align-items: center;
+}
+
+#feedbackButton {
+    background-color: var(--bg-primary);
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer
 }
 
 /** GENERAL (Overrides above css rules) **/
