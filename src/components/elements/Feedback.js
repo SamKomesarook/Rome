@@ -10,8 +10,55 @@ const Feedback = ({ isActive }) => {
 
   const isActiveClass = isActive ? '' : ' hidden';
   
+ /* email sending method source code
+  const nodemailer = require('nodemailer');
+
+  const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+         user: 'sherryysj@gmail.com',
+         pass: ''
+      }
+    });
+
+   const mailOptions = {
+      from: 'sherryysj@gmail.com',
+      to: 'sherryysj@gmail.com',
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!'
+   };
+  
   const submitFeedback = (e) => {
 	  console.log("hello");
+	  transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+	   
+  }
+  */
+  
+  /* sqlite database source code
+  // Can't resolve 'aws-sdk' error with sqlite3
+  const submitFeedback = (e) => {
+	  console.log("hello");
+	  const sqlite3 = require('sqlite3').verbose();
+      let db = new sqlite3.Database(':memory:', (err) => {
+      if (err) {
+          return console.error(err.message);
+      }
+      console.log('Connected to the in-memory SQlite database.');
+      });
+  }
+  */
+  
+  /* csv method source code
+  const submitFeedback = (e) => {
+	  console.log("hello");
+
       const createCsvWriter = require('csv-writer').createArrayCsvWriter;
       const csvWriter = createCsvWriter({
           header: ['NAME', 'LANGUAGE'],
@@ -23,15 +70,19 @@ const Feedback = ({ isActive }) => {
           ['Mary', 'English']
         ];
 		
-/*bug here
+      //bug here
       csvWriter.writeRecords(records)// returns a promise
           .then(() => {
              console.log('...Done');
        });
-*/  
+      
   }
+  */
   
-  
+  const submitFeedback = (e) => {
+	  console.log("placeholder");
+  }
+ 
   return (
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
 	  <form id="input-control">
