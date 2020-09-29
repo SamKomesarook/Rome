@@ -74,6 +74,8 @@ const ResetButton = () => {
       ...DisplayContext.DEFAULT(),
       machine: prevDisplay.machine,
       text: prevDisplay.text,
+      memorySize: prevDisplay.memorySize,
+      externalMemorySize: prevDisplay.externalMemorySize,
     }));
   };
 

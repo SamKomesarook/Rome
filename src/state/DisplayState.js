@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export const DisplayContext = React.createContext();
 
@@ -15,9 +15,11 @@ export const DisplayProvider = (props) => {
 // The default value of Display Context
 DisplayContext.DEFAULT = () => {
   const localMemorySize = 12;
-  const localSpecialKeys = [
-    { key: localMemorySize - 1, specialContent: 'usb' },
-  ];
+
+  // TODO - Nick: Check with Sam before creating a pr to decide if we should keep the setup for future usage
+  // const localSpecialKeys = [
+  //   { key: localMemorySize - 1, specialContent: 'usb' },
+  // ];
 
   const createMemoryArray = () => {
     const memoryArray = [];
@@ -31,10 +33,12 @@ DisplayContext.DEFAULT = () => {
         name: '', //
       });
     }
-    // Set special content for special memory cell
-    for (const specialKey of localSpecialKeys) {
-      memoryArray[specialKey.key].special = specialKey.specialContent;
-    }
+    
+    // TODO - Nick: Check with Sam before creating a pr to decide if we should keep the setup for future usage
+    // // Set special content for special memory cell
+    // for (const specialKey of localSpecialKeys) {
+    //   memoryArray[specialKey.key].special = specialKey.specialContent;
+    // }
     return memoryArray;
   };
 
@@ -60,7 +64,8 @@ DisplayContext.DEFAULT = () => {
       underline: '', // Style: underline font
     },
     memorySize: localMemorySize,
-    specialKeys: localSpecialKeys,
+    externalMemorySize: 0,
+    // specialKeys: localSpecialKeys, // TODO - Nick: Check with Sam before creating a pr to decide if we should keep the setup for future usage
     memory: createMemoryArray(),
   };
 

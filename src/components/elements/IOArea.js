@@ -12,14 +12,15 @@ const InputArea = () => {
       const staticDisplay = DisplayContext.createCustomClone(display);
       const newMem = staticDisplay.memory;
 
+      // TODO - Nick: Check with Sam before creating a pr to decide if we should keep the setup for future usage
       // Get the keys of special memory cells
-      const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
-      if (staticDisplay.selected === usbMemoryKey) {
-        USBToggle();
-      } else {
+      // const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+      // if (staticDisplay.selected === usbMemoryKey) {
+      //   USBToggle();
+      // } else {
         newMem[staticDisplay.selected].content = staticDisplay.input;
         newMem[staticDisplay.selected].type = 'string';
-      }
+      // }
       staticDisplay.memory = newMem;
       staticDisplay.reading = false;
       processInstrs(staticDisplay);

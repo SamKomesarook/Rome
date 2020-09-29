@@ -41,7 +41,7 @@ const MemoryCell = ({ id }) => {
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
     } else {
-      setByteCellClass(` memory-${memoryCell.size}-bytes-cell`);
+      setByteCellClass(`memory-${memoryCell.size}-bytes-cell`);
     }
   };
 
@@ -61,7 +61,7 @@ const MemoryCell = ({ id }) => {
   };
 
   return (
-    <div id={`memory-${id}`} className={`memory-cell ${selectedMemoryCell}${byteCellClass}`} key={memoryCell.key} onDoubleClick={handleClickCell}>
+    <div id={`memory-${id}`} className={`memory-cell ${selectedMemoryCell} ${byteCellClass}`} key={memoryCell.key} onDoubleClick={handleClickCell}>
       {shouldBinaryDisplayed ? binaryContent : memoryCell.content}
     </div>
   );

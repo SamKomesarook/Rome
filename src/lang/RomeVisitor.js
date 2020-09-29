@@ -92,8 +92,10 @@ class RVisitor extends RomeVisitor {
 
   visitMove(ctx) {
     if (this.visitChildren(ctx)[2] === 'next') {
-      const maxUsableMemoryKey = this.staticDisplay.memorySize - this.staticDisplay.specialKeys.length - 1;
-      if (this.staticDisplay.selected === maxUsableMemoryKey) {
+      // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
+      // const maxUsableMemoryKey = this.staticDisplay.memorySize - this.staticDisplay.specialKeys.length - 1;
+      // if (this.staticDisplay.selected === maxUsableMemoryKey) {
+      if (this.staticDisplay.selected === this.staticDisplay.memorySize - 1) {
         this.errorReporter.generalError('No more memory');
         return;
       }
@@ -154,8 +156,9 @@ class RVisitor extends RomeVisitor {
     if (type === 'character' || type === 'string') {
       if (arg[0] === '"' && arg[arg.length - 1] === '"') {
         const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
-        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
+        // const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = this.staticDisplay.memorySize; // - numOfSpecialKeys;
         if ((type === 'character' && arg.length - 2 > 1)
         || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * 6 - pos * 6))) {
           this.errorReporter.generalError('Out of memory');
@@ -167,11 +170,12 @@ class RVisitor extends RomeVisitor {
       }
     }
 
+    // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
     // Get the keys of special memory cells
-    const usbMemoryKey = this.staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (this.staticDisplay.selected === usbMemoryKey) {
-      USBToggle();
-    } else {
+    // const usbMemoryKey = this.staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+    // if (this.staticDisplay.selected === usbMemoryKey) {
+    //   USBToggle();
+    // } else {
       switch (type) {
         case 'character':
           this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
@@ -190,7 +194,7 @@ class RVisitor extends RomeVisitor {
         default:
           this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
       }
-    }
+    // }
   }
 
   visitFree(ctx) {
