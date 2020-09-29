@@ -457,20 +457,17 @@ aside:hover .sidebar-item-text {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+	align-items: flex-end;
 }
 
 #feedbackContent {
-    height: 25rem;
-    width: 120%;
+    height: 30rem;
+    width: 168%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
     cursor: pointer;
 	resize: none;
-}
-
-#feedbackSubmit {
-    align-items: center;
 }
 
 #feedbackButton {
@@ -480,7 +477,12 @@ aside:hover .sidebar-item-text {
     padding: 10px 30px;
     text-decoration: none;
     margin: 4px 2px;
-    cursor: pointer
+    cursor: pointer;
+}
+
+#feedbackDirection{
+	flex-direction:column;
+    align-items: flex-start;
 }
 
 /** GENERAL (Overrides above css rules) **/

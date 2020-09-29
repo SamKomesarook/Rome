@@ -37,19 +37,19 @@ const Feedback = ({ isActive }) => {
 	  <form id="input-control">
 	    <div className="control-container">
           <span style={{color:"white"}}>Email:</span>
-          <input type="email" id="feedbackEmail" name="feedbackEmail" placeholder="input your email" className="control" />
+          <input type="email" id="feedbackEmail" name="feedbackEmail" placeholder="Please input your email" className="control" />
         </div>
-		<div className="control-container">
+		<div className="control-container" id="feedbackDirection">
 		  <div>
 		    <span style={{color:"white"}}>Feedback:</span>
           </div>
 		  <div>
-		    <textArea type="text" form="input-control" id="feedbackContent" name="feedbackContent" placeholder="input your feedback for us" />
+		    <textArea type="text" form="input-control" id="feedbackContent" name="feedbackContent" placeholder="Please input your feedback for us" />
           </div>
 		</div>
-		<div id="feedbackSubmit">
+		<div>
 		  <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback("this.form")}/>
-        </div>  
+		</div>  
 	  </form> 
     </div>
   );
