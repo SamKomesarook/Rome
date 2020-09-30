@@ -155,7 +155,6 @@ aside:hover .sidebar-item-text {
 
 .style-content{
     color: white;
-    font-family: 'Open Sans';
     padding: 8px;
     text-align: center;
     white-space: pre-line;
@@ -177,9 +176,7 @@ aside:hover .sidebar-item-text {
 
 #about-title {
     display: flex;
-    font-style: oblique;
     font-size: 1.75rem;
-    font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
     justify-content: center;
     align-items: center ;
@@ -190,7 +187,6 @@ aside:hover .sidebar-item-text {
 }
 
 .about-heading {
-    font-family: "Lucida Console", Monaco, monospace;
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
@@ -198,7 +194,6 @@ aside:hover .sidebar-item-text {
 }
 
 .about-paragraph {
-    font-family: "Lucida Console", Monaco, monospace;
     text-align: center;
     margin-top: 1rem;
 }

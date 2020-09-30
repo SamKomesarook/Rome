@@ -5,7 +5,6 @@ import Memory from '../computer/Memory';
 import { StartButton, ResetButton } from '../elements/Button';
 import { InputArea, OutputArea } from '../computer/IOArea';
 import { Processor } from '../computer/Peripherals';
-import Switch from '../elements/Switch';
 import VideoPlayer from '../elements/VideoPlayer';
 import '../computer/computer.css';
 import '../elements/styles.css';
@@ -19,7 +18,6 @@ const Main = () => {
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
         <CodingArea />
-        <Switch />
         <div className="hflex">
           <StartButton />
           <ResetButton />
