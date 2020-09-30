@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import TextArea from '../elements/TextArea';
+import CodingArea from '../elements/CodingArea';
 import { UiContext } from '../../state/UiContext';
 import Memory from '../computer/Memory';
 import { StartButton, ResetButton } from '../elements/Button';
@@ -18,7 +18,7 @@ const Main = () => {
     <div className="main">
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
-        <TextArea />
+        <CodingArea />
         <Switch />
         <div className="hflex">
           <StartButton />
