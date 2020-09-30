@@ -38,6 +38,11 @@ LEFT: 'last';
 
 LOOP: 'loop';
 
+WHILE: 'while';
+
+ADD: 'add';
+MINUS: 'minus';
+
 STYLE: 'style';
 PAINT: 'paint';
 TEXT_COLOR: 'text_color';
@@ -64,11 +69,6 @@ NUMBER: ('0' .. '9')+;
 STRLIT: '"' ~ ["\r\n]* '"';
 
 ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
-
-WHILE: 'while';
-
-ADD: 'add';
-MINUS: 'minus';
 
 // Rules
 

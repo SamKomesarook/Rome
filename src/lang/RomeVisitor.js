@@ -73,7 +73,7 @@ class RVisitor extends RomeVisitor {
 	
 	// Assign left value based on content type
     if (memoryCell.type === 'numbers') {
-      leftValue = memoryCell.content;
+      leftValue = parseInt(memoryCell.content);
     } else {
       // Strip off the double quotes and convert string to int
       leftValue = parseInt(memoryCell.content.slice(1, -1));
@@ -82,8 +82,9 @@ class RVisitor extends RomeVisitor {
         return;
       }
 	}
-    
+
 	// run loop
+	// when loop will run out of bounary, error will show and expressions inside loop wont run at all
 	if (condInput[0] === 'is') {
       if (compareKeyword === 'less'){
 	     while(leftValue < rightValue){
@@ -95,8 +96,8 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime == upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		 }
@@ -110,13 +111,12 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime == upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		 }
 	  } else if (compareKeyword === 'equal') {
-		  // looks like a if loop, only can run one time
 		  while(leftValue == rightValue){
 			this.display.commands.unshift(ctx.expressions());
             this.display.commands = this.display.commands.flat(Infinity);
@@ -126,8 +126,8 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime == upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		  }
@@ -143,8 +143,8 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime ===upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		 }
@@ -158,13 +158,12 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime == upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		 }
 	  } else if (compareKeyword === 'equal') {
-		  // looks like a if loop, only can run one time
 		  while(leftValue != rightValue){
 			this.display.commands.unshift(ctx.expressions());
             this.display.commands = this.display.commands.flat(Infinity);
@@ -174,8 +173,8 @@ class RVisitor extends RomeVisitor {
 				leftValue -= 1;
 			}
 			runningTime += 1;
-			if (runningTime == upperBound){
-				this.errorReporter.generalError('loop boundary exceeded');
+			if (runningTime > upperBound){
+				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
 				return;
 			}
 		  }
