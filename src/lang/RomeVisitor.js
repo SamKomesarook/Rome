@@ -1,5 +1,5 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { USBToggle } from '../components/elements/Peripherals';
+import { USBToggle } from '../components/computer/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
 
 // TODO some updates use setDisplay. Should we?
