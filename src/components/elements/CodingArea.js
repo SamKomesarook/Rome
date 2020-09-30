@@ -16,7 +16,7 @@ const CodingArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper">
+    <div id="coding-area-wrapper" className="code">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
