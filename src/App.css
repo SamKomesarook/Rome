@@ -24,10 +24,14 @@
     height: 100%;
 }
 
-#computer-column{
+#computer-column {
     border: solid 2px black;
     border-radius: 10px;
     padding: 10px;
+}
+
+#toolbar-column {
+    width: 5rem;
 }
 
 .hflex {

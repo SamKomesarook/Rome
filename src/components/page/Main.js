@@ -75,7 +75,6 @@ const Main = () => {
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
         <CodingArea />
-        <Toolbar />
         <div className="hflex">
           <StartButton />
           <ResetButton />
@@ -97,6 +96,7 @@ const Main = () => {
         <OutputArea />
         <InputArea />
       </div>
+      <Toolbar className="layout-column" />
     </div>
   );
 };
