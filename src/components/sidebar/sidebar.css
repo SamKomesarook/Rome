@@ -179,7 +179,14 @@ aside:hover .sidebar-item-text {
     font-size: 1.75rem;
     font-weight: bold;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
+    margin-top: 40px;
+}
+
+#image-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 #about-title > svg {
@@ -189,7 +196,7 @@ aside:hover .sidebar-item-text {
 .about-heading {
     text-align: center;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: italic;
     margin-top: 4rem;
 }
 
