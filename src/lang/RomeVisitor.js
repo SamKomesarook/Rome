@@ -50,28 +50,28 @@ class RVisitor extends RomeVisitor {
     }
     for (let i = 0; i < upperBound; i++) {
       this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity); // TODO is the assignment really necessary?
+      this.display.commands = this.display.commands.flat(Infinity);
     }
   }
-  
+
   visitWhile(ctx) {
-	const condInput = this.visitChildren(ctx.whileConditional()); 
-	const memoryCell = this.display.memory[this.display.selected];
+    const condInput = this.visitChildren(ctx.whileConditional());
+    const memoryCell = this.display.memory[this.display.selected];
     // Ensure there are expressions inside the while loop
     if (ctx.expressions().length < 1) {
       return;
     }
-	
-	//set loop upperBound, while running out of it show error
-	const upperBound = 12;	
-	let runningTime = 0;
-	
-	let leftValue;
+
+    // set loop upperBound, while running out of it show error
+    const upperBound = 12;
+    let runningTime = 0;
+
+    let leftValue;
     const rightValue = condInput[4][0];
     const compareKeyword = condInput[2];
-	const calculation = condInput[6];
-	
-	// Assign left value based on content type
+    const calculation = condInput[6];
+
+    // Assign left value based on content type
     if (memoryCell.type === 'numbers') {
       leftValue = parseInt(memoryCell.content);
     } else {
@@ -81,105 +81,105 @@ class RVisitor extends RomeVisitor {
         this.errorReporter.generalError('Wrong conditional argument type');
         return;
       }
-	}
+    }
 
-	// run loop
-	// when loop will run out of bounary, error will show and expressions inside loop wont run at all
-	if (condInput[0] === 'is') {
-      if (compareKeyword === 'less'){
-	     while(leftValue < rightValue){
-		    this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		 }
-      } else if (compareKeyword === 'greater'){
-	     while(leftValue > rightValue){
-			this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		 }
-	  } else if (compareKeyword === 'equal') {
-		  while(leftValue == rightValue){
-			this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		  }
-	  }
-	} else if (condInput[0] === 'not'){
-		if (compareKeyword === 'less'){
-	     while(leftValue >= rightValue){
-		    this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		 }
-      } else if (compareKeyword === 'greater'){
-	     while(leftValue <= rightValue){
-			this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		 }
-	  } else if (compareKeyword === 'equal') {
-		  while(leftValue != rightValue){
-			this.display.commands.unshift(ctx.expressions());
-            this.display.commands = this.display.commands.flat(Infinity);
-			if (calculation === 'add'){
-			    leftValue += 1;
-			} else {
-				leftValue -= 1;
-			}
-			runningTime += 1;
-			if (runningTime > upperBound){
-				this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-				return;
-			}
-		  }
-	   }
-	}
+    // run loop
+    // when loop run out of bounary, error will show and expressions inside loop wont run at all
+    if (condInput[0] === 'is') {
+      if (compareKeyword === 'less') {
+        while (leftValue < rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      } else if (compareKeyword === 'greater') {
+        while (leftValue > rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      } else if (compareKeyword === 'equal') {
+        while (leftValue == rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      }
+    } else if (condInput[0] === 'not') {
+      if (compareKeyword === 'less') {
+        while (leftValue >= rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      } else if (compareKeyword === 'greater') {
+        while (leftValue <= rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      } else if (compareKeyword === 'equal') {
+        while (leftValue != rightValue) {
+          this.display.commands.unshift(ctx.expressions());
+          this.display.commands = this.display.commands.flat(Infinity);
+          if (calculation === 'add') {
+            leftValue += 1;
+          } else {
+            leftValue -= 1;
+          }
+          runningTime += 1;
+          if (runningTime > upperBound) {
+            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
+            return;
+          }
+        }
+      }
+    }
   }
 
   visitMem(ctx) {
