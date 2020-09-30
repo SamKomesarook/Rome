@@ -8,7 +8,7 @@ import { Processor } from '../computer/Peripherals';
 import Switch from '../elements/Switch';
 import VideoPlayer from '../elements/VideoPlayer';
 import '../computer/computer.css';
-import '../elements/style.css';
+import '../elements/styles.css';
 
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
