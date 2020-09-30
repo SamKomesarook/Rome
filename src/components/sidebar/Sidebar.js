@@ -6,6 +6,7 @@ import Challenge from './Challenge';
 import SidebarButton from './SidebarButton';
 import HtmlElementUtil from '../../utils/HtmlElementUtil';
 import { UiContext } from '../../state/UiContext';
+import './sidebar.css';
 
 const Sidebar = () => {
   const [activeSidebarItem, setActiveSidebarItem] = useState('');

@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import TextArea from './TextArea';
+import CodingArea from '../elements/CodingArea';
 import { UiContext } from '../../state/UiContext';
-import Memory from './Memory';
-import { StartButton, ResetButton } from './Button';
-import { InputArea, OutputArea } from './IOArea';
-import { Processor } from './Peripherals';
-import Switch from './Switch';
-import VideoPlayer from './VideoPlayer';
+import Memory from '../computer/Memory';
+import { StartButton, ResetButton } from '../elements/Button';
+import { InputArea, OutputArea } from '../computer/IOArea';
+import { Processor } from '../computer/Peripherals';
+import Switch from '../elements/Switch';
+import VideoPlayer from '../elements/VideoPlayer';
+import '../computer/computer.css';
+import '../elements/styles.css';
 
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
@@ -16,7 +18,7 @@ const Main = () => {
     <div className="main">
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
-        <TextArea />
+        <CodingArea />
         <Switch />
         <div className="hflex">
           <StartButton />

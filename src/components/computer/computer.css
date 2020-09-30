@@ -1,0 +1,104 @@
+/** MEMORY **/
+
+.memory-section {
+    height: 50vh;
+    width: 100%;
+    background-color: var(--border-line);
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    border: 3px solid var(--border-line);
+    border-radius: 10px;
+}
+
+.memory-cell {
+    background-color: var(--bg-secondary);
+    padding: 0.5rem;
+    display: grid;
+}
+
+.memory-cell:first-child {
+    border-top-left-radius: 8px;
+}
+
+.memory-cell:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+.memory-cell:nth-child(4) {
+    border-top-right-radius: 8px;
+}
+
+.memory-cell:nth-child(9) {
+    border-bottom-left-radius: 8px;
+}
+
+.selected-memory-cell {
+    background: var(--dark-grey);
+}
+
+.memory-1-bytes-cell, .memory-2-bytes-cell, .memory-4-bytes-cell, .memory-6-bytes-cell {
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+}
+
+.memory-1-bytes-cell {
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.memory-2-bytes-cell {
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.memory-4-bytes-cell {
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.memory-6-bytes-cell {
+    grid-template-rows: repeat(6, 1fr);
+}
+
+/** PERIPHERAL **/
+
+.peripheral-icon-grp {
+    align-self: center;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.periph-icon {
+    background-color:  #384047;
+    height: 4rem;
+}
+
+/** IO AREA **/
+
+#output-area {
+    background-color: var(--bg-secondary);
+    white-space: pre-line;
+    width: 100%;
+    height: 20%;
+    border: 3px solid var(--border-line);
+    border-radius: 10px;
+    overflow: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 3 1 auto;
+}
+
+#input-bar {
+    width: 100%;
+    height: 3rem;
+    border-radius: 10px;
+    color: white;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+#input-bar:disabled {
+    background-color: var(--bg-secondary);
+    border: 3px solid var(--border-line);
+}
