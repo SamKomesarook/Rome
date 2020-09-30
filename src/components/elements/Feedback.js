@@ -99,7 +99,7 @@ const Feedback = ({ isActive }) => {
           </div>
 		</div>
 		<div>
-		  <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback("this.form")}/>
+		  <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback}/>
 		</div>  
 	  </form> 
     </div>
