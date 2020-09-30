@@ -83,6 +83,15 @@ RomeListener.prototype.exitCond = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#whileCond.
+RomeListener.prototype.enterWhileCond = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#whileCond.
+RomeListener.prototype.exitWhileCond = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#stylingExpressions.
 RomeListener.prototype.enterStylingExpressions = function(ctx) {
 };

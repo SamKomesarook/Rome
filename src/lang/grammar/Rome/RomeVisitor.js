@@ -60,6 +60,12 @@ RomeVisitor.prototype.visitCond = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#whileCond.
+RomeVisitor.prototype.visitWhileCond = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#stylingExpressions.
 RomeVisitor.prototype.visitStylingExpressions = function(ctx) {
   return this.visitChildren(ctx);

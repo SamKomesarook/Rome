@@ -55,28 +55,23 @@ class RVisitor extends RomeVisitor {
   }
   
   visitWhile(ctx) {
+	const condInput = this.visitChildren(ctx.whileConditional()); 
+	const memoryCell = this.display.memory[this.display.selected];
     // Ensure there are expressions inside the while loop
     if (ctx.expressions().length < 1) {
       return;
     }
 	
-	while (whileLoopCondition(ctx)){
-	  this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity);
-	  //how to update ctx?
-	}
-    
-  }
-  
-  whileLoopCondition(ctx){
-    const condInput = this.visitChildren(ctx.conditional());
-    const memoryCell = this.display.memory[this.display.selected];
-
-    let leftValue;
+	//set loop upperBound, while running out of it show error
+	const upperBound = 12;	
+	let runningTime = 0;
+	
+	let leftValue;
     const rightValue = condInput[4][0];
     const compareKeyword = condInput[2];
-
-    // Assign left value based on content type
+	const calculation = condInput[6];
+	
+	// Assign left value based on content type
     if (memoryCell.type === 'numbers') {
       leftValue = memoryCell.content;
     } else {
@@ -86,27 +81,106 @@ class RVisitor extends RomeVisitor {
         this.errorReporter.generalError('Wrong conditional argument type');
         return;
       }
-    }
-
-    if (condInput[0] === 'is') {
-      if ((compareKeyword === 'less' && leftValue < rightValue)
-      || (compareKeyword === 'greater' && leftValue > rightValue)
-      // eslint-disable-next-line eqeqeq
-      || (compareKeyword === 'equal' && leftValue == rightValue)) {
-        return true;
-      } else {
-	    return false;
+	}
+    
+	// run loop
+	if (condInput[0] === 'is') {
+      if (compareKeyword === 'less'){
+	     while(leftValue < rightValue){
+		    this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime == upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		 }
+      } else if (compareKeyword === 'greater'){
+	     while(leftValue > rightValue){
+			this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime == upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		 }
+	  } else if (compareKeyword === 'equal') {
+		  // looks like a if loop, only can run one time
+		  while(leftValue == rightValue){
+			this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime == upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		  }
 	  }
-    } else if (condInput[0] === 'not') {
-      if ((compareKeyword === 'less' && leftValue >= rightValue)
-      || (compareKeyword === 'greater' && leftValue <= rightValue)
-      // eslint-disable-next-line eqeqeq
-      || (compareKeyword === 'equal' && leftValue != rightValue)) {
-        return true;
-      } else {
-	    return false;
-	  }
-    }
+	} else if (condInput[0] === 'not'){
+		if (compareKeyword === 'less'){
+	     while(leftValue >= rightValue){
+		    this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime ===upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		 }
+      } else if (compareKeyword === 'greater'){
+	     while(leftValue <= rightValue){
+			this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime == upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		 }
+	  } else if (compareKeyword === 'equal') {
+		  // looks like a if loop, only can run one time
+		  while(leftValue != rightValue){
+			this.display.commands.unshift(ctx.expressions());
+            this.display.commands = this.display.commands.flat(Infinity);
+			if (calculation === 'add'){
+			    leftValue += 1;
+			} else {
+				leftValue -= 1;
+			}
+			runningTime += 1;
+			if (runningTime == upperBound){
+				this.errorReporter.generalError('loop boundary exceeded');
+				return;
+			}
+		  }
+	   }
+	}
   }
 
   visitMem(ctx) {

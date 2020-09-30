@@ -67,6 +67,9 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 WHILE: 'while';
 
+ADD: 'add';
+MINUS: 'minus';
+
 // Rules
 
 strargs : STRLIT #Str ;
@@ -84,6 +87,8 @@ r: START NEWLINE (imp NEWLINE)* expressions* END NEWLINE*;
 expressions: expression NEWLINE;
 
 conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # Cond;
+
+whileConditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) WS (ADD | MINUS) # whileCond;
 
 stylingExpressions: stylingExpression NEWLINE;
 
@@ -104,7 +109,7 @@ expression:
 	| MOVE '(' (RIGHT | LEFT) ')'							# Move
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
-	| WHILE '(' intargs ')' '{' NEWLINE expressions* '}'	# While	
+	| WHILE '(' whileConditional ')' '{' NEWLINE expressions* '}'	# While	
 	| WRITE '(' (intargs | STRLIT) ')'					# Write
 	| KREAD													# Kread
 	| SWRITE '(' (intargs | STRLIT) ')'					# Swrite
