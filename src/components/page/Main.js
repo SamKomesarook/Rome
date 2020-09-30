@@ -1,14 +1,15 @@
 import React, { useState, useContext, useRef } from 'react';
-import TextArea from './TextArea';
 import { DisplayContext } from '../../state/DisplayState';
 import { UiContext } from '../../state/UiContext';
-import Memory from './Memory';
-import { StartButton, ResetButton } from './Button';
-import { InputArea, OutputArea } from './IOArea';
-import { Processor } from './Peripherals';
-import VideoPlayer from './VideoPlayer';
-import Toolbar from './Toolbar';
-import HtmlElementUtil from '../../utils/HtmlElementUtil';
+import Memory from '../computer/Memory';
+import { StartButton, ResetButton } from '../elements/Button';
+import { InputArea, OutputArea } from '../computer/IOArea';
+import { Processor } from '../computer/Peripherals';
+import VideoPlayer from '../elements/VideoPlayer';
+import Toolbar from '../elements/Toolbar';
+import CodingArea from '../elements/CodingArea';
+import '../computer/computer.css';
+import '../elements/styles.css';
 
 const Main = () => {
   const [display, setDisplay] = useContext(DisplayContext);
@@ -73,7 +74,7 @@ const Main = () => {
     <div className="main">
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
-        <TextArea />
+        <CodingArea />
         <Toolbar />
         <div className="hflex">
           <StartButton />

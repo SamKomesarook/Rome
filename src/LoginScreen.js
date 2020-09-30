@@ -49,13 +49,13 @@ function LoginScreen() {
   }
 
   return (
-    <div className="container">
-      <div className="loginScreen">
+    <div className="login-container">
+      <div className="login-screen">
         Welcome to Rome.
         <input
           name="password-field"
           type="password"
-          className="input"
+          className="login-input"
           value={password}
           onChange={setInput}
           placeholder="password"
@@ -63,7 +63,7 @@ function LoginScreen() {
         <button
           type="submit"
           onClick={login}
-          className="btn"
+          className="login-btn"
         >
           Go
         </button>

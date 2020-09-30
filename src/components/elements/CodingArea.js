@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
 
-const TextArea = () => {
+const CodingArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
 
   function handleChange(event) {
@@ -16,7 +16,7 @@ const TextArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper">
+    <div id="coding-area-wrapper" className="code">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
@@ -44,4 +44,4 @@ const TextArea = () => {
   );
 };
 
-export default TextArea;
+export default CodingArea;
