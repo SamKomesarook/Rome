@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+//import { openDatabase } from 'react-native-sqlite-storage';
+//import { Alert } from 'react-native';
 
 const Feedback = ({ isActive }) => {
   const DATA = [
@@ -10,20 +12,24 @@ const Feedback = ({ isActive }) => {
 
   const isActiveClass = isActive ? '' : ' hidden';
   
- /* email sending method source code
+  let [userEmail, setUserEmail] = useState('');
+  let [feedbackContent, setFeedbackContent] = useState('');
+  
+  /* 
+  // email sending method test source code
   const nodemailer = require('nodemailer');
 
   const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-         user: 'sherryysj@gmail.com',
-         pass: ''
+         user: 'xxxx@gmail.com',
+         pass: 'xxxxx'
       }
     });
 
    const mailOptions = {
-      from: 'sherryysj@gmail.com',
-      to: 'sherryysj@gmail.com',
+      from: 'xxxx@gmail.com',
+      to: 'xxxx@gmail.com',
       subject: 'Sending Email using Node.js',
       text: 'That was easy!'
    };
@@ -41,10 +47,11 @@ const Feedback = ({ isActive }) => {
   }
   */
   
-  /* sqlite database source code
+  /*
+  // sqlite database test source code
   // Can't resolve 'aws-sdk' error with sqlite3
   const submitFeedback = (e) => {
-	  console.log("hello");
+	  console.log("sqlite initial test");
 	  const sqlite3 = require('sqlite3').verbose();
       let db = new sqlite3.Database(':memory:', (err) => {
       if (err) {
@@ -55,7 +62,40 @@ const Feedback = ({ isActive }) => {
   }
   */
   
-  /* csv method source code
+  /* 
+  // react native sqlite database test source code
+  var db = openDatabase({ name: 'UserDatabase.db' });
+  
+
+  const submitFeedback = (e) => {
+	  console.log("react native sqlite initial test");
+      db.transaction(function (tx) {
+      tx.executeSql(
+        'INSERT INTO feedback (user_email, feedback_content) VALUES (?,?)',
+        [userEmail, feedbackContent],
+        (tx, results) => {
+          console.log('Results', results.rowsAffected);
+          if (results.rowsAffected > 0) {
+            Alert.alert(
+              'Success',
+              'You are Registered Successfully',
+              [
+                {
+                  text: 'Ok',
+                  onPress: () => e.navigate('HomeScreen'),
+                },
+              ],
+              { cancelable: false }
+            );
+          } else alert('Registration Failed');
+        }
+      );
+    });
+  }
+  */
+  
+  /*
+  // csv method test source code
   const submitFeedback = (e) => {
 	  console.log("hello");
 
@@ -70,6 +110,8 @@ const Feedback = ({ isActive }) => {
           ['Mary', 'English']
         ];
 		
+      console.log("hello");
+	  
       //bug here
       csvWriter.writeRecords(records)// returns a promise
           .then(() => {
@@ -81,8 +123,10 @@ const Feedback = ({ isActive }) => {
   
   const submitFeedback = (e) => {
 	  console.log("placeholder");
+	  console.log(userEmail);
+	  console.log(feedbackContent);
   }
- 
+  
   return (
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
 	  <form id="input-control">
@@ -95,7 +139,7 @@ const Feedback = ({ isActive }) => {
 		    <span style={{color:"white"}}>Feedback:</span>
           </div>
 		  <div>
-		    <textArea type="text" form="input-control" id="feedbackContent" name="feedbackContent" placeholder="Please input your feedback for us" />
+		    <textarea type="text" form="input-control" id="feedbackContent" name="feedbackContent" placeholder="Please input your feedback for us" />
           </div>
 		</div>
 		<div>
