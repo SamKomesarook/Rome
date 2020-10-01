@@ -179,6 +179,11 @@ button:disabled {
                                     supported by Chrome and Opera */
 }
 
+.deactive-item {
+    color: var(--bg-contrast-primary);
+    filter: opacity(40%);
+}
+
 .hidden {
     display: none !important;
 }
