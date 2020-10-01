@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
-import { processInstrs } from '../../lang/Common';
+import { processInstrs, ErrorReporter } from '../../lang/Common';
 import { USBToggle } from './Peripherals';
 
 const InputArea = () => {
@@ -17,8 +17,25 @@ const InputArea = () => {
       if (staticDisplay.selected === usbMemoryKey) {
         USBToggle();
       } else {
-        newMem[staticDisplay.selected].content = staticDisplay.input;
-        newMem[staticDisplay.selected].type = 'string';
+        const { input } = staticDisplay;
+        const errorReporter = new ErrorReporter(staticDisplay);
+
+        // Check if the memory has enough space to accomodate the new input
+        const pos = staticDisplay.memory[staticDisplay.selected].key;
+        const numOfSpecialKeys = staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = staticDisplay.memorySize - numOfSpecialKeys;
+        if (input.length > (numOfUsableMemoryCells * 6 - pos * 6)) {
+          errorReporter.generalError('Out of memory');
+          return;
+        }
+
+        // Ensure one memory cell only contains 6 letters of a string
+        const base = Math.floor(input.length / 6);
+        for (let i = 0; i < base + 1; i++) {
+          staticDisplay.memory[pos + i * 1].content = input.substr(i * 6, 6);
+          staticDisplay.memory[pos + i * 1].type = 'string';
+          staticDisplay.memory[pos + i * 1].size = '6';
+        }
       }
       staticDisplay.memory = newMem;
       staticDisplay.reading = false;
@@ -58,13 +75,13 @@ const OutputArea = () => {
       contentEditable="false"
       id="output-area"
       style={{
-        'backgroundColor': `${display.outputStyle.bgColor}`,
+        backgroundColor: `${display.outputStyle.bgColor}`,
         color: `${display.outputStyle.txtColor}`,
-        'fontSize': `${display.outputStyle.txtSize}`,
-        'textAlign': `${display.outputStyle.txtAlign}`,
-        'fontWeight': `${display.outputStyle.bold}`,
-        'fontStyle': `${display.outputStyle.italic}`,
-        'textDecorationLine': `${display.outputStyle.underline}`,
+        fontSize: `${display.outputStyle.txtSize}`,
+        textAlign: `${display.outputStyle.txtAlign}`,
+        fontWeight: `${display.outputStyle.bold}`,
+        fontStyle: `${display.outputStyle.italic}`,
+        textDecorationLine: `${display.outputStyle.underline}`,
       }}
     >
       {display.output}
