@@ -4,7 +4,6 @@ const webdriver = require('selenium-webdriver');
 
 const testBinaryViewOfInteger = 'test the binary view of integer type';
 const testBinaryViewOfLong = 'test the binary view of long type';
-const testBinaryViewOfFloat = 'test the binary view of float type';
 const testBinaryViewOfNegative = 'test the binary view of negative number';
 const testBinaryViewOfCharacter = 'test the binary view of character type';
 const testBinaryViewOfString = 'test the binary view of string type';
@@ -59,27 +58,6 @@ describe('test binary view', () => {
     const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCellsRes = await binaryCells.getText();
     expect(binaryCellsRes).toEqual('0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n1\n0\n1\n1\n1\n1');
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
-
-    expect(outputAreaRes).toEqual('');
-  }, 35000);
-
-  test(testBinaryViewOfFloat, async () => {
-    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(float)\nwrite(0.127)\nend');
-
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
-    await driver.actions().doubleClick(memoryCell0).perform();
-
-    const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
-    const binaryCellsRes = await binaryCells.getText();
-
-    expect(binaryCellsRes).toEqual('0\n0\n1\n1\n1\n1\n1\n1\n1\n0\n0\n1\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n1\n0\n0\n1\n0\n0\n1\n1\n0\n1\n1\n1\n0\n1\n0\n0\n1\n0\n1\n1\n1\n1\n0\n0\n0\n1\n1\n0\n1\n0\n1\n0\n1');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();

@@ -1,8 +1,6 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { USBToggle } from '../components/computer/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
 
-// TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
   constructor(staticDisplay, errorReporter) {
     super();
@@ -32,24 +30,6 @@ class RVisitor extends RomeVisitor {
     const { selected } = this.staticDisplay;
     const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
     this.staticDisplay.memory[selected].type = newType;
-
-    switch (newType) {
-      case 'character':
-        this.staticDisplay.memory[selected].size = 1;
-        break;
-      case 'integer':
-        this.staticDisplay.memory[selected].size = 2;
-        break;
-      case 'long':
-      case 'float':
-        this.staticDisplay.memory[selected].size = 4;
-        break;
-      case 'string':
-        this.staticDisplay.memory[selected].size = 6;
-        break;
-      default:
-        this.staticDisplay.memory[selected].size = 0;
-    }
   }
 
   visitLoop(ctx) {
@@ -92,9 +72,6 @@ class RVisitor extends RomeVisitor {
 
   visitMove(ctx) {
     if (this.visitChildren(ctx)[2] === 'next') {
-      // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
-      // const maxUsableMemoryKey = this.staticDisplay.memorySize - this.staticDisplay.specialKeys.length - 1;
-      // if (this.staticDisplay.selected === maxUsableMemoryKey) {
       if (this.staticDisplay.selected === this.staticDisplay.memorySize - 1) {
         this.errorReporter.generalError('No more memory');
         return;
@@ -111,6 +88,7 @@ class RVisitor extends RomeVisitor {
 
   visitWrite(ctx) {
     const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+    const { dataTypeSize } = this.staticDisplay;
 
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
@@ -156,11 +134,10 @@ class RVisitor extends RomeVisitor {
     if (type === 'character' || type === 'string') {
       if (arg[0] === '"' && arg[arg.length - 1] === '"') {
         const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-        // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
-        // const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
-        const numOfUsableMemoryCells = this.staticDisplay.memorySize; // - numOfSpecialKeys;
+
+        // Check if the memory has enough space to accomodate the input
         if ((type === 'character' && arg.length - 2 > 1)
-        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * 6 - pos * 6))) {
+        || (type === 'string' && arg.length - 2 > (this.staticDisplay.memorySize * dataTypeSize.string - pos * dataTypeSize.string))) {
           this.errorReporter.generalError('Out of memory');
           return;
         }
@@ -170,31 +147,28 @@ class RVisitor extends RomeVisitor {
       }
     }
 
-    // TODO - Nick: Check with Sam before creating a pr for usb to decide if we should keep the setup for future usage
-    // Get the keys of special memory cells
-    // const usbMemoryKey = this.staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
-    // if (this.staticDisplay.selected === usbMemoryKey) {
-    //   USBToggle();
-    // } else {
-      switch (type) {
-        case 'character':
-          this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
-          return;
-        case 'string': {
-          const strVal = arg.slice(1, -1);
-          const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-          const base = Math.floor(strVal.length / 6);
-          for (let i = 0; i < base + 1; i++) {
-            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
-            this.staticDisplay.memory[pos + i * 1].type = 'string';
-            this.staticDisplay.memory[pos + i * 1].size = '6';
+    switch (type) {
+      case 'character':
+        this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
+        return;
+      case 'string': {
+        const strVal = arg.slice(1, -1);
+        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+        const base = Math.floor(strVal.length / dataTypeSize.string);
+
+        // Ensure one memory cell only contains the defined number of letter
+        for (let i = 0; i < base + 1; i++) {
+          this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
+          this.staticDisplay.memory[pos + i * 1].type = 'string';
+          if (i > 0) {
+            this.staticDisplay.selected += 1;
           }
-          return;
         }
-        default:
-          this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+        return;
       }
-    // }
+      default:
+        this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+    }
   }
 
   visitFree(ctx) {
@@ -206,18 +180,16 @@ class RVisitor extends RomeVisitor {
     const memoryCell = this.staticDisplay.memory[this.staticDisplay.selected];
 
     let leftValue;
-    const rightValue = condInput[4][0];
+    const rightValue = condInput[4];
     const compareKeyword = condInput[2];
 
     // Assign left value based on content type
     if (memoryCell.type === 'integer' || memoryCell.type === 'long' || memoryCell.type === 'float') {
       leftValue = memoryCell.content;
     } else {
-      // Strip off the double quotes and convert string to int
-      leftValue = parseInt(memoryCell.content.slice(1, -1));
+      leftValue = parseInt(memoryCell.content);
       if (isNaN(leftValue)) {
-        this.errorReporter.generalError('Wrong conditional argument type');
-        return;
+        leftValue = `"${memoryCell.content}"`;
       }
     }
 
