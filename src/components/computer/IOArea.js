@@ -17,8 +17,9 @@ const InputArea = () => {
       if (staticDisplay.selected === usbMemoryKey) {
         USBToggle();
       } else {
-        newMem[staticDisplay.selected].content = staticDisplay.input;
         newMem[staticDisplay.selected].type = 'string';
+        newMem[staticDisplay.selected].size = 6;
+        newMem[staticDisplay.selected].content = staticDisplay.input;
       }
       staticDisplay.memory = newMem;
       staticDisplay.reading = false;
@@ -58,13 +59,13 @@ const OutputArea = () => {
       contentEditable="false"
       id="output-area"
       style={{
-        'backgroundColor': `${display.outputStyle.bgColor}`,
+        backgroundColor: `${display.outputStyle.bgColor}`,
         color: `${display.outputStyle.txtColor}`,
-        'fontSize': `${display.outputStyle.txtSize}`,
-        'textAlign': `${display.outputStyle.txtAlign}`,
-        'fontWeight': `${display.outputStyle.bold}`,
-        'fontStyle': `${display.outputStyle.italic}`,
-        'textDecorationLine': `${display.outputStyle.underline}`,
+        fontSize: `${display.outputStyle.txtSize}`,
+        textAlign: `${display.outputStyle.txtAlign}`,
+        fontWeight: `${display.outputStyle.bold}`,
+        fontStyle: `${display.outputStyle.italic}`,
+        textDecorationLine: `${display.outputStyle.underline}`,
       }}
     >
       {display.output}
