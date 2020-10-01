@@ -33,8 +33,8 @@ describe('test challenge tab', () => {
     const challengeContent = await TestConfig.getElementByXpath(driver, '//*[@id="challenge"]/div[2]');
     const challengeContentInfo = await challengeContent.getText();
 
-    expect(selectedTopic).toEqual('Challenge Title');
-    expect(challengeContentInfo).toEqual('Challenge content and solution');
+    expect(selectedTopic).toEqual('Adder');
+    expect(challengeContentInfo).toEqual('Create a program that asks a user for two numbers, then adds them together and displays the result.');
   }, 35000);
 
   test(testSelectCalculator, async () => {
@@ -43,13 +43,13 @@ describe('test challenge tab', () => {
 
     const dropdownField = await TestConfig.getElementById(driver, 'topics');
     await dropdownField.click();
-    await dropdownField.sendKeys('Calculator', Key.ENTER);
+    await dropdownField.sendKeys('Trusting program', Key.ENTER);
     const selectedTopic = await dropdownField.getAttribute('value');
 
     const challengeContent = await TestConfig.getElementByXpath(driver, '//*[@id="challenge"]/div[2]');
     const challengeContentInfo = await challengeContent.getText();
 
-    expect(selectedTopic).toEqual('Calculator');
-    expect(challengeContentInfo).toEqual('Create a program that asks a user for two numbers, then adds them together and displays the result.');
+    expect(selectedTopic).toEqual('Trusting program');
+    expect(challengeContentInfo).toEqual('Create a program that tells users a secret if they guess the secret password with 3 guesses.');
   }, 35000);
 });
