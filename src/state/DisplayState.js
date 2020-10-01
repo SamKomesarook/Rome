@@ -25,7 +25,6 @@ DisplayContext.DEFAULT = () => {
       memoryArray.push({
         key: i, // Unique key
         type: '', // Type 'integer, long, float, string or character'
-        size: '', // The available space taken based on the data type
         content: '', // defined content
         special: '', //
         name: '', //
@@ -58,6 +57,13 @@ DisplayContext.DEFAULT = () => {
       bold: '', // Style: bold font
       italic: '', // Style: italic font
       underline: '', // Style: underline font
+    },
+    dataTypeSize: { // The available space taken of each data types
+      character: 1,
+      integer: 2,
+      float: 4,
+      long: 4,
+      string: 6,
     },
     memorySize: localMemorySize,
     specialKeys: localSpecialKeys,

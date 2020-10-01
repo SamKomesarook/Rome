@@ -32,24 +32,6 @@ class RVisitor extends RomeVisitor {
     const { selected } = this.staticDisplay;
     const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
     this.staticDisplay.memory[selected].type = newType;
-
-    switch (newType) {
-      case 'character':
-        this.staticDisplay.memory[selected].size = 1;
-        break;
-      case 'integer':
-        this.staticDisplay.memory[selected].size = 2;
-        break;
-      case 'long':
-      case 'float':
-        this.staticDisplay.memory[selected].size = 4;
-        break;
-      case 'string':
-        this.staticDisplay.memory[selected].size = 6;
-        break;
-      default:
-        this.staticDisplay.memory[selected].size = 0;
-    }
   }
 
   visitLoop(ctx) {
@@ -109,6 +91,7 @@ class RVisitor extends RomeVisitor {
 
   visitWrite(ctx) {
     const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+    const { dataTypeSize } = this.staticDisplay;
 
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
@@ -157,7 +140,7 @@ class RVisitor extends RomeVisitor {
         const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
         const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
         if ((type === 'character' && arg.length - 2 > 1)
-        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * 6 - pos * 6))) {
+        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * dataTypeSize.string - pos * dataTypeSize.string))) {
           this.errorReporter.generalError('Out of memory');
           return;
         }
@@ -179,11 +162,12 @@ class RVisitor extends RomeVisitor {
         case 'string': {
           const strVal = arg.slice(1, -1);
           const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-          const base = Math.floor(strVal.length / 6);
+          const base = Math.floor(strVal.length / dataTypeSize.string);
+
+          // Ensure one memory cell only contains the defined number of letter
           for (let i = 0; i < base + 1; i++) {
-            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * 6, 6);
+            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
             this.staticDisplay.memory[pos + i * 1].type = 'string';
-            this.staticDisplay.memory[pos + i * 1].size = '6';
           }
           return;
         }

@@ -19,22 +19,23 @@ const InputArea = () => {
       } else {
         const { input } = staticDisplay;
         const errorReporter = new ErrorReporter(staticDisplay);
+        const STRING_SIZE = staticDisplay.dataTypeSize.string;
 
         // Check if the memory has enough space to accomodate the new input
         const pos = staticDisplay.memory[staticDisplay.selected].key;
         const numOfSpecialKeys = staticDisplay.specialKeys.length;
         const numOfUsableMemoryCells = staticDisplay.memorySize - numOfSpecialKeys;
-        if (input.length > (numOfUsableMemoryCells * 6 - pos * 6)) {
+        if (input.length > (numOfUsableMemoryCells * STRING_SIZE - pos * STRING_SIZE)) {
           errorReporter.generalError('Out of memory');
           return;
         }
 
-        // Ensure one memory cell only contains 6 letters of a string
-        const base = Math.floor(input.length / 6);
+        // Ensure one memory cell only contains 6 (string_size) letters of a string
+        const base = Math.floor(input.length / STRING_SIZE);
         for (let i = 0; i < base + 1; i++) {
-          staticDisplay.memory[pos + i * 1].content = input.substr(i * 6, 6);
+          staticDisplay.memory[pos + i * 1].content = input.substr(i * STRING_SIZE, STRING_SIZE);
           staticDisplay.memory[pos + i * 1].type = 'string';
-          staticDisplay.memory[pos + i * 1].size = '6';
+          staticDisplay.memory[pos + i * 1].size = STRING_SIZE;
         }
       }
       staticDisplay.memory = newMem;
