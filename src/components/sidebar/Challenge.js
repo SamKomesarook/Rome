@@ -21,8 +21,8 @@ const Challenge = ({ isActive }) => {
 
   const { content: contents } = DATA.find((element) => element.topic === topic);
 
-  const optionList = DATA.map((challenge) => (
-    <option value={challenge.topic}>{challenge.topic}</option>
+  const optionList = DATA.map((item) => (
+    <option value={item.topic}>{item.topic}</option>
   ));
 
   const handleChangeTopic = (e) => {

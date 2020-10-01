@@ -113,23 +113,17 @@ const Help = ({ isActive }) => {
     ? ''
     : ' hidden';
 
+  const optionList = DATA.map((item) => (
+    <option value={item.keyword}>{item.keyword}</option>
+  ));
+
   return (
     <div id="help" className={`sidebar-item-pane${isActiveClass}`}>
       <div className="filter-control">
         <div className="control-container">
           <label htmlFor="keywords">
             <select name="keywords" id="keywords" className="control" onChange={handleChangeKeyword}>
-              <option value="start">start</option>
-              <option value="end">end</option>
-              <option value="set">set</option>
-              <option value="write">write</option>
-              <option value="free">free</option>
-              <option value="loop">loop</option>
-              <option value="if">if</option>
-              <option value="import">import</option>
-              <option value="keyboardRead">keyboardRead</option>
-              <option value="consoleWrite">consoleWrite</option>
-              <option value="style">style</option>
+              {optionList}
             </select>
           </label>
         </div>
