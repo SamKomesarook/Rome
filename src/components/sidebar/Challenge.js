@@ -21,6 +21,10 @@ const Challenge = ({ isActive }) => {
 
   const { content: contents } = DATA.find((element) => element.topic === topic);
 
+  const optionList = DATA.map((challenge) => (
+    <option value={challenge.topic}>{challenge.topic}</option>
+  ));
+
   const handleChangeTopic = (e) => {
     setTopic(e.target.value);
   };
@@ -34,8 +38,7 @@ const Challenge = ({ isActive }) => {
           <label htmlFor="topics">
             Topic:
             <select name="topics" id="topics" className="control" onChange={handleChangeTopic}>
-              <option value="Challenge Title">Challenge Title</option>
-              <option value="Calculator">Calculator</option>
+              {optionList}
             </select>
           </label>
         </div>
