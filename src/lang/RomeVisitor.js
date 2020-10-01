@@ -190,18 +190,16 @@ class RVisitor extends RomeVisitor {
     const memoryCell = this.staticDisplay.memory[this.staticDisplay.selected];
 
     let leftValue;
-    const rightValue = condInput[4][0];
+    const rightValue = condInput[4];
     const compareKeyword = condInput[2];
 
     // Assign left value based on content type
     if (memoryCell.type === 'integer' || memoryCell.type === 'long' || memoryCell.type === 'float') {
       leftValue = memoryCell.content;
     } else {
-      // Strip off the double quotes and convert string to int
-      leftValue = parseInt(memoryCell.content.slice(1, -1));
+      leftValue = parseInt(memoryCell.content);
       if (isNaN(leftValue)) {
-        this.errorReporter.generalError('Wrong conditional argument type');
-        return;
+        leftValue = `"${memoryCell.content}"`;
       }
     }
 
