@@ -14,9 +14,10 @@ const Help = ({ isActive }) => {
       example: ['start\n#Selects the memory cell 3 spots away\nloop(3){\nmove(next)\n}\nend',
         'start\n#Reads 3 input strings from the user\nimport(IO)\nloop(3){\nkeyboardRead\nmove(next)\n}\nend',
       ],
-    }, { // TODO this needs to be fixed!
+    }, {
       keyword: 'if',
       content: 'Executes the arguments in the curly brackets if the condition is true.',
+      codeArg: true,
       argument: [{
         name: 'confirm',
         desc: '\'is\' or \'not\'',
@@ -28,7 +29,7 @@ const Help = ({ isActive }) => {
         desc: 'The argument',
       },
       ],
-      example: ['start\n#Only greets the user if his or her name is '],
+      example: ['start\n#Only greets the user is his or her name is Mark\nimport(IO)\nconsoleWrite("What is your name”)\nkeyboardRead\nif(is equal "Mark”){\nconsoleWrite(“Hello Mark!”)\n}\nif(not equal "Mark”){\nconsoleWrite(“I’m waiting for\nsomeone else…”)\n}\nend'],
     }, {
       keyword: 'write',
       content: 'Writes arguments to the selected memory cell.\nArguments must be either numbers, or a string enclosed by parenthesis.',
@@ -47,56 +48,53 @@ const Help = ({ isActive }) => {
       example: ['hello', 'goodbye'],
     }, {
       keyword: 'move',
-      content: 'Changes the selected memory cell to the immediate right `last` or left `next`.\n\nExample:',
-      example: ['hello', 'goodbye'],
+      content: 'Changes the selected memory cell.',
+      example: ['start\n#Selects the memory cell in the right direction\nmove(next)\nend'],
+      argument: [{
+        name: 'direction',
+        desc: '\'next\' for the memory cell in the right direction, \'last\' for the memory cell in the left direction.',
+      }],
     }, {
       keyword: 'set',
-      content: 'Sets the type that can be written to the memory cell. the args are either `numbers` or `letters`.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
-      example: ['hello', 'goodbye'],
+      content: 'Sets the type that can be written to the memory cell.',
+      argument: [{
+        name: 'type',
+        desc: '\'integer\', \'long\', \'character\', \'string\', or \'float\'.',
+      }],
+      example: ['start\nset(string)\nwrite("hello")\nset(integer)\nwrite(4)\nend'],
     }, {
       keyword: 'free',
-      content: 'Remove content saved in selected memory cell.\n\nExample:\nstart\nset(letters)\nwrite("hello")\nfree\nwrite("world!")\nend',
-      example: ['hello', 'goodbye'],
+      content: 'Remove content saved in selected memory cell.',
+      example: ['start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend'],
     }, {
       keyword: 'import',
-      content: 'Import a library within the arguments.\n\nExample:\nstart\nimport(IO)\n//do something\nend',
-      example: ['hello', 'goodbye'],
+      content: 'Import a library within the arguments.',
+      example: ['start\nimport(IO)\nend'],
+      argument: [{
+        name: 'library name',
+        desc: '\'IO\'.',
+      }],
     }, {
       keyword: 'keyboardRead',
-      content: 'Read in a line of input from the input line. requires IO library.\n\nExample:\nstart\nimport(IO)\nkeyboardRead\nend',
-      example: ['hello', 'goodbye'],
+      content: 'Read in a line of input from the input line. Requires IO library.',
+      example: ['start\nimport(IO)\nkeyboardRead\nend'],
     }, {
       keyword: 'consoleWrite',
-      content: 'Print the argument to the console window. requires IO library.\n\nExample:\nstart\nimport(IO)\nconsoleWrite("Hello")\nend',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'paint',
-      content: 'Paint the background color of the console window.\n\nExample:\nstyle{\npaint(pink)\n} \n\nAvailable colors: black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'text_color',
-      content: 'Set the color of the text in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_color(brown)\n} \n\nAvailable colors: black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'text_size',
-      content: 'Set the size of the text in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_size(x-large)\n} \n\nAvailable size: xx-large, x-large, larger, large, medium, small, smaller, x-small, xx-small',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'text_align',
-      content: 'Set the alignment of the text in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\ntext_align(right)\n} \n\nAvailable align: left, center, right',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'bold',
-      content: 'Make the text bold in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nbold(true)\n}',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'italic',
-      content: 'Make the text italic in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nitalic(true)\n}',
-      example: ['hello', 'goodbye'],
-    }, {
-      keyword: 'underline',
-      content: 'Make the text underline in console window.\n\nExample:\nimport(IO)\nconsoleWrite("Hello")\nstyle{\nunderline(true)\n}',
-      example: ['hello', 'goodbye'],
+      content: 'Print the argument to the console window. Requires IO library.',
+      example: ['start\nimport(IO)\nconsoleWrite("Hello")\nend'],
+      argument: [{
+        name: 'argument',
+        desc: 'string or memory referance.',
+      }],
+    },
+    {
+      keyword: 'style',
+      content: 'Style the output container.',
+      example: ['start\n#Output with some fun style!\nimport(IO)\nstyle{\nunderline(true)\nitalic(true)\ntext_align(center)\npaint(blue)\n}\nconsoleWrite("Hello!")\nend'],
+      argument: [{
+        name: 'style',
+        desc: 'Style the output window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\bold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
+      }],
     },
   ];
 
@@ -131,13 +129,7 @@ const Help = ({ isActive }) => {
               <option value="import">import</option>
               <option value="keyboardRead">keyboardRead</option>
               <option value="consoleWrite">consoleWrite</option>
-              <option value="paint">paint</option>
-              <option value="text_color">text_color</option>
-              <option value="text_size">text_size</option>
-              <option value="text_align">text_align</option>
-              <option value="bold">bold</option>
-              <option value="italic">italic</option>
-              <option value="underline">underline</option>
+              <option value="style">style</option>
             </select>
           </label>
         </div>
@@ -148,33 +140,47 @@ const Help = ({ isActive }) => {
         </div>
         <div className="argument-container">
           {keyword}
-          {args && '('}
-          {args && args.map((item, index) => {
-            if (index === args.length - 1) {
+          {keyword !== 'style'
+          && (
+          <div>
+            {args && '('}
+            {args && args.map((item, index) => {
+              if (index === args.length - 1) {
+                return (
+                  <div className="argument-name">
+                    {item.name}
+                  </div>
+                );
+              }
               return (
                 <div className="argument-name">
                   {item.name}
+                  {keyword !== 'if' && ','}
+                  &nbsp;
                 </div>
               );
-            }
-            return (
-              <div className="argument-name">
-                {item.name}
-                {','}
-                &nbsp;
-              </div>
-            );
-          })}
-          {args && ')'}
-          {codeArgs && '{'}
-          {codeArgs && (
-          <div className="argument-name">
-            <br />
-            code
-            <br />
+            })}
+            {args && ')'}
+            {codeArgs && '{'}
+            {codeArgs && (
+            <div className="argument-name">
+              <br />
+              code
+              <br />
+            </div>
+            )}
+            {codeArgs && '}'}
           </div>
           )}
-          {codeArgs && '}'}
+          {keyword === 'style' && '{'}
+          {keyword === 'style' && (
+            <div className="argument-name">
+              <br />
+              style
+              <br />
+            </div>
+          )}
+          {keyword === 'style' && '}'}
         </div>
         {args && args.map((item) => (
           <div>
@@ -182,6 +188,7 @@ const Help = ({ isActive }) => {
               {item.name}
               {' '}
               -
+              {' '}
               {item.desc}
             </div>
           </div>
