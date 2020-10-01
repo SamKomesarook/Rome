@@ -139,6 +139,7 @@ class RVisitor extends RomeVisitor {
         const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
         const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
         const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        // Check if the memory has enough space to accomodate the input
         if ((type === 'character' && arg.length - 2 > 1)
         || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * dataTypeSize.string - pos * dataTypeSize.string))) {
           this.errorReporter.generalError('Out of memory');
@@ -168,6 +169,7 @@ class RVisitor extends RomeVisitor {
           for (let i = 0; i < base + 1; i++) {
             this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
             this.staticDisplay.memory[pos + i * 1].type = 'string';
+            this.staticDisplay.selected += 1;
           }
           return;
         }
