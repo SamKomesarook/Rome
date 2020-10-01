@@ -16,19 +16,20 @@ const MemoryCell = ({ id }) => {
 
   const generateBinaryContent = () => {
     let binary = '';
+    const size = display.dataTypeSize[memoryCell.type];
 
     // Convert content to binary
     switch (memoryCell.type) {
       case 'string':
       case 'character':
-        binary = BinaryUtil.text2Bin(memoryCell.content, memoryCell.size);
+        binary = BinaryUtil.text2Bin(memoryCell.content, size);
         break;
       case 'integer':
       case 'long':
-        binary = BinaryUtil.num2Bin(memoryCell.content, memoryCell.size);
+        binary = BinaryUtil.num2Bin(memoryCell.content, size);
         break;
       case 'float':
-        binary = BinaryUtil.dec2Bin(memoryCell.content, memoryCell.size);
+        binary = BinaryUtil.dec2Bin(memoryCell.content, size);
         break;
       default:
     }
@@ -38,10 +39,11 @@ const MemoryCell = ({ id }) => {
   };
 
   const generateBinaryGrid = (localShouldBinaryDisplayed) => {
+    const size = display.dataTypeSize[memoryCell.type];
     if (memoryCell.type === '' || localShouldBinaryDisplayed === false) {
       setByteCellClass('');
     } else {
-      setByteCellClass(` memory-${memoryCell.size}-bytes-cell`);
+      setByteCellClass(` memory-${size}-bytes-cell`);
     }
   };
 

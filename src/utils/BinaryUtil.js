@@ -37,46 +37,35 @@ class BinaryUtil {
       return this.getFilling(remainingBitsLength, '1') + invertedBinary;
     };
 
-    static dec2Bin = (dec, byte = 4) => {
-      // Positize number to maintain the length of binary to only the significant part
-      let positiveValue;
-      if (dec >= 0) {
-        positiveValue = dec;
-      } else {
-        positiveValue = dec * -1;
+    static dec2Bin = (input) => {
+      const floatNum = parseFloat(input);
+
+      const buffer = new ArrayBuffer(4);
+      new DataView(buffer).setFloat32(0, floatNum);
+      const bytes = new Uint8Array(buffer);
+
+      // 0 - positive, 1 - negative
+      const signBit = (bytes[0] >> 7);
+      const exp = (bytes[0] << 1) | (bytes[1] >> 7);
+      // expected: 126 , in binary 01111110
+
+      // The most significant bit is 1 and is ommited, so we put it back here
+      const sig = (((bytes[1] & 0x7F) | 0x80) << 16) | (bytes[2] << 8) | bytes[3];
+
+      return signBit + this.toBits(exp, 8).join('') + this.toBits(sig, 23).join('');
+    }
+
+    /**
+     * Getting bit sequence of an input number
+     */
+    static toBits = (n, bitCount) => {
+      let x = n;
+      const bs = [];
+      for (let b = 0; b < bitCount; b++) {
+        x = n >> b;
+        bs.push(x & 0x01);
       }
-
-      const exponentMemoryAllocation = 8;
-      const significantMemoryAllocation = byte * 8 - exponentMemoryAllocation - 1;
-
-      // Convert the input into binary
-      const binary = parseFloat(positiveValue).toString(2);
-
-      // Find the exponent required for normalization
-      const exponent = binary.includes('.') ? binary.indexOf('.') - 1 : 0;
-
-      // Find the exponent binary form with bias component
-      const biasExponent = 127 + exponent;
-      let biasExponentBinary = parseInt(biasExponent).toString(2);
-      biasExponentBinary = this.getFilling(8 - biasExponentBinary.length, '0') + biasExponentBinary;
-
-      // Get the signification part
-      let significant = binary.replace('.', '').slice(1);
-
-      while (true) {
-        const lastChar = significant.charAt(significant.length - 1);
-        if (lastChar === '0') {
-          significant = significant.slice(0, -1);
-        } else {
-          break;
-        }
-      }
-
-      const sign = dec >= 0 ? 0 : 1;
-
-      const decBinary = sign + biasExponentBinary + significant;
-
-      return decBinary + this.getFilling(significantMemoryAllocation - significant.length, '0');
+      return bs.reverse();
     }
 
     static getFilling = (remainingLength, character) => {
