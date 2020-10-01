@@ -17,7 +17,7 @@ const Challenge = ({ isActive }) => {
     },
   ];
 
-  const [topic, setTopic] = useState('Challenge Title');
+  const [topic, setTopic] = useState('Adder');
 
   const { content: contents } = DATA.find((element) => element.topic === topic);
 
