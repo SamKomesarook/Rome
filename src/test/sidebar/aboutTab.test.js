@@ -27,7 +27,7 @@ describe('test about tab', () => {
     const aboutContentInfo = await aboutContent.getText();
 
     const expectedTopic = 'Rome-Education + Julia Brown Schools +';
-    const expectedThank = 'Special thanks to:\nTon Binh On - Nick (programming)\nJiecong Zhang (programming)\nShujie Yang (programming)\nErina Ho (gorgeous logo)';
+    const expectedThank = 'special thanks to:\nTon Binh On (Nick)\nJiecong Zhang\nShujie Yang\nErina Ho';
 
     expect(aboutContentInfo).toContain(expectedTopic);
     expect(aboutContentInfo).toContain(expectedThank);
