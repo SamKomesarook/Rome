@@ -35,7 +35,9 @@ const InputArea = () => {
         for (let i = 0; i < base + 1; i++) {
           staticDisplay.memory[pos + i * 1].content = input.substr(i * STRING_SIZE, STRING_SIZE);
           staticDisplay.memory[pos + i * 1].type = 'string';
-          staticDisplay.selected += 1;
+          if (i > 0) {
+            staticDisplay.selected += 1;
+          }
         }
       }
       staticDisplay.memory = newMem;

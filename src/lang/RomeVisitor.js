@@ -169,7 +169,9 @@ class RVisitor extends RomeVisitor {
           for (let i = 0; i < base + 1; i++) {
             this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
             this.staticDisplay.memory[pos + i * 1].type = 'string';
-            this.staticDisplay.selected += 1;
+            if (i > 0) {
+              this.staticDisplay.selected += 1;
+            }
           }
           return;
         }
