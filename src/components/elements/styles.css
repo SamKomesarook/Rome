@@ -47,15 +47,19 @@
 #toolbar {
     background-color: var(--bg-secondary);
     height: 5rem;
-    width: 13rem;
+    width: 11rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
 }
 
 .toolbar-item > svg {
     height: 2rem;
+    /* color: var(--bg-contrast-secondary); */
+    
 }
 
 /** SWITCH **/

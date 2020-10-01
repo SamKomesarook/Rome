@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 import { UiContext } from '../../state/UiContext';
 import MemoryCell from './MemoryCell';
+import ExternalPort from './ExternalPort';
 
 const Memory = () => {
   const [display, setDisplay] = useContext(DisplayContext);
@@ -18,8 +19,11 @@ const Memory = () => {
   };
 
   return (
-    <div className={`memory-section noselect ${isElementHiddenClass}`}>
-      {memoryCellList(display.memorySize)}
+    <div id="memory-section-wrapper">
+      <div className={`memory-section noselect ${isElementHiddenClass}`}>
+        {memoryCellList(display.memorySize)}
+      </div>
+      <ExternalPort />
     </div>
   );
 };

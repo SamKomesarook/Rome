@@ -7,6 +7,11 @@
 
 /** MEMORY **/
 
+#memory-section-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .memory-section {
     height: 50vh;
     width: 100%;
@@ -18,6 +23,7 @@
     gap: 1px;
     border: 3px solid var(--border-line);
     border-radius: 10px;
+    border-bottom-right-radius: 0;
 }
 
 .memory-cell {
@@ -30,9 +36,9 @@
     border-top-left-radius: 8px;
 }
 
-.memory-cell:last-child {
+/* .memory-cell:last-child {
     border-bottom-right-radius: 8px;
-}
+} */
 
 .memory-cell:nth-child(4) {
     border-top-right-radius: 8px;
@@ -65,6 +71,25 @@
 
 .memory-6-bytes-cell {
     grid-template-rows: repeat(6, 1fr);
+}
+
+/** EXTERNAL PORT **/
+
+#external-port {
+    position: absolute;
+    background-color: var(--bg-secondary);
+    right: 0;
+    width: 25%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#external-port > svg {
+    height: 2rem;
 }
 
 /** PERIPHERAL **/
