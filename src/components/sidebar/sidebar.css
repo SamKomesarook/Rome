@@ -204,3 +204,9 @@ aside:hover .sidebar-item-text {
     text-align: center;
     margin-top: 1rem;
 }
+
+/** HELP TAB **/
+
+#help {
+    width: 50rem;
+}
