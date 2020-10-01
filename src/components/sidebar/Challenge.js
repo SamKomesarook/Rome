@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 const Challenge = ({ isActive }) => {
   const DATA = [
     {
-      topic: 'Challenge Title', content: 'Challenge content and solution',
+      topic: 'Adder', content: 'Create a program that asks a user for two numbers, then adds them together and displays the result.',
     },
     {
-      topic: 'Calculator', content: 'Create a program that asks a user for two numbers, then adds them together and displays the result.',
+      topic: 'Rude program', content: 'Create a program that only greets users with the same name as you.',
+    },
+    {
+      topic: 'Trusting program', content: 'Create a program that tells users a secret if they guess the secret password with 3 guesses.',
+    },
+    {
+      topic: 'View mode', content: 'Ask the user if they want to use light or dark mode, then greet them with that style!',
     },
   ];
 
