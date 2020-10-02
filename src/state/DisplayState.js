@@ -42,7 +42,6 @@ DisplayContext.DEFAULT = () => {
     delay: 10, // Number of seconds of delay between command execution
     text: '', // Content of the programming section
     output: '', // Content of the output bar
-    input: '', // Content of the input bar
     consoleHistory: [],
     running: false, // If there is a program running
     reading: false, // If the program is reading user input
