@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const DisplayContext = React.createContext();
 
@@ -16,8 +16,7 @@ export const DisplayProvider = (props) => {
 DisplayContext.DEFAULT = () => {
   const localMemorySize = 12;
   const localSpecialKeys = [
-    { key: localMemorySize - 2, specialContent: 'usb' },
-    { key: localMemorySize - 1, specialContent: 'net' },
+    { key: localMemorySize - 1, specialContent: 'usb' },
   ];
 
   const createMemoryArray = () => {
@@ -25,7 +24,7 @@ DisplayContext.DEFAULT = () => {
     for (let i = 0; i < localMemorySize; i++) {
       memoryArray.push({
         key: i, // Unique key
-        type: '', // Type 'numbers or letters'
+        type: '', // Type 'integer, long, float, string or character'
         content: '', // defined content
         special: '', //
         name: '', //
@@ -33,7 +32,7 @@ DisplayContext.DEFAULT = () => {
     }
     // Set special content for special memory cell
     for (const specialKey of localSpecialKeys) {
-      memoryArray[specialKey.key].special = memoryArray[specialKey.key].specialContent;
+      memoryArray[specialKey.key].special = specialKey.specialContent;
     }
     return memoryArray;
   };
@@ -59,10 +58,27 @@ DisplayContext.DEFAULT = () => {
       italic: '', // Style: italic font
       underline: '', // Style: underline font
     },
+    dataTypeSize: { // The available space taken of each data types
+      character: 1,
+      integer: 2,
+      float: 4,
+      long: 4,
+      string: 6,
+    },
     memorySize: localMemorySize,
     specialKeys: localSpecialKeys,
     memory: createMemoryArray(),
   };
 
   return initialDisplay;
+};
+
+DisplayContext.createCustomClone = (display) => {
+  const deepClone = {
+    ...display,
+    outputStyle: { ...display.outputStyle },
+    memory: JSON.parse(JSON.stringify(display.memory)),
+  };
+
+  return deepClone;
 };

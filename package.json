@@ -26,8 +26,8 @@
         "webpack-dev-server": "webpack-dev-server",
         "dev": "webpack-dev-server --mode=development",
         "prod": "webpack --mode=production",
-        "setPassword": "node src/hash/setPassword $PASS true",
-
+        "setPassword": "node src/hash/setPassword",
+      
         "serve": "http-server ./dist"
     },
     "eslintConfig": {

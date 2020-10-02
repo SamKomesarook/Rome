@@ -1,14 +1,13 @@
 import { RomeVisitor } from './grammar/Rome/RomeVisitor';
-import { NetToggle, USBToggle } from '../components/elements/Peripherals';
-import { ErrorReporter } from './Common';
+import { USBToggle } from '../components/computer/Peripherals';
+import { NumContext } from './grammar/Rome/RomeParser';
 
 // TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
-  constructor(display, setDisplay) {
+  constructor(staticDisplay, errorReporter) {
     super();
-    this.display = display;
-    this.setDisplay = setDisplay;
-    this.reporter = new ErrorReporter(display); // TODO is it necessary to have one here and one in the processInstrs function?
+    this.staticDisplay = staticDisplay;
+    this.errorReporter = errorReporter;
   }
 
   visitChildren(ctx) {
@@ -30,44 +29,42 @@ class RVisitor extends RomeVisitor {
   }
 
   visitSet(ctx) {
-    const newMemory = this.display.memory;
-    newMemory[this.display.selected].type = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
-    this.setDisplay((display) => ({
-      ...display,
-      memory: newMemory,
-    }));
+    const { selected } = this.staticDisplay;
+    const newType = this.visitChildren(ctx)[2]; // TODO no need to visit all of the children, just need the args
+    this.staticDisplay.memory[selected].type = newType;
   }
 
   visitLoop(ctx) {
+    // Ensure there are expressions inside the for loop
     if (ctx.expressions().length < 1) {
       return;
     }
     const upperBound = parseInt(this.visitChildren(ctx.intargs()));
     if (isNaN(upperBound)) {
-      this.reporter.generalError('Non-number loop argument');
+      this.errorReporter.generalError('Non-number loop argument');
       return;
     }
     for (let i = 0; i < upperBound; i++) {
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity); // TODO is the assignment really necessary?
+      this.staticDisplay.commands.unshift(ctx.expressions());
+      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity); // TODO is the assignment really necessary?
     }
   }
 
   visitMem(ctx) {
     if (ctx.strargs() != null) {
       const arg = this.visitChildren(ctx.strargs())[0];
-      for (let i = 0; i < this.display.memory.length; i++) {
-        const mem = this.display.memory[i];
+      for (let i = 0; i < this.staticDisplay.memory.length; i++) {
+        const mem = this.staticDisplay.memory[i];
         if (mem.name === arg) {
           return mem.content;
         }
       }
-      this.reporter.generalError('No memory with that name');
-    } else if (ctx.intargs().constructor.name === 'NumContext') {
+      this.errorReporter.generalError('No memory with that name');
+    } else if (ctx.intargs().constructor === NumContext) {
       try {
-        return this.display.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content;
+        return this.staticDisplay.memory[parseInt(this.visitChildren(ctx.intargs())) - 1].content;
       } catch (e) {
-        this.reporter.generalError('Cannot parse memory argument');
+        this.errorReporter.generalError('Cannot parse memory argument');
         return null;
       }
     } else {
@@ -76,115 +73,158 @@ class RVisitor extends RomeVisitor {
   }
 
   visitMove(ctx) {
-    if (ctx.children[2].getText() === 'next') {
-      const maxUsableMemoryKey = this.display.memorySize - this.display.specialKeys.length - 1;
-      if (this.display.selected === maxUsableMemoryKey) {
-        this.reporter.generalError('No more memory');
+    if (this.visitChildren(ctx)[2] === 'next') {
+      const maxUsableMemoryKey = this.staticDisplay.memorySize - this.staticDisplay.specialKeys.length - 1;
+      if (this.staticDisplay.selected === maxUsableMemoryKey) {
+        this.errorReporter.generalError('No more memory');
         return;
       }
-      this.display.selected += 1;
+      this.staticDisplay.selected += 1;
     } else {
-      if (this.display.selected === 0) {
-        this.reporter.generalError('No more memory');
+      if (this.staticDisplay.selected === 0) {
+        this.errorReporter.generalError('No more memory');
         return;
       }
-      this.display.selected -= 1;
+      this.staticDisplay.selected -= 1;
     }
   }
 
   visitWrite(ctx) {
-    // TODO check for maximum length (or spillover to the next memory cell?
-    if (this.display.memory[this.display.selected].content !== '') {
-      this.reporter.generalError('Memory cell not empty');
+    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+    const { dataTypeSize } = this.staticDisplay;
+
+    if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
+      this.errorReporter.generalError('Memory cell not empty');
       return;
     }
-    if (this.display.memory[this.display.selected].type === '') {
-      this.reporter.generalError('Memory type not set');
+    if (type === '') {
+      this.errorReporter.generalError('Memory type not set');
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
       arg = arg[0];
     }
-    if (arg[0] === '"' && this.display.memory[this.display.selected].type === 'numbers') {
-      this.reporter.generalError('Wrong memory type for writing');
+
+    if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
+      this.errorReporter.generalError('Wrong memory type for writing');
       return;
     }
-    if (arg[0] !== '"' && this.display.memory[this.display.selected].type === 'letters') {
-      this.reporter.generalError('Wrong memory type for writing');
-      return;
+    if (!isNaN(arg)) {
+      const number = Number(arg);
+      const dec = arg.match(/\./g);
+
+      if ((type === 'integer' && (number > 65535 || number < -65535))
+      || (type === 'long' && (number > 4294967295 || number < -4294967295))
+      || (type === 'float' && (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER))) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+        this.errorReporter.generalError('Out of memory');
+        return;
+      }
+      if ((type === 'integer' || type === 'long') && dec !== null) {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
+      if (type === 'float') {
+        if (dec === null) {
+          arg += '.00';
+        } else if (dec.length > 1) {
+          this.errorReporter.generalError('Wrong memory type for writing');
+          return;
+        }
+      }
+    }
+
+    if (type === 'character' || type === 'string') {
+      if (arg[0] === '"' && arg[arg.length - 1] === '"') {
+        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        // Check if the memory has enough space to accomodate the input
+        if ((type === 'character' && arg.length - 2 > 1)
+        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * dataTypeSize.string - pos * dataTypeSize.string))) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
+      } else {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
     }
 
     // Get the keys of special memory cells
-    const netMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'net').key;
-    const usbMemoryKey = this.display.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (this.display.selected === netMemoryKey) {
-      NetToggle();
-    } else if (this.display.selected === usbMemoryKey) {
+    const usbMemoryKey = this.staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+    if (this.staticDisplay.selected === usbMemoryKey) {
       USBToggle();
     } else {
-      this.display.memory[this.display.selected].content = arg;
+      switch (type) {
+        case 'character':
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
+          return;
+        case 'string': {
+          const strVal = arg.slice(1, -1);
+          const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+          const base = Math.floor(strVal.length / dataTypeSize.string);
+
+          // Ensure one memory cell only contains the defined number of letter
+          for (let i = 0; i < base + 1; i++) {
+            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
+            this.staticDisplay.memory[pos + i * 1].type = 'string';
+            if (i > 0) {
+              this.staticDisplay.selected += 1;
+            }
+          }
+          return;
+        }
+        default:
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+      }
     }
   }
 
   visitFree(ctx) {
-    this.display.memory[this.display.selected].content = '';
+    this.staticDisplay.memory[this.staticDisplay.selected].content = '';
   }
 
   visitIf(ctx) {
-    let condArg1;
-    let condArg2;
-    const args = this.visitChildren(ctx.conditional());
-    const mem = this.display.memory[this.display.selected];
-    if (mem.type === 'letters') {
-      condArg1 = mem.content;
+    const condInput = this.visitChildren(ctx.conditional());
+    const memoryCell = this.staticDisplay.memory[this.staticDisplay.selected];
+
+    let leftValue;
+    const rightValue = condInput[4];
+    const compareKeyword = condInput[2];
+
+    // Assign left value based on content type
+    if (memoryCell.type === 'integer' || memoryCell.type === 'long' || memoryCell.type === 'float') {
+      leftValue = memoryCell.content;
     } else {
-      try {
-        condArg1 = parseInt(mem.content);
-      } catch (e) {
-        this.reporter.generalError('Wrong conditional argument type');
-        return;
+      leftValue = parseInt(memoryCell.content);
+      if (isNaN(leftValue)) {
+        leftValue = `"${memoryCell.content}"`;
       }
     }
-    if (this.display.memory[this.display.selected].type === 'letters') {
-      condArg2 = args[4];
-    } else {
-      condArg2 = args[4][0];
-    }
-    if (args[0] === 'is') {
-      if (args[2] === 'less') {
-        if (condArg1 < condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (args[2] === 'greater') {
-        if (condArg1 > condArg2) {
-          this.display.commands.unshift(ctx.expressions());
-          this.display.commands = this.display.commands.flat(Infinity);
-        }
-      } else if (condArg1 === condArg2) {
-        this.display.commands.unshift(ctx.expressions());
-        this.display.commands = this.display.commands.flat(Infinity);
+
+    if (condInput[0] === 'is') {
+      if ((compareKeyword === 'less' && leftValue < rightValue)
+      || (compareKeyword === 'greater' && leftValue > rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue == rightValue)) {
+        this.staticDisplay.commands.unshift(ctx.expressions());
+        this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
       }
-    } else if (args[2] === 'less') {
-      if (condArg1 >= condArg2) {
-        this.display.commands.unshift(ctx.expressions());
-        this.display.commands = this.display.commands.flat(Infinity);
+    } else if (condInput[0] === 'not') {
+      if ((compareKeyword === 'less' && leftValue >= rightValue)
+      || (compareKeyword === 'greater' && leftValue <= rightValue)
+      // eslint-disable-next-line eqeqeq
+      || (compareKeyword === 'equal' && leftValue != rightValue)) {
+        this.staticDisplay.commands.unshift(ctx.expressions());
+        this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
       }
-    } else if (args[2] === 'greater') {
-      if (condArg1 <= condArg2) {
-        this.display.commands.unshift(ctx.expressions());
-        this.display.commands = this.display.commands.flat(Infinity);
-      }
-    } else if (condArg1 !== condArg2) {
-      this.display.commands.unshift(ctx.expressions());
-      this.display.commands = this.display.commands.flat(Infinity);
     }
   }
 
   visitKread(ctx) {
-    if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 'k_read'");
+    if (!this.staticDisplay.importIO) {
+      this.errorReporter.generalError("Unknown function 'keyboardRead'");
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
@@ -192,8 +232,8 @@ class RVisitor extends RomeVisitor {
   }
 
   visitSwrite(ctx) {
-    if (!this.display.importIO) {
-      this.reporter.generalError("Unknown function 's_write'");
+    if (!this.staticDisplay.importIO) {
+      this.errorReporter.generalError("Unknown function 'consoleWrite'");
       return;
     }
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
@@ -201,11 +241,11 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     // TODO if string, print with parenthesis?
-    this.display.output = this.display.output.concat(arg.replace('"', '').replace('"', ''), '\n');
+    this.staticDisplay.output = this.staticDisplay.output.concat(arg.replace('"', '').replace('"', ''), '\n');
   }
 
   visitIo(ctx) {
-    this.display.importIO = true;
+    this.staticDisplay.importIO = true;
   }
 
   visitName(ctx) {
@@ -214,97 +254,48 @@ class RVisitor extends RomeVisitor {
       arg = arg[0];
     }
     if (arg[0] !== '"') {
-      this.reporter.generalError('Cannot name a memory area as a number');
+      this.errorReporter.generalError('Cannot name a memory area as a number');
       return;
     }
-    this.display.memory[this.display.selected].name = arg;
+    this.staticDisplay.memory[this.staticDisplay.selected].name = arg;
   }
 
   visitPaint(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        bgColor: newValue,
-      },
-    }));
+    const newValue = this.visitChildren(ctx)[2];
+    this.staticDisplay.outputStyle.bgColor = newValue;
   }
 
   visitTextColor(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtColor: newValue,
-      },
-    }));
+    const newValue = this.visitChildren(ctx)[2];
+    this.staticDisplay.outputStyle.txtColor = newValue;
   }
 
   visitTextSize(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtSize: newValue,
-      },
-    }));
+    const newValue = this.visitChildren(ctx)[2];
+    this.staticDisplay.outputStyle.txtSize = newValue;
   }
 
   visitTextAlign(ctx) {
-    const newValue = ctx.children[2].getText();
-    // Update display.outputStyle.bgColor
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        txtAlign: newValue,
-      },
-    }));
+    const newValue = this.visitChildren(ctx)[2];
+    this.staticDisplay.outputStyle.txtAlign = newValue;
   }
 
   visitBold(ctx) {
-    const isBold = (ctx.children[2].getText() === 'true');
+    const isBold = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isBold ? 'bold' : '';
-    // Update display.outputStyle.bold
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        bold: newValue,
-      },
-    }));
+    this.staticDisplay.outputStyle.bold = newValue;
   }
 
   visitItalic(ctx) {
-    const isItalic = (ctx.children[2].getText() === 'true');
+    const isItalic = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isItalic ? 'italic' : '';
-    // Update display.outputStyle.italic
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        italic: newValue,
-      },
-    }));
+    this.staticDisplay.outputStyle.italic = newValue;
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (ctx.children[2].getText() === 'true');
+    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isUnderline ? 'underline' : '';
-    // Update display.outputStyle.underline
-    this.setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      outputStyle: {
-        ...prevDisplay.outputStyle,
-        underline: newValue,
-      },
-    }));
+    this.staticDisplay.outputStyle.underline = newValue;
   }
 }
 

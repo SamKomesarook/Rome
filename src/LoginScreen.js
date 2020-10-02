@@ -15,7 +15,7 @@ function LoginScreen() {
   const setInput = (e) => setPassword(e.target.value);
 
   // login button
-  // set the state to false 
+  // set the state to false
   const [log, setLog] = React.useState(false);
 
   // read from cookie
@@ -49,15 +49,13 @@ function LoginScreen() {
   }
 
   return (
-
-  // <div className="app">
-    <div className="container">
-      <div className="loginScreen">
-          Welcome to Rome.
+    <div className="login-container">
+      <div className="login-screen">
+        Welcome to Rome.
         <input
           name="password-field"
           type="password"
-          className="input"
+          className="login-input"
           value={password}
           onChange={setInput}
           placeholder="password"
@@ -65,14 +63,12 @@ function LoginScreen() {
         <button
           type="submit"
           onClick={login}
-          className="btn"
+          className="login-btn"
         >
           Go
         </button>
       </div>
     </div>
-  // </div>
-
   );
 }
 
