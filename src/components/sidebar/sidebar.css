@@ -193,6 +193,11 @@ aside:hover .sidebar-item-text {
     height: 1.5rem;
 }
 
+#title-heart{
+	background-color: var(--bg-secondary);
+	outline:none;
+}
+
 .about-heading {
     text-align: center;
     font-size: 1.5rem;
