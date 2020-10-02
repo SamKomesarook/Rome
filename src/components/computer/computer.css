@@ -84,6 +84,7 @@
     color: white;
     padding: 1rem;
     overflow: auto;
+    text-align: left;
 }
 
 #console input {
@@ -92,10 +93,16 @@
     width: 100%;
     color: white;
     border: none;
+    font-size: 1rem;
+    padding: 0;
 }
 
 #console input:focus {
     box-shadow: none;
+}
+
+#console .hflex {
+    gap: 0;
 }
 
 /** IO AREA **/

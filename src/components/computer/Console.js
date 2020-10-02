@@ -146,7 +146,9 @@ const Console = () => {
   console.log('consoleHistory', display.consoleHistory);
   const consoleHistoryList = display.consoleHistory.map((record) => {
     console.log('record', record);
-    return <div>{record}</div>;
+    return (
+      <div>{`> ${record}`}</div>
+    );
   });
 
   const handleKey = (event) => {
@@ -172,10 +174,11 @@ const Console = () => {
         fontStyle: `${display.outputStyle.italic}`,
         textDecorationLine: `${display.outputStyle.underline}`,
       }}
+      className="code"
     >
       {consoleHistoryList}
       <div className="hflex">
-        <span>{'>'}</span>
+        <span>>&nbsp;</span>
         <input
           id="console-input"
           type="text"
