@@ -19,8 +19,8 @@ const Memory = () => {
   };
 
   return (
-    <div id="memory-section-wrapper">
-      <div className={`memory-section noselect ${isElementHiddenClass}`}>
+    <div id="memory-section-wrapper" className={isElementHiddenClass}>
+      <div className="memory-section noselect">
         {memoryCellList(display.memorySize)}
       </div>
       <ExternalPort />

@@ -5,10 +5,9 @@ import { DisplayContext } from '../../state/DisplayState';
 const Toolbar = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const [ui, setUi] = useContext(UiContext);
-  const usbRef = useRef();
   const noItemClass = display.externalMemorySize === 0 ? '' : 'no-item';
 
-  // const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
+  const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
   const [isElementDragEnterClass, setElementDragEnterClass] = useState('');
   const dragEventTargetRef = useRef(null);
 
@@ -22,9 +21,6 @@ const Toolbar = () => {
 
   const handleDragLeave = (e) => {
     if (ui.ctxDraggedItem === 'externalPortUsb') {
-      console.log('leave e.target', e.target);
-      console.log('leave dragEventTarget', dragEventTargetRef.current);
-
       e.preventDefault();
       if (e.target === dragEventTargetRef.current) {
         setElementDragEnterClass('');
@@ -36,22 +32,19 @@ const Toolbar = () => {
   const handleDragOver = (e) => {
     if (ui.ctxDraggedItem === 'externalPortUsb') {
       e.preventDefault();
-      console.log('dragover');
     }
   };
 
   const handleDrop = (e) => {
     if (ui.ctxDraggedItem === 'externalPortUsb') {
       e.preventDefault();
+      const updatedMemorySize = display.memorySize - display.externalMemorySize;
       setDisplay((prevDisplay) => ({
         ...prevDisplay,
-        memorySize: (prevDisplay.memorySize - prevDisplay.externalMemorySize),
+        memorySize: updatedMemorySize,
         externalMemorySize: 0,
         // Remove the external memory cell
-        memory: prevDisplay.memory.slice(
-          0,
-          prevDisplay.memorySize - prevDisplay.externalMemorySize,
-        ),
+        memory: prevDisplay.memory.slice(0, updatedMemorySize),
       }));
 
       setElementDragEnterClass('');
@@ -59,31 +52,30 @@ const Toolbar = () => {
     }
   };
 
-
-  
-
+  // Register the current dragged item as toolbarUSB
   const handleDragStart = () => {
     setUi((prevUi) => ({ ...prevUi, ctxDraggedItem: 'toolbarUsb' }));
   };
 
+  // Clear up the current dragged item
   const handleDragEnd = () => {
     setUi((prevUi) => ({ ...prevUi, ctxDraggedItem: '' }));
   };
 
   return (
-    <div 
+    <div
       id="toolbar"
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      className={`${isElementDragEnterClass} ${isElementHiddenClass}`}
     >
       <div
         className={`toolbar-item ${noItemClass}`}
         draggable={display.externalMemorySize === 0}
         onDragStart={handleDragStart}
         onDragEnd={handleDragStart}
-        ref={usbRef}
         style={{ cursor: display.externalMemorySize === 0 ? 'grab' : 'auto' }}
       >
         <svg viewBox="0 0 24 24">
