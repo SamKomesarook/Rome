@@ -88,7 +88,7 @@
     border-bottom-right-radius: 10px;
 }
 
-#external-port > svg {
+#external-port svg {
     height: 2rem;
 }
 

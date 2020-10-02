@@ -17,57 +17,63 @@ const Main = () => {
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
   const [isElementDragEnterClass, setElementDragEnterClass] = useState('');
   const dragEventTargetRef = useRef(null);
-  const computerRef = useRef(null);
 
   const handleDragEnter = (e) => {
-    e.preventDefault();
-    setElementDragEnterClass('drag-hovered');
-    dragEventTargetRef.current = e.target;
+    if (ui.ctxDraggedItem === 'toolbarUsb') {
+      e.preventDefault();
+      setElementDragEnterClass('drag-hovered');
+      dragEventTargetRef.current = e.target;
+    }
   };
 
   const handleDragLeave = (e) => {
-    console.log('leave e.target', e.target);
-    console.log('leave dragEventTarget', dragEventTargetRef.current);
+    if (ui.ctxDraggedItem === 'toolbarUsb') {
+      console.log('leave e.target', e.target);
+      console.log('leave dragEventTarget', dragEventTargetRef.current);
 
-    e.preventDefault();
-    if (e.target === dragEventTargetRef.current) {
-      setElementDragEnterClass('');
-      dragEventTargetRef.current = null;
+      e.preventDefault();
+      if (e.target === dragEventTargetRef.current) {
+        setElementDragEnterClass('');
+        dragEventTargetRef.current = null;
+      }
     }
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault();
-    console.log('dragover');
+    if (ui.ctxDraggedItem === 'toolbarUsb') {
+      e.preventDefault();
+      console.log('dragover');
+    }
   };
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    console.log('drop');
-    const EXTERNAL_MEMORY_SIZE = 8;
-    const combinedMemorySize = display.memorySize + EXTERNAL_MEMORY_SIZE;
-    const newMemory = [];
+    if (ui.ctxDraggedItem === 'toolbarUsb') {
+      e.preventDefault();
+      console.log('drop');
+      const EXTERNAL_MEMORY_SIZE = 8;
+      const combinedMemorySize = display.memorySize + EXTERNAL_MEMORY_SIZE;
+      const newMemory = [];
 
-    for (let i = display.memorySize; i < combinedMemorySize; i++) {
-      newMemory.push({
-        key: i,
-        type: '',
-        size: '',
-        content: '',
-        special: 'usb',
-        name: '',
-      });
+      for (let i = display.memorySize; i < combinedMemorySize; i++) {
+        newMemory.push({
+          key: i,
+          type: '',
+          content: '',
+          special: 'usb',
+          name: '',
+        });
+      }
+
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
+        memorySize: combinedMemorySize,
+        externalMemorySize: EXTERNAL_MEMORY_SIZE,
+        memory: prevDisplay.memory.concat(newMemory),
+      }));
+
+      setElementDragEnterClass('');
+      dragEventTargetRef.current = null;
     }
-
-    setDisplay((prevDisplay) => ({
-      ...prevDisplay,
-      memorySize: combinedMemorySize,
-      externalMemorySize: EXTERNAL_MEMORY_SIZE,
-      memory: prevDisplay.memory.concat(newMemory),
-    }));
-
-    setElementDragEnterClass('');
-    dragEventTargetRef.current = null;
   };
 
   return (
@@ -87,7 +93,6 @@ const Main = () => {
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        ref={computerRef}
       >
         <Memory />
         <div className={`peripheral-icon-grp ${isElementHiddenClass}`}>

@@ -179,7 +179,7 @@ button:disabled {
                                     supported by Chrome and Opera */
 }
 
-.deactive-item {
+.no-item {
     color: var(--bg-contrast-primary);
     filter: opacity(40%);
 }

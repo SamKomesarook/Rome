@@ -7,7 +7,8 @@ export const UiProvider = (props) => {
     ctxIsVideoPlayerActive: false,
     ctxYoutubeContentID: '',
     ctxIsAppRunViewActive: false,
-    ctxUsbRef: useRef(),
+    // ctxToolbarUsbRef: useRef(),
+    ctxDraggedItem: '',
   });
 
   return (
