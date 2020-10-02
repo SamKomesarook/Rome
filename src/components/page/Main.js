@@ -8,7 +8,7 @@ import Computer from '../computer/Computer';
 import '../elements/styles.css';
 
 const Main = () => {
-  const [ui] = useContext(UiContext);
+  const [ui, setUi] = useContext(UiContext);
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   return (

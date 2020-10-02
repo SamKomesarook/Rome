@@ -92,7 +92,7 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(outputAreaRes).toEqual("ERROR: mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

@@ -43,7 +43,7 @@ describe('test float', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('Out of memory');
+    expect(outputAreaRes).toEqual('ERROR: Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -60,7 +60,7 @@ describe('test float', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('Out of memory');
+    expect(outputAreaRes).toEqual('ERROR: Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -117,7 +117,7 @@ describe('test float', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('Wrong memory type for writing');
+    expect(outputAreaRes).toEqual('ERROR: Wrong memory type for writing');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

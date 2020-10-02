@@ -76,7 +76,7 @@ describe('test character', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('Out of memory');
+    expect(outputAreaRes).toEqual('ERROR: Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -93,7 +93,7 @@ describe('test character', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(outputAreaRes).toEqual("ERROR: mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });
