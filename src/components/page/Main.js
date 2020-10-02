@@ -18,10 +18,6 @@ const Main = () => {
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
         <CodingArea />
-        <div className="hflex">
-          <StartButton />
-          <ResetButton />
-        </div>
       </div>
       <div className="layout-column" id="computer-column">
         <Memory />
