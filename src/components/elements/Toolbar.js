@@ -47,14 +47,17 @@ const Toolbar = () => {
         memory: prevDisplay.memory.slice(0, updatedMemorySize),
       }));
 
+      // Reset dragging properties
       setElementDragEnterClass('');
       dragEventTargetRef.current = null;
 
-      setDisplay((prevDisplay) => ({
-        ...prevDisplay,
-        errors: true,
-        output: prevDisplay.output.concat('ERROR: USB memory not found\n'),
-      }));
+      if (display.running) {
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
+          errors: true,
+          output: prevDisplay.output.concat('ERROR: USB memory not found\n'),
+        }));
+      }
     }
   };
 

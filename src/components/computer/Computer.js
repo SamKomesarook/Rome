@@ -44,6 +44,7 @@ const Computer = () => {
       const updatedMemorySize = display.memorySize + EXTERNAL_MEMORY_SIZE;
       const newMemory = [];
 
+      // Build up usb memory
       for (let i = display.memorySize; i < updatedMemorySize; i++) {
         newMemory.push({
           key: i,
@@ -61,6 +62,7 @@ const Computer = () => {
         memory: prevDisplay.memory.concat(newMemory),
       }));
 
+      // Reset dragging properties
       setElementDragEnterClass('');
       dragEventTargetRef.current = null;
     }
