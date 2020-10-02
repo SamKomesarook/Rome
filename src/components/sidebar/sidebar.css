@@ -7,6 +7,7 @@ aside {
     top: 0;
     right: 0;
     background-color: var(--bg-secondary);
+    filter: brightness(90%); /* To differentiate with memory section*/
 }
 
 .sidebar-item-list {
@@ -59,8 +60,8 @@ aside:hover .sidebar-item-text {
 }
 
 .sidebar-btn:hover, .sidebar-btn.toggle-btn[aria-pressed="true"] {
-    color: var(--bg-contrast-primary);
-    border-right: 0.1rem solid var(--bg-contrast-primary);
+    color: white;
+    border-right: 0.1rem solid white;
 }
 
 .sidebar-item-pane {
@@ -77,15 +78,6 @@ aside:hover .sidebar-item-text {
 }
 
 /** DISTANCE LEARNING **/
-
-.filter-control {
-    width: 100%;
-    padding: 1rem;
-    border-bottom: 2px solid var(--border-line-dark);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
 
 .list {
     display: flex;

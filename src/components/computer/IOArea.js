@@ -61,6 +61,7 @@ const InputArea = () => {
   return (
     <input
       id="input-bar"
+      className="highlightable-input"
       size="60"
       type="text"
       onKeyDown={handleKey}
