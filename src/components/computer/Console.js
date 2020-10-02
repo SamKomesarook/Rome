@@ -1,9 +1,9 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import antlr4 from 'antlr4';
 import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs, ErrorReporter } from '../../lang/Common';
-import { NetToggle, USBToggle } from './Peripherals';
+import { USBToggle } from './Peripherals';
 import { RomeLexer } from '../../lang/grammar/Rome/RomeLexer';
 import { RomeParser } from '../../lang/grammar/Rome/RomeParser';
 import { MachineLexer } from '../../lang/grammar/Machine/MachineLexer';
@@ -87,6 +87,9 @@ const Console = () => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
 
+    // Save recent command to console history
+    staticDisplay.consoleHistory.push(inputRef.current.value);
+
     staticDisplay.running = true;
 
     const chars = new antlr4.InputStream(staticDisplay.text);
@@ -122,9 +125,23 @@ const Console = () => {
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
+  const executeReset = () => {
+    // Reset to the default value but keep machine and text value
+    setDisplay((prevDisplay) => ({
+      ...DisplayContext.DEFAULT(),
+      machine: prevDisplay.machine,
+      text: prevDisplay.text,
+      consoleHistory: prevDisplay.consoleHistory.push(inputRef.current.value),
+    }));
+  };
+
   const executeWriteToMemory = () => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
+
+    // Save recent command to console history
+    staticDisplay.consoleHistory.push(inputRef.current.value);
+
     const newMem = staticDisplay.memory;
 
     // Get the keys of special memory cells
@@ -143,14 +160,6 @@ const Console = () => {
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
-  console.log('consoleHistory', display.consoleHistory);
-  const consoleHistoryList = display.consoleHistory.map((record) => {
-    console.log('record', record);
-    return (
-      <div>{`> ${record}`}</div>
-    );
-  });
-
   const handleKey = (event) => {
     if (event.keyCode === 13) {
       const inputValue = inputRef.current.value;
@@ -158,9 +167,16 @@ const Console = () => {
         executeWriteToMemory();
       } else if (inputValue === 'start') {
         executeStart();
+      } else if (inputValue === 'reset') {
+        executeReset();
       }
+      inputRef.current.value = '';
     }
   };
+
+  const consoleHistoryList = display.consoleHistory.map((record) => (
+    <div>{`> ${record}`}</div>
+  ));
 
   return (
     <div
