@@ -2,12 +2,10 @@ import TestConfig from '../TestConfig';
 
 const webdriver = require('selenium-webdriver');
 
-const testName = {
-  testConsoleWriteLetters: 'test keyboard write letters correctly',
-  testConsoleWriteNumbers: 'test keyboard write numbers',
-  testConsoleWriteEmpty: 'test keyboard write empty letters',
-  testConsoleWriteNoQuote: 'test keyboard write letters without quote',
-};
+const testConsoleWriteString = 'test keyboard write string correctly';
+const testConsoleWriteInteger = 'test keyboard write integer';
+const testConsoleWriteEmpty = 'test keyboard write empty string';
+const testConsoleWriteNoQuote = 'test keyboard write string without quote';
 
 describe('test console write', () => {
   let driver;
@@ -30,7 +28,7 @@ describe('test console write', () => {
     stopBtn.click();
   }, 30000);
 
-  test(testName.testConsoleWriteLetters, async () => {
+  test(testConsoleWriteString, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 
@@ -47,7 +45,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNumbers, async () => {
+  test(testConsoleWriteInteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
 
@@ -64,7 +62,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteEmpty, async () => {
+  test(testConsoleWriteEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
 
@@ -81,7 +79,7 @@ describe('test console write', () => {
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNoQuote, async () => {
+  test(testConsoleWriteNoQuote, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
 
@@ -94,7 +92,7 @@ describe('test console write', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, STRLIT}");
+    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

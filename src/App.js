@@ -1,39 +1,14 @@
 import React from 'react';
 import './App.css';
-import './components/styles/styles.css';
-import TextArea from './components/elements/TextArea';
+import Main from './components/page/Main';
 import { DisplayProvider } from './state/DisplayState';
 import { UiProvider } from './state/UiContext';
-import Memory from './components/elements/Memory';
-import { StartButton, ResetButton } from './components/elements/Button';
-import Console from './components/elements/Console';
-import { InputArea, OutputArea } from './components/elements/IOArea';
-import { NetPeripheral, USBPeripheral, Processor } from './components/elements/Peripherals';
-import Switch from './components/elements/Switch';
-import Sidebar from './components/elements/Sidebar';
-import VideoPlayer from './components/elements/VideoPlayer';
+import Sidebar from './components/sidebar/Sidebar';
 
 const App = () => (
   <UiProvider>
     <DisplayProvider>
-      <div className="main">
-        <div className="layout-column">
-          <VideoPlayer />
-          <TextArea />
-          <Switch />
-          <div className="hflex">
-            <StartButton />
-            <ResetButton />
-          </div>
-        </div>
-        <div className="layout-column" id="computer-column">
-          <Memory />
-          <div className="peripheral-icon-grp">
-            <Processor />
-          </div>
-          <Console />
-        </div>
-      </div>
+      <Main />
       <Sidebar />
     </DisplayProvider>
   </UiProvider>

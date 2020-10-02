@@ -1,3 +1,9 @@
+/*Courier Prime*/
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+/*Open Sans*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -9,7 +15,7 @@ html {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    font-family: -apple-system, "Open Sans", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
         sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -30,7 +36,8 @@ html, body {
     --border-line-dark: #3c3c3c;
     --bg-contrast-primary: #ececec;
     --bg-contrast-secondary: #b6b6b6;
-    --light-blue: rgba(81, 203, 238, 1);
+    --border-line-editable: #81b1ff;
+    --bg-editable: #262d33;
     --grey: #ccc;
     --blue: #2196F3;
     --baby-blue: #4873FF;
@@ -38,6 +45,6 @@ html, body {
     --dark-grey: #30383F;
 }
 
-/* code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-} */
+code, .code {
+    font-family: "Courier Prime", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
