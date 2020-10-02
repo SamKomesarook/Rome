@@ -26,37 +26,9 @@ describe('test binary view', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  function listNum(str) {
-    const strArray = str.split('');
-    let res = '';
-    for (let i = 0; i < str.length - 1; i++) {
-      res = `${res + strArray[i]}\n`;
-    }
-    res += strArray[strArray.length - 1];
-    return res;
-  }
-
-  function fillIn(str) {
-    let fill = '';
-    for (let i = 0; i < 8 - str.length; i++) {
-      fill += '0';
-    }
-    return fill + str;
-  }
-
-  function transfer(str) {
-    let res = '';
-    for (let i = 0; i < 6; i++) {
-      res += fillIn(str.charCodeAt(i).toString(2));
-    }
-    return res;
-  }
-
   test(testBinaryViewOfInteger, async () => {
-    const value = 43697;
-    const str = value.toString();
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys(`start\nset(integer)\nwrite(${str})\nend`);
+    await codingArea.sendKeys('start\nset(integer)\nwrite(43697)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -66,9 +38,7 @@ describe('test binary view', () => {
 
     const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCellsRes = await binaryCells.getText();
-    const bValue = parseInt(value).toString(2);
-    const res = listNum(bValue);
-    expect(binaryCellsRes).toEqual(res);
+    expect(binaryCellsRes).toEqual('1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n1\n0\n0\n0\n1');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
@@ -77,10 +47,8 @@ describe('test binary view', () => {
   }, 35000);
 
   test(testBinaryViewOfLong, async () => {
-    const value = 4163953387;
-    const str = value.toString();
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys(`start\nset(long)\nwrite(${str})\nend`);
+    await codingArea.sendKeys('start\nset(long)\nwrite(4163953387)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -90,9 +58,7 @@ describe('test binary view', () => {
 
     const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCellsRes = await binaryCells.getText();
-    const bValue = parseInt(value).toString(2);
-    const res = listNum(bValue);
-    expect(binaryCellsRes).toEqual(res);
+    expect(binaryCellsRes).toEqual('1\n1\n1\n1\n1\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n1\n1\n1\n0\n0\n0\n1\n0\n1\n1\n1\n0\n1\n0\n1\n1');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
@@ -119,8 +85,8 @@ describe('test binary view', () => {
     const binaryCells1 = await TestConfig.getElementById(driver, 'memory-1');
     const binaryCells1Res = await binaryCells1.getText();
 
-    expect(binaryCells0Res).toEqual(listNum('01000001001011000000000000000000'));
-    expect(binaryCells1Res).toEqual(listNum('11000001001011000000000000000000'));
+    expect(binaryCells0Res).toEqual('0\n1\n0\n0\n0\n0\n0\n1\n0\n0\n1\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0');
+    expect(binaryCells1Res).toEqual('1\n1\n0\n0\n0\n0\n0\n1\n0\n0\n1\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
@@ -129,11 +95,8 @@ describe('test binary view', () => {
   }, 35000);
 
   test(testBinaryViewOfNegative, async () => {
-    const value = -43697;
-    const absValue = 43697;
-    const str = value.toString();
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys(`start\nset(integer)\nwrite(${str})\nend`);
+    await codingArea.sendKeys('start\nset(integer)\nwrite(-43697)\nend');
 
     const startBtn = await TestConfig.getElementById(driver, 'start-button');
     await startBtn.click();
@@ -143,10 +106,7 @@ describe('test binary view', () => {
 
     const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCellsRes = await binaryCells.getText();
-    const bValue = parseInt(absValue).toString(2);
-    const negBin = bValue.replace(/1/g, '9').replace(/0/g, '1').replace(/9/g, '0');
-    const res = listNum(negBin);
-    expect(binaryCellsRes).toEqual(res);
+    expect(binaryCellsRes).toEqual('0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0\n1\n1\n1\n0');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
@@ -166,9 +126,7 @@ describe('test binary view', () => {
 
     const binaryCells = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCellsRes = await binaryCells.getText();
-    const bValue = fillIn('r'.charCodeAt(0).toString(2));
-    const res = listNum(bValue);
-    expect(binaryCellsRes).toEqual(res);
+    expect(binaryCellsRes).toEqual('0\n1\n1\n1\n0\n0\n1\n0');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
@@ -193,16 +151,12 @@ describe('test binary view', () => {
 
     const binaryCells0 = await TestConfig.getElementById(driver, 'memory-0');
     const binaryCells0Res = await binaryCells0.getText();
-    const bValue0 = transfer(str1);
-    const res0 = listNum(bValue0);
 
     const binaryCells1 = await TestConfig.getElementById(driver, 'memory-1');
     const binaryCells1Res = await binaryCells1.getText();
-    const bValue1 = transfer(str2);
-    const res1 = listNum(bValue1);
 
-    expect(binaryCells0Res).toEqual(res0);
-    expect(binaryCells1Res).toEqual(res1);
+    expect(binaryCells0Res).toEqual('0\n1\n1\n1\n0\n0\n1\n0\n0\n1\n1\n0\n1\n1\n1\n1\n0\n1\n1\n0\n1\n1\n0\n1\n0\n1\n1\n0\n0\n1\n0\n1\n0\n1\n1\n0\n1\n1\n0\n0\n0\n1\n1\n0\n0\n0\n0\n1');
+    expect(binaryCells1Res).toEqual('0\n1\n1\n0\n1\n1\n1\n0\n0\n1\n1\n0\n0\n1\n1\n1\n0\n1\n1\n1\n0\n1\n0\n1\n0\n1\n1\n0\n0\n0\n0\n1\n0\n1\n1\n0\n0\n1\n1\n1\n0\n1\n1\n0\n0\n1\n0\n1');
 
     const outputArea = await TestConfig.getElementById(driver, 'output-area');
     const outputAreaRes = await outputArea.getText();
