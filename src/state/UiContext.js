@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 export const UiContext = React.createContext();
 
@@ -7,7 +7,6 @@ export const UiProvider = (props) => {
     ctxIsVideoPlayerActive: false,
     ctxYoutubeContentID: '',
     ctxIsAppRunViewActive: false,
-    // ctxToolbarUsbRef: useRef(),
     ctxDraggedItem: '',
   });
 
