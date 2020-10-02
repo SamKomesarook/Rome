@@ -119,7 +119,7 @@ const Help = ({ isActive }) => {
 
   return (
     <div id="help" className={`sidebar-item-pane${isActiveClass}`}>
-      <div className="filter-control">
+      <div className="control-group">
         <div className="control-container">
           <label htmlFor="keywords">
             <select name="keywords" id="keywords" className="control" onChange={handleChangeKeyword}>

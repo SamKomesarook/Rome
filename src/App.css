@@ -42,7 +42,7 @@ Glowing Blue Input Highlights <Start>
 Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
 */
 
-input[type=text], textarea {
+.highlightable-input {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -54,13 +54,13 @@ input[type=text], textarea {
     font-family: inherit;
 }
 
-input[type=text]:focus, textarea:focus {
+.highlightable-input:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
 }
 
-input[type=text]:enabled, textarea:enabled {
+.highlightable-input:enabled {
     border: 3px solid var(--border-line-editable);
     background-color: var(--bg-editable);
 }
@@ -68,6 +68,15 @@ input[type=text]:enabled, textarea:enabled {
 /* Glowing Blue Input Highlights <End> */
 
 /** CONTROL **/
+
+.control-group {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-line-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
 .control-container {
     display: flex;
@@ -107,6 +116,10 @@ input[type=text]:enabled, textarea:enabled {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+input[type=text].control {
+    cursor: text;
 }
 
 select.control {
