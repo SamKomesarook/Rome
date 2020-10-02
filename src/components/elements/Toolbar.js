@@ -49,6 +49,12 @@ const Toolbar = () => {
 
       setElementDragEnterClass('');
       dragEventTargetRef.current = null;
+
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
+        errors: true,
+        output: prevDisplay.output.concat('ERROR: USB memory not found\n'),
+      }));
     }
   };
 
@@ -75,7 +81,7 @@ const Toolbar = () => {
         className={`toolbar-item ${noItemClass}`}
         draggable={display.externalMemorySize === 0}
         onDragStart={handleDragStart}
-        onDragEnd={handleDragStart}
+        onDragEnd={handleDragEnd}
         style={{ cursor: display.externalMemorySize === 0 ? 'grab' : 'auto' }}
       >
         <svg viewBox="0 0 24 24">
