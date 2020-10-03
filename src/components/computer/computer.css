@@ -87,22 +87,29 @@
     flex-grow: 1;
 }
 
-#console input {
-    /* all: initial; */
+#console .hflex {
+    align-items: flex-start;
+}
+
+#console textarea {
     background-color: inherit;
     width: 100%;
+    height: 100%;
     color: white;
     border: none;
     font-size: 1rem;
     padding: 0;
+    margin: 0;
+    resize: none;
 }
 
-#console input:focus {
+#console textarea:focus {
     box-shadow: none;
 }
 
 #console .hflex {
     gap: 0;
+    height: 100%;
 }
 
 /** IO AREA **/

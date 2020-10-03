@@ -90,8 +90,9 @@ const Console = () => {
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
-  const handleKey = (event) => {
-    if (event.keyCode === 13) {
+  const handleKey = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
       const inputValue = inputRef.current.value;
       if (display.reading) {
         executeWriteToMemory();
@@ -125,9 +126,8 @@ const Console = () => {
       {consoleHistoryList}
       <div className="hflex">
         <span>>&nbsp;</span>
-        <input
+        <textarea
           id="console-input"
-          type="text"
           ref={inputRef}
           onKeyDown={handleKey}
         />
