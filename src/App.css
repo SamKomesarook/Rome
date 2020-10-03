@@ -176,6 +176,11 @@ button:disabled {
     color: dimgray;
 }
 
+.third-btn {
+    background-color: var(--light-green);
+    color: dimgray;
+}
+
 /** OTHER **/
 
 .noselect {

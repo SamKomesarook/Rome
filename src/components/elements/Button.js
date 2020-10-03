@@ -90,7 +90,32 @@ const ResetButton = () => {
   );
 };
 
+const NextButton = () => {
+  const [display, setDisplay] = useContext(DisplayContext);
+
+  const handleNext = () => {
+    // Reset to the default value but keep machine and text value
+    setDisplay((prevDisplay) => ({
+      ...DisplayContext.DEFAULT(),
+      machine: prevDisplay.machine,
+      text: prevDisplay.text,
+    }));
+  };
+
+  return (
+    <button
+      id="next-button"
+      onClick={handleNext}
+      type="button"
+      className="std-btn third-btn"
+    >
+      Next
+    </button>
+  );
+};
+
 export {
   StartButton,
   ResetButton,
+  NextButton,
 };
