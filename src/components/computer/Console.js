@@ -65,6 +65,13 @@ const Console = () => {
     }));
   };
 
+  const executeClear = (inputValue) => {
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      consoleHistory: [],
+    }));
+  };
+
   const executeWriteToMemory = (inputValue) => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
@@ -100,6 +107,8 @@ const Console = () => {
         executeStart(inputValue);
       } else if (inputValue === 'reset') {
         executeReset(inputValue);
+      } else if (inputValue === 'consoleClear') {
+        executeClear(inputValue);
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
