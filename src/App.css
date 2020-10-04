@@ -177,8 +177,13 @@ button:disabled {
 }
 
 .third-btn {
+    background-color: var(--light-purple);
+    color: white;
+}
+
+.fourth-btn {
     background-color: var(--light-green);
-    color: dimgray;
+    color: white;
 }
 
 /** OTHER **/
