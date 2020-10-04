@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+//import Mailto from 'react-mailto';
 //import { openDatabase } from 'react-native-sqlite-storage';
 //import { Alert } from 'react-native';
 
@@ -19,6 +20,19 @@ const Feedback = ({ isActive }) => {
 	  console.log("placeholder");
 	  console.log(userEmail);
 	  console.log(feedbackContent);
+	  
+	  /*
+	  // react mailto package
+	  // Cannot read property 'node' of undefined error
+	  return (
+	      <Mailto email="userEmail" obfuscate={true}>
+           Email me!
+          </Mailto>
+	  );
+	  */
+
+	  const mailToContent = "mailto:rome-education@protonmail.com?subject=Feedback&body=User Email: "+ userEmail + "%0d%0aFeedback Content: %0d%0a" + feedbackContent;
+	  window.location.href=mailToContent;
 	  
   }
   
@@ -160,7 +174,7 @@ const Feedback = ({ isActive }) => {
           </div>
 		</div>
 		<div>
-		  <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback}/>
+		  <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback} />
 		</div>  
 	  </form> 
     </div>
