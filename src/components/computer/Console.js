@@ -13,12 +13,12 @@ const Console = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const inputRef = useRef();
 
-  const executeStart = () => {
+  const executeStart = (inputValue) => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
 
     // Save recent command to console history
-    staticDisplay.consoleHistory.push(inputRef.current.value);
+    staticDisplay.consoleHistory.push(inputValue);
 
     staticDisplay.running = true;
 
@@ -55,22 +55,22 @@ const Console = () => {
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
-  const executeReset = () => {
+  const executeReset = (inputValue) => {
     // Reset to the default value but keep machine and text value
     setDisplay((prevDisplay) => ({
       ...DisplayContext.DEFAULT(),
       machine: prevDisplay.machine,
       text: prevDisplay.text,
-      consoleHistory: prevDisplay.consoleHistory.push(inputRef.current.value),
+      consoleHistory: [...prevDisplay.consoleHistory, inputValue],
     }));
   };
 
-  const executeWriteToMemory = () => {
+  const executeWriteToMemory = (inputValue) => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
 
     // Save recent command to console history
-    staticDisplay.consoleHistory.push(inputRef.current.value);
+    staticDisplay.consoleHistory.push(inputValue);
 
     const newMem = staticDisplay.memory;
 
@@ -95,11 +95,16 @@ const Console = () => {
       e.preventDefault();
       const inputValue = inputRef.current.value;
       if (display.reading) {
-        executeWriteToMemory();
+        executeWriteToMemory(inputValue);
       } else if (inputValue === 'start') {
-        executeStart();
+        executeStart(inputValue);
       } else if (inputValue === 'reset') {
-        executeReset();
+        executeReset(inputValue);
+      } else {
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
+          consoleHistory: [...prevDisplay.consoleHistory, inputValue],
+        }));
       }
       inputRef.current.value = '';
     }
