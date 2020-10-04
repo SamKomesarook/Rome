@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import { DisplayContext } from '../../state/DisplayState';
+import { UiContext } from '../../state/UiContext';
 import { processInstrs, ErrorReporter } from '../../lang/Common';
 
 const antlr4 = require('antlr4');
@@ -90,9 +91,34 @@ const ResetButton = () => {
   );
 };
 
+const DebugButton = () => {
+  // const [display, setDisplay] = useContext(DisplayContext);
+  // const staticDisplay = DisplayContext.createCustomClone(display);
+  const [ui, setUi] = useContext(UiContext);
+  const handleDebug = () => {
+    // Reset to the default value but keep machine and text value
+    setUi((prevUI) => ({
+      ...prevUI,
+      ctxIsDebugActive: !prevUI.ctxIsDebugActive,
+    }));
+    // console.log(staticDisplay.text.split('\n'));
+  };
+
+  return (
+    <button
+      id="next-button"
+      onClick={handleDebug}
+      type="button"
+      className="std-btn third-btn"
+    >
+      Debug
+    </button>
+  );
+};
+
 const NextButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-
+  const staticDisplay = DisplayContext.createCustomClone(display);
   const handleNext = () => {
     // Reset to the default value but keep machine and text value
     setDisplay((prevDisplay) => ({
@@ -100,6 +126,7 @@ const NextButton = () => {
       machine: prevDisplay.machine,
       text: prevDisplay.text,
     }));
+    // console.log(staticDisplay.text.split('\n'));
   };
 
   return (
@@ -107,7 +134,7 @@ const NextButton = () => {
       id="next-button"
       onClick={handleNext}
       type="button"
-      className="std-btn third-btn"
+      className="std-btn fourth-btn"
     >
       Next
     </button>
@@ -118,4 +145,5 @@ export {
   StartButton,
   ResetButton,
   NextButton,
+  DebugButton,
 };

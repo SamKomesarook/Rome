@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import CodingArea from '../elements/CodingArea';
 import { UiContext } from '../../state/UiContext';
 import Memory from '../computer/Memory';
-import { StartButton, ResetButton, NextButton } from '../elements/Button';
+import { StartButton, ResetButton, DebugButton, NextButton } from '../elements/Button';
 import { InputArea, OutputArea } from '../computer/IOArea';
 import { Debuger, Processor } from '../computer/Peripherals';
 import VideoPlayer from '../elements/VideoPlayer';
@@ -28,6 +28,7 @@ const Main = () => {
             <NextButton />
           </div>
           <ResetButton />
+          <DebugButton />
         </div>
       </div>
       <div className="layout-column" id="computer-column">
