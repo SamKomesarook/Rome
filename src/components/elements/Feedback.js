@@ -12,10 +12,31 @@ const Feedback = ({ isActive }) => {
 
   const isActiveClass = isActive ? '' : ' hidden';
   
-  let [userEmail, setUserEmail] = useState('');
-  let [feedbackContent, setFeedbackContent] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [feedbackContent, setFeedbackContent] = useState('');
+  
+  const submitFeedback = () => {
+	  console.log("placeholder");
+	  console.log(userEmail);
+	  console.log(feedbackContent);
+	  
+  }
+  
+  const handleEmailChange = (e) => {
+      setUserEmail(e.target.value);
+	  console.log(userEmail);
+  
+  }
+  
+  const handleContentChange = (e) => {
+      setFeedbackContent(e.target.value);
+	  console.log(feedbackContent);
+  
+  }
   
   /* 
+  // unworked source codes, keep for reference 
+  
   // email sending method test source code
   const nodemailer = require('nodemailer');
 
@@ -121,25 +142,21 @@ const Feedback = ({ isActive }) => {
   }
   */
   
-  const submitFeedback = (e) => {
-	  console.log("placeholder");
-	  console.log(userEmail);
-	  console.log(feedbackContent);
-  }
+
   
   return (
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
 	  <form id="input-control">
 	    <div className="control-container">
           <span style={{color:"white"}}>Email:</span>
-          <input type="email" id="feedbackEmail" name="feedbackEmail" placeholder="Please input your email" className="control" />
+          <input type="email" onChange={handleEmailChange.bind(this)} id="feedbackEmail" name="feedbackEmail" placeholder="Please input your email" className="control" />
         </div>
 		<div className="control-container" id="feedbackDirection">
 		  <div>
 		    <span style={{color:"white"}}>Feedback:</span>
           </div>
 		  <div>
-		    <textarea type="text" form="input-control" id="feedbackContent" name="feedbackContent" placeholder="Please input your feedback for us" />
+		    <textarea type="text" onChange={handleContentChange.bind(this)} form="input-control" id="feedbackContent" name="feedbackContent" placeholder="Please input your feedback for us" />
           </div>
 		</div>
 		<div>
