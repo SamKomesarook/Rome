@@ -12,6 +12,7 @@ const testAll = 'test the combine result with all style command';
 
 describe('test styling language', () => {
   let driver;
+  const STYLING_WAIT_TIME = 500;
 
   beforeAll(async () => {
     driver = new webdriver.Builder().withCapabilities(TestConfig.CAPABILITIES).build();
@@ -24,7 +25,14 @@ describe('test styling language', () => {
   }, 40000);
 
   afterEach(async () => {
-    await driver.navigate().refresh();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('reset');
+    await driver.actions().keyDown(Key.ENTER).perform();
+    await consoleInput.sendKeys('consoleClear');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.clear();
   }, 30000);
 
   test(testPaint, async () => {
@@ -34,9 +42,10 @@ describe('test styling language', () => {
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
+    await driver.sleep(STYLING_WAIT_TIME);
 
-    const consoleArea = await TestConfig.getElementById(driver, 'console');
-    const paint = await consoleArea.getCssValue('background-color');
+    const console = await TestConfig.getElementById(driver, 'console');
+    const paint = await console.getCssValue('background-color');
 
     expect(paint).toEqual('rgba(0, 0, 255, 1)');
   }, 35000);
@@ -48,6 +57,7 @@ describe('test styling language', () => {
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
+    await driver.sleep(STYLING_WAIT_TIME);
 
     const console = await TestConfig.getElementById(driver, 'console');
     const fontSize = await console.getCssValue('font-size');
@@ -90,6 +100,7 @@ describe('test styling language', () => {
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
+    await driver.sleep(STYLING_WAIT_TIME);
 
     const console = await TestConfig.getElementById(driver, 'console');
     const bold = await console.getCssValue('font-weight');
@@ -132,6 +143,7 @@ describe('test styling language', () => {
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
+    await driver.sleep(STYLING_WAIT_TIME);
 
     const console = await TestConfig.getElementById(driver, 'console');
     const paint = await console.getCssValue('background-color');
