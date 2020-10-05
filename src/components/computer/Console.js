@@ -132,13 +132,13 @@ const Console = () => {
     <div
       id="console"
       style={{
-        backgroundColor: `${display.outputStyle.bgColor}`,
-        color: `${display.outputStyle.txtColor}`,
-        fontSize: `${display.outputStyle.txtSize}`,
-        textAlign: `${display.outputStyle.txtAlign}`,
-        fontWeight: `${display.outputStyle.bold}`,
-        fontStyle: `${display.outputStyle.italic}`,
-        textDecorationLine: `${display.outputStyle.underline}`,
+        backgroundColor: `${display.consoleStyle.bgColor}`,
+        color: `${display.consoleStyle.txtColor}`,
+        fontSize: `${display.consoleStyle.txtSize}`,
+        textAlign: `${display.consoleStyle.txtAlign}`,
+        fontWeight: `${display.consoleStyle.bold}`,
+        fontStyle: `${display.consoleStyle.italic}`,
+        textDecorationLine: `${display.consoleStyle.underline}`,
       }}
       className="code highlightable-input"
     >
