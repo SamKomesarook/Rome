@@ -88,6 +88,8 @@
 
 #console .hflex {
     align-items: flex-start;
+    gap: 0;
+    height: 100%;
 }
 
 #console-input {
@@ -105,9 +107,4 @@
 
 #console-input:focus {
     outline: none;
-}
-
-#console .hflex {
-    gap: 0;
-    height: 100%;
 }

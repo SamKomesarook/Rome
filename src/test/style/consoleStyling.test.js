@@ -12,7 +12,7 @@ const testAll = 'test the combine result with all style command';
 
 describe('test styling language', () => {
   let driver;
-  const STYLING_WAIT_TIME = 1000;
+  const STYLING_WAIT_TIME = 2000;
 
   beforeAll(async () => {
     driver = new webdriver.Builder().withCapabilities(TestConfig.CAPABILITIES).build();
