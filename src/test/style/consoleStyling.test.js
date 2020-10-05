@@ -35,8 +35,8 @@ describe('test styling language', () => {
     await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
 
-    const console = await TestConfig.getElementById(driver, 'console');
-    const paint = await console.getCssValue('background-color');
+    const consoleArea = await TestConfig.getElementById(driver, 'console');
+    const paint = await consoleArea.getCssValue('background-color');
 
     expect(paint).toEqual('rgba(0, 0, 255, 1)');
   }, 35000);

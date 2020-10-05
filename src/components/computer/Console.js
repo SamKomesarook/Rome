@@ -14,8 +14,13 @@ const Console = () => {
   const inputRef = useRef();
 
   const executeStart = (inputValue) => {
-    // Create a deep copy of display
-    const staticDisplay = DisplayContext.createCustomClone(display);
+    // Create a deep copy of default display
+    const staticDisplay = DisplayContext.createCustomClone({
+      ...DisplayContext.DEFAULT(),
+      machine: display.machine,
+      text: display.text,
+      consoleHistory: [...display.consoleHistory],
+    });
 
     // Save recent command to console history
     staticDisplay.consoleHistory.push(inputValue);
@@ -135,7 +140,7 @@ const Console = () => {
         fontStyle: `${display.outputStyle.italic}`,
         textDecorationLine: `${display.outputStyle.underline}`,
       }}
-      className="code"
+      className="code highlightable-input"
     >
       {consoleHistoryList}
       <div className="hflex">

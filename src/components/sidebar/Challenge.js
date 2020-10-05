@@ -33,7 +33,7 @@ const Challenge = ({ isActive }) => {
 
   return (
     <div id="challenge" className={`sidebar-item-pane${isActiveClass}`}>
-      <div className="filter-control">
+      <div className="control-group">
         <div className="control-container">
           <label htmlFor="topics">
             Topic:

@@ -38,7 +38,7 @@ const CodingArea = () => {
         loop
         showCursor={false}
       >
-        <textarea id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
+        <textarea id="coding-area" className="highlightable-input" onChange={handleChange.bind(this)} spellCheck={false} />
       </Typed>
     </div>
   );
