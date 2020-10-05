@@ -22,14 +22,9 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 }
 
-const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
-  while (true) {
-    if (staticDisplay.commands.length === 0 || staticDisplay.errors) {
-      break;
-    }
-
-    const instr = staticDisplay.commands[0];
-    staticDisplay.commands.splice(0, 1);
+const processInstrs = (staticDisplay, errorReporter) => {
+  while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
+    const instr = staticDisplay.commands.shift();
 
     if (instr.children[0].constructor === KreadContext
        || instr.children[0].constructor === ReadContext) {
