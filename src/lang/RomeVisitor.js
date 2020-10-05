@@ -239,9 +239,10 @@ class RVisitor extends RomeVisitor {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
       arg = arg[0];
+      this.staticDisplay.consoleHistory.push(arg);
+    } else {
+      this.staticDisplay.consoleHistory.push(arg.slice(1, -1));
     }
-
-    this.staticDisplay.consoleHistory.push(arg.slice(1, -1));
   }
 
   visitIo(ctx) {
