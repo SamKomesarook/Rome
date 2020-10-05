@@ -247,7 +247,111 @@ class RVisitor extends RomeVisitor {
   visitIo(ctx) {
     this.staticDisplay.importIO = true;
   }
+  
+  visitMath(ctx) {
+    this.staticDisplay.importMath = true;
+  }
 
+  visitRandom(ctx) {
+	
+    // check whether math package is imported 	
+	if (!this.staticDisplay.importMath){
+	  this.errorReporter.generalError('Require import(math) for random number function.');
+      return;
+	}
+
+    // rewrite below to match random number
+    const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
+    const { dataTypeSize } = this.staticDisplay;	
+	
+    if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
+      this.errorReporter.generalError('Memory cell not empty');
+      return;
+    }
+    if (type === '') {
+      this.errorReporter.generalError('Memory type not set');
+      return;
+    }
+    let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
+    if (typeof arg === 'object') {
+      arg = arg[0];
+    }
+
+    if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
+      this.errorReporter.generalError('Wrong memory type for writing');
+      return;
+    }
+    if (!isNaN(arg)) {
+      const number = Number(arg);
+      const dec = arg.match(/\./g);
+
+      if ((type === 'integer' && (number > 65535 || number < -65535))
+      || (type === 'long' && (number > 4294967295 || number < -4294967295))
+      || (type === 'float' && (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER))) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+        this.errorReporter.generalError('Out of memory');
+        return;
+      }
+      if ((type === 'integer' || type === 'long') && dec !== null) {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
+      if (type === 'float') {
+        if (dec === null) {
+          arg += '.00';
+        } else if (dec.length > 1) {
+          this.errorReporter.generalError('Wrong memory type for writing');
+          return;
+        }
+      }
+    }
+
+    if (type === 'character' || type === 'string') {
+      if (arg[0] === '"' && arg[arg.length - 1] === '"') {
+        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+        // Check if the memory has enough space to accomodate the input
+        if ((type === 'character' && arg.length - 2 > 1)
+        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * dataTypeSize.string - pos * dataTypeSize.string))) {
+          this.errorReporter.generalError('Out of memory');
+          return;
+        }
+      } else {
+        this.errorReporter.generalError('Wrong memory type for writing');
+        return;
+      }
+    }
+
+    // Get the keys of special memory cells
+    const usbMemoryKey = this.staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+    if (this.staticDisplay.selected === usbMemoryKey) {
+      USBToggle();
+    } else {
+      switch (type) {
+        case 'character':
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
+          return;
+        case 'string': {
+          const strVal = arg.slice(1, -1);
+          const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+          const base = Math.floor(strVal.length / dataTypeSize.string);
+
+          // Ensure one memory cell only contains the defined number of letter
+          for (let i = 0; i < base + 1; i++) {
+            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
+            this.staticDisplay.memory[pos + i * 1].type = 'string';
+            if (i > 0) {
+              this.staticDisplay.selected += 1;
+            }
+          }
+          return;
+        }
+        default:
+          this.staticDisplay.memory[this.staticDisplay.selected].content = arg;
+      }
+    }
+  }
+  
   visitName(ctx) {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
