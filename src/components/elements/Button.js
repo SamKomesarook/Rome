@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import { DisplayContext } from '../../state/DisplayState';
 import { UiContext } from '../../state/UiContext';
-import { processInstrs, ErrorReporter } from '../../lang/Common';
+import { processInstrs, debugInstrs, ErrorReporter } from '../../lang/Common';
+import { USBToggle } from '../computer/Peripherals';
 
 const antlr4 = require('antlr4');
 const { RomeLexer } = require('../../lang/grammar/Rome/RomeLexer');
@@ -83,7 +84,6 @@ const ResetButton = () => {
       id="reset-button"
       onClick={handleReset}
       type="button"
-      disabled={!display.running}
       className="std-btn secondary-btn"
     >
       Reset
@@ -95,13 +95,13 @@ const DebugButton = () => {
   // const [display, setDisplay] = useContext(DisplayContext);
   // const staticDisplay = DisplayContext.createCustomClone(display);
   const [ui, setUi] = useContext(UiContext);
+  const [display, setDisplay] = useContext(DisplayContext);
   const handleDebug = () => {
     // Reset to the default value but keep machine and text value
     setUi((prevUI) => ({
       ...prevUI,
       ctxIsDebugActive: !prevUI.ctxIsDebugActive,
     }));
-    // console.log(staticDisplay.text.split('\n'));
   };
 
   return (
@@ -109,6 +109,7 @@ const DebugButton = () => {
       id="next-button"
       onClick={handleDebug}
       type="button"
+      disabled={!!display.running}
       className="std-btn third-btn"
     >
       Debug
@@ -116,34 +117,92 @@ const DebugButton = () => {
   );
 };
 
-const NextButton = () => {
+const DebugStartButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const staticDisplay = DisplayContext.createCustomClone(display);
-  const handleNext = () => {
-    // Reset to the default value but keep machine and text value
-    setDisplay((prevDisplay) => ({
-      ...DisplayContext.DEFAULT(),
-      machine: prevDisplay.machine,
-      text: prevDisplay.text,
-    }));
-    // console.log(staticDisplay.text.split('\n'));
+  const handleDebugStart = () => {
+    const staticDisplay = DisplayContext.createCustomClone(display);
+    staticDisplay.debuging = true;
+    // setDisplay(DisplayContext.createCustomClone(staticDisplay));
+    const chars = new antlr4.InputStream(staticDisplay.text);
+    const lexer = (staticDisplay.machine)
+      ? new MachineLexer(chars)
+      : new RomeLexer(chars);
+    const tokens = new antlr4.CommonTokenStream(lexer);
+    const parser = (staticDisplay.machine)
+      ? new MachineParser(tokens)
+      : new RomeParser(tokens);
+    const errorReporter = new ErrorReporter(staticDisplay);
+    parser.buildParseTrees = true;
+    parser.removeErrorListeners();
+    parser.addErrorListener(errorReporter);
+
+    const tree = parser.r();
+
+    if (tree.exception === null && parser._syntaxErrors === 0) {
+      try {
+        for (const child of tree.children) {
+          if (child.constructor !== TerminalNodeImpl) {
+            staticDisplay.commands.push(child);
+          }
+        }
+        staticDisplay.errors = false;
+        processInstrs(staticDisplay, errorReporter);
+      } catch (e) {
+        console.log(e);
+        // TODO print error messages
+      }
+    }
+
+    // Render new display information
+    setDisplay(DisplayContext.createCustomClone(staticDisplay));
   };
 
   return (
     <button
-      id="next-button"
-      onClick={handleNext}
+      id="debug-start-button"
+      onClick={handleDebugStart}
       type="button"
       className="std-btn fourth-btn"
+    >
+      Start
+    </button>
+  );
+};
+
+const DebugNextButton = () => {
+  const [display, setDisplay] = useContext(DisplayContext);
+  const handleDebugNext = () => {
+    // Create a deep copy of display
+    const staticDisplay = DisplayContext.createCustomClone(display);
+    staticDisplay.debuging = true;
+    // Get the keys of special memory cells
+    const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+    if (staticDisplay.selected === usbMemoryKey) {
+      USBToggle();
+    }
+    const errorReporter = new ErrorReporter(staticDisplay);
+    // Render new display information
+    processInstrs(staticDisplay, errorReporter);
+    setDisplay(DisplayContext.createCustomClone(staticDisplay));
+    console.log(staticDisplay.debuging);
+    // processInstrs(staticDisplay);
+  };
+
+  return (
+    <button
+      id="debug-next-button"
+      onClick={handleDebugNext}
+      type="button"
+      className="std-btn fifth-btn"
     >
       Next
     </button>
   );
 };
-
 export {
   StartButton,
   ResetButton,
-  NextButton,
+  DebugStartButton,
+  DebugNextButton,
   DebugButton,
 };

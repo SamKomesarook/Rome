@@ -2,6 +2,7 @@ import { RVisitor } from './RomeVisitor';
 import { MVisitor } from './MachineVisitor';
 import { KreadContext } from './grammar/Rome/RomeParser';
 import { ReadContext } from './grammar/Machine/MachineParser';
+import { DisplayContext } from '../state/DisplayState';
 
 const antlr4 = require('antlr4');
 
@@ -39,6 +40,25 @@ const processInstrs = (staticDisplay, errorReporter) => {
       instr.accept(staticDisplay.machine
         ? new MVisitor(staticDisplay, errorReporter)
         : new RVisitor(staticDisplay, errorReporter));
+      // staticDisplay.debuging = !staticDisplay.debuging;
+      if (staticDisplay.debuging) {
+        break;
+      }
+    }
+  }
+};
+
+const debugInstrs = (staticDisplay, errorReporter) => {
+  while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
+    const instr = staticDisplay.commands.shift();
+
+    if (staticDisplay.debuging) {
+      break;
+    } else {
+      instr.accept(staticDisplay.machine
+        ? new MVisitor(staticDisplay, errorReporter)
+        : new RVisitor(staticDisplay, errorReporter));
+      // this.staticDisplay.debuging = true;
     }
   }
 };
@@ -46,4 +66,5 @@ const processInstrs = (staticDisplay, errorReporter) => {
 export {
   processInstrs,
   ErrorReporter,
+  debugInstrs,
 };

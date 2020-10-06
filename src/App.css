@@ -35,6 +35,11 @@
     gap: 1rem;
 }
 
+#debugHflex {
+    display: flex;
+    gap: 1rem;
+}
+
 /** INPUT **/
 
 /*
@@ -182,6 +187,11 @@ button:disabled {
 }
 
 .fourth-btn {
+    background-color: var(--light-green);
+    color: white;
+}
+
+.fifth-btn {
     background-color: var(--light-green);
     color: white;
 }

@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import CodingArea from '../elements/CodingArea';
 import { UiContext } from '../../state/UiContext';
 import Memory from '../computer/Memory';
-import { StartButton, ResetButton, DebugButton, NextButton } from '../elements/Button';
+import {
+  StartButton, ResetButton, DebugButton, DebugStartButton, DebugNextButton,
+} from '../elements/Button';
 import { InputArea, OutputArea } from '../computer/IOArea';
 import { Debuger, Processor } from '../computer/Peripherals';
 import VideoPlayer from '../elements/VideoPlayer';
@@ -24,8 +26,9 @@ const Main = () => {
           <div className={isStratHiddenClass}>
             <StartButton />
           </div>
-          <div className={isDebugRunningClass}>
-            <NextButton />
+          <div className={isDebugRunningClass} id="debugHflex">
+            <DebugStartButton />
+            <DebugNextButton />
           </div>
           <ResetButton />
           <DebugButton />
