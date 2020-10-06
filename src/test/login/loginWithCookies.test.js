@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 
 const loginWithCookies = 'test login with cookies';
 
