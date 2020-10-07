@@ -99,6 +99,7 @@
     align-items: flex-start;
     gap: 0;
     height: 100%;
+    text-decoration-line: inherit;
 }
 
 #console-input {
@@ -111,7 +112,7 @@
     font-family: inherit;
     font-weight: inherit;
     font-style: inherit;
-    text-decoration: inherit;
+    text-decoration-line: inherit;
     text-align: inherit;
     padding: 0;
     margin: 0;
