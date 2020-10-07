@@ -33,6 +33,7 @@
 .hflex {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 /** INPUT **/
@@ -50,19 +51,14 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     outline: none;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid #DDDDDD;
-    font-family: inherit;
+    border: 3px solid var(--border-line-editable);
+    background-color: var(--bg-editable);
 }
 
-.highlightable-input:focus {
+.highlightable-input:focus-within {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-}
-
-.highlightable-input:enabled {
-    border: 3px solid var(--border-line-editable);
-    background-color: var(--bg-editable);
 }
 
 /* Glowing Blue Input Highlights <End> */
@@ -107,6 +103,7 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
 .control:hover, .control:focus {
     border: none;
     box-shadow: none;
+    outline: none;
 }
 
 .control-container label {

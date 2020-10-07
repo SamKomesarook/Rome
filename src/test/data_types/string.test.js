@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 
 // Test names
 const testOverflowToBeforeSpecial = 'test string overflows and reach just right before special cell';
@@ -23,22 +22,23 @@ describe('test string', () => {
   }, 40000);
 
   afterEach(async () => {
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('reset');
+    await driver.actions().keyDown(Key.ENTER).perform();
+    await consoleInput.sendKeys('consoleClear');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
-
-    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
-    stopBtn.click();
   }, 30000);
 
   test(testOverflowToBeforeSpecial, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("123456789012345678901234567890123456789012345678901234567890123456")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -65,7 +65,6 @@ describe('test string', () => {
     const memoryCell11 = await TestConfig.getElementById(driver, 'memory-11');
     const memoryCell11Res = await memoryCell11.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('123456');
     expect(memoryCell1Res).toEqual('789012');
     expect(memoryCell2Res).toEqual('345678');
@@ -84,11 +83,12 @@ describe('test string', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("1234567890123456789012345678901234567890123456789012345678901234567890")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -115,7 +115,7 @@ describe('test string', () => {
     const memoryCell11 = await TestConfig.getElementById(driver, 'memory-11');
     const memoryCell11Res = await memoryCell11.getText();
 
-    expect(outputAreaRes).toEqual('Out of memory');
+    expect(secondConsoleRecordRes).toEqual('> Out of memory');
     expect(memoryCell0Res).toEqual('');
     expect(memoryCell1Res).toEqual('');
     expect(memoryCell2Res).toEqual('');
@@ -134,11 +134,12 @@ describe('test string', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("12345678901234567890123456789012345678901234567890123456789012345678901234567890")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -165,7 +166,7 @@ describe('test string', () => {
     const memoryCell11 = await TestConfig.getElementById(driver, 'memory-11');
     const memoryCell11Res = await memoryCell11.getText();
 
-    expect(outputAreaRes).toEqual('Out of memory');
+    expect(secondConsoleRecordRes).toEqual('> Out of memory');
     expect(memoryCell0Res).toEqual('');
     expect(memoryCell1Res).toEqual('');
     expect(memoryCell2Res).toEqual('');
@@ -184,16 +185,13 @@ describe('test string', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -201,16 +199,17 @@ describe('test string', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite(abc)\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

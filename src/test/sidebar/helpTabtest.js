@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 const { Key } = require('selenium-webdriver');
 
 const testFirstEntry = 'test first entry of help tab';

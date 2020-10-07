@@ -89,11 +89,11 @@ const Help = ({ isActive }) => {
     },
     {
       keyword: 'style',
-      content: 'Style the output container.',
-      example: ['start\n#Output with some fun style!\nimport(IO)\nstyle{\nunderline(true)\nitalic(true)\ntext_align(center)\npaint(blue)\n}\nconsoleWrite("Hello!")\nend'],
+      content: 'Style the console container.',
+      example: ['start\n#Console with some fun style!\nimport(IO)\nstyle{\nunderline(true)\nitalic(true)\ntext_align(center)\npaint(blue)\n}\nconsoleWrite("Hello!")\nend'],
       argument: [{
         name: 'style',
-        desc: 'Style the output window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\bold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
+        desc: 'Style the console window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\bold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
       }],
     },{
       keyword: 'rand',

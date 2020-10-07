@@ -239,9 +239,10 @@ class RVisitor extends RomeVisitor {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
       arg = arg[0];
+      this.staticDisplay.consoleHistory.push(arg);
+    } else {
+      this.staticDisplay.consoleHistory.push(arg.slice(1, -1));
     }
-    // TODO if string, print with parenthesis?
-    this.staticDisplay.output = this.staticDisplay.output.concat(arg.replace('"', '').replace('"', ''), '\n');
   }
 
   visitIo(ctx) {
@@ -306,40 +307,40 @@ class RVisitor extends RomeVisitor {
 
   visitPaint(ctx) {
     const newValue = this.visitChildren(ctx)[2];
-    this.staticDisplay.outputStyle.bgColor = newValue;
+    this.staticDisplay.consoleStyle.bgColor = newValue;
   }
 
   visitTextColor(ctx) {
     const newValue = this.visitChildren(ctx)[2];
-    this.staticDisplay.outputStyle.txtColor = newValue;
+    this.staticDisplay.consoleStyle.txtColor = newValue;
   }
 
   visitTextSize(ctx) {
     const newValue = this.visitChildren(ctx)[2];
-    this.staticDisplay.outputStyle.txtSize = newValue;
+    this.staticDisplay.consoleStyle.txtSize = newValue;
   }
 
   visitTextAlign(ctx) {
     const newValue = this.visitChildren(ctx)[2];
-    this.staticDisplay.outputStyle.txtAlign = newValue;
+    this.staticDisplay.consoleStyle.txtAlign = newValue;
   }
 
   visitBold(ctx) {
     const isBold = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isBold ? 'bold' : '';
-    this.staticDisplay.outputStyle.bold = newValue;
+    this.staticDisplay.consoleStyle.bold = newValue;
   }
 
   visitItalic(ctx) {
     const isItalic = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isItalic ? 'italic' : '';
-    this.staticDisplay.outputStyle.italic = newValue;
+    this.staticDisplay.consoleStyle.italic = newValue;
   }
 
   visitUnderline(ctx) {
     const isUnderline = (this.visitChildren(ctx)[2] === 'true');
     const newValue = isUnderline ? 'underline' : '';
-    this.staticDisplay.outputStyle.underline = newValue;
+    this.staticDisplay.consoleStyle.underline = newValue;
   }
 }
 
