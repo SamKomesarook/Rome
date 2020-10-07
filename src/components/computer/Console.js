@@ -149,6 +149,13 @@ const Console = () => {
           id="console-input"
           ref={inputRef}
           onKeyDown={handleKey}
+          style={{
+            color: `${display.consoleStyle.txtColor}`,
+            textAlign: `${display.consoleStyle.txtAlign}`,
+            fontWeight: `${display.consoleStyle.bold}`,
+            fontStyle: `${display.consoleStyle.italic}`,
+            textDecorationLine: `${display.consoleStyle.underline}`,
+          }}
         />
       </div>
     </div>
