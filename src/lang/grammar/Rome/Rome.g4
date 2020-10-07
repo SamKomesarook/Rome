@@ -76,7 +76,9 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 strargs : STRLIT #Str ;
 
-imp:  IMP '(' (IO | MATH) ')';
+imp:  IMP '(' IO ')' # Io
+    | IMP '(' MATH ')' # Math
+    ;
 
 mem: MEM '(' (intargs | strargs) ')';
 

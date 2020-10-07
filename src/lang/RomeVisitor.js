@@ -245,12 +245,10 @@ class RVisitor extends RomeVisitor {
   }
 
   visitIo(ctx) {
-	console.log("call me");
     this.staticDisplay.importIO = true;
   }
   
   visitMath(ctx) {
-	console.log("call me");
     this.staticDisplay.importMath = true;
   }
 
@@ -258,44 +256,43 @@ class RVisitor extends RomeVisitor {
 	
     // check whether math package is imported 	
 	if (!this.staticDisplay.importMath){
-	  this.errorReporter.generalError('Require import(math) for random number function.');
+	  this.errorReporter.generalError('Require import(math) for random number function');
       return;
 	}
 
-    // set memory type as integer
-    this.staticDisplay.memory[this.staticDisplay.selected].type = 'integer';
-    const { dataTypeSize } = this.staticDisplay;	
-	
-	// check if there is memory
+    // check if there is memory
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
       return;
     }
+
+    // set memory type as integer
+    this.staticDisplay.memory[this.staticDisplay.selected].type = 'integer';
+    const { dataTypeSize } = this.staticDisplay;	
 	
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
       arg = arg[0];
     }
 
-    if (isNaN(arg) || typeof arg != 'integer') {
-      this.errorReporter.generalError('Wrong argument for random, please input an integer');
+    // convert the argument to integer
+    const number = parseInt(arg);
+	
+	// check whether argument less than 0
+    if (number < 0){
+	  this.errorReporter.generalError('Please input a positive number for random number function');
       return;
-    } else {
-		
-      const number = Number(arg);
-      if (number < 0){
-	    this.errorReporter.generalError('Please input a positive number');
-        return;
-	  }
-      if (number > 65535 || number < -65535) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
-        this.errorReporter.generalError('Please input a number within 65535, otherwise the random number will be out of memory');
-        return;
-      }
-	  
-	  const randNum = Math.floor(Math.random() * number);
-	  this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
 	}
+	
+    // check whether argument less than 65536 which	generates random number bigger than 65535 where memory cannot take
+    if (number > 65536) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+      this.errorReporter.generalError('Please input a number which is not bigger than 65536, otherwise the random number will be out of memory');
+      return;
+    }
 	  
+	const randNum = Math.floor(Math.random() * number);
+	this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
+ 
   }
   
   visitName(ctx) {

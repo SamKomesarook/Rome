@@ -20,12 +20,21 @@ RomeListener.prototype.exitStr = function(ctx) {
 };
 
 
-// Enter a parse tree produced by RomeParser#imp.
-RomeListener.prototype.enterImp = function(ctx) {
+// Enter a parse tree produced by RomeParser#Io.
+RomeListener.prototype.enterIo = function(ctx) {
 };
 
-// Exit a parse tree produced by RomeParser#imp.
-RomeListener.prototype.exitImp = function(ctx) {
+// Exit a parse tree produced by RomeParser#Io.
+RomeListener.prototype.exitIo = function(ctx) {
+};
+
+
+// Enter a parse tree produced by RomeParser#Math.
+RomeListener.prototype.enterMath = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Math.
+RomeListener.prototype.exitMath = function(ctx) {
 };
 
 
