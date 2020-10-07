@@ -72,7 +72,7 @@ const Help = ({ isActive }) => {
       example: ['start\nimport(IO)\nend'],
       argument: [{
         name: 'library name',
-        desc: '\'IO\'.',
+        desc: '\'IO\', \'math\'.',
       }],
     }, {
       keyword: 'keyboardRead',
@@ -95,7 +95,15 @@ const Help = ({ isActive }) => {
         name: 'style',
         desc: 'Style the output window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\bold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
       }],
-    },
+    },{
+      keyword: 'rand',
+      content: 'Writes a random number from 0-n(excluded) into the currently selected memory cell.',
+      argument: [{
+        name: 'integer',
+        desc: 'The number range for selecting random number',
+      }],
+      example: ['start\n#Import math package for random number function\nimport(math)\nrand(10)\nend'],
+    }, 
   ];
 
   const [keyword, setKeyword] = useState('start');

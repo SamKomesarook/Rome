@@ -247,18 +247,17 @@ class RVisitor extends RomeVisitor {
   visitIo(ctx) {
     this.staticDisplay.importIO = true;
   }
-  
+
   visitMath(ctx) {
     this.staticDisplay.importMath = true;
   }
 
   visitRandom(ctx) {
-	
-    // check whether math package is imported 	
-	if (!this.staticDisplay.importMath){
-	  this.errorReporter.generalError('Require import(math) for random number function');
+    // check whether math package is imported
+    if (!this.staticDisplay.importMath) {
+      this.errorReporter.generalError('Require import(math) for random number function');
       return;
-	}
+    }
 
     // check if there is memory
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
@@ -268,8 +267,7 @@ class RVisitor extends RomeVisitor {
 
     // set memory type as integer
     this.staticDisplay.memory[this.staticDisplay.selected].type = 'integer';
-    const { dataTypeSize } = this.staticDisplay;	
-	
+
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
       arg = arg[0];
@@ -277,24 +275,23 @@ class RVisitor extends RomeVisitor {
 
     // convert the argument to integer
     const number = parseInt(arg);
-	
-	// check whether argument less than 0
-    if (number < 0){
-	  this.errorReporter.generalError('Please input a positive number for random number function');
+
+    // check whether argument less than 0
+    if (number < 0) {
+      this.errorReporter.generalError('Please input a positive number for random number function');
       return;
-	}
-	
-    // check whether argument less than 65536 which	generates random number bigger than 65535 where memory cannot take
+    }
+
+    // check whether argument less than 65536 which generates random number bigger than 65535
     if (number > 65536) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
       this.errorReporter.generalError('Please input a number which is not bigger than 65536, otherwise the random number will be out of memory');
       return;
     }
-	  
-	const randNum = Math.floor(Math.random() * number);
-	this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
- 
+
+    const randNum = Math.floor(Math.random() * number);
+    this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
   }
-  
+
   visitName(ctx) {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
