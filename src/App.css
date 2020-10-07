@@ -187,12 +187,12 @@ button:disabled {
 }
 
 .fourth-btn {
-    background-color: var(--light-green);
+    background-color: var(--light-purple);
     color: white;
 }
 
 .fifth-btn {
-    background-color: var(--light-green);
+    background-color: var(--light-red);
     color: white;
 }
 

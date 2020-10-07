@@ -40,31 +40,20 @@ const processInstrs = (staticDisplay, errorReporter) => {
       instr.accept(staticDisplay.machine
         ? new MVisitor(staticDisplay, errorReporter)
         : new RVisitor(staticDisplay, errorReporter));
-      // staticDisplay.debuging = !staticDisplay.debuging;
       if (staticDisplay.debuging) {
         break;
       }
     }
   }
-};
-
-const debugInstrs = (staticDisplay, errorReporter) => {
-  while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
-    const instr = staticDisplay.commands.shift();
-
-    if (staticDisplay.debuging) {
-      break;
-    } else {
-      instr.accept(staticDisplay.machine
-        ? new MVisitor(staticDisplay, errorReporter)
-        : new RVisitor(staticDisplay, errorReporter));
-      // this.staticDisplay.debuging = true;
-    }
+  if (staticDisplay.commands.length === 0 && staticDisplay.debuging) {
+    // eslint-disable-next-line no-param-reassign
+    staticDisplay.debuging = false;
+    // eslint-disable-next-line no-param-reassign
+    staticDisplay.debugEndHint = true;
   }
 };
 
 export {
   processInstrs,
   ErrorReporter,
-  debugInstrs,
 };

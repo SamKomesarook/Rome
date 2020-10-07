@@ -85,6 +85,7 @@ const ResetButton = () => {
       onClick={handleReset}
       type="button"
       className="std-btn secondary-btn"
+      disabled={!display.running}
     >
       Reset
     </button>
@@ -106,7 +107,7 @@ const DebugButton = () => {
 
   return (
     <button
-      id="next-button"
+      id="debug-button"
       onClick={handleDebug}
       type="button"
       disabled={!!display.running}
@@ -122,7 +123,8 @@ const DebugStartButton = () => {
   const handleDebugStart = () => {
     const staticDisplay = DisplayContext.createCustomClone(display);
     staticDisplay.debuging = true;
-    // setDisplay(DisplayContext.createCustomClone(staticDisplay));
+    staticDisplay.running = true;
+
     const chars = new antlr4.InputStream(staticDisplay.text);
     const lexer = (staticDisplay.machine)
       ? new MachineLexer(chars)
@@ -163,6 +165,7 @@ const DebugStartButton = () => {
       onClick={handleDebugStart}
       type="button"
       className="std-btn fourth-btn"
+      disabled={!!display.running}
     >
       Start
     </button>
@@ -171,6 +174,7 @@ const DebugStartButton = () => {
 
 const DebugNextButton = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+  const className = display.debugEndHint ? 'std-btn fifth-btn' : 'std-btn primary-btn';
   const handleDebugNext = () => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
@@ -184,8 +188,7 @@ const DebugNextButton = () => {
     // Render new display information
     processInstrs(staticDisplay, errorReporter);
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
-    console.log(staticDisplay.debuging);
-    // processInstrs(staticDisplay);
+    // console.log(staticDisplay.debuging);
   };
 
   return (
@@ -193,7 +196,8 @@ const DebugNextButton = () => {
       id="debug-next-button"
       onClick={handleDebugNext}
       type="button"
-      className="std-btn fifth-btn"
+      className={className}
+      disabled={!display.running || !!display.reading || !display.debuging}
     >
       Next
     </button>

@@ -45,6 +45,7 @@ DisplayContext.DEFAULT = () => {
     input: '', // Content of the input bar
     running: false, // If there is a program running
     debuging: false, // If the debug mode is running
+    debugEndHint: false, // If the debug is finish
     reading: false, // If the program is reading user input
     errors: false, // If there are any runtime errors
     selected: 0, // The key of the selected memory
