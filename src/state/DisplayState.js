@@ -49,6 +49,7 @@ DisplayContext.DEFAULT = () => {
     selected: 0, // The key of the selected memory
     commands: [], // The saved list of commands while the program is reading user input
     importIO: false, // If the user has imported the IO package
+	importMath: false, // If the user has imported the math package
     outputStyle: {
       bgColor: '', // Style: background color
       txtColor: '', // Style: text color

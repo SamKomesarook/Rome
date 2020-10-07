@@ -245,10 +245,12 @@ class RVisitor extends RomeVisitor {
   }
 
   visitIo(ctx) {
+	console.log("call me");
     this.staticDisplay.importIO = true;
   }
   
   visitMath(ctx) {
+	console.log("call me");
     this.staticDisplay.importMath = true;
   }
 
