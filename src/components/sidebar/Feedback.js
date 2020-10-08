@@ -8,6 +8,7 @@ const Feedback = ({ isActive }) => {
 
   const submitFeedback = (e) => {
     e.preventDefault();
+    setStatus('');
 
     // Requires information from emailjs account to work.
     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
