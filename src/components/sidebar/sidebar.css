@@ -7,7 +7,16 @@ aside {
     top: 0;
     right: 0;
     background-color: var(--bg-secondary);
-    filter: brightness(90%); /* To differentiate with memory section*/
+}
+
+aside:hover {
+    width: 16rem;
+    box-shadow: 0 0 5px #071219;
+}
+
+aside:hover .sidebar-item-text {
+    display: block;
+    margin: 3px;
 }
 
 .sidebar-item-list {
@@ -34,6 +43,7 @@ aside {
     color: var(--bg-contrast-secondary);
     background-color: var(--bg-secondary);
     border-right: 0.1rem solid transparent;
+    outline: none;
 }
 
 .sidebar-item:last-child {
@@ -48,15 +58,6 @@ aside {
 .sidebar-item svg {
     width: 2rem;
     margin: 0 1.4rem;
-}
-
-aside:hover {
-    width: 16rem;
-}
-
-aside:hover .sidebar-item-text {
-    display: block;
-    margin: 3px;
 }
 
 .sidebar-btn:hover, .sidebar-btn.toggle-btn[aria-pressed="true"] {
@@ -75,6 +76,7 @@ aside:hover .sidebar-item-text {
     flex-direction: column;
     align-items: center;
     border-right: 2px solid var(--border-line-dark);
+    box-shadow: -3px 0 3px #07121957;
 }
 
 /** DISTANCE LEARNING **/

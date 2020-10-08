@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 
 const testInitalState = 'test initial state of sidebar';
 const testSelectDistLearn = 'test select distance learning';

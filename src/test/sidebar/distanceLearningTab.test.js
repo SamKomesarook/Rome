@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 
 const testTabInit = 'test initial state of distance tab when first entry';
 const testSearchInput1 = 'test searching video using input "fox"';
