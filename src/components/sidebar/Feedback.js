@@ -33,7 +33,7 @@ const Feedback = ({ isActive }) => {
           </label>
         </div>
         <div>
-          <input id="feedbackButton" type="submit" value="Submit" className="std-btn" />
+          <button type="submit" className="std-btn">Submit</button>
         </div>
       </form>
     </div>

@@ -48,7 +48,6 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
-    outline: none;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
     border: 3px solid var(--border-line-editable);
@@ -59,6 +58,12 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
+}
+
+input[type=text], textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
 }
 
 /* Glowing Blue Input Highlights <End> */

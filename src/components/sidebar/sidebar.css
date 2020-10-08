@@ -215,7 +215,6 @@ aside:hover .sidebar-item-text {
 #fb-form {
     width: 100%;
     padding: 1rem;
-    border-bottom: 2px solid var(--border-line-dark);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -233,6 +232,11 @@ aside:hover .sidebar-item-text {
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    cursor: pointer;
     resize: none;
+}
+
+#fb-form button {
+    margin-top: 0.5rem;
+    background-color: var(--bg-primary);
+    color: var(--bg-contrast-primary);
 }

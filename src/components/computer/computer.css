@@ -104,7 +104,3 @@
     margin: 0;
     resize: none;
 }
-
-#console-input:focus {
-    outline: none;
-}
