@@ -209,7 +209,8 @@ aside:hover .sidebar-item-text {
 }
 
 /** FEEDBACK TAB **/
-#input-control {
+
+#fb-form {
     width: 100%;
     padding: 1rem;
     border-bottom: 2px solid var(--border-line-dark);
@@ -219,27 +220,17 @@ aside:hover .sidebar-item-text {
 	align-items: flex-end;
 }
 
-#feedbackContent {
+#fb-content-label {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#fb-form textarea {
     height: 30rem;
-    width: 168%;
+    width: 100%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
     cursor: pointer;
-	resize: none;
-}
-
-#feedbackButton {
-    background-color: var(--bg-primary);
-    border: none;
-    color: white;
-    padding: 10px 30px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-#feedbackDirection{
-	flex-direction:column;
-    align-items: flex-start;
+    resize: none;
 }
