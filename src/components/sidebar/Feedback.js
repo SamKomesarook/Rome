@@ -7,33 +7,33 @@ const Feedback = ({ isActive }) => {
   const isActiveClass = isActive ? '' : ' hidden';
 
   const submitFeedback = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    // emailjs.sendForm('service_gigqfhk', 'service_gigqfhk', e.target, 'user_SVlHitOYZ16May1HWdVZw')
-    //   .then((result) => {
-    //     console.log(result.text);
-    //   }, (error) => {
-    //     console.log(error.text);
-    //   });
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
   };
 
   return (
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
-      <form id="fb-form">
+      <form id="fb-form" onSubmit={submitFeedback}>
         <div className="control-container">
           <label htmlFor="fb-subject">
-            Email:
+            Subject:
             <input type="text" id="fb-subject" name="subject" placeholder="Subject" className="control" />
           </label>
         </div>
         <div className="control-container">
           <label htmlFor="fb-content" id="fb-content-label">
             Feedback:
-            <textarea type="text" id="fb-content" form="fb-form" name="Content" placeholder="Content of feedback" />
+            <textarea type="text" id="fb-content" form="fb-form" name="message" placeholder="Content of feedback" />
           </label>
         </div>
         <div>
-          <input id="feedbackButton" type="submit" value="Submit" onClick={submitFeedback} className="std-btn" />
+          <input id="feedbackButton" type="submit" value="Submit" className="std-btn" />
         </div>
       </form>
     </div>
