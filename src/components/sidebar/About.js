@@ -13,7 +13,7 @@ const About = ({ isActive }) => {
   };
 
   return (
-    <div id="about" className={`sidebar-item-pane${isActiveClass}`}>
+    <div id="about" className={`sidebar-item-pane ${isActiveClass}`}>
       <div id="about-content">
         <div id="about-title">
           <span>Rome-Education + Julia Brown Schools +&nbsp;</span>

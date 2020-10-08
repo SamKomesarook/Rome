@@ -59,18 +59,38 @@
     grid-template-rows: repeat(6, 1fr);
 }
 
-/** PERIPHERAL **/
+/** PROCESSOR **/
 
-.peripheral-icon-grp {
-    align-self: center;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
+.processor {
+    padding: 0.2rem;
+    height: 3.5rem;
+    border-radius: 10px;
+    /* border: 3px solid black; */
+    box-shadow: 0 0 2.5px #071219;
+    background-color: var(--bg-secondary);
+    color: #ababab;
 }
 
-.periph-icon {
-    background-color:  #384047;
-    height: 4rem;
+.processor-active {
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    position: relative;
+    animation: change 10s ease-in-out infinite;
+    padding: 0.2rem;
+    height: 3.5rem;
+    border-radius: 10px;
+    color: white;
+    box-shadow: none;
+}
+
+@keyframes change {
+    0% {
+        background-position: 0 50%;
+    } 50% {
+        background-position: 100% 50%;
+    } 100% {
+        background-position: 0 50%;
+    }
 }
 
 /** CONSOLE **/
