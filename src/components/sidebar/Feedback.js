@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './sidebar.css';
 import emailjs from 'emailjs-com';
 
 const Feedback = ({ isActive }) => {
   const isActiveClass = isActive ? '' : ' hidden';
+  const [status, setStatus] = useState('');
 
   const submitFeedback = (e) => {
     e.preventDefault();
 
+    // Requires information from emailjs account to work.
     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
       .then((result) => {
         console.log(result.text);
+        setStatus('success');
       }, (error) => {
         console.log(error.text);
+        setStatus('fail');
       });
   };
 
@@ -32,7 +36,15 @@ const Feedback = ({ isActive }) => {
             <textarea type="text" id="fb-content" form="fb-form" name="message" placeholder="Content of feedback" />
           </label>
         </div>
-        <div>
+        <div className="hflex">
+          <div className={status === 'success' ? '' : 'hidden'}>
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21,13.34C20.37,13.12 19.7,13 19,13A6,6 0 0,0 13,19C13,19.34 13.03,19.67 13.08,20H3A2,2 0 0,1 1,18V6C1,4.89 1.89,4 3,4H19A2,2 0 0,1 21,6V13.34M23.5,17L18.5,22L15,18.5L16.5,17L18.5,19L22,15.5L23.5,17M3,6V8L11,13L19,8V6L11,11L3,6Z" /></svg>
+            Successfully sent
+          </div>
+          <div className={status === 'fail' ? '' : 'hidden'} style={{color: 'red'}}>
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.41 19L22.54 21.12L21.12 22.54L19 20.41L16.88 22.54L15.47 21.12L17.59 19L15.47 16.88L16.88 15.47L19 17.59L21.12 15.47L22.54 16.88L20.41 19M13 19C13 19.34 13.04 19.67 13.09 20H4C2.9 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H20C21.1 4 22 4.89 22 6V13.81C21.12 13.3 20.1 13 19 13C15.69 13 13 15.69 13 19M20 8V6L12 11L4 6V8L12 13L20 8Z" /></svg>
+            Failed to send
+          </div>
           <button type="submit" className="std-btn">Submit</button>
         </div>
       </form>

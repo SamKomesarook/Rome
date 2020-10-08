@@ -7,6 +7,7 @@ aside {
     top: 0;
     right: 0;
     background-color: var(--bg-secondary);
+    font-size: 14px;
 }
 
 aside:hover {
@@ -43,7 +44,6 @@ aside:hover .sidebar-item-text {
     color: var(--bg-contrast-secondary);
     background-color: var(--bg-secondary);
     border-right: 0.1rem solid transparent;
-    outline: none;
 }
 
 .sidebar-item:last-child {
@@ -72,6 +72,7 @@ aside:hover .sidebar-item-text {
     width: 20rem;
     height: 100vh;
     background-color: var(--bg-secondary);
+    color: var(--bg-contrast-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -235,8 +236,15 @@ aside:hover .sidebar-item-text {
     resize: none;
 }
 
-#fb-form button {
+#fb-form > div:last-child{
     margin-top: 0.5rem;
+}
+
+#fb-form button {
     background-color: var(--bg-primary);
     color: var(--bg-contrast-primary);
+}
+
+#fb-form svg {
+    height: 2rem;
 }
