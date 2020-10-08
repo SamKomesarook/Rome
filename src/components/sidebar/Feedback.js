@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './sidebar.css';
 import emailjs from 'emailjs-com';
 
 const Feedback = ({ isActive }) => {
@@ -13,10 +12,8 @@ const Feedback = ({ isActive }) => {
     // Requires information from emailjs account to work.
     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
       .then((result) => {
-        console.log(result.text);
         setStatus('success');
       }, (error) => {
-        console.log(error.text);
         setStatus('fail');
       });
   };
