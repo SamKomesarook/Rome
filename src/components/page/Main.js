@@ -2,11 +2,8 @@ import React, { useContext } from 'react';
 import CodingArea from '../elements/CodingArea';
 import { UiContext } from '../../state/UiContext';
 import Memory from '../computer/Memory';
-import {
-  StartButton, ResetButton, DebugButton, DebugStartButton, DebugNextButton,
-} from '../elements/Button';
-import { InputArea, OutputArea } from '../computer/IOArea';
-import { Debuger, Processor } from '../computer/Peripherals';
+import Console from '../computer/Console';
+import { Processor } from '../computer/Peripherals';
 import VideoPlayer from '../elements/VideoPlayer';
 import '../computer/computer.css';
 import '../elements/styles.css';
@@ -22,17 +19,6 @@ const Main = () => {
       <div className={`layout-column ${isElementHiddenClass}`}>
         <VideoPlayer />
         <CodingArea />
-        <div className="hflex">
-          <div className={isStratHiddenClass}>
-            <StartButton />
-          </div>
-          <div className={isDebugRunningClass} id="debugHflex">
-            <DebugStartButton />
-            <DebugNextButton />
-          </div>
-          <ResetButton />
-          <DebugButton />
-        </div>
       </div>
       <div className="layout-column" id="computer-column">
         <Memory />
@@ -42,8 +28,7 @@ const Main = () => {
             <Debuger />
           </div>
         </div>
-        <OutputArea />
-        <InputArea />
+        <Console />
       </div>
     </div>
   );

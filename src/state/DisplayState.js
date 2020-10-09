@@ -41,8 +41,7 @@ DisplayContext.DEFAULT = () => {
     machine: false, // If the user is using the Machine language
     delay: 10, // Number of seconds of delay between command execution
     text: '', // Content of the programming section
-    output: '', // Content of the output bar
-    input: '', // Content of the input bar
+    consoleHistory: [],
     running: false, // If there is a program running
     debuging: false, // If the debug mode is running
     debugEndHint: false, // If the debug is finish
@@ -51,7 +50,7 @@ DisplayContext.DEFAULT = () => {
     selected: 0, // The key of the selected memory
     commands: [], // The saved list of commands while the program is reading user input
     importIO: false, // If the user has imported the IO package
-    outputStyle: {
+    consoleStyle: {
       bgColor: '', // Style: background color
       txtColor: '', // Style: text color
       txtSize: '', // Style: text size
@@ -78,7 +77,7 @@ DisplayContext.DEFAULT = () => {
 DisplayContext.createCustomClone = (display) => {
   const deepClone = {
     ...display,
-    outputStyle: { ...display.outputStyle },
+    consoleStyle: { ...display.consoleStyle },
     memory: JSON.parse(JSON.stringify(display.memory)),
   };
 

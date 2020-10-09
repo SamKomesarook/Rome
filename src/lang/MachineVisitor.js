@@ -32,7 +32,8 @@ class MVisitor extends MachineVisitor {
 
   visitPrint(ctx) {
     // TODO convert to ascii
-    this.staticDisplay.output = this.staticDisplay.output.concat(this.staticDisplay.memory[this.staticDisplay.selected].content, '\n');
+    const selectedMemoryContent = this.staticDisplay.memory[this.staticDisplay.selected].content;
+    this.staticDisplay.consoleHistory.push(selectedMemoryContent);
   }
 
   visitRead(ctx) {

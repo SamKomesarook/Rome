@@ -1,6 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
 
 const testName = {
   testAboutInfo: 'test the about info shows in about tab',
