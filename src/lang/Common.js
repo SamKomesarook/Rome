@@ -2,7 +2,6 @@ import { RVisitor } from './RomeVisitor';
 import { MVisitor } from './MachineVisitor';
 import { KreadContext } from './grammar/Rome/RomeParser';
 import { ReadContext } from './grammar/Machine/MachineParser';
-import { DisplayContext } from '../state/DisplayState';
 
 const antlr4 = require('antlr4');
 
@@ -53,38 +52,7 @@ const processInstrs = (staticDisplay, errorReporter) => {
   }
 };
 
-const debugInstrs = (staticDisplay, errorReporter) => {
-  while (staticDisplay.commands.length !== 0) {
-    const instr = staticDisplay.commands.shift();
-
-    if (instr.children[0].constructor === KreadContext
-       || instr.children[0].constructor === ReadContext) {
-      if (!staticDisplay.importIO) {
-        errorReporter.generalError("Unknown function 'keyboardRead'");
-        break;
-      }
-      // eslint-disable-next-line no-param-reassign
-      staticDisplay.reading = true;
-      break;
-    } else {
-      instr.accept(staticDisplay.machine
-        ? new MVisitor(staticDisplay, errorReporter)
-        : new RVisitor(staticDisplay, errorReporter));
-      if (staticDisplay.debuging) {
-        break;
-      }
-    }
-  }
-  if (staticDisplay.commands.length === 0 && staticDisplay.debuging && !staticDisplay.error) {
-    // eslint-disable-next-line no-param-reassign
-    staticDisplay.debuging = false;
-    // eslint-disable-next-line no-param-reassign
-    staticDisplay.debugEndHint = true;
-  }
-};
-
 export {
   processInstrs,
   ErrorReporter,
-  debugInstrs,
 };

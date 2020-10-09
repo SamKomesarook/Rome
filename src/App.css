@@ -168,27 +168,27 @@ button:disabled {
     font-weight: bold;
 }
 
-.primary-btn {
-    background-color: var(--baby-blue);
+.next-btn {
+    background-color: var(--light-green);
     color: white;
 }
 
-.secondary-btn {
+.reset-btn {
     background-color: var(--light-grey);
     color: dimgray;
 }
 
-.third-btn {
+.debug-btn {
     background-color: var(--light-purple);
     color: white;
 }
 
-.fourth-btn {
-    background-color: var(--light-purple);
+.start-btn {
+    background-color: var(--baby-blue);
     color: white;
 }
 
-.fifth-btn {
+.stop-btn {
     background-color: var(--light-red);
     color: white;
 }
