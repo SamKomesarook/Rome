@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { TerminalNodeImpl } from 'antlr4/tree/Tree';
+import { TerminalNodeImpl, ErrorNodeImpl } from 'antlr4/tree/Tree';
+import { ConsoleErrorListener } from 'antlr4/error/ErrorListener';
 import { DisplayContext } from '../../state/DisplayState';
 import { UiContext } from '../../state/UiContext';
 import { processInstrs, debugInstrs, ErrorReporter } from '../../lang/Common';
@@ -140,23 +141,24 @@ const DebugStartButton = () => {
 
     const tree = parser.r();
 
-    if (tree.exception === null && parser._syntaxErrors === 0) {
-      try {
-        for (const child of tree.children) {
-          if (child.constructor !== TerminalNodeImpl) {
-            staticDisplay.commands.push(child);
-          }
-        }
-        staticDisplay.errors = false;
-        processInstrs(staticDisplay, errorReporter);
-      } catch (e) {
-        console.log(e);
-        // TODO print error messages
+    for (const child of tree.children) {
+      if (child.constructor !== TerminalNodeImpl) {
+        staticDisplay.commands.push(child);
+      }
+      if (child.constructor === ErrorNodeImpl) {
+        staticDisplay.errors = true;
+        break;
       }
     }
+    console.log(staticDisplay.commands);
+    debugInstrs(staticDisplay, errorReporter);
 
+    // debugInstrs(staticDisplay, errorReporter);
     // Render new display information
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
+    // console.log(`running:${staticDisplay.running}`);
+    // console.log(`debuging:${staticDisplay.debuging}`);
+    // console.log(`reading:${staticDisplay.reading}`);
   };
 
   return (
@@ -178,7 +180,7 @@ const DebugNextButton = () => {
   const handleDebugNext = () => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
-    staticDisplay.debuging = true;
+    // staticDisplay.debuging = true;
     // Get the keys of special memory cells
     const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
     if (staticDisplay.selected === usbMemoryKey) {
@@ -186,7 +188,7 @@ const DebugNextButton = () => {
     }
     const errorReporter = new ErrorReporter(staticDisplay);
     // Render new display information
-    processInstrs(staticDisplay, errorReporter);
+    debugInstrs(staticDisplay, errorReporter);
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
     // console.log(staticDisplay.debuging);
   };
