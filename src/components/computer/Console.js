@@ -8,6 +8,7 @@ import { RomeLexer } from '../../lang/grammar/Rome/RomeLexer';
 import { RomeParser } from '../../lang/grammar/Rome/RomeParser';
 import { MachineLexer } from '../../lang/grammar/Machine/MachineLexer';
 import { MachineParser } from '../../lang/grammar/Machine/MachineParser';
+import DebugControl from './DebugControl';
 
 const Console = () => {
   const [display, setDisplay] = useContext(DisplayContext);
@@ -129,28 +130,31 @@ const Console = () => {
   ));
 
   return (
-    <div
-      id="console"
-      style={{
-        backgroundColor: `${display.consoleStyle.bgColor}`,
-        color: `${display.consoleStyle.txtColor}`,
-        fontSize: `${display.consoleStyle.txtSize}`,
-        textAlign: `${display.consoleStyle.txtAlign}`,
-        fontWeight: `${display.consoleStyle.bold}`,
-        fontStyle: `${display.consoleStyle.italic}`,
-        textDecorationLine: `${display.consoleStyle.underline}`,
-      }}
-      className="code highlightable-input"
-    >
-      {consoleHistoryList}
-      <div className="hflex">
-        <span>>&nbsp;</span>
-        <textarea
-          id="console-input"
-          ref={inputRef}
-          onKeyDown={handleKey}
-        />
+    <div id="console-wrapper">
+      <div
+        id="console"
+        style={{
+          backgroundColor: `${display.consoleStyle.bgColor}`,
+          color: `${display.consoleStyle.txtColor}`,
+          fontSize: `${display.consoleStyle.txtSize}`,
+          textAlign: `${display.consoleStyle.txtAlign}`,
+          fontWeight: `${display.consoleStyle.bold}`,
+          fontStyle: `${display.consoleStyle.italic}`,
+          textDecorationLine: `${display.consoleStyle.underline}`,
+        }}
+        className="code highlightable-input"
+      >
+        {consoleHistoryList}
+        <div className="hflex">
+          <span>>&nbsp;</span>
+          <textarea
+            id="console-input"
+            ref={inputRef}
+            onKeyDown={handleKey}
+          />
+        </div>
       </div>
+      <DebugControl />
     </div>
   );
 };
