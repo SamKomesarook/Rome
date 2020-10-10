@@ -1,4 +1,4 @@
-import webdriver, { Key } from 'selenium-webdriver';
+import webdriver from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
 
 const testOpenAppRunView = 'test open app run view';
