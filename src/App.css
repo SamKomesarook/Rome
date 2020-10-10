@@ -36,11 +36,6 @@
     align-items: center;
 }
 
-#debugHflex {
-    display: flex;
-    gap: 1rem;
-}
-
 /** INPUT **/
 
 /*

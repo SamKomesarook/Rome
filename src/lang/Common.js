@@ -14,11 +14,13 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
     this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 
   generalError(msg) {
     this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 }
 
@@ -27,7 +29,7 @@ const processInstrs = (staticDisplay, errorReporter) => {
     const instr = staticDisplay.commands.shift();
 
     if (instr.children[0].constructor === KreadContext
-       || instr.children[0].constructor === ReadContext) {
+      || instr.children[0].constructor === ReadContext) {
       if (!staticDisplay.importIO) {
         errorReporter.generalError("Unknown function 'keyboardRead'");
         break;

@@ -22,9 +22,7 @@ const Main = () => {
         <VideoPlayer />
         <CodingArea />
         <div className="hflex">
-          <div className={isDebugRunningClass} id="debugHflex">
-            <DebugStartButton />
-            <ResetButton />
+          <div className={isDebugRunningClass}>
             <DebugNextButton />
           </div>
           <DebugButton />
