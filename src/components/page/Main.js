@@ -7,26 +7,37 @@ import { Processor } from '../computer/Peripherals';
 import VideoPlayer from '../elements/VideoPlayer';
 import '../computer/computer.css';
 import '../elements/styles.css';
+import { Tablet } from './Tablet';
+import { Computer } from './Computer';
 
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
-  const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
-
-  return (
-    <div className="main">
-      <div className={`layout-column ${isElementHiddenClass}`}>
-        <VideoPlayer />
-        <CodingArea />
-      </div>
-      <div className="layout-column" id="computer-column">
-        <Memory />
-        <div className={`peripheral-icon-grp ${isElementHiddenClass}`}>
-          <Processor />
-        </div>
-        <Console />
-      </div>
-    </div>
-  );
+  
+  const memorySize = () => {
+	  console.log('call me');
+      setUi((prevUI) => ({
+        ...prevUI,
+        ctxMemoryTabletSize: 'memory-section-size-tablet',
+      }));
+  };
+  
+  if (navigator.userAgent.match(/Tablet|iPad/i))
+  {
+	memorySize();
+	/*
+    const memorySize = () => {
+	  console.log('call me');
+      setUi((prevUI) => ({
+        ...prevUI,
+        ctxMemoryTabletSize: 'memory-section-size-tablet',
+      }));
+    };
+	*/
+	return (<Tablet />);
+  } else {
+	return (<Computer />);
+  }
+  
 };
 
 export default Main;

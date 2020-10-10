@@ -7,6 +7,7 @@ export const UiProvider = (props) => {
     ctxIsVideoPlayerActive: false,
     ctxYoutubeContentID: '',
     ctxIsAppRunViewActive: false,
+	ctxMemoryTabletSize: 'memory-section-size-computer'
   });
 
   return (

@@ -1,7 +1,25 @@
 /** MEMORY **/
 
 .memory-section {
-    height: 50vh;
+    width: 100%;
+    background-color: var(--border-line);
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    border: 3px solid var(--border-line);
+    border-radius: 10px;
+}
+
+#memory-section-size-computer {
+	height: 50vh;
+}
+
+#memory-section-size-tablet {
+	height: 25vh;
+}
+.memory-section-tablet {
+    height: 25vh;
     width: 100%;
     background-color: var(--border-line);
     display: grid;
