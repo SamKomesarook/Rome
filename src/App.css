@@ -168,26 +168,6 @@ button:disabled {
     color: white;
 }
 
-.reset-btn {
-    background-color: var(--light-grey);
-    color: dimgray;
-}
-
-.debug-btn {
-    background-color: var(--light-purple);
-    color: white;
-}
-
-.start-btn {
-    background-color: var(--baby-blue);
-    color: white;
-}
-
-.stop-btn {
-    background-color: var(--light-red);
-    color: white;
-}
-
 /** OTHER **/
 
 .noselect {

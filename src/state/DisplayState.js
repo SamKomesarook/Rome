@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export const DisplayContext = React.createContext();
 
@@ -43,8 +43,9 @@ DisplayContext.DEFAULT = () => {
     text: '', // Content of the programming section
     consoleHistory: [],
     running: false, // If there is a program running
-    debuging: false, // If the debug mode is running
-    debugEndHint: false, // If the debug is finish
+    isDebugAcive: false,
+    // debuging: false, // If the debug mode is running
+    // debugEndHint: false, // If the debug is finish
     reading: false, // If the program is reading user input
     errors: false, // If there are any runtime errors
     selected: 0, // The key of the selected memory

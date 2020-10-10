@@ -20,6 +20,7 @@ const Console = () => {
       ...DisplayContext.DEFAULT(),
       machine: display.machine,
       text: display.text,
+      isDebugActive: display.isDebugActive,
       consoleHistory: [...display.consoleHistory],
     });
 

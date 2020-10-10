@@ -61,7 +61,7 @@
 
 /** PROCESSOR **/
 
-.processor {
+.app-status {
     padding: 0.2rem;
     height: 3.5rem;
     border-radius: 10px;
@@ -71,7 +71,7 @@
     color: #ababab;
 }
 
-.processor-active {
+.app-active {
     background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
     background-size: 400% 400%;
     position: relative;
