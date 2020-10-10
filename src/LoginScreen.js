@@ -42,18 +42,14 @@ function LoginScreen() {
     }
   };
 
-  const back = () => {
-    setPopUp(false);
-  };
-
   if (log) {
     return (
       <App />
     );
   }
 
-  const isMain = popUp ? 'hidden' : 'login-screen';
-  const isPopUP = popUp ? 'login-screen' : 'hidden';
+  const isMain = 'login-screen';
+
   return (
     <div className="login-container">
       <div className={isMain}>
@@ -61,7 +57,7 @@ function LoginScreen() {
         <input
           name="password-field"
           type="password"
-          className="login-input"
+          className={!popUp ? 'login-input' : 'login-input-invalid'}
           value={password}
           onChange={setInput}
           placeholder="password"
@@ -74,18 +70,7 @@ function LoginScreen() {
           Go
         </button>
       </div>
-      <div className={isPopUP}>
-        <div>
-          Wrong password, please try again
-        </div>
-        <button
-          type="submit"
-          onClick={back}
-          className="login-btn"
-        >
-          Back
-        </button>
-      </div>
+
     </div>
   );
 }
