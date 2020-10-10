@@ -106,20 +106,34 @@
     flex-grow: 1;
 }
 
+#console > div {
+    word-break: break-all;
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+}
+
 #console .hflex {
     align-items: flex-start;
     gap: 0;
     height: 100%;
+    text-decoration-line: inherit;
 }
 
 #console-input {
     background-color: inherit;
     width: 100%;
     height: 100%;
-    color: white;
+    color: inherit;
     border: none;
-    font-size: 1rem;
+    font-size: inherit;
     font-family: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration-line: inherit;
+    text-align: inherit;
     padding: 0;
     margin: 0;
     resize: none;
