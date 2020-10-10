@@ -24,7 +24,7 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 }
 
-const processInstrs = (staticDisplay, errorReporter) => {
+const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
   while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
     const instr = staticDisplay.commands.shift();
 
@@ -38,19 +38,15 @@ const processInstrs = (staticDisplay, errorReporter) => {
       staticDisplay.reading = true;
       break;
     } else {
+      // Process the line of code
       instr.accept(staticDisplay.machine
         ? new MVisitor(staticDisplay, errorReporter)
         : new RVisitor(staticDisplay, errorReporter));
-      if (staticDisplay.debuging) {
+
+      if (staticDisplay.isDebugActive) {
         break;
       }
     }
-  }
-  if (staticDisplay.commands.length === 0 && staticDisplay.debuging) {
-    // eslint-disable-next-line no-param-reassign
-    staticDisplay.debuging = false;
-    // eslint-disable-next-line no-param-reassign
-    staticDisplay.debugEndHint = true;
   }
 };
 

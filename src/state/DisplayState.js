@@ -43,9 +43,7 @@ DisplayContext.DEFAULT = () => {
     text: '', // Content of the programming section
     consoleHistory: [],
     running: false, // If there is a program running
-    isDebugAcive: false,
-    // debuging: false, // If the debug mode is running
-    // debugEndHint: false, // If the debug is finish
+    isDebugAcive: false, // Is the debug mode is active
     reading: false, // If the program is reading user input
     errors: false, // If there are any runtime errors
     selected: 0, // The key of the selected memory
