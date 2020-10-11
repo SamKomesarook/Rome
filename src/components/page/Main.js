@@ -14,16 +14,16 @@ const Main = () => {
   const [ui, setUi] = useContext(UiContext);
   
   const memorySize = () => {
-	  console.log('call me');
-      setUi((prevUI) => ({
-        ...prevUI,
-        ctxMemoryTabletSize: 'memory-section-size-tablet',
-      }));
+	console.log('call me');
+    setUi((prevUI) => ({
+      ...prevUI,
+      ctxMemoryTabletSize: 'memory-section-size-tablet',
+    }));
   };
   
   if (navigator.userAgent.match(/Tablet|iPad/i))
   {
-	memorySize();
+	//memorySize();
 	/*
     const memorySize = () => {
 	  console.log('call me');
