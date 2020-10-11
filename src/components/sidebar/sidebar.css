@@ -8,6 +8,7 @@ aside {
     right: 0;
     background-color: var(--bg-secondary);
     font-size: 14px;
+    z-index: 100;
 }
 
 aside:hover {
@@ -60,7 +61,7 @@ aside:hover .sidebar-item-text {
     margin: 0 1.4rem;
 }
 
-.sidebar-btn:hover, .sidebar-btn.toggle-btn[aria-pressed="true"] {
+.sidebar-btn:hover, .sidebar-btn:focus, .sidebar-btn.toggle-btn[aria-pressed="true"] {
     color: white;
     border-right: 0.1rem solid white;
 }
@@ -125,7 +126,7 @@ aside:hover .sidebar-item-text {
 
 .argument-desc{
     color: white;
-     display:inline; 
+    display:inline; 
 }
 
 .argument-elem{
@@ -184,15 +185,6 @@ aside:hover .sidebar-item-text {
     display: flex;
 }
 
-#about-title > svg {
-    height: 1.5rem;
-}
-
-#title-heart{
-	background-color: var(--bg-secondary);
-	outline:none;
-}
-
 .about-heading {
     text-align: center;
     font-size: 1.5rem;
@@ -203,6 +195,31 @@ aside:hover .sidebar-item-text {
 .about-paragraph {
     text-align: center;
     margin-top: 1rem;
+}
+
+.heart-animation {
+    background-image: url('../../icons/heart_animation.png');
+    background-repeat: no-repeat;
+    background-size: 2900%;
+    background-position: left;
+    height: 50px;
+    width: 80px;
+    margin: 0 -20px;
+    cursor: pointer;
+    outline: none;
+}
+
+.animate {
+    animation: heart-burst .8s steps(28) forwards;
+}
+
+@keyframes heart-burst {
+    0% {
+        background-position: left
+    }
+    100% {
+        background-position: right
+    }
 }
 
 /** HELP TAB **/
