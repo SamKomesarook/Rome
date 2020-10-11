@@ -2,7 +2,7 @@ name: Google Cloud Continuous Deployment - Staging site
 
 on:
   push:
-    branches: [ nicko/cd-staging-setup ]
+    branches: [ staging ]
     
 jobs:
   build:
