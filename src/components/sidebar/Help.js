@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 const Help = ({ isActive }) => {
   const DATA = [
     {
+      keyword: 'start',
+      content: 'Indicates the start of the program.\nAll programs must begin with this command.',
+      example: ['start\n#The simplest possible program!\nend'],
+    }, {
+      keyword: 'end',
+      content: 'Indicates the end of the program.\nAll programs must end with this command.',
+      example: ['start\n#The simplest possible program!\nend'],
+    }, {
       keyword: 'loop',
       content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.',
       argument: [{
@@ -38,14 +46,6 @@ const Help = ({ isActive }) => {
         name: 'contents',
         desc: 'Numbers, charaters, or string,',
       }],
-    }, {
-      keyword: 'start',
-      content: 'Indicates the start of the program.\nAll programs must begin with this command.',
-      example: ['start\n#The simplest possible program!\nend'],
-    }, {
-      keyword: 'end',
-      content: 'Indicates the end of the program.\nAll programs must end with this command.\n\nExample:\nstart\n//do something\nend',
-      example: ['hello', 'goodbye'],
     }, {
       keyword: 'move',
       content: 'Changes the selected memory cell.',
@@ -134,9 +134,8 @@ const Help = ({ isActive }) => {
         </div>
         <div className="argument-container">
           {keyword}
-          {keyword !== 'style'
-          && (
-          <div>
+          {keyword !== 'style' && (
+          <>
             {args && '('}
             {args && args.map((item, index) => {
               if (index === args.length - 1) {
@@ -164,7 +163,7 @@ const Help = ({ isActive }) => {
             </div>
             )}
             {codeArgs && '}'}
-          </div>
+          </>
           )}
           {keyword === 'style' && '{'}
           {keyword === 'style' && (
