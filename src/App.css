@@ -60,7 +60,7 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     margin: 5px 1px 3px 0px;
 }
 
-input[type=text], textarea {
+input, textarea {
     font-family: inherit;
     font-size: inherit;
     outline: none;
