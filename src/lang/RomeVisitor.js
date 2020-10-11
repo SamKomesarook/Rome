@@ -138,7 +138,7 @@ class RVisitor extends RomeVisitor {
     }
 
     if (type === 'string') {
-      if (arg[0] !== '"' || arg[arg.length - 1] !== '"') {
+      if ((arg[0] !== '"' || arg[arg.length - 1] !== '"') && (arg[0] !== '“' || arg[arg.length - 1] !== '”')) {
         this.errorReporter.generalError(WRONG_TYPE);
         return;
       }
@@ -155,7 +155,7 @@ class RVisitor extends RomeVisitor {
     }
 
     if (type === 'character') {
-      if (arg[0] !== "'" || arg[arg.length - 1] !== "'") {
+      if ((arg[0] !== "'" || arg[arg.length - 1] !== "'") && (arg[0] !== '‘' || arg[arg.length - 1] !== '’')) {
         this.errorReporter.generalError(WRONG_TYPE);
         return;
       }
