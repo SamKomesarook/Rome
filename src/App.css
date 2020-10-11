@@ -163,11 +163,6 @@ button:disabled {
     font-weight: bold;
 }
 
-.next-btn {
-    background-color: var(--light-green);
-    color: white;
-}
-
 /** OTHER **/
 
 .noselect {

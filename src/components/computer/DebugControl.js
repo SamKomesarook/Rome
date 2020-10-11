@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
+import { UiContext } from '../../state/UiContext';
 import { USBToggle } from './Peripherals';
 import { processInstrs } from '../../lang/Common';
 
 const DebugControl = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+  const [ui, setUi] = useContext(UiContext);
   const isDebugging = display.isDebugActive && display.running;
+  const isElementHidden = ui.ctxIsAppRunViewActive ? 'hidden' : '';
 
   const handleClickDebug = () => {
     setDisplay((prevDisplay) => ({
@@ -33,7 +36,7 @@ const DebugControl = () => {
   };
 
   return (
-    <div id="debug-control">
+    <div id="debug-control" className={isElementHidden}>
       <div
         role="button"
         className={`hovered ${display.running ? 'hidden' : ''}`}
