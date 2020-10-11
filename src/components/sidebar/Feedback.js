@@ -23,6 +23,12 @@ const Feedback = ({ isActive }) => {
     <div id="feedback" className={`sidebar-item-pane${isActiveClass}`}>
       <form id="fb-form" onSubmit={submitFeedback}>
         <div className="control-container">
+          <label htmlFor="fb-email">
+            Email:
+            <input type="email" id="fb-email" name="email" placeholder="Email" className="control" />
+          </label>
+        </div>
+        <div className="control-container">
           <label htmlFor="fb-subject">
             Subject:
             <input type="text" id="fb-subject" name="subject" placeholder="Subject" className="control" />

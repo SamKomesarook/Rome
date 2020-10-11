@@ -66,6 +66,11 @@ input[type=text], textarea {
     outline: none;
 }
 
+input:invalid {
+    box-shadow: 0 2px firebrick;
+    transition: all 0.2s ease-in-out;
+}
+
 /* Glowing Blue Input Highlights <End> */
 
 /** CONTROL **/
@@ -95,13 +100,12 @@ input[type=text], textarea {
     color: var(--bg-contrast-primary);
 }
 
-.control-container .control {
+.control {
     height: 2rem;
     width: 100%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    cursor: pointer;
 }
 
 .control:hover, .control:focus {
@@ -119,10 +123,6 @@ input[type=text], textarea {
     gap: 0.5rem;
 }
 
-input[type=text].control {
-    cursor: text;
-}
-
 select.control {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -135,6 +135,7 @@ select.control {
     text-overflow: ellipsis;
     padding-right: 1rem;
     font-family: inherit;
+    cursor: pointer;
 }
 
 select.control > option {
@@ -152,7 +153,7 @@ button {
     outline: none;
 }
 
-button:hover:enabled, div[role="button"]:hover {
+button:hover:enabled, div[role=button]:hover {
     cursor: pointer;
     filter: brightness(90%);
 }
