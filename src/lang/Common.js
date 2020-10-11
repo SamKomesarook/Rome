@@ -14,20 +14,22 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
     this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 
   generalError(msg) {
     this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 }
 
-const processInstrs = (staticDisplay, errorReporter) => {
+const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
   while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
     const instr = staticDisplay.commands.shift();
 
     if (instr.children[0].constructor === KreadContext
-       || instr.children[0].constructor === ReadContext) {
+      || instr.children[0].constructor === ReadContext) {
       if (!staticDisplay.importIO) {
         errorReporter.generalError("Unknown function 'keyboardRead'");
         break;
@@ -36,9 +38,14 @@ const processInstrs = (staticDisplay, errorReporter) => {
       staticDisplay.reading = true;
       break;
     } else {
+      // Process the line of code
       instr.accept(staticDisplay.machine
         ? new MVisitor(staticDisplay, errorReporter)
         : new RVisitor(staticDisplay, errorReporter));
+
+      if (staticDisplay.isDebugActive) {
+        break;
+      }
     }
   }
 };

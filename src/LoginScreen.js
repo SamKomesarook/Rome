@@ -17,7 +17,7 @@ function LoginScreen() {
   // login button
   // set the state to false
   const [log, setLog] = React.useState(false);
-
+  const [popUp, setPopUp] = React.useState(false);
   // read from cookie
   const readCookie = () => {
     const user = Cookies.get('user');
@@ -38,7 +38,7 @@ function LoginScreen() {
       // set cookie with 1 day expiry
       Cookies.set('user', hashValue.value, { expires: 1 });
     } else {
-      window.alert('wrong password, please try again.');
+      setPopUp(true);
     }
   };
 
@@ -48,14 +48,16 @@ function LoginScreen() {
     );
   }
 
+  const isMain = 'login-screen';
+
   return (
     <div className="login-container">
-      <div className="login-screen">
+      <div className={isMain}>
         Welcome to Rome.
         <input
           name="password-field"
           type="password"
-          className="login-input"
+          className={!popUp ? 'login-input' : 'login-input-invalid'}
           value={password}
           onChange={setInput}
           placeholder="password"
@@ -68,6 +70,7 @@ function LoginScreen() {
           Go
         </button>
       </div>
+
     </div>
   );
 }
