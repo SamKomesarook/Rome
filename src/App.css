@@ -146,7 +146,7 @@ button {
     font-size: 1rem;
 }
 
-button:hover:enabled {
+button:hover:enabled, div[role="button"]:hover {
     cursor: pointer;
     filter: brightness(90%);
 }
@@ -161,16 +161,6 @@ button:disabled {
     height: 3rem;
     border-radius: 10px;
     font-weight: bold;
-}
-
-.primary-btn {
-    background-color: var(--baby-blue);
-    color: white;
-}
-
-.secondary-btn {
-    background-color: var(--light-grey);
-    color: dimgray;
 }
 
 /** OTHER **/
