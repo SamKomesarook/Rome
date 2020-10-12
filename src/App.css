@@ -36,6 +36,16 @@
     padding: 10px;
 }
 
+#tabletWarning{
+    
+}
+
+@media screen and (min-width: 1369px) {
+  #tabletWarning {
+    display: none;
+  }
+}
+
 .hflex {
     display: flex;
     gap: 1rem;

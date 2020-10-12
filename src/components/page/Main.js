@@ -11,10 +11,12 @@ import '../elements/styles.css';
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
+  const tabletWarning = 'Using a desktop or laptop will give you a better experience.';
 
   return (
     <div className="main">
       <div className={`layout-column ${isElementHiddenClass}`}>
+	    <span id="tabletWarning">{tabletWarning}</span>
         <VideoPlayer />
         <CodingArea />
       </div>
