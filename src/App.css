@@ -37,7 +37,9 @@
 }
 
 #tabletWarning{
-    
+	background-color: grey;
+	color: white;
+	display:inline-block;
 }
 
 @media screen and (min-width: 1369px) {

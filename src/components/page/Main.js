@@ -11,7 +11,7 @@ import '../elements/styles.css';
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
-  const tabletWarning = 'Using a desktop or laptop will give you a better experience.';
+  const tabletWarning = 'Warning: Using a desktop or laptop will give you a better experience.';
 
   return (
     <div className="main">
