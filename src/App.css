@@ -36,12 +36,6 @@
     padding: 10px;
 }
 
-@media screen and (orientation: portrait) {
-  #computer-column {
-    height: 50vh;
-  }
-}
-
 .hflex {
     display: flex;
     gap: 1rem;
