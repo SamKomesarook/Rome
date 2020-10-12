@@ -12,6 +12,12 @@
     border-radius: 10px;
 }
 
+@media screen and (orientation: portrait) {
+  .memory-section {
+    height: 25vh;
+  }
+}
+
 .memory-cell {
     background-color: var(--bg-secondary);
     padding: 0.5rem;

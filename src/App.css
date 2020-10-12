@@ -14,6 +14,12 @@
     gap: 3rem;
 }
 
+@media screen and (orientation: portrait) {
+  .main {
+    flex-direction: column;
+  }
+}
+
 .layout-column {
     display: flex;
     flex-direction: column;
@@ -28,6 +34,12 @@
     border: solid 2px black;
     border-radius: 10px;
     padding: 10px;
+}
+
+@media screen and (orientation: portrait) {
+  #computer-column {
+    height: 50vh;
+  }
 }
 
 .hflex {
