@@ -186,7 +186,7 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  test(testLoop, async () => {
+  test(testMemoryAccess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 

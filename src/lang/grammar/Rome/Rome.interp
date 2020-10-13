@@ -53,6 +53,7 @@ null
 null
 null
 null
+null
 
 token symbolic names:
 null
@@ -107,6 +108,7 @@ BOOLEAN_PROP
 IDENTIFIER
 NUMBER
 FLOAT
+CHARACTER
 STRLIT
 ONE_LINE_COMMENT
 

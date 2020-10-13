@@ -102,7 +102,7 @@ describe('test binary view', () => {
 
   test(testBinaryViewOfCharacter, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(character)\nwrite("r")\nend');
+    await codingArea.sendKeys("start\nset(character)\nwrite('r')\nend");
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -118,8 +118,6 @@ describe('test binary view', () => {
   }, 35000);
 
   test(testBinaryViewOfString, async () => {
-    const str1 = 'romela';
-    const str2 = 'nguage';
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("romelanguage")\nend');
 

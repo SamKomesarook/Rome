@@ -1771,6 +1771,10 @@ WriteContext.prototype.floatargs = function() {
 WriteContext.prototype.STRLIT = function() {
     return this.getToken(RomeParser.STRLIT, 0);
 };
+
+WriteContext.prototype.CHARACTER = function() {
+    return this.getToken(RomeParser.CHARACTER, 0);
+};
 WriteContext.prototype.enterRule = function(listener) {
     if(listener instanceof RomeListener ) {
         listener.enterWrite(this);
@@ -1989,6 +1993,10 @@ SwriteContext.prototype.floatargs = function() {
 
 SwriteContext.prototype.STRLIT = function() {
     return this.getToken(RomeParser.STRLIT, 0);
+};
+
+SwriteContext.prototype.CHARACTER = function() {
+    return this.getToken(RomeParser.CHARACTER, 0);
 };
 SwriteContext.prototype.enterRule = function(listener) {
     if(listener instanceof RomeListener ) {
@@ -2328,6 +2336,10 @@ RomeParser.prototype.expression = function() {
                 this.state = 157;
                 this.match(RomeParser.STRLIT);
                 break;
+            case RomeParser.CHARACTER:
+                this.state = 153;
+                this.match(RomeParser.CHARACTER);
+                break;
             default:
                 throw new antlr4.error.NoViableAltException(this);
             }
@@ -2362,6 +2374,10 @@ RomeParser.prototype.expression = function() {
             case RomeParser.STRLIT:
                 this.state = 166;
                 this.match(RomeParser.STRLIT);
+                break;
+            case RomeParser.CHARACTER:
+                this.state = 163;
+                this.match(RomeParser.CHARACTER);
                 break;
             default:
                 throw new antlr4.error.NoViableAltException(this);
