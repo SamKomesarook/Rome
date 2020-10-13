@@ -2465,3 +2465,5 @@ RomeParser.prototype.expression = function() {
 
 
 exports.RomeParser = RomeParser;
+exports.KreadContext = KreadContext;
+exports.NumContext = NumContext;
