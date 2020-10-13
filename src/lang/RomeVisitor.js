@@ -283,13 +283,13 @@ class RVisitor extends RomeVisitor {
       return;
     }
 
-    // check whether argument less than 65536 which generates random number bigger than 65535
-    if (number > 65536) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
-      this.errorReporter.generalError('Please input a number which is not bigger than 65536, otherwise the random number will be out of memory');
+    // check whether argument less than 65535 which generates random number bigger than 65535
+    if (number > 65535) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+      this.errorReporter.generalError('Please input a number which is not bigger than 65535, otherwise the random number will be out of memory');
       return;
     }
 
-    const randNum = Math.floor(Math.random() * number);
+    const randNum = Math.floor(Math.random() * (number+1));
     this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
   }
 
