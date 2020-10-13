@@ -66,7 +66,6 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
-    outline: none;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
     border: 3px solid var(--border-line-editable);
@@ -77,6 +76,17 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
+}
+
+input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+}
+
+input:invalid {
+    box-shadow: 0 2px firebrick;
+    transition: all 0.2s ease-in-out;
 }
 
 /* Glowing Blue Input Highlights <End> */
@@ -98,9 +108,8 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     align-items: center;
     background-color: var(--bg-primary);
     border-radius: 5px;
-    /* padding: 0.5rem 1rem; */
-    padding: 1rem 1rem;
-    height: 3rem;
+    padding: 0.5rem 1rem;
+    height: 100%;
     width: 100%;
 }
 
@@ -109,13 +118,12 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     color: var(--bg-contrast-primary);
 }
 
-.control-container .control {
+.control {
     height: 2rem;
     width: 100%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    cursor: pointer;
 }
 
 .control:hover, .control:focus {
@@ -133,10 +141,6 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     gap: 0.5rem;
 }
 
-input[type=text].control {
-    cursor: text;
-}
-
 select.control {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -149,6 +153,7 @@ select.control {
     text-overflow: ellipsis;
     padding-right: 1rem;
     font-family: inherit;
+    cursor: pointer;
 }
 
 select.control > option {
@@ -161,10 +166,12 @@ button {
     border: none;
     text-align: center;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: inherit;
+    letter-spacing: 0.7px;
+    outline: none;
 }
 
-button:hover:enabled, div[role="button"]:hover {
+button:hover:enabled, div[role=button]:hover {
     cursor: pointer;
     filter: brightness(90%);
 }

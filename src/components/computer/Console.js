@@ -1,13 +1,7 @@
 import React, { useContext, useRef } from 'react';
-import { TerminalNodeImpl } from 'antlr4/tree/Tree';
-import antlr4 from 'antlr4';
 import { DisplayContext } from '../../state/DisplayState';
-import { processInstrs, ErrorReporter } from '../../lang/Common';
+import { processInstrs, compile, ErrorReporter } from '../../lang/Common';
 import { USBToggle } from './Peripherals';
-import { RomeLexer } from '../../lang/grammar/Rome/RomeLexer';
-import { RomeParser } from '../../lang/grammar/Rome/RomeParser';
-import { MachineLexer } from '../../lang/grammar/Machine/MachineLexer';
-import { MachineParser } from '../../lang/grammar/Machine/MachineParser';
 import DebugControl from './DebugControl';
 
 const Console = () => {
@@ -15,48 +9,17 @@ const Console = () => {
   const inputRef = useRef();
 
   const executeStart = (inputValue) => {
-    // Create a deep copy of default display
-    const staticDisplay = DisplayContext.createCustomClone({
+    // Create a deep copy of default display with some updated values
+    let staticDisplay = DisplayContext.createCustomClone({
       ...DisplayContext.DEFAULT(),
       machine: display.machine,
       text: display.text,
+      running: true,
       isDebugActive: display.isDebugActive,
-      consoleHistory: [...display.consoleHistory],
+      consoleHistory: [...display.consoleHistory, inputValue],
     });
 
-    // Save recent command to console history
-    staticDisplay.consoleHistory.push(inputValue);
-
-    staticDisplay.running = true;
-
-    const chars = new antlr4.InputStream(staticDisplay.text);
-    const lexer = (staticDisplay.machine)
-      ? new MachineLexer(chars)
-      : new RomeLexer(chars);
-    const tokens = new antlr4.CommonTokenStream(lexer);
-    const parser = (staticDisplay.machine)
-      ? new MachineParser(tokens)
-      : new RomeParser(tokens);
-    const errorReporter = new ErrorReporter(staticDisplay);
-    parser.buildParseTrees = true;
-    parser.removeErrorListeners();
-    parser.addErrorListener(errorReporter);
-
-    const tree = parser.r();
-
-    if (tree.exception === null && parser._syntaxErrors === 0) {
-      try {
-        for (const child of tree.children) {
-          if (child.constructor !== TerminalNodeImpl) {
-            staticDisplay.commands.push(child);
-          }
-        }
-        staticDisplay.errors = false;
-        processInstrs(staticDisplay, errorReporter);
-      } catch (e) {
-        console.log(e);
-      }
-    }
+    staticDisplay = compile(staticDisplay);
 
     // Render new display information
     setDisplay(DisplayContext.createCustomClone(staticDisplay));
@@ -85,20 +48,23 @@ const Console = () => {
 
     // Save recent command to console history
     staticDisplay.consoleHistory.push(inputValue);
-
-    const newMem = staticDisplay.memory;
-
-    // Get the keys of special memory cells
-    const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
-    if (staticDisplay.selected === usbMemoryKey) {
-      USBToggle();
-    } else {
-      newMem[staticDisplay.selected].content = inputRef.current.value;
-      newMem[staticDisplay.selected].type = 'string';
-    }
-    staticDisplay.memory = newMem;
     staticDisplay.reading = false;
-    processInstrs(staticDisplay);
+
+    if (staticDisplay.memory[staticDisplay.selected].content.length === 0) {
+    // Get the keys of special memory cells
+      const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
+      if (staticDisplay.selected === usbMemoryKey) {
+        USBToggle();
+      } else {
+        staticDisplay.memory[staticDisplay.selected].content = inputRef.current.value;
+        staticDisplay.memory[staticDisplay.selected].type = 'string';
+      }
+      staticDisplay.reading = false;
+      processInstrs(staticDisplay);
+    } else {
+      const errorReporter = new ErrorReporter(staticDisplay);
+      errorReporter.generalError('Memory cell not empty');
+    }
 
     // Render new display information
     setDisplay(DisplayContext.createCustomClone(staticDisplay));

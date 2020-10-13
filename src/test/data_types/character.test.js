@@ -33,7 +33,7 @@ describe('test character', () => {
 
   test(testValidCharacter, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(character)\nwrite("u")\nend');
+    await codingArea.sendKeys("start\nset(character)\nwrite('u')\nend");
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -47,7 +47,7 @@ describe('test character', () => {
 
   test(testEmptyCharacter, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(character)\nwrite("")\nend');
+    await codingArea.sendKeys("start\nset(character)\nwrite('')\nend");
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -61,7 +61,7 @@ describe('test character', () => {
 
   test(testMultipleCharacters, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(character)\nwrite("ab")\nend');
+    await codingArea.sendKeys("start\nset(character)\nwrite('ab')\nend");
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -91,7 +91,7 @@ describe('test character', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, CHARACTER, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });
