@@ -263,6 +263,50 @@ class RVisitor extends RomeVisitor {
     this.staticDisplay.importIO = true;
   }
 
+  visitMath(ctx) {
+    this.staticDisplay.importMath = true;
+  }
+
+  visitRandom(ctx) {
+    // check whether math package is imported
+    if (!this.staticDisplay.importMath) {
+      this.errorReporter.generalError('Require import(math) for random number function');
+      return;
+    }
+
+    // check if there is memory
+    if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
+      this.errorReporter.generalError('Memory cell not empty');
+      return;
+    }
+
+    // set memory type as integer
+    this.staticDisplay.memory[this.staticDisplay.selected].type = 'integer';
+
+    let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
+    if (typeof arg === 'object') {
+      arg = arg[0];
+    }
+
+    // convert the argument to integer
+    const number = parseInt(arg);
+
+    // check whether argument less than 0
+    if (number < 0) {
+      this.errorReporter.generalError('Please input a positive number for random number function');
+      return;
+    }
+
+    // check whether argument less than 65535 which generates random number bigger than 65535
+    if (number > 65535) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+      this.errorReporter.generalError('Please input a number which is not bigger than 65535, otherwise the random number will be out of memory');
+      return;
+    }
+
+    const randNum = Math.floor(Math.random() * (number+1));
+    this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
+  }
+
   visitName(ctx) {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {

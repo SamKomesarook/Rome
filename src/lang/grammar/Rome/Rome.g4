@@ -25,6 +25,7 @@ NAME: 'name';
 
 IMP: 'import';
 IO: 'IO';
+MATH: 'math';
 
 IF: 'if';
 IS: 'is';
@@ -34,6 +35,7 @@ LESS: 'less';
 GRE: 'greater';
 AND: 'and';
 OR: 'or';
+RANDOM: 'rand';
 
 MOVE: 'move';
 RIGHT: 'next';
@@ -75,7 +77,9 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 strargs : STRLIT #Str ;
 
-imp:  IMP '(' IO ')' # Io ;
+imp:  IMP '(' IO ')' # Io
+    | IMP '(' MATH ')' # Math
+    ;
 
 mem: MEM '(' (intargs | strargs) ')';
 
@@ -115,4 +119,5 @@ expression:
 	| SWRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
 	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
+	| RANDOM '(' intargs ')'					# Random
 	;
