@@ -24,7 +24,7 @@ DisplayContext.DEFAULT = () => {
     for (let i = 0; i < localMemorySize; i++) {
       memoryArray.push({
         key: i, // Unique key
-        type: '', // Type 'numbers or letters'
+        type: '', // Type 'integer, long, float, string or character'
         content: '', // defined content
         special: '', //
         name: '', //
@@ -41,15 +41,15 @@ DisplayContext.DEFAULT = () => {
     machine: false, // If the user is using the Machine language
     delay: 10, // Number of seconds of delay between command execution
     text: '', // Content of the programming section
-    output: '', // Content of the output bar
-    input: '', // Content of the input bar
+    consoleHistory: [],
     running: false, // If there is a program running
+    isDebugAcive: false, // Is the debug mode is active
     reading: false, // If the program is reading user input
     errors: false, // If there are any runtime errors
     selected: 0, // The key of the selected memory
     commands: [], // The saved list of commands while the program is reading user input
     importIO: false, // If the user has imported the IO package
-    outputStyle: {
+    consoleStyle: {
       bgColor: '', // Style: background color
       txtColor: '', // Style: text color
       txtSize: '', // Style: text size
@@ -58,10 +58,27 @@ DisplayContext.DEFAULT = () => {
       italic: '', // Style: italic font
       underline: '', // Style: underline font
     },
+    dataTypeSize: { // The available space taken of each data types
+      character: 1,
+      integer: 2,
+      float: 4,
+      long: 4,
+      string: 6,
+    },
     memorySize: localMemorySize,
     specialKeys: localSpecialKeys,
     memory: createMemoryArray(),
   };
 
   return initialDisplay;
+};
+
+DisplayContext.createCustomClone = (display) => {
+  const deepClone = {
+    ...display,
+    consoleStyle: { ...display.consoleStyle },
+    memory: JSON.parse(JSON.stringify(display.memory)),
+  };
+
+  return deepClone;
 };

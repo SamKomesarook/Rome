@@ -38,6 +38,15 @@ RomeListener.prototype.exitMem = function(ctx) {
 };
 
 
+// Enter a parse tree produced by RomeParser#Float.
+RomeListener.prototype.enterFloat = function(ctx) {
+};
+
+// Exit a parse tree produced by RomeParser#Float.
+RomeListener.prototype.exitFloat = function(ctx) {
+};
+
+
 // Enter a parse tree produced by RomeParser#Num.
 RomeListener.prototype.enterNum = function(ctx) {
 };

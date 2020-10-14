@@ -1,16 +1,13 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
 
-const webdriver = require('selenium-webdriver');
-
-const testName = {
-  testTabInit: 'test initial state of distance tab when first entry',
-  testSearchInput1: 'test searching video using input "fox"',
-  testSearchInput2: 'test searching video using input "browser"',
-  testLevelList: 'test the level dropdownfied',
-  testWeekList: 'test the week dropdownfied',
-  testVideo1: 'test the first video',
-  testVideo2: 'test the second video',
-};
+const testTabInit = 'test initial state of distance tab when first entry';
+const testSearchInput1 = 'test searching video using input "fox"';
+const testSearchInput2 = 'test searching video using input "browser"';
+const testLevelList = 'test the level dropdownfied';
+const testWeekList = 'test the week dropdownfied';
+const testVideo1 = 'test the first video';
+const testVideo2 = 'test the second video';
 
 describe('test distance learing tab', () => {
   let driver;
@@ -29,7 +26,7 @@ describe('test distance learing tab', () => {
     await driver.navigate().refresh();
   }, 30000);
 
-  test(testName.testTabInit, async () => {
+  test(testTabInit, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
@@ -55,12 +52,12 @@ describe('test distance learing tab', () => {
     expect(title2).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
-  test(testName.testSearchInput1, async () => {
+  test(testSearchInput1, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
-    const serachArea = await TestConfig.getElementById(driver, 'dis-search');
-    await serachArea.sendKeys('fox');
+    const searchArea = await TestConfig.getElementById(driver, 'dis-search');
+    await searchArea.sendKeys('fox');
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title1 = await link1.getText();
@@ -68,12 +65,12 @@ describe('test distance learing tab', () => {
     expect(title1).toEqual('Why are there Four Firefoxes?');
   }, 40000);
 
-  test(testName.testSearchInput2, async () => {
+  test(testSearchInput2, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
-    const serachArea = await TestConfig.getElementById(driver, 'dis-search');
-    await serachArea.sendKeys('browser');
+    const searchArea = await TestConfig.getElementById(driver, 'dis-search');
+    await searchArea.sendKeys('browser');
 
     const link2 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title2 = await link2.getText();
@@ -81,20 +78,20 @@ describe('test distance learing tab', () => {
     expect(title2).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
-  test(testName.testLevelList, async () => {
+  test(testLevelList, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
     const levelList = await TestConfig.getElementById(driver, 'levels');
     await levelList.sendKeys('Toddler');
-    
+
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title1 = await link1.getText();
 
     expect(title1).toEqual('Why are there Four Firefoxes?');
   }, 40000);
 
-  test(testName.testWeekList, async () => {
+  test(testWeekList, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
@@ -107,7 +104,7 @@ describe('test distance learing tab', () => {
     expect(title1).toEqual('Where do Browser Styles Come From?');
   }, 40000);
 
-  test(testName.testVideo1, async () => {
+  test(testVideo1, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 
@@ -120,7 +117,7 @@ describe('test distance learing tab', () => {
     expect(isVideo1Visible).toEqual(true);
   }, 35000);
 
-  test(testName.testVideo2, async () => {
+  test(testVideo2, async () => {
     const content = await TestConfig.getElementByXpath(driver, '//*[@id="sidebar"]/ul/li[1]/button');
     await content.click();
 

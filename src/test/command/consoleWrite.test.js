@@ -1,13 +1,10 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
 
-const webdriver = require('selenium-webdriver');
-
-const testName = {
-  testConsoleWriteLetters: 'test keyboard write letters correctly',
-  testConsoleWriteNumbers: 'test keyboard write numbers',
-  testConsoleWriteEmpty: 'test keyboard write empty letters',
-  testConsoleWriteNoQuote: 'test keyboard write letters without quote',
-};
+const testConsoleWriteString = 'test keyboard write string correctly';
+const testConsoleWriteInteger = 'test keyboard write integer';
+const testConsoleWriteEmpty = 'test keyboard write empty string';
+const testConsoleWriteNoQuote = 'test keyboard write string without quote';
 
 describe('test console write', () => {
   let driver;
@@ -23,78 +20,81 @@ describe('test console write', () => {
   }, 40000);
 
   afterEach(async () => {
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('reset');
+    await driver.actions().keyDown(Key.ENTER).perform();
+    await consoleInput.sendKeys('consoleClear');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
-
-    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
-    stopBtn.click();
   }, 30000);
 
-  test(testName.testConsoleWriteLetters, async () => {
+  test(testConsoleWriteString, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('hello!');
+    expect(secondConsoleRecordRes).toEqual('> hello!');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNumbers, async () => {
+  test(testConsoleWriteInteger, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite(1)\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('1');
+    expect(secondConsoleRecordRes).toEqual('> 1');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteEmpty, async () => {
+  test(testConsoleWriteEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
-  test(testName.testConsoleWriteNoQuote, async () => {
+  test(testConsoleWriteNoQuote, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite()\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual("mismatched input ')' expecting {'memory', NUMBER, STRLIT}");
+    expect(secondConsoleRecordRes).toEqual("> mismatched input ')' expecting {'memory', NUMBER, FLOAT, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

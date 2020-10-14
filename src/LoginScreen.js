@@ -15,9 +15,9 @@ function LoginScreen() {
   const setInput = (e) => setPassword(e.target.value);
 
   // login button
-  // set the state to false 
+  // set the state to false
   const [log, setLog] = React.useState(false);
-
+  const [popUp, setPopUp] = React.useState(false);
   // read from cookie
   const readCookie = () => {
     const user = Cookies.get('user');
@@ -38,7 +38,7 @@ function LoginScreen() {
       // set cookie with 1 day expiry
       Cookies.set('user', hashValue.value, { expires: 1 });
     } else {
-      window.alert('wrong password, please try again.');
+      setPopUp(true);
     }
   };
 
@@ -48,16 +48,16 @@ function LoginScreen() {
     );
   }
 
-  return (
+  const isMain = 'login-screen';
 
-  // <div className="app">
-    <div className="container">
-      <div className="loginScreen">
-          Welcome to Rome.
+  return (
+    <div className="login-container">
+      <div className={isMain}>
+        Welcome to Rome.
         <input
           name="password-field"
           type="password"
-          className="input"
+          className={!popUp ? 'login-input' : 'login-input-invalid'}
           value={password}
           onChange={setInput}
           placeholder="password"
@@ -65,14 +65,13 @@ function LoginScreen() {
         <button
           type="submit"
           onClick={login}
-          className="btn"
+          className="login-btn"
         >
           Go
         </button>
       </div>
-    </div>
-  // </div>
 
+    </div>
   );
 }
 

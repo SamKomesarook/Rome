@@ -1,12 +1,9 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
 
-const webdriver = require('selenium-webdriver');
-const { Key } = require('selenium-webdriver');
-
-const testName = {
-  testKeyboardRead: 'test keyboard read input correctly',
-  testKeyboardReadEmpty: 'test keyboard read empty letters',
-};
+const testKeyboardRead = 'test keyboard read input correctly';
+const testKeyboardReadEmpty = 'test keyboard read empty string';
+const testMoveKReadAndMove = 'test move then keyboard read and then move';
 
 describe('test keyboard read', () => {
   let driver;
@@ -22,52 +19,68 @@ describe('test keyboard read', () => {
   }, 40000);
 
   afterEach(async () => {
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('reset');
+    await driver.actions().keyDown(Key.ENTER).perform();
+    await consoleInput.sendKeys('consoleClear');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
-
-    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
-    stopBtn.click();
   }, 30000);
 
-  test(testName.testKeyboardRead, async () => {
+  test(testKeyboardRead, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const inputArea = await TestConfig.getElementById(driver, 'input-bar');
-    await inputArea.sendKeys('hello!');
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    await consoleInput.sendKeys('hello!');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('hello!');
   }, 35000);
 
-  test(testName.testKeyboardReadEmpty, async () => {
+  test(testKeyboardReadEmpty, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const inputArea = await TestConfig.getElementById(driver, 'input-bar');
-    await inputArea.sendKeys('');
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    await consoleInput.sendKeys('');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('');
+  }, 35000);
+
+  test(testMoveKReadAndMove, async () => {
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nimport(IO)\nmove(next)\nkeyboardRead\nmove(next)\nend');
+
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
+    await consoleInput.sendKeys('Hello');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
+    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
+
+    const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
+    const memoryCell1Res = await memoryCell1.getText();
+
+    expect(memoryCell0Res).toEqual('');
+    expect(memoryCell1Res).toEqual('Hello');
   }, 35000);
 });

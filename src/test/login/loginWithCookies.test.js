@@ -1,10 +1,7 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
 
-const webdriver = require('selenium-webdriver');
-
-const testName = {
-  loginWithCookies: 'test login with cookies',
-};
+const loginWithCookies = 'test login with cookies';
 
 describe('test login with cookies ', () => {
   let driver;
@@ -19,7 +16,7 @@ describe('test login with cookies ', () => {
     await driver.quit();
   }, 40000);
 
-  test(testName.loginWithCookies, async () => {
+  test(loginWithCookies, async () => {
     await driver.get(TestConfig.URL);
 
     let passwordField;

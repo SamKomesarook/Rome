@@ -12,40 +12,40 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-    this.display.output = this.display.output.concat(`${msg}\n`);
+    this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 
   generalError(msg) {
-    this.display.output = this.display.output.concat(`${msg}\n`);
+    this.display.consoleHistory.push(msg);
     this.display.errors = true;
+    this.display.running = false;
   }
 }
 
-const processInstrs = (display, setDisplay) => {
-  const errorReporter = new ErrorReporter(display);
-  while (true) {
-    if (display.commands.length === 0 || display.errors) {
-      break;
-    }
-    const instr = display.commands[0];
-    display.commands.splice(0, 1);
+const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDisplay)) => {
+  while (staticDisplay.commands.length !== 0 && !staticDisplay.errors) {
+    const instr = staticDisplay.commands.shift();
 
     if (instr.children[0].constructor === KreadContext
-       || instr.children[0].constructor === ReadContext) {
-      if (!display.importIO) {
+      || instr.children[0].constructor === ReadContext) {
+      if (!staticDisplay.importIO) {
         errorReporter.generalError("Unknown function 'keyboardRead'");
         break;
       }
-      setDisplay((prevDisplay) => ({
-        ...prevDisplay,
-        reading: true,
-      }));
+      // eslint-disable-next-line no-param-reassign
+      staticDisplay.reading = true;
       break;
     } else {
-      instr.accept(display.machine
-        ? new MVisitor(display, setDisplay, errorReporter)
-        : new RVisitor(display, setDisplay, errorReporter));
+      // Process the line of code
+      instr.accept(staticDisplay.machine
+        ? new MVisitor(staticDisplay, errorReporter)
+        : new RVisitor(staticDisplay, errorReporter));
+
+      if (staticDisplay.isDebugActive) {
+        break;
+      }
     }
   }
 };

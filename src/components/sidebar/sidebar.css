@@ -1,0 +1,228 @@
+/** SIDEBAR **/
+
+aside {
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: var(--bg-secondary);
+    z-index: 100;
+}
+
+aside:hover {
+    width: 16rem;
+    box-shadow: 0 0 5px #071219;
+}
+
+aside:hover .sidebar-item-text {
+    display: block;
+    margin: 3px;
+}
+
+.sidebar-item-list {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sidebar-item {
+    width: 100%;
+}
+
+.sidebar-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+    padding: 0;
+    color: var(--bg-contrast-secondary);
+    background-color: var(--bg-secondary);
+    border-right: 0.1rem solid transparent;
+    outline: none;
+}
+
+.sidebar-item:last-child {
+    margin-top: auto;
+}
+
+.sidebar-item-text {
+    display: none;
+    margin-left: 1rem;
+}
+
+.sidebar-item svg {
+    width: 2rem;
+    margin: 0 1.4rem;
+}
+
+.sidebar-btn:hover, .sidebar-btn:focus, .sidebar-btn.toggle-btn[aria-pressed="true"] {
+    color: white;
+    border-right: 0.1rem solid white;
+}
+
+.sidebar-item-pane {
+    position: fixed;
+    right: 5rem;
+    top: 0;
+    width: 20rem;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid var(--border-line-dark);
+    box-shadow: -3px 0 3px #07121957;
+}
+
+/** DISTANCE LEARNING **/
+
+.list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+}
+
+.list-item {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0;
+    border-bottom: 0.5px solid var(--border-line-dark);
+    color: var(--bg-contrast-primary);
+    font-weight: normal;
+}
+
+/** Dropdown content for sidebar **/
+
+.dropdown-content {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0;
+    color: var(--bg-contrast-primary);
+    font-weight: normal;
+	white-space: pre-line;
+    text-align: center;
+}
+
+.dropdown-example{
+    background-color: grey;
+    display:inline-block;
+    white-space: pre-line;
+    padding: 5px;
+    margin: 15px;
+    text-align: left;
+    color: black;
+    font-family: 'Courier Prime';
+}
+
+.argument-desc{
+    color: white;
+    display:inline; 
+}
+
+.argument-elem{
+    display:inline;
+}
+
+.argument-name{
+    display:inline;
+    font-family: 'Courier Prime';
+    font-style: italic;
+}
+
+.argument-container{
+    padding: 5px;
+    margin: 15px;
+    text-align: left;
+    background-color: grey;
+    display:inline-block;
+    color: black;
+    font-family: 'Courier Prime';
+}
+
+.style-content{
+    color: white;
+    padding: 8px;
+    text-align: center;
+    white-space: pre-line;
+}
+
+/** ABOUT TAB **/
+
+#about {
+    width: 50rem;
+}
+
+#about-content {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bg-secondary);
+    color: var(--bg-contrast-primary);
+    white-space: pre-line;
+}
+
+#about-title {
+    display: flex;
+    font-size: 1.75rem;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+#image-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.about-heading {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: italic;
+    margin-top: 4rem;
+}
+
+.about-paragraph {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.heart-animation {
+    background-image: url('../../icons/heart_animation.png');
+    background-repeat: no-repeat;
+    background-size: 2900%;
+    background-position: left;
+    height: 50px;
+    width: 80px;
+    margin: 0 -20px;
+    cursor: pointer;
+    outline: none;
+}
+
+.animate {
+    animation: heart-burst .8s steps(28) forwards;
+}
+
+@keyframes heart-burst {
+    0% {
+        background-position: left
+    }
+    100% {
+        background-position: right
+    }
+}
+
+/** HELP TAB **/
+
+#help {
+    width: 50rem;
+}
