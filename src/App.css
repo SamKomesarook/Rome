@@ -24,10 +24,21 @@
     height: 100%;
 }
 
-#computer-column{
+#computer-column {
     border: solid 2px black;
     border-radius: 10px;
     padding: 10px;
+}
+
+#tablet-tip-bar {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 5rem);
+    text-align: center;
+    background-color: var(--bg-secondary);
+    opacity: 70%;
+    color: white;
+    padding: 2px 0;
 }
 
 .hflex {
@@ -184,4 +195,14 @@ button:disabled {
 
 .hidden {
     display: none !important;
+}
+
+@media screen and (orientation: portrait) {
+    #computer-column {
+        height: 175%;
+    }
+    
+    .main {
+        flex-direction: column;
+    }
 }

@@ -265,3 +265,11 @@ aside:hover .sidebar-item-text {
 #fb-form svg {
     height: 2rem;
 }
+
+/** MEDIA QUERIES **/
+
+@media screen and (max-width: 768px) {
+    #help, #about {
+        width: calc(100% - 5rem);
+    }
+}
