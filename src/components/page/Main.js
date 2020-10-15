@@ -11,18 +11,10 @@ import '../elements/styles.css';
 const Main = () => {
   const [ui, setUi] = useContext(UiContext);
   const isElementHiddenClass = ui.ctxIsAppRunViewActive ? 'hidden' : '';
-  const tabletWarning = 'Warning: Using a desktop or laptop will give you a better experience.';
-  let isHiddenWarning = 'hidden';
 
-  if (navigator.userAgent.match(/Tablet|iPad/i))
-  {
-    isHiddenWarning = '';
-  }
-  
   return (
     <div className="main">
       <div className={`layout-column ${isElementHiddenClass}`}>
-        <span id="tabletWarning" className={isHiddenWarning}>{tabletWarning}</span>
         <VideoPlayer />
         <CodingArea />
       </div>

@@ -162,12 +162,6 @@ aside:hover .sidebar-item-text {
     width: 50rem;
 }
 
-@media screen and (max-width: 768px) {
-  #about {
-    width: 40rem;
-  }
-}
-
 #about-content {
     width: 100%;
     padding: 0.75rem 0.75rem;
@@ -234,12 +228,6 @@ aside:hover .sidebar-item-text {
     width: 50rem;
 }
 
-@media screen and (max-width: 768px) {
-  #help {
-    width: 40rem;
-  }
-}
-
 /** FEEDBACK TAB **/
 
 #fb-form {
@@ -276,4 +264,12 @@ aside:hover .sidebar-item-text {
 
 #fb-form svg {
     height: 2rem;
+}
+
+/** MEDIA QUERIES **/
+
+@media screen and (max-width: 768px) {
+    #help, #about {
+        width: calc(100% - 5rem);
+    }
 }
