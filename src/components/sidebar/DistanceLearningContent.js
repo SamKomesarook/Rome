@@ -4,7 +4,7 @@ import { UiContext } from '../../state/UiContext';
 
 const DistanceLearningContent = ({ title, link }) => {
   const [ui, setUi] = useContext(UiContext);
-  const youtubeContentID = link.split('=')[1];
+  const youtubeContentID = link.replace('https://www.youtube.com/watch?v=', '').replace('https://youtu.be/', '');
 
   const handleSelectVideo = () => {
     setUi((prevUI) => ({
