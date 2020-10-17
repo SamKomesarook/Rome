@@ -6,10 +6,13 @@ import DropdownField from '../elements/DropdownField';
 const DistanceLearning = ({ isActive }) => {
   const DATA = [
     {
-      id: 'dl-1', week: 'w1', level: 'toddler', title: 'Why are there Four Firefoxes?', link: 'https://www.youtube.com/watch?v=qQ1oQJJn1nQ',
+      id: 'dl-1', week: 'w1', level: 'kindergarten', title: 'Rome Intro', link: 'https://youtu.be/8QUjc-AZCFQ',
     },
     {
-      id: 'dl-2', week: 'w3', level: 'primary', title: 'Where do Browser Styles Come From?', link: 'https://www.youtube.com/watch?v=spK_S0HfzFw',
+      id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc',
+    },
+    {
+      id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU',
     },
   ];
 
