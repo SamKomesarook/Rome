@@ -1,7 +1,5 @@
+import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-
-const webdriver = require('selenium-webdriver');
-const { Key } = require('selenium-webdriver');
 
 const testMoveNext = 'test the sample code: start\nmove(next)\nmove(last)\nend';
 const testMoveLast = 'test the sample code: start\nmove(next)\nmove(last)\nend';
@@ -31,11 +29,14 @@ describe('test example programs', () => {
   }, 40000);
 
   afterEach(async () => {
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('reset');
+    await driver.actions().keyDown(Key.ENTER).perform();
+    await consoleInput.sendKeys('consoleClear');
+    await driver.actions().keyDown(Key.ENTER).perform();
+
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.clear();
-
-    const stopBtn = await TestConfig.getElementById(driver, 'reset-button');
-    stopBtn.click();
   }, 30000);
 
   // move next write 1
@@ -43,11 +44,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nmove(next)\nset(integer)\nwrite(1)\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -55,7 +54,6 @@ describe('test example programs', () => {
     const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
     const memoryCell1Res = await memoryCell1.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('');
     expect(memoryCell1Res).toEqual('1');
   }, 40000);
@@ -65,11 +63,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nmove(next)\nmove(last)\nset(integer)\nwrite(1)\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -77,7 +73,6 @@ describe('test example programs', () => {
     const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
     const memoryCell1Res = await memoryCell1.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('1');
     expect(memoryCell1Res).toEqual('');
   }, 40000);
@@ -92,16 +87,13 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("hello!")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('hello!');
   }, 40000);
 
@@ -115,16 +107,13 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(4)\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('4');
   }, 40000);
 
@@ -140,16 +129,13 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('world!');
   }, 40000);
 
@@ -166,11 +152,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nloop(3){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -184,7 +168,6 @@ describe('test example programs', () => {
     const memoryCell3 = await TestConfig.getElementById(driver, 'memory-3');
     const memoryCell3Res = await memoryCell3.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('data');
     expect(memoryCell1Res).toEqual('data');
     expect(memoryCell2Res).toEqual('data');
@@ -203,15 +186,13 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  test(testLoop, async () => {
+  test(testMemoryAccess, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -228,7 +209,6 @@ describe('test example programs', () => {
     const memoryCell4 = await TestConfig.getElementById(driver, 'memory-4');
     const memoryCell4Res = await memoryCell4.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
     expect(memoryCell1Res).toEqual('data');
     expect(memoryCell2Res).toEqual('data');
@@ -253,11 +233,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("data")\nmove(next)\n}\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -274,7 +252,6 @@ describe('test example programs', () => {
     const memoryCell4 = await TestConfig.getElementById(driver, 'memory-4');
     const memoryCell4Res = await memoryCell4.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
     expect(memoryCell1Res).toEqual('data');
     expect(memoryCell2Res).toEqual('data');
@@ -282,8 +259,6 @@ describe('test example programs', () => {
     expect(memoryCell4Res).toEqual('');
   }, 40000);
 
-  // This command doesn't wrok correctly
-  // So i comment this test
   // if is equal:
   //   start
   //   set(integer)
@@ -295,26 +270,23 @@ describe('test example programs', () => {
   //   }
   //   end
 
-  //   test(testIfIsEqual, async () => {
-  //     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-  //     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(string)\nwrite("is equal to 3!")\n}\nend');
+  test(testIfIsEqual, async () => {
+    const codingArea = await TestConfig.getElementById(driver, 'coding-area');
+    await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(is equal 3){\nmove(next)\nset(string)\nwrite("= 3")\n}\nend');
 
-  //     const startBtn = await TestConfig.getElementById(driver, 'start-button');
-  //     await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-  //     const outputArea = await TestConfig.getElementById(driver, 'output-area');
-  //     const outputAreaRes = await outputArea.getText();
+    const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
+    const memoryCell0Res = await memoryCell0.getText();
 
-  //     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
-  //     const memoryCell0Res = await memoryCell0.getText();
+    const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
+    const memoryCell1Res = await memoryCell1.getText();
 
-  //     const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
-  //     const memoryCell1Res = await memoryCell1.getText();
-
-  //     expect(outputAreaRes).toEqual('');
-  //     expect(memoryCell0Res).toEqual('3');
-  //     expect(memoryCell1Res).toEqual('"is equal to 3!"');
-  //   }, 40000);
+    expect(memoryCell0Res).toEqual('3');
+    expect(memoryCell1Res).toEqual('= 3');
+  }, 40000);
 
   // if not less:
   //   start
@@ -331,11 +303,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("not <3")\n}\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -343,7 +313,6 @@ describe('test example programs', () => {
     const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
     const memoryCell1Res = await memoryCell1.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
     expect(memoryCell1Res).toEqual('not <3');
   }, 40000);
@@ -363,11 +332,9 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("> 3")\n}\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
@@ -375,7 +342,6 @@ describe('test example programs', () => {
     const memoryCell1 = await TestConfig.getElementById(driver, 'memory-1');
     const memoryCell1Res = await memoryCell1.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('3');
     expect(memoryCell1Res).toEqual('');
   }, 40000);
@@ -390,20 +356,16 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nkeyboardRead\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
-
-    const inputArea = await TestConfig.getElementById(driver, 'input-bar');
-    await inputArea.sendKeys('hello!');
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
     await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    await consoleInput.sendKeys('hello!');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('');
     expect(memoryCell0Res).toEqual('hello!');
   }, 40000);
 
@@ -417,16 +379,17 @@ describe('test example programs', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nimport(IO)\nconsoleWrite("hello!")\nend');
 
-    const startBtn = await TestConfig.getElementById(driver, 'start-button');
-    await startBtn.click();
+    const consoleInput = await TestConfig.getElementById(driver, 'console-input');
+    await consoleInput.sendKeys('start');
+    await driver.actions().keyDown(Key.ENTER).perform();
 
-    const outputArea = await TestConfig.getElementById(driver, 'output-area');
-    const outputAreaRes = await outputArea.getText();
+    const secondConsoleRecord = await TestConfig.getElementByXpath(driver, '//*[@id="console"]/div[2]');
+    const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(outputAreaRes).toEqual('hello!');
+    expect(secondConsoleRecordRes).toEqual('> hello!');
     expect(memoryCell0Res).toEqual('');
   }, 40000);
 });

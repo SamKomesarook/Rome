@@ -25,6 +25,7 @@ NAME: 'name';
 
 IMP: 'import';
 IO: 'IO';
+MATH: 'math';
 
 IF: 'if';
 IS: 'is';
@@ -34,6 +35,7 @@ LESS: 'less';
 GRE: 'greater';
 AND: 'and';
 OR: 'or';
+RANDOM: 'rand';
 
 MOVE: 'move';
 RIGHT: 'next';
@@ -66,7 +68,8 @@ NUMBER: '-'?('0' .. '9')+;
 
 FLOAT: '-'?('0' .. '9')+ '.' ('0' .. '9')+;
 
-STRLIT: '"' ~ ["\r\n]* '"';
+CHARACTER : '\'' ~ ["\r\n]* '\'' | '\u2018' ~ ["\r\n]* '\u2019';
+STRLIT: '"' ~ ["\r\n]* '"' | '\u201C' ~ ["\r\n]* '\u201D';
 
 ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
@@ -74,7 +77,9 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 strargs : STRLIT #Str ;
 
-imp:  IMP '(' IO ')' # Io ;
+imp:  IMP '(' IO ')' # Io
+    | IMP '(' MATH ')' # Math
+    ;
 
 mem: MEM '(' (intargs | strargs) ')';
 
@@ -109,9 +114,10 @@ expression:
 	| MOVE '(' (RIGHT | LEFT) ')'							# Move
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
-	| WRITE '(' (intargs | floatargs | STRLIT) ')'					# Write
+	| WRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Write
 	| KREAD													# Kread
-	| SWRITE '(' (intargs | floatargs | STRLIT) ')'					# Swrite
+	| SWRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
 	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
+	| RANDOM '(' intargs ')'					# Random
 	;

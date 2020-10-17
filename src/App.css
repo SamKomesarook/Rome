@@ -24,15 +24,27 @@
     height: 100%;
 }
 
-#computer-column{
+#computer-column {
     border: solid 2px black;
     border-radius: 10px;
     padding: 10px;
 }
 
+#tablet-tip-bar {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 5rem);
+    text-align: center;
+    background-color: var(--bg-secondary);
+    opacity: 70%;
+    color: white;
+    padding: 2px 0;
+}
+
 .hflex {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 /** INPUT **/
@@ -42,32 +54,46 @@ Glowing Blue Input Highlights <Start>
 Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
 */
 
-input[type=text], textarea {
+.highlightable-input {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
-    outline: none;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid #DDDDDD;
-    font-family: inherit;
+    border: 3px solid var(--border-line-editable);
+    background-color: var(--bg-editable);
 }
 
-input[type=text]:focus, textarea:focus {
+.highlightable-input:focus-within {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
 }
 
-input[type=text]:enabled, textarea:enabled {
-    border: 3px solid var(--border-line-editable);
-    background-color: var(--bg-editable);
+input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+}
+
+input:invalid {
+    box-shadow: 0 2px firebrick;
+    transition: all 0.2s ease-in-out;
 }
 
 /* Glowing Blue Input Highlights <End> */
 
 /** CONTROL **/
+
+.control-group {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-line-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
 .control-container {
     display: flex;
@@ -75,9 +101,8 @@ input[type=text]:enabled, textarea:enabled {
     align-items: center;
     background-color: var(--bg-primary);
     border-radius: 5px;
-    /* padding: 0.5rem 1rem; */
-    padding: 1rem 1rem;
-    height: 3rem;
+    padding: 0.5rem 1rem;
+    height: 100%;
     width: 100%;
 }
 
@@ -86,18 +111,18 @@ input[type=text]:enabled, textarea:enabled {
     color: var(--bg-contrast-primary);
 }
 
-.control-container .control {
+.control {
     height: 2rem;
     width: 100%;
     background-color: transparent;
     color: var(--bg-contrast-primary);
     border: none;
-    cursor: pointer;
 }
 
 .control:hover, .control:focus {
     border: none;
     box-shadow: none;
+    outline: none;
 }
 
 .control-container label {
@@ -121,6 +146,7 @@ select.control {
     text-overflow: ellipsis;
     padding-right: 1rem;
     font-family: inherit;
+    cursor: pointer;
 }
 
 select.control > option {
@@ -133,10 +159,12 @@ button {
     border: none;
     text-align: center;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: inherit;
+    letter-spacing: 0.7px;
+    outline: none;
 }
 
-button:hover:enabled {
+button:hover:enabled, div[role=button]:hover {
     cursor: pointer;
     filter: brightness(90%);
 }
@@ -153,16 +181,6 @@ button:disabled {
     font-weight: bold;
 }
 
-.primary-btn {
-    background-color: var(--baby-blue);
-    color: white;
-}
-
-.secondary-btn {
-    background-color: var(--light-grey);
-    color: dimgray;
-}
-
 /** OTHER **/
 
 .noselect {
@@ -177,4 +195,14 @@ button:disabled {
 
 .hidden {
     display: none !important;
+}
+
+@media screen and (orientation: portrait) {
+    #computer-column {
+        height: 175%;
+    }
+    
+    .main {
+        flex-direction: column;
+    }
 }

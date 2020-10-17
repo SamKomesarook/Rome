@@ -7,6 +7,18 @@ aside {
     top: 0;
     right: 0;
     background-color: var(--bg-secondary);
+    font-size: 14px;
+    z-index: 100;
+}
+
+aside:hover {
+    width: 16rem;
+    box-shadow: 0 0 5px #071219;
+}
+
+aside:hover .sidebar-item-text {
+    display: block;
+    margin: 3px;
 }
 
 .sidebar-item-list {
@@ -49,18 +61,9 @@ aside {
     margin: 0 1.4rem;
 }
 
-aside:hover {
-    width: 16rem;
-}
-
-aside:hover .sidebar-item-text {
-    display: block;
-    margin: 3px;
-}
-
-.sidebar-btn:hover, .sidebar-btn.toggle-btn[aria-pressed="true"] {
-    color: var(--bg-contrast-primary);
-    border-right: 0.1rem solid var(--bg-contrast-primary);
+.sidebar-btn:hover, .sidebar-btn:focus, .sidebar-btn.toggle-btn[aria-pressed="true"] {
+    color: white;
+    border-right: 0.1rem solid white;
 }
 
 .sidebar-item-pane {
@@ -70,22 +73,15 @@ aside:hover .sidebar-item-text {
     width: 20rem;
     height: 100vh;
     background-color: var(--bg-secondary);
+    color: var(--bg-contrast-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     border-right: 2px solid var(--border-line-dark);
+    box-shadow: -3px 0 3px #07121957;
 }
 
 /** DISTANCE LEARNING **/
-
-.filter-control {
-    width: 100%;
-    padding: 1rem;
-    border-bottom: 2px solid var(--border-line-dark);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
 
 .list {
     display: flex;
@@ -130,7 +126,7 @@ aside:hover .sidebar-item-text {
 
 .argument-desc{
     color: white;
-     display:inline; 
+    display:inline; 
 }
 
 .argument-elem{
@@ -189,10 +185,6 @@ aside:hover .sidebar-item-text {
     display: flex;
 }
 
-#about-title > svg {
-    height: 1.5rem;
-}
-
 .about-heading {
     text-align: center;
     font-size: 1.5rem;
@@ -205,8 +197,79 @@ aside:hover .sidebar-item-text {
     margin-top: 1rem;
 }
 
+.heart-animation {
+    background-image: url('../../icons/heart_animation.png');
+    background-repeat: no-repeat;
+    background-size: 2900%;
+    background-position: left;
+    height: 50px;
+    width: 80px;
+    margin: 0 -20px;
+    cursor: pointer;
+    outline: none;
+}
+
+.animate {
+    animation: heart-burst .8s steps(28) forwards;
+}
+
+@keyframes heart-burst {
+    0% {
+        background-position: left
+    }
+    100% {
+        background-position: right
+    }
+}
+
 /** HELP TAB **/
 
 #help {
     width: 50rem;
+}
+
+/** FEEDBACK TAB **/
+
+#fb-form {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+	align-items: flex-end;
+}
+
+#fb-content-label {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#fb-form textarea {
+    height: 30rem;
+    width: 100%;
+    background-color: transparent;
+    color: var(--bg-contrast-primary);
+    border: none;
+    resize: none;
+}
+
+#fb-form > div:last-child{
+    margin-top: 0.5rem;
+}
+
+#fb-form button {
+    background-color: var(--bg-primary);
+    color: var(--bg-contrast-primary);
+}
+
+#fb-form svg {
+    height: 2rem;
+}
+
+/** MEDIA QUERIES **/
+
+@media screen and (max-width: 768px) {
+    #help, #about {
+        width: calc(100% - 5rem);
+    }
 }

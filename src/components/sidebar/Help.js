@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 const Help = ({ isActive }) => {
   const DATA = [
     {
+      keyword: 'start',
+      content: 'Indicates the start of the program.\nAll programs must begin with this command.',
+      example: ['start\n#The simplest possible program!\nend'],
+    }, {
+      keyword: 'end',
+      content: 'Indicates the end of the program.\nAll programs must end with this command.',
+      example: ['start\n#The simplest possible program!\nend'],
+    }, {
       keyword: 'loop',
       content: 'Loops the arguments in the curly brackets as many times as the argument in the round parenthesis indicates.',
       argument: [{
@@ -39,14 +47,6 @@ const Help = ({ isActive }) => {
         desc: 'Numbers, charaters, or string,',
       }],
     }, {
-      keyword: 'start',
-      content: 'Indicates the start of the program.\nAll programs must begin with this command.',
-      example: ['start\n#The simplest possible program!\nend'],
-    }, {
-      keyword: 'end',
-      content: 'Indicates the end of the program.\nAll programs must end with this command.\n\nExample:\nstart\n//do something\nend',
-      example: ['hello', 'goodbye'],
-    }, {
       keyword: 'move',
       content: 'Changes the selected memory cell.',
       example: ['start\n#Selects the memory cell in the right direction\nmove(next)\nend'],
@@ -72,7 +72,7 @@ const Help = ({ isActive }) => {
       example: ['start\nimport(IO)\nend'],
       argument: [{
         name: 'library name',
-        desc: '\'IO\'.',
+        desc: '\'IO\', \'math\'.',
       }],
     }, {
       keyword: 'keyboardRead',
@@ -89,13 +89,21 @@ const Help = ({ isActive }) => {
     },
     {
       keyword: 'style',
-      content: 'Style the output container.',
-      example: ['start\n#Output with some fun style!\nimport(IO)\nstyle{\nunderline(true)\nitalic(true)\ntext_align(center)\npaint(blue)\n}\nconsoleWrite("Hello!")\nend'],
+      content: 'Style the console container.',
+      example: ['start\n#Console with some fun style!\nimport(IO)\nstyle{\nunderline(true)\nitalic(true)\ntext_align(center)\npaint(blue)\n}\nconsoleWrite("Hello!")\nend'],
       argument: [{
         name: 'style',
-        desc: 'Style the output window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\bold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
+        desc: 'Style the console window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\nbold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
       }],
-    },
+    },{
+      keyword: 'rand',
+      content: 'Writes a random number from 0-n(excluded) into the currently selected memory cell.',
+      argument: [{
+        name: 'integer',
+        desc: 'The number range for selecting random number',
+      }],
+      example: ['start\n#Import math package for random number function\nimport(math)\nrand(10)\nend'],
+    }, 
   ];
 
   const [keyword, setKeyword] = useState('start');
@@ -119,7 +127,7 @@ const Help = ({ isActive }) => {
 
   return (
     <div id="help" className={`sidebar-item-pane${isActiveClass}`}>
-      <div className="filter-control">
+      <div className="control-group">
         <div className="control-container">
           <label htmlFor="keywords">
             <select name="keywords" id="keywords" className="control" onChange={handleChangeKeyword}>
@@ -134,9 +142,8 @@ const Help = ({ isActive }) => {
         </div>
         <div className="argument-container">
           {keyword}
-          {keyword !== 'style'
-          && (
-          <div>
+          {keyword !== 'style' && (
+          <>
             {args && '('}
             {args && args.map((item, index) => {
               if (index === args.length - 1) {
@@ -164,7 +171,7 @@ const Help = ({ isActive }) => {
             </div>
             )}
             {codeArgs && '}'}
-          </div>
+          </>
           )}
           {keyword === 'style' && '{'}
           {keyword === 'style' && (
