@@ -97,7 +97,8 @@ conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT |floatargs) # 
 
 stylingExpressions: stylingExpression NEWLINE;
 
-stylingExpression: PAINT '(' COLOR ')' 	# Paint
+stylingExpression: 
+	PAINT '(' COLOR ')' 				# Paint
 	| TEXT_COLOR '(' COLOR ')' 			# TextColor
 	| TEXT_SIZE '(' SIZE ')'			# TextSize
 	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
@@ -109,15 +110,15 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
 
 expression:
-	SET '(' (INT | LONG | CHAR | STR | FLO) ')'								# Set
-	| FREE													# Free
-	| MOVE '(' (RIGHT | LEFT) ')'							# Move
-	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
-	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
-	| WRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Write
-	| KREAD													# Kread
-	| SWRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Swrite
-	| NAME '(' (STRLIT |  mem) ')' 						# Name
-	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
-	| RANDOM '(' intargs ')'					# Random
+	SET '(' (INT | LONG | CHAR | STR | FLO) ')'						# Set
+	| FREE															# Free
+	| MOVE '(' (RIGHT | LEFT) ')'									# Move
+	| IF '(' conditional ')' '{' NEWLINE expressions* '}'			# If
+	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'				# Loop
+	| WRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'		# Write
+	| KREAD															# Kread
+	| SWRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'		# Swrite
+	| NAME '(' (STRLIT |  mem) ')' 									# Name
+	| STYLE '{' NEWLINE stylingExpressions* '}'						# Style
+	| RANDOM '(' intargs ')'										# Random
 	;
