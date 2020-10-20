@@ -15,6 +15,7 @@ const LoginScreen = () => {
   const [isInvalidInput, setInvalidInput] = useState(false);
 
   const handleLogin = () => {
+    setInvalidInput(false);
     const check = bcrypt.compareSync(passwordRef.current.value, hashValue.value);
     if (check) {
       // Set cookie with 1 day expiry
@@ -45,7 +46,7 @@ const LoginScreen = () => {
         <input
           name="password-field"
           type="password"
-          className={isInvalidInput ? 'login-input-invalid' : 'login-input'}
+          className={`login-input ${isInvalidInput ? 'login-input-invalid' : ''}`}
           placeholder="password"
           ref={passwordRef}
         />
