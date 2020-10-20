@@ -43,21 +43,24 @@
     font-family: inherit;
     resize: none;
     text-align: left;
-    /* border-radius: 10px; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
 }
 
 #coding-area {
-    position: absolute;
-    top: 0;
     background-color: transparent;
+    /* background-color: white; */
     /* background-color: pink; */
-    color: white;
+    /* color: transparent; */
+    
+   -webkit-text-fill-color: transparent; /* sets just the text color */
 }
 
 #coding-area-color-layer {
-    position: absolute;
-    top: 0;
-    /* background-color: blue; */
+    background-color: blue;
+    color: white;
 }
 
 div[data-placeholder]:not(:focus):before {
