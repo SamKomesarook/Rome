@@ -26,19 +26,8 @@ const CodingArea = () => {
   const colorCode = {
     macroWrapper: '#a3b1bf',
   };
-
-  // function handleChange(event) {
-  //   event.preventDefault();
-  //   const { value } = event.target;
-  //   // TODO ensure the below includes newline breaks and shit...
-  //   setDisplay((prevDisplay) => ({
-  //     ...prevDisplay,
-  //     text: value,
-  //   }));
-  // }
-
+  
   const updateColor = (lines) => {
-    console.log('lines', lines);
     const styledLines = lines.map((line) => {
       if (line === '') {
         return '<br>';
@@ -48,7 +37,6 @@ const CodingArea = () => {
     styledLines.unshift('<div>');
     styledLines.push('</div>');
     const output = styledLines.join('</div><div>');
-    console.log('output', output);
     return output;
   };
 
@@ -58,22 +46,21 @@ const CodingArea = () => {
     return textOnlyLines;
   };
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     e.preventDefault();
     const { innerHTML } = e.target;
 
     const lines = stripOffHTML(innerHTML);
-    // console.log('e', e);
-    // console.log('value', text);
 
     colorLayerRef.current.innerHTML = updateColor(lines);
-    // console.log('colorLayerRef', colorLayerRef.current);
+  };
 
-    // setDisplay((prevDisplay) => ({
-    //   ...prevDisplay,
-    //   text,
-    // }));
-  }
+  const handleScroll = (e) => {
+    colorLayerRef.current.scrollTo(
+      codingAreaRef.current.scrollLeft,
+      codingAreaRef.current.scrollTop,
+    );
+  };
 
   // Init placeholder on DOM load
   document.addEventListener('DOMContentLoaded', () => new TypeWriter(codingAreaRef.current, sample));
@@ -88,6 +75,7 @@ const CodingArea = () => {
         id="coding-area"
         ref={codingAreaRef}
         onInput={handleChange}
+        onScroll={handleScroll}
         // className="highlightable-input"
         spellCheck={false}
         contentEditable="true"
