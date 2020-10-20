@@ -196,6 +196,7 @@ aside:hover .sidebar-item-text {
 .about-paragraph {
     text-align: center;
     margin-top: 1rem;
+    line-height: 1.25rem;
 }
 
 .heart-animation {
