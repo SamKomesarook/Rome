@@ -18,7 +18,7 @@ const Memory = () => {
   };
 
   return (
-    <div className={`memory-section noselect ${isElementHiddenClass}`}>
+    <div className={`memory-section noselect code ${isElementHiddenClass}`}>
       {memoryCellList(display.memorySize)}
     </div>
   );

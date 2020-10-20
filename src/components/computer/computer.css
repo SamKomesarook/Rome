@@ -16,6 +16,7 @@
     background-color: var(--bg-secondary);
     padding: 0.5rem;
     display: grid;
+    align-content: center;
 }
 
 .memory-cell:first-child {
@@ -45,18 +46,22 @@
 
 .memory-1-bytes-cell {
     grid-template-rows: repeat(1, 1fr);
+    font-size: min(calc((15vh - 1rem) / 1), 1rem);
 }
 
 .memory-2-bytes-cell {
     grid-template-rows: repeat(2, 1fr);
+    font-size: min(calc((15vh - 1rem) / 2), 1rem);
 }
 
 .memory-4-bytes-cell {
     grid-template-rows: repeat(4, 1fr);
+    font-size: min(calc((15vh - 1rem) / 4), 1rem);
 }
 
 .memory-6-bytes-cell {
     grid-template-rows: repeat(6, 1fr);
+    font-size: min(calc((15vh - 1rem) / 6), 1rem);
 }
 
 /** PROCESSOR **/

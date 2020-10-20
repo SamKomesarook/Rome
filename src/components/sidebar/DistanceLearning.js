@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import DistanceLearningContent from './DistanceLearningContent';
@@ -5,15 +6,9 @@ import DropdownField from '../elements/DropdownField';
 
 const DistanceLearning = ({ isActive }) => {
   const DATA = [
-    {
-      id: 'dl-1', week: 'w1', level: 'kindergarten', title: 'Rome Intro', link: 'https://youtu.be/8QUjc-AZCFQ',
-    },
-    {
-      id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc',
-    },
-    {
-      id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU',
-    },
+    { id: 'dl-1', week: 'w1', level: 'kindergarten', title: 'Rome Intro', link: 'https://youtu.be/8QUjc-AZCFQ' },
+    { id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc' },
+    { id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU' },
   ];
 
   // Level options for dropdown field
