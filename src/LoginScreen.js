@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import bcrypt from 'bcryptjs';
 import Cookies from 'js-cookie';
 import App from './App';
@@ -11,13 +11,10 @@ const hashValue = data.find((hash) => hash.id === 1);
 
 function LoginScreen() {
   // password
-  const [password, setPassword] = useState('');
-  const setInput = (e) => setPassword(e.target.value);
+  const passwordRef = useRef();
+  const [log, setLog] = useState(false);
+  const [popUp, setPopUp] = useState(false);
 
-  // login button
-  // set the state to false
-  const [log, setLog] = React.useState(false);
-  const [popUp, setPopUp] = React.useState(false);
   // read from cookie
   const readCookie = () => {
     const user = Cookies.get('user');
@@ -32,7 +29,7 @@ function LoginScreen() {
 
   const login = () => {
     // const hash = fs.readFileSync('hash.txt');
-    const check = bcrypt.compareSync(password, hashValue.value);
+    const check = bcrypt.compareSync(passwordRef.current.value, hashValue.value);
     if (check) {
       setLog(true);
       // set cookie with 1 day expiry
@@ -48,19 +45,16 @@ function LoginScreen() {
     );
   }
 
-  const isMain = 'login-screen';
-
   return (
     <div className="login-container">
-      <div className={isMain}>
+      <div className="login-screen">
         Welcome to Rome.
         <input
           name="password-field"
           type="password"
           className={!popUp ? 'login-input' : 'login-input-invalid'}
-          value={password}
-          onChange={setInput}
           placeholder="password"
+          ref={passwordRef}
         />
         <button
           type="submit"
@@ -70,7 +64,6 @@ function LoginScreen() {
           Go
         </button>
       </div>
-
     </div>
   );
 }
