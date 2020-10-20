@@ -6,40 +6,33 @@ import './LoginScreen.css';
 
 const data = require('./hash/hash.json');
 
-// read from json
+// Read from json
 const hashValue = data.find((hash) => hash.id === 1);
 
-function LoginScreen() {
-  // password
+const LoginScreen = () => {
   const passwordRef = useRef();
-  const [log, setLog] = useState(false);
-  const [popUp, setPopUp] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isInvalidInput, setInvalidInput] = useState(false);
 
-  // read from cookie
-  const readCookie = () => {
-    const user = Cookies.get('user');
-    if (user) {
-      setLog(true);
+  const handleLogin = () => {
+    const check = bcrypt.compareSync(passwordRef.current.value, hashValue.value);
+    if (check) {
+      // Set cookie with 1 day expiry
+      Cookies.set('user', hashValue.value, { expires: 1 });
+      setLoggedIn(true);
+    } else {
+      setInvalidInput(true);
     }
   };
 
   React.useEffect(() => {
-    readCookie();
+    // Read from cookie
+    if (Cookies.get('user')) {
+      setLoggedIn(true);
+    }
   }, []);
 
-  const login = () => {
-    // const hash = fs.readFileSync('hash.txt');
-    const check = bcrypt.compareSync(passwordRef.current.value, hashValue.value);
-    if (check) {
-      setLog(true);
-      // set cookie with 1 day expiry
-      Cookies.set('user', hashValue.value, { expires: 1 });
-    } else {
-      setPopUp(true);
-    }
-  };
-
-  if (log) {
+  if (isLoggedIn) {
     return (
       <App />
     );
@@ -52,13 +45,13 @@ function LoginScreen() {
         <input
           name="password-field"
           type="password"
-          className={!popUp ? 'login-input' : 'login-input-invalid'}
+          className={isInvalidInput ? 'login-input-invalid' : 'login-input'}
           placeholder="password"
           ref={passwordRef}
         />
         <button
           type="submit"
-          onClick={login}
+          onClick={handleLogin}
           className="login-btn"
         >
           Go
@@ -66,6 +59,6 @@ function LoginScreen() {
       </div>
     </div>
   );
-}
+};
 
 export default LoginScreen;
