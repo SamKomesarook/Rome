@@ -63,6 +63,7 @@ aside:hover .sidebar-item-text {
 
 .sidebar-btn:hover, .sidebar-btn:focus, .sidebar-btn.toggle-btn[aria-pressed="true"] {
     color: white;
+    border: none;
     border-right: 0.1rem solid white;
 }
 
