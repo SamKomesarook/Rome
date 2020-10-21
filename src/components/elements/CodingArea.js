@@ -1,12 +1,14 @@
 import React, { useContext, useRef } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 import TypeWriter from '../../utils/TypeWriter';
+import CodeStyleProcessor from './CodeStyleProcessor';
 
 const CodingArea = () => {
+  const codeStyleProcessor = new CodeStyleProcessor();
   const [display, setDisplay] = useContext(DisplayContext);
   const codingAreaRef = useRef();
   const colorLayerRef = useRef();
-  const sample = [  
+  const sample = [
     'start\nmove(next)\nmove(last)\nend',
     'start\nset(letters)\nwrite("hello!")\nend',
     'start\nset(numbers)\nwrite(4)\nend',
@@ -23,36 +25,22 @@ const CodingArea = () => {
     'start\nimport(IO)\nk_write("hello!")\nend',
   ];
 
-  const colorCode = {
-    macroWrapper: '#a3b1bf',
-  };
-  
-  const updateColor = (lines) => {
-    const styledLines = lines.map((line) => {
-      if (line === '') {
-        return '<br>';
-      }
-      return line.replace(/start/, `<span style='color: ${colorCode.macroWrapper}'>start</span>`);
-    });
-    styledLines.unshift('<div>');
-    styledLines.push('</div>');
-    const output = styledLines.join('</div><div>');
-    return output;
-  };
-
   const stripOffHTML = (innerHTML) => {
-    const lines = innerHTML.split(/<\/div><div>/g);
-    const textOnlyLines = lines.map((line) => line.replace(/<\/?div>|<span([A-Z]+)*<\/span>|<br>/g, ''));
+    const lines = innerHTML.replace(/^<div>|<\/div>$/, '').split(/<\/div><div>|<div>|<\/div>/g);
+    const textOnlyLines = lines.map((line) => line.replace(/<span([A-Z]+)*<\/span>|<br>/g, ''));
     return textOnlyLines;
   };
 
   const handleChange = (e) => {
     e.preventDefault();
     const { innerHTML } = e.target;
-
     const lines = stripOffHTML(innerHTML);
+    colorLayerRef.current.innerHTML = codeStyleProcessor.updateColor(lines);
 
-    colorLayerRef.current.innerHTML = updateColor(lines);
+    setDisplay((prevDisplay) => ({
+      ...prevDisplay,
+      text: lines.join('\n'),
+    }));
   };
 
   const handleScroll = (e) => {

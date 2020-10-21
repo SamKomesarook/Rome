@@ -48,20 +48,14 @@
     left: 0;
     border-radius: inherit;
     overflow: auto;
-    /* overflow-wrap: normal; */
 }
 
 #coding-area {
-    background-color: transparent;
-    /* background-color: white; */
-    /* background-color: pink; */
-    /* color: transparent; */
-    
+    background-color: transparent;    
    -webkit-text-fill-color: transparent; /* sets just the text color */
 }
 
 #coding-area-color-layer {
-    background-color: blue;
     color: white;
 }
 
