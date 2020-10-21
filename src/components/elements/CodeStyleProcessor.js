@@ -6,6 +6,7 @@ class CodeStyleProcessor {
       macroWrappers: '#a3b1bf', // For start and end keywords
       attributes: '#cb886e',
       words: '#9ab584',
+      numbers: '#b08cac',
       comment: '#5e6a83',
     };
 
@@ -15,9 +16,7 @@ class CodeStyleProcessor {
 
   applyColor = (color, content) => `<span style='color: ${color}'>${content}</span>`;
 
-  styleComment = (line) => {
-    return this.applyColor(this.colorCodes.comment, line);
-  }
+  styleComment = (line) => this.applyColor(this.colorCodes.comment, line)
 
   styleStart = (line) => {
     if (line.match(/^start{?$/)) {
@@ -46,6 +45,11 @@ class CodeStyleProcessor {
   styleQuoteContent = (line) => {
     const quoteContent = line.match(/"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/);
     return line.replace(quoteContent[0], this.applyColor(this.colorCodes.words, quoteContent));
+  }
+
+  styleNumber = (line) => {
+    const number = line.match(/[0-9]+.?[0-9]*|[0-9]+/);
+    return line.replace(number[0], this.applyColor(this.colorCodes.numbers, number));
   }
 
   updateColor = (lines) => {
@@ -81,6 +85,11 @@ class CodeStyleProcessor {
       // String and character
       if (line.match(/"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/)) {
         styledLine = this.styleQuoteContent(line);
+      }
+
+      // Integer, float, long
+      if (line.match(/[0-9]+.?[0-9]*|[0-9]+/)) {
+        styledLine = this.styleNumber(line);
       }
 
       return styledLine;
