@@ -6,6 +6,7 @@ class CodeStyleProcessor {
       macroWrappers: '#a3b1bf', // For start and end keywords
       attributes: '#cb886e',
       words: '#9ab584',
+      comment: '#5e6a83',
     };
 
     this.hasStart = false;
@@ -13,6 +14,10 @@ class CodeStyleProcessor {
   }
 
   applyColor = (color, content) => `<span style='color: ${color}'>${content}</span>`;
+
+  styleComment = (line) => {
+    return this.applyColor(this.colorCodes.comment, line);
+  }
 
   styleStart = (line) => {
     if (line.match(/^start{?$/)) {
@@ -53,21 +58,27 @@ class CodeStyleProcessor {
       // Make empty line a separate line
       if (line === '') return '<br>';
 
-      // Apply style to start keyword and anything before that
+      // Comment
+      if (line.match(/^#/)) {
+        return this.styleComment(line);
+      }
+
+      // Start
       if (!this.hasStart) {
         return this.styleStart(line);
       }
 
-      // Apply style to end keyword and anything before that
+      // End
       if (line.match(/^end{?$/) || this.hasEnd) {
         return this.styleEnd(line);
       }
 
+      // Set
       if (line.match(/^(set\()[A-Z]+\)?/)) {
         return this.styleSet(line);
       }
 
-      // Apply style to string and character
+      // String and character
       if (line.match(/"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/)) {
         styledLine = this.styleQuoteContent(line);
       }
