@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 class CodeStyleProcessor {
   constructor() {
     this.colorCodes = {
@@ -35,9 +34,9 @@ class CodeStyleProcessor {
   };
 
   styleSet = (line) => {
-    const attribute = line.match(/^(set\()[a-zA-Z]+/)[0].replace(/^(set\()/, '').replace(/\)[a-zA-Z]*/, '');
+    const attribute = line.match(/^(set\().+/)[0].replace(/^(set\()/, '').replace(/\).*/, '');
     const styledAttribute = this.applyColor(this.colorCodes.attributes, `${attribute}`);
-    const optionalEndBracket = line.replace(/set\(/, '').replace(attribute, '');
+    const optionalEndBracket = line.replace(/set\([^)]*/, '');
     return `set(${styledAttribute}${optionalEndBracket === null ? '' : optionalEndBracket}`;
   };
 
@@ -47,7 +46,7 @@ class CodeStyleProcessor {
   }
 
   styleNumber = (line) => {
-    const number = line.match(/[0-9]+.?[0-9]*|[0-9]+/);
+    const number = line.match(/[\d]+\.?[\d]*|[\d]+/);
     return line.replace(number[0], this.applyColor(this.colorCodes.numbers, number));
   }
 
@@ -77,7 +76,7 @@ class CodeStyleProcessor {
       }
 
       // Set
-      if (line.match(/^(set\()[a-zA-Z]+/)) {
+      if (line.match(/^(set\().+/)) {
         return this.styleSet(line);
       }
 
@@ -87,7 +86,7 @@ class CodeStyleProcessor {
       }
 
       // Integer, float, long
-      if (line.match(/[0-9]+.?[0-9]*|[0-9]+/)) {
+      if (line.match(/[\d]+\.?[\d]*|[\d]+/)) {
         styledLine = this.styleNumber(line);
       }
 
