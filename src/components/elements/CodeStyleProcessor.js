@@ -3,8 +3,8 @@ class CodeStyleProcessor {
   constructor() {
     this.styleCodes = [
       { name: 'error', color: '#bf616a', bold: false, italic: false },
-      { name: 'macroWrappers', color: '#a3b1bf', bold: true, italic: false },
-      { name: 'attributes', color: '#a3b2b9', bold: true, italic: false },
+      { name: 'macroWrappers', color: '#a3b1bf', bold: true, italic: false }, // For start and end keywords
+      { name: 'attributes', color: '#cb886e', bold: true, italic: false },
     ];
 
     this.hasStart = false;
@@ -32,6 +32,12 @@ class CodeStyleProcessor {
     return line.replace(line, this.buildStyleSpan('error', line));
   };
 
+  styleSet = (line) => {
+    const attribute = line.replace(/^(set\()/, '').replace(/\)$/, '');
+    // Only style the attribute inside the brackets
+    return `set(${this.buildStyleSpan('attributes', `${attribute}`)}${line.match(/\)$/) ? ')' : ''}`;
+  };
+
   updateColor = (lines) => {
     this.hasStart = false;
     this.hasEnd = false;
@@ -48,6 +54,11 @@ class CodeStyleProcessor {
       // Apply style to end keyword and anything before that
       if (line.match(/^end{?$/) || this.hasEnd) {
         return this.styleEnd(line);
+      }
+
+      if (line.match(/^(set\()([A-Z]+)*\)?/)) {
+      // if (line.match(/^(set\()/)) {
+        return this.styleSet(line);
       }
 
       return line;

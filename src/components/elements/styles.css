@@ -51,8 +51,8 @@
 }
 
 #coding-area {
-    background-color: transparent;    
-   -webkit-text-fill-color: transparent; /* sets just the text color */
+    background-color: transparent;  
+    -webkit-text-fill-color: transparent; /* sets just the text color */
 }
 
 #coding-area-color-layer {
