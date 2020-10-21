@@ -55,9 +55,9 @@ DisplayContext.DEFAULT = () => {
       txtColor: '', // Style: text color
       txtSize: '', // Style: text size
       txtAlign: '', // Style: text alignment
-      bold: '', // Style: bold font
-      italic: '', // Style: italic font
-      underline: '', // Style: underline font
+      fontWeight: '', // Style: e.g. bold font
+      fontStyle: '', // Style: e.g. italic font
+      textDecorationLine: '', // Style: e.g. underline font
     },
     dataTypeSize: { // The available space taken of each data types
       character: 1,
