@@ -51,7 +51,7 @@ const CodingArea = () => {
   };
 
   // Init placeholder on DOM load
-  document.addEventListener('DOMContentLoaded', () => new TypeWriter(codingAreaRef.current, sample));
+  document.addEventListener('DOMContentLoaded', () => new TypeWriter(colorLayerRef.current, sample));
 
   // Coding area with two layers:
   // 1. top layer "coding-area" where user interact with code with invisible text and background
