@@ -35,11 +35,10 @@ class CodeStyleProcessor {
   };
 
   styleSet = (line) => {
-    const attribute = line.replace(/^(set\()/, '').replace(/\)$/, '');
-    // Only style the attribute inside the brackets
+    const attribute = line.match(/^(set\()[a-zA-Z]+/)[0].replace(/^(set\()/, '').replace(/\)[a-zA-Z]*/, '');
     const styledAttribute = this.applyColor(this.colorCodes.attributes, `${attribute}`);
-    const optionalEndBracket = line.match(/\)$/) ? ')' : '';
-    return `set(${styledAttribute}${optionalEndBracket}`;
+    const optionalEndBracket = line.replace(/set\(/, '').replace(attribute, '');
+    return `set(${styledAttribute}${optionalEndBracket === null ? '' : optionalEndBracket}`;
   };
 
   styleQuoteContent = (line) => {
@@ -78,7 +77,7 @@ class CodeStyleProcessor {
       }
 
       // Set
-      if (line.match(/^(set\()[A-Z]+\)?/)) {
+      if (line.match(/^(set\()[a-zA-Z]+/)) {
         return this.styleSet(line);
       }
 
