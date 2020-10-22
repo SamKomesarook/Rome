@@ -53,16 +53,16 @@
 #coding-area {
     background-color: transparent;  
     -webkit-text-fill-color: transparent; /* sets just the text color */
+    z-index: 1;
 }
 
 #coding-area-color-layer {
     color: white;
 }
 
-div[data-placeholder]:not(:focus):before {
+#coding-area:not(:focus) ~ div[data-placeholder]:before {
     content: attr(data-placeholder);
     float: left;
-    margin-left: 2px;
     color: #b3b3b3;
     white-space: pre-wrap;
     text-align: left;

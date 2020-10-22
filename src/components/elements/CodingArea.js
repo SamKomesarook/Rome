@@ -59,17 +59,16 @@ const CodingArea = () => {
   return (
     <div id="coding-area-wrapper" className="code highlightable-input">
       <div
-        id="coding-area-color-layer"
-        ref={colorLayerRef}
-      />
-      <div
         id="coding-area"
         ref={codingAreaRef}
         onInput={handleChange}
         onScroll={handleScroll}
-        // className="highlightable-input"
         spellCheck={false}
         contentEditable="true"
+      />
+      <div
+        id="coding-area-color-layer"
+        ref={colorLayerRef}
         data-placeholder=""
       />
     </div>
