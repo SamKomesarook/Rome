@@ -100,7 +100,7 @@ class CodeStyleProcessor {
       const parts = this.separateParts(line, '(', ')');
       const formattedAttribute = this.applyStyle(this.colorCodes.attribute, `${parts[1]}`);
 
-      // If there is value after the closing bracket
+      // If there is content after the closing bracket, format that content
       if (parts[2]) {
         parts[2] = this.formatAttribute(parts[2]);
       }
@@ -116,8 +116,27 @@ class CodeStyleProcessor {
   }
 
   formatQuoteContent = (line) => {
-    const quoteContent = line.replace(this.spanRegEx).match(/"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/)[0];
-    return line.replace(quoteContent, this.applyStyle(this.colorCodes.word, quoteContent));
+    const quoteRegex = /"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/;
+
+    // Check if the input has quote to format
+    if (line.match(quoteRegex)) {
+      // Getting the first quote content in the line
+      const quoteContent = line.replace(this.spanRegEx).match(quoteRegex)[0];
+      const openingQuote = quoteContent.charAt(0);
+      const closingQuote = quoteContent.charAt(quoteContent.length - 1);
+
+      const parts = this.separateParts(line, openingQuote, closingQuote);
+      const formattedQuoteContent = this.applyStyle(this.colorCodes.word, `${parts[1]}`);
+
+      // If there is content after the closing quote, format that content
+      if (parts[2]) {
+        parts[2] = this.formatQuoteContent(parts[2]);
+      }
+
+      return parts[0] + openingQuote + formattedQuoteContent + (parts[2] === undefined ? '' : (`${closingQuote}${parts[2]}`));
+    }
+
+    return line;
   }
 
   updateColor = (lines) => {
