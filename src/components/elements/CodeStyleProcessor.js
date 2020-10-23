@@ -4,13 +4,21 @@ class CodeStyleProcessor {
       error: '#bf616a',
       macroWrapper: '#a3b1bf', // For start and end keywords
       typeDeclaration: '#6bdfff',
-      attribute: '#cb886e',
-      word: '#9ab584',
+      arguement: '#cb886e',
+      string: '#9ab584',
       number: '#b08cac',
       comment: '#5e6a83',
     };
 
     this.spanRegEx = /<\/?span[^>]*>/g;
+    this.startRegEx = /^start$/;
+    this.endRegEx = /^end$/;
+    this.setRegEx = /^set\(.+/;
+    this.stringRegEx = /^"[^"]*"$|^'[^']*'$|^“[^”]*”$|^‘[^’]*’$/;
+    this.numberRegEx = /^[\d]+\.[\d]+$|^[\d]+$/;
+    this.completedBracketsRegEx = /\([^()]+\)/g;
+    this.openingBracketRegEx = /\([^()]+/g;
+
     this.hasStart = false;
     this.hasEnd = false;
   }
@@ -26,7 +34,7 @@ class CodeStyleProcessor {
 
     // Remove all style inside the content
     if (shouldOverwriteInnerStyle) {
-      content.replace(/<\/?span[^>]*>/g, '');
+      result = result.replace(this.spanRegEx, '');
     }
 
     // Shifting the lastOpeningSpanTag to the end of content
@@ -66,23 +74,26 @@ class CodeStyleProcessor {
   formatComment = (line) => this.applyStyle(this.colorCodes.comment, line)
 
   formatStart = (line) => {
-    if (line.match(/^start{?$/)) {
+    if (line.match(this.startRegEx)) {
       this.hasStart = true;
-      return line.replace(/^start{?$/, this.applyStyle(this.colorCodes.macroWrapper, line));
+      return line.replace(this.startRegEx, this.applyStyle(this.colorCodes.macroWrapper, line));
     }
     return line.replace(line, this.applyStyle(this.colorCodes.error, line));
   };
 
   formatEnd = (line) => {
-    if (line.match(/^end{?$/)) {
+    if (line.match(this.endRegEx)) {
       this.hasEnd = true;
-      return line.replace(/^end{?$/, this.applyStyle(this.colorCodes.macroWrapper, line));
+      return line.replace(this.endRegEx, this.applyStyle(this.colorCodes.macroWrapper, line));
     }
     return line.replace(line, this.applyStyle(this.colorCodes.error, line));
   };
 
   formatSet = (line) => {
-    const attribute = line.match(/^(set\().+/)[0].replace(/^(set\()/, '').replace(/\).*/, '').replace(this.spanRegEx, '');
+    const attribute = line.match(this.setRegEx)[0]
+      .replace(/^set\(/, '')
+      .replace(/\).*/, '')
+      .replace(this.spanRegEx, '');
     if (attribute === 'string'
     || attribute === 'character'
     || attribute === 'integer'
@@ -95,49 +106,59 @@ class CodeStyleProcessor {
     return line;
   };
 
-  formatAttribute = (line) => {
-    if (line.match(/\([^)]+/)) {
-      const parts = this.separateParts(line, '(', ')');
-      const formattedAttribute = this.applyStyle(this.colorCodes.attribute, `${parts[1]}`);
+  formatArguments = (line, i = 0) => {
+    let maskedLine = line;
+    let argumentIndex = i;
+    const formattedArgumentsPairs = []; // Store { key, fullFormattedArgument }
 
-      // If there is content after the closing bracket, format that content
-      if (parts[2]) {
-        parts[2] = this.formatAttribute(parts[2]);
+    // Find the argument within brackets.
+    // Prioritize argument with both () brackets first then opening bracket alone
+    let argumentWithBrackets = maskedLine.match(this.completedBracketsRegEx);
+    if (!argumentWithBrackets) {
+      argumentWithBrackets = maskedLine.match(this.openingBracketRegEx);
+    }
+
+    argumentWithBrackets.forEach((argumentWithBracket) => {
+      const argument = argumentWithBracket.replace(/\(|\)/g, '');
+
+      let formattedArgument = '';
+      if (argument.match(this.numberRegEx)) {
+        formattedArgument = this.applyStyle(this.colorCodes.number, argument);
+      } else if (argument.match(this.stringRegEx)) {
+        formattedArgument = this.applyStyle(this.colorCodes.string, argument);
+      } else {
+        formattedArgument = this.applyStyle(this.colorCodes.arguement, argument);
       }
 
-      return `${parts[0]}(${formattedAttribute}${parts[2] === undefined ? '' : (`)${parts[2]}`)}`;
+      // Create an id/key unique to the current argument
+      const key = `__${argumentIndex}__${(new Date()).toString().replace(/\(|\)/g, '')}__${argumentIndex}__`;
+
+      /* Replace the current argument with a unique key,
+      so that we can temporarily remove the brackets of the current argument
+      and continue to apply style to other arguments */
+      maskedLine = maskedLine.replace(argumentWithBracket, key);
+
+      // Store key-value pair for formattedArgument to restore it later
+      formattedArgumentsPairs.push({
+        key,
+        fullFormattedArgument: `(${formattedArgument}${argumentWithBracket.match(/\)/) ? ')' : ''}`,
+      });
+
+      argumentIndex += 1;
+    });
+
+    // Check if there is another argument in brackets to format
+    if (maskedLine.match(this.openingBracketRegEx)) {
+      maskedLine = this.formatArguments(maskedLine, argumentIndex);
     }
-    return line;
+
+    // Restore formatted argument
+    formattedArgumentsPairs.forEach((pair) => {
+      maskedLine = maskedLine.replace(pair.key, pair.fullFormattedArgument);
+    });
+
+    return maskedLine;
   };
-
-  formatNumber = (line) => {
-    const number = line.replace(this.spanRegEx).match(/[\d]+\.?[\d]*|[\d]+/)[0];
-    return line.replace(number, this.applyStyle(this.colorCodes.number, number));
-  }
-
-  formatQuoteContent = (line) => {
-    const quoteRegex = /"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/;
-
-    // Check if the input has quote to format
-    if (line.match(quoteRegex)) {
-      // Getting the first quote content in the line
-      const quoteContent = line.replace(this.spanRegEx).match(quoteRegex)[0];
-      const openingQuote = quoteContent.charAt(0);
-      const closingQuote = quoteContent.charAt(quoteContent.length - 1);
-
-      const parts = this.separateParts(line, openingQuote, closingQuote);
-      const formattedQuoteContent = this.applyStyle(this.colorCodes.word, `${parts[1]}`);
-
-      // If there is content after the closing quote, format that content
-      if (parts[2]) {
-        parts[2] = this.formatQuoteContent(parts[2]);
-      }
-
-      return parts[0] + openingQuote + formattedQuoteContent + (parts[2] === undefined ? '' : (`${closingQuote}${parts[2]}`));
-    }
-
-    return line;
-  }
 
   updateColor = (lines) => {
     this.hasStart = false;
@@ -163,28 +184,19 @@ class CodeStyleProcessor {
       }
 
       // End
-      if (line.match(/^end{?$/) || this.hasEnd) {
+      if (line.match(this.endRegEx) || this.hasEnd) {
         return this.formatEnd(formattedLine);
       }
 
       // Attribute
-      if (line.match(/\([^)]\)?/)) {
-        formattedLine = this.formatAttribute(formattedLine);
+      if (line.match(this.openingBracketRegEx)) {
+        formattedLine = this.formatArguments(formattedLine);
+        // formattedLine = this.formatAttribute(formattedLine);
       }
 
       // Set
-      if (line.match(/^(set\().+/)) {
+      if (line.match(this.setRegEx)) {
         formattedLine = this.formatSet(formattedLine);
-      }
-
-      // Integer, float, long
-      if (line.match(/[\d]+\.?[\d]*|[\d]+/)) {
-        formattedLine = this.formatNumber(formattedLine);
-      }
-
-      // String and character
-      if (line.match(/"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/)) {
-        formattedLine = this.formatQuoteContent(formattedLine);
       }
 
       return formattedLine;
