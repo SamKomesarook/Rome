@@ -25,21 +25,15 @@ const CodingArea = () => {
     'start\nimport(IO)\nk_write("hello!")\nend',
   ];
 
-  const stripOffHTML = (innerHTML) => {
-    const lines = innerHTML.replace(/^<div>|<\/div>$/, '').split(/<\/div><div>|<div>|<\/div>/g);
-    const textOnlyLines = lines.map((line) => line.replace(/<span([A-Z]+)*<\/span>|<br>/g, ''));
-    return textOnlyLines;
-  };
-
   const handleChange = (e) => {
     e.preventDefault();
-    const { innerHTML } = e.target;
-    const lines = stripOffHTML(innerHTML);
+    const { value } = e.target;
+    const lines = value.split(/\n|\r/g);
     colorLayerRef.current.innerHTML = codeStyleProcessor.renderStyle(lines);
 
     setDisplay((prevDisplay) => ({
       ...prevDisplay,
-      text: lines.join('\n'),
+      text: value,
     }));
   };
 
@@ -58,13 +52,12 @@ const CodingArea = () => {
   // 2. the lower layer "coding-area-color-layer" where text is styled with color
   return (
     <div id="coding-area-wrapper" className="code highlightable-input">
-      <div
+      <textarea
         id="coding-area"
         ref={codingAreaRef}
-        onInput={handleChange}
+        onChange={handleChange}
         onScroll={handleScroll}
         spellCheck={false}
-        contentEditable="true"
       />
       <div
         id="coding-area-color-layer"

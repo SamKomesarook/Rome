@@ -53,8 +53,10 @@
 
 #coding-area {
     background-color: transparent;  
-    -webkit-text-fill-color: transparent; /* sets just the text color */
+    color: transparent;
+    caret-color: white;
     z-index: 1;
+    border: none;
 }
 
 #coding-area-color-layer {
