@@ -48,6 +48,7 @@
     left: 0;
     border-radius: inherit;
     overflow: auto;
+    overflow-wrap: break-word;
 }
 
 #coding-area {

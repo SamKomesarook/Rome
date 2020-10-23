@@ -15,7 +15,7 @@ class CodeStyleProcessor {
     this.endRegEx = /^end$/;
     this.setRegEx = /^set\(.+/;
     this.stringRegEx = /^"[^"]*"$|^'[^']*'$|^“[^”]*”$|^‘[^’]*’$/;
-    this.numberRegEx = /^[\d]+\.[\d]+$|^[\d]+$/;
+    this.numberRegEx = /^-?[\d]+\.[\d]+$|^[\d]+$/;
     this.completedBracketsRegEx = /\([^()]+\)/g;
     this.openingBracketRegEx = /\([^()]+/g;
 
@@ -204,10 +204,9 @@ class CodeStyleProcessor {
         return this.formatEnd(formattedLine);
       }
 
-      // Attribute
+      // Argument
       if (line.match(this.openingBracketRegEx)) {
         formattedLine = this.formatArguments(formattedLine);
-        // formattedLine = this.formatAttribute(formattedLine);
       }
 
       // Set
