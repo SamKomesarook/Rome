@@ -35,7 +35,7 @@ const CodingArea = () => {
     e.preventDefault();
     const { innerHTML } = e.target;
     const lines = stripOffHTML(innerHTML);
-    colorLayerRef.current.innerHTML = codeStyleProcessor.updateColor(lines);
+    colorLayerRef.current.innerHTML = codeStyleProcessor.renderStyle(lines);
 
     setDisplay((prevDisplay) => ({
       ...prevDisplay,

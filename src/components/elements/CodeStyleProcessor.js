@@ -3,11 +3,11 @@ class CodeStyleProcessor {
     this.colorCodes = {
       error: '#bf616a',
       macroWrapper: '#a3b1bf', // For start and end keywords
-      typeDeclaration: '#6bdfff',
-      arguement: '#cb886e',
-      string: '#9ab584',
-      number: '#b08cac',
-      comment: '#5e6a83',
+      typeDeclaration: '#6bdfff', // For text inside set()
+      arguement: '#cb886e', // For text inside brackets ()
+      string: '#9ab584', // For text inside  ("")
+      number: '#b08cac', // For digits inside ()
+      comment: '#5e6a83', // For text after #
     };
 
     this.spanRegEx = /<\/?span[^>]*>/g;
@@ -52,6 +52,16 @@ class CodeStyleProcessor {
     return `<span style='color: ${color}'>${result}</span>`;
   }
 
+  /**
+   * Split up a line into 3 pieces:
+   * 1. Before openingParenthesis
+   * 2. Between openingParenthesis and closing parenthesis
+   * 3. After closingParenthesis
+   *
+   * @param { String } root
+   * @param { String } openingParenthesis
+   * @param { String } closingParenthesis
+   */
   separateParts = (root, openingParenthesis, closingParenthesis) => {
     // Separate the root into 2 parts, before and after openingParenthesis
     const phase1Result = root.split(openingParenthesis);
@@ -106,6 +116,12 @@ class CodeStyleProcessor {
     return line;
   };
 
+  /**
+   * Format arguments inside brackers ()
+   *
+   * @param { String } line
+   * @param { Number } i
+   */
   formatArguments = (line, i = 0) => {
     let maskedLine = line;
     let argumentIndex = i;
@@ -160,7 +176,7 @@ class CodeStyleProcessor {
     return maskedLine;
   };
 
-  updateColor = (lines) => {
+  renderStyle = (lines) => {
     this.hasStart = false;
     this.hasEnd = false;
 
