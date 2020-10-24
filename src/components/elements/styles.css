@@ -38,7 +38,7 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 1rem 1.5rem;
+    /* padding: 1rem 1.5rem; */
     font-size: 1rem;
     font-family: inherit;
     resize: none;
@@ -52,6 +52,7 @@
 }
 
 #coding-area {
+    padding: 1rem 1.5rem;
     background-color: transparent;  
     color: transparent;
     caret-color: white;
@@ -60,16 +61,28 @@
 }
 
 #coding-area-color-layer {
+    padding: 0 1.5rem;
     color: white;
 }
 
-#coding-area:not(:focus) ~ div[data-placeholder]:before {
+
+#coding-area-wrapper:not(:focus-within) div[data-placeholder]:before {
     content: attr(data-placeholder);
     float: left;
     color: #b3b3b3;
     white-space: pre-wrap;
     text-align: left;
 }
+
+#coding-area-color-layer > div:first-child, 
+#coding-area-color-layer > div:last-child {
+    height: 1rem;
+}
+
+/* #coding-area-color-layer::before, #coding-area-color:after {
+    content: "";
+    height: 1rem;
+} */
 
 /** SWITCH **/
 

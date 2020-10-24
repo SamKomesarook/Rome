@@ -8,6 +8,7 @@ const CodingArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const codingAreaRef = useRef();
   const colorLayerRef = useRef();
+  const colorLayerWrapperRef = useRef();
   const sample = [
     'start\nmove(next)\nmove(last)\nend',
     'start\nset(letters)\nwrite("hello!")\nend',
@@ -38,7 +39,7 @@ const CodingArea = () => {
   };
 
   const handleScroll = (e) => {
-    colorLayerRef.current.scrollTo(
+    colorLayerWrapperRef.current.scrollTo(
       codingAreaRef.current.scrollLeft,
       codingAreaRef.current.scrollTop,
     );
@@ -59,11 +60,13 @@ const CodingArea = () => {
         onScroll={handleScroll}
         spellCheck={false}
       />
-      <div
-        id="coding-area-color-layer"
-        ref={colorLayerRef}
-        data-placeholder=""
-      />
+      <div id="coding-area-color-layer" ref={colorLayerWrapperRef}>
+        {/* Custom top padding to match the textarea */}
+        <div />
+        <div ref={colorLayerRef} data-placeholder="" />
+        {/* Custom bottom padding to match the textarea */}
+        <div />
+      </div>
     </div>
   );
 };
