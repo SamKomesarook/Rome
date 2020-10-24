@@ -64,13 +64,12 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     border: 3px solid var(--border-line);
     border-radius: 7px;
     /* background-color: var(--bg-secondary); */
-    background-color: #222;
+    background-color: var(--bg-editable-pane);
 }
 
 .highlightable-input:focus-within, .highlightable-input:focus {
     border: 3px solid #88c0d0;
     border-radius: 7px;
-    background-color: #222;
     box-shadow: 0 0 4px #aac3ca;
 }
 

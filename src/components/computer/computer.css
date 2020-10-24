@@ -166,7 +166,7 @@
     position: absolute;
     top: -2rem;
     display: flex;
-    background-color: #222;
+    background-color: var(--bg-editable-pane);
     height: 3rem;
     border-radius: 5px;
 }

@@ -31,8 +31,9 @@ html, body {
     width: 100%;
     --bg-primary: #384047;
     --bg-secondary: #1E272E;
+    --bg-editable-pane: #222;
     --border-line: #5e81ac;
-    --border-line-light: #4d5864;
+    /* --border-line-light: #4d5864; */
     --border-line-dark: #3c3c3c;
     --bg-contrast-primary: #ececec;
     --bg-contrast-secondary: #b6b6b6;
