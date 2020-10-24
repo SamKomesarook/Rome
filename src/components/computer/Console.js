@@ -6,7 +6,7 @@ import DebugControl from './DebugControl';
 
 const Console = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const executeStart = (inputValue) => {
     // Create a deep copy of default display with some updated values
