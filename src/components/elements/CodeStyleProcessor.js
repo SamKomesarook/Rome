@@ -16,8 +16,8 @@ class CodeStyleProcessor {
     this.setRegEx = /^set\(.+/;
     this.stringRegEx = /^"[^"]*"$|^'[^']*'$|^“[^”]*”$|^‘[^’]*’$/;
     this.numberRegEx = /^-?[\d]+\.[\d]+$|^[\d]+$/;
-    this.completedBracketsRegEx = /\([^()]+\)/g;
-    this.openingBracketRegEx = /\([^()]+/g;
+    this.completedBracketsRegEx = /\([^()]*\)/g;
+    this.openingBracketRegEx = /\([^()]*/g;
 
     this.hasStart = false;
     this.hasEnd = false;
