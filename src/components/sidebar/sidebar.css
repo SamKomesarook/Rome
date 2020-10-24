@@ -156,6 +156,15 @@ aside:hover .sidebar-item-text {
     white-space: pre-line;
 }
 
+.error{
+    color: white;
+    padding: 8px;
+    text-align: center;
+    white-space: pre-line;
+    font-style:italic;
+    font-family:Georgia;
+}
+
 /** ABOUT TAB **/
 
 #about {
