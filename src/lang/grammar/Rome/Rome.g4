@@ -60,8 +60,6 @@ NEWLINE: '\n';
 
 WS: ' ';
 
-BOOLEAN_PROP: 'true' | 'false';
-
 IDENTIFIER: [a-zA-Z]+;
 
 NUMBER: '-'?('0' .. '9')+;
@@ -102,9 +100,9 @@ stylingExpression:
 	| TEXT_COLOR '(' COLOR ')' 			# TextColor
 	| TEXT_SIZE '(' SIZE ')'			# TextSize
 	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
-	| BOLD '(' BOOLEAN_PROP ')'			# Bold
-	| ITALIC '(' BOOLEAN_PROP ')'		# Italic
-	| UNDERLINE '(' BOOLEAN_PROP ')'	# Underline 
+	| BOLD 								# Bold
+	| ITALIC 							# Italic
+	| UNDERLINE 						# Underline 
 	;
 	
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*

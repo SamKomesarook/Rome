@@ -344,21 +344,15 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    const isBold = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isBold ? 'bold' : '';
-    this.staticDisplay.consoleStyle.bold = newValue;
+    this.staticDisplay.consoleStyle.fontWeight = 'bold';
   }
 
   visitItalic(ctx) {
-    const isItalic = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isItalic ? 'italic' : '';
-    this.staticDisplay.consoleStyle.italic = newValue;
+    this.staticDisplay.consoleStyle.fontStyle = 'italic';
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isUnderline ? 'underline' : '';
-    this.staticDisplay.consoleStyle.underline = newValue;
+    this.staticDisplay.consoleStyle.textDecorationLine = 'underline';
   }
 }
 

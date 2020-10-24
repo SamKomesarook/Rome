@@ -123,9 +123,9 @@ const Console = () => {
           color: `${display.consoleStyle.txtColor}`,
           fontSize: `${display.consoleStyle.txtSize}`,
           textAlign: `${display.consoleStyle.txtAlign}`,
-          fontWeight: `${display.consoleStyle.bold}`,
-          fontStyle: `${display.consoleStyle.italic}`,
-          textDecorationLine: `${display.consoleStyle.underline}`,
+          fontWeight: `${display.consoleStyle.fontWeight}`,
+          fontStyle: `${display.consoleStyle.fontStyle}`,
+          textDecorationLine: `${display.consoleStyle.textDecorationLine}`,
         }}
         className="code highlightable-input"
       >
