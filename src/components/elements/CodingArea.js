@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import Typed from 'react-typed';
+import Cookies from 'js-cookie';
 import { DisplayContext } from '../../state/DisplayState';
 
 const CodingArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+  const args = Cookies.get('code');
 
   function handleChange(event) {
     event.preventDefault();
@@ -13,6 +15,20 @@ const CodingArea = () => {
       ...prevDisplay,
       text: value,
     }));
+    Cookies.set('code', value, { expires: 3 });
+  }
+
+  if (args) {
+    return (
+      <div id="coding-area-wrapper" className="code">
+        <Typed
+          strings={[args]}
+          showCursor={false}
+        >
+          <textarea id="coding-area" className="highlightable-input" onChange={handleChange.bind(this)} spellCheck={false} />
+        </Typed>
+      </div>
+    );
   }
 
   return (
