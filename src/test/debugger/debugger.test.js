@@ -35,10 +35,10 @@ describe('test debugger', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("abc")\nmove(next)\nset(integer)\nwrite(3)\nloop(memory(2)){\nmove(next)\nset(string)\nwrite("data")\n}\nend');
 
-    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[1]');
+    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[1]');
     await debuggerBtn.click();
 
-    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[2]', false);
+    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[2]', false);
     expect(await stepIntoBtn.isDisplayed()).toEqual(false);
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
@@ -172,10 +172,10 @@ describe('test debugger', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("abc")\nmove(next)\nend');
 
-    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[1]');
+    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[1]');
     await debuggerBtn.click();
 
-    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[2]', false);
+    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[2]', false);
     expect(await stepIntoBtn.isDisplayed()).toEqual(false);
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
@@ -202,10 +202,10 @@ describe('test debugger', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("abc")\nmove(next)\nend');
 
-    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[1]');
+    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[1]');
     await debuggerBtn.click();
 
-    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[2]', false);
+    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[2]', false);
     expect(await stepIntoBtn.isDisplayed()).toEqual(false);
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
@@ -226,10 +226,10 @@ describe('test debugger', () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
     await codingArea.sendKeys('start\nset(string)\nwrite("abc")\nmove(next)\nend');
 
-    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[1]');
+    const debuggerBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[1]');
     await debuggerBtn.click();
 
-    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/div[2]', false);
+    const stepIntoBtn = await TestConfig.getElementByXpath(driver, '//*[@id="debug-control"]/button[2]', false);
     expect(await stepIntoBtn.isDisplayed()).toEqual(false);
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
