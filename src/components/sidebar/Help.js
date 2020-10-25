@@ -22,7 +22,6 @@ const Help = ({ isActive }) => {
       example: ['start\n#Selects the memory cell 3 spots away\nloop(3){\nmove(next)\n}\nend',
         'start\n#Reads 3 input strings from the user\nimport(IO)\nloop(3){\nkeyboardRead\nmove(next)\n}\nend',
       ],
-      error: ['Error "Non-number loop argument": \n loop should not processed with non number argument'],
     }, {
       keyword: 'if',
       content: 'Executes the arguments in the curly brackets if the condition is true.',
@@ -47,10 +46,6 @@ const Help = ({ isActive }) => {
         name: 'contents',
         desc: 'Numbers, charaters, or string,',
       }],
-      error: ['Error "Memory cell not empty": \n write into a memory which already has data',
-        'Error "Memory type not set": \n write with empty memory type',
-        'Error "Wrong memory type for writing": \n write content not match with memory type',
-        'Error "Out of memory": \n write in data exceed the maximum memory'],
     }, {
       keyword: 'move',
       content: 'Changes the selected memory cell.',
@@ -59,7 +54,6 @@ const Help = ({ isActive }) => {
         name: 'direction',
         desc: '\'next\' for the memory cell in the right direction, \'last\' for the memory cell in the left direction.',
       }],
-      error: ['Error "No more memory": \n program execute to special memory'],
     }, {
       keyword: 'set',
       content: 'Sets the type that can be written to the memory cell.',
@@ -84,7 +78,6 @@ const Help = ({ isActive }) => {
       keyword: 'keyboardRead',
       content: 'Read in a line of input from the input line. Requires IO library.',
       example: ['start\nimport(IO)\nkeyboardRead\nend'],
-      error: ['Error "Unknown function "keyboardRead"": \n libeary keyboardRead not found'],
     }, {
       keyword: 'consoleWrite',
       content: 'Print the argument to the console window. Requires IO library.',
@@ -93,7 +86,6 @@ const Help = ({ isActive }) => {
         name: 'argument',
         desc: 'string or memory referance.',
       }],
-      error: ['Error "Unknown function "keyboardRead"": \n libeary consoleWrite not found'],
     },
     {
       keyword: 'style',
@@ -111,10 +103,6 @@ const Help = ({ isActive }) => {
         desc: 'The number range for selecting random number',
       }],
       example: ['start\n#Import math package for random number function\nimport(math)\nrand(10)\nend'],
-      error: ['Error "Require import(math) for random number function": \n libeary math not found',
-        'Error "Memory cell not empty": \n selected memory already has data',
-        'Error "Please input a positive number for random number function": \n random argument can not be negative number',
-        'Error "Please input a number which is not bigger than 65535, otherwise the random number will be out of memory": \n random argument exceed maximum memory'],
     },
   ];
 
@@ -124,7 +112,6 @@ const Help = ({ isActive }) => {
   const { example: examples } = DATA.find((element) => element.keyword === keyword);
   const { argument: args } = DATA.find((element) => element.keyword === keyword);
   const { codeArg: codeArgs } = DATA.find((element) => element.keyword === keyword);
-  const { error: errors } = DATA.find((element) => element.keyword === keyword);
 
   const handleChangeKeyword = (e) => {
     setKeyword(e.target.value);
@@ -210,13 +197,6 @@ const Help = ({ isActive }) => {
         {examples && examples.map((item) => (
           <div>
             <div className="dropdown-example">
-              {item}
-            </div>
-          </div>
-        ))}
-        {errors && errors.map((item) => (
-          <div>
-            <div className="error">
               {item}
             </div>
           </div>
