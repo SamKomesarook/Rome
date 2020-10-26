@@ -81,7 +81,7 @@ describe('test styling language', () => {
 
   test(testUnderline, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nunderline(true)\n}\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nunderline\n}\nconsoleWrite("hello!")\nend');
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -95,7 +95,7 @@ describe('test styling language', () => {
 
   test(testBold, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nbold(true)\n}\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nbold\n}\nconsoleWrite("hello!")\nend');
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -110,7 +110,7 @@ describe('test styling language', () => {
 
   test(testItalic, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nitalic(true)\n}\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nimport(IO)\nstyle{\nitalic\n}\nconsoleWrite("hello!")\nend');
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');
@@ -138,7 +138,7 @@ describe('test styling language', () => {
 
   test(testAll, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nimport(IO)\nstyle{\npaint(blue)\ntext_size(larger)\ntext_color(white)\nunderline(true)\nbold(true)\nitalic(true)\ntext_align(center)\n}\nconsoleWrite("hello!")\nend');
+    await codingArea.sendKeys('start\nimport(IO)\nstyle{\npaint(blue)\ntext_size(larger)\ntext_color(white)\nunderline\nbold\nitalic\ntext_align(center)\n}\nconsoleWrite("hello!")\nend');
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');

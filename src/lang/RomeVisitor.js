@@ -46,7 +46,7 @@ class RVisitor extends RomeVisitor {
     }
     for (let i = 0; i < upperBound; i++) {
       this.staticDisplay.commands.unshift(ctx.expressions());
-      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity); // TODO is the assignment really necessary?
+      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
     }
   }
 
@@ -242,7 +242,6 @@ class RVisitor extends RomeVisitor {
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
-    // TODO check for memory number to determine if animations are needed
   }
 
   visitSwrite(ctx) {
@@ -319,6 +318,11 @@ class RVisitor extends RomeVisitor {
     this.staticDisplay.memory[this.staticDisplay.selected].name = arg;
   }
 
+  visitStyle(ctx) {
+    this.staticDisplay.commands.unshift(ctx.stylingExpressions());
+    this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
+  }
+
   visitPaint(ctx) {
     const newValue = this.visitChildren(ctx)[2];
     this.staticDisplay.consoleStyle.bgColor = newValue;
@@ -340,24 +344,16 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    const isBold = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isBold ? 'bold' : '';
-    this.staticDisplay.consoleStyle.bold = newValue;
+    this.staticDisplay.consoleStyle.fontWeight = 'bold';
   }
 
   visitItalic(ctx) {
-    const isItalic = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isItalic ? 'italic' : '';
-    this.staticDisplay.consoleStyle.italic = newValue;
+    this.staticDisplay.consoleStyle.fontStyle = 'italic';
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isUnderline ? 'underline' : '';
-    this.staticDisplay.consoleStyle.underline = newValue;
+    this.staticDisplay.consoleStyle.textDecorationLine = 'underline';
   }
 }
 
-export {
-  RVisitor,
-};
+export default RVisitor;

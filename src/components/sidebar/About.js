@@ -17,12 +17,10 @@ const About = ({ isActive }) => {
       <div id="about-content">
         <div id="about-title">
           <span>Rome-Education + Julia Brown Schools +&nbsp;</span>
-          <div
+          <button
+            type="button"
             className={`heart-animation ${heartBurstClass}`}
             onClick={handleClickHeart}
-            onKeyPress={handleClickHeart}
-            role="button"
-            tabIndex="0"
             aria-label="heart icon"
           />
           <span>&nbsp;=&nbsp;</span>

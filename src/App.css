@@ -164,14 +164,14 @@ button {
     outline: none;
 }
 
-button:hover:enabled, div[role=button]:hover {
+button:hover:enabled {
     cursor: pointer;
     filter: brightness(90%);
 }
 
 button:disabled {
     cursor: default;
-    filter: brightness(125%);
+    filter: brightness(40%);
 }
 
 .std-btn {
