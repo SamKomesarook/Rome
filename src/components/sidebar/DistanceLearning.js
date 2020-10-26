@@ -14,6 +14,15 @@ const DistanceLearning = ({ isActive }) => {
     {
       id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU',
     },
+    {
+      id: 'dl-4', week: 'w1', level: 'kindergarten', title: 'History + IO Area', link: 'https://youtu.be/MK1MASGa0cM',
+    },
+    {
+      id: 'dl-5', week: 'w1', level: 'kindergarten', title: 'Import + IO + consoleWrite', link: 'https://youtu.be/jriMYvV05Zc',
+    },
+    {
+      id: 'dl-6', week: 'w1', level: 'kindergarten', title: 'Program: Hello World', link: 'https://youtu.be/AbIzSvyvX2s',
+    },
   ];
 
   // Level options for dropdown field
