@@ -110,9 +110,14 @@ const Console = () => {
     }
   };
 
-  const consoleHistoryList = display.consoleHistory.map((record) => (
-    <div>{`> ${record}`}</div>
-  ));
+  const consoleHistoryList = display.consoleHistory.map((record) => {
+    if (record.substring(0, 5) === 'ERROR'){
+	  return <div>>&nbsp;<span style={{color:"red"}}>{`${record}`}</span></div>
+    }else{
+      return <div>{`> ${record}`}</div>
+	}
+	
+  });
 
   return (
     <div id="console-wrapper">
