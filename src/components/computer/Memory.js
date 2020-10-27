@@ -12,7 +12,7 @@ const Memory = () => {
   const memoryCellList = (memorySize) => {
     const tempMemoryCellList = [];
     for (let i = 0; i < memorySize; i++) {
-      tempMemoryCellList.push(<MemoryCell id={i} />);
+      tempMemoryCellList.push(<MemoryCell id={i} key={i} />);
     }
     return tempMemoryCellList;
   };

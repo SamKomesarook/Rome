@@ -14,7 +14,6 @@ const About = ({ isActive }) => {
 
   const contributorList = contributorData.map((contributor) => {
     if (contributor.gitHub !== undefined) {
-      console.log(contributor.name);
       return (
         <a href={contributor.gitHub} style={{ textDecoration: 'none', color: 'inherit'}}>
           {/* Offset to ensure the text is aligned center with other lines */}

@@ -34,6 +34,7 @@ const MemoryCell = ({ id }) => {
       default:
     }
 
+    // eslint-disable-next-line react/no-array-index-key
     const binaryCellList = binary.split('').map((bit, index) => (<div key={index}>{bit}</div>));
     setBinaryContent(binaryCellList);
   };
