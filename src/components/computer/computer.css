@@ -163,16 +163,19 @@
     top: -2rem;
     display: flex;
     background-color: var(--bg-editable-pane);
+    align-items: flex-start;
     height: 3rem;
     border-radius: 5px;
 }
 
-#debug-control div[role="button"] {
-    padding: 0.2rem 0.5rem;
+#debug-control button {
+    padding: 0.2rem 0.3rem;
+    background-color: transparent;
 }
 
 #debug-control svg {
     height: 1.5rem;
+    color: var(--bg-contrast-primary);
 }
 
 /** MEDIA QUERIES **/

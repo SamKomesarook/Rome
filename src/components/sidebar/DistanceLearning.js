@@ -6,9 +6,24 @@ import DropdownField from '../elements/DropdownField';
 
 const DistanceLearning = ({ isActive }) => {
   const DATA = [
-    { id: 'dl-1', week: 'w1', level: 'kindergarten', title: 'Rome Intro', link: 'https://youtu.be/8QUjc-AZCFQ' },
-    { id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc' },
-    { id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU' },
+    {
+      id: 'dl-1', week: 'w1', level: 'kindergarten', title: 'Rome Intro', link: 'https://youtu.be/8QUjc-AZCFQ',
+    },
+    {
+      id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc',
+    },
+    {
+      id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU',
+    },
+    {
+      id: 'dl-4', week: 'w1', level: 'kindergarten', title: 'History + IO Area', link: 'https://youtu.be/MK1MASGa0cM',
+    },
+    {
+      id: 'dl-5', week: 'w1', level: 'kindergarten', title: 'Import + IO + consoleWrite', link: 'https://youtu.be/jriMYvV05Zc',
+    },
+    {
+      id: 'dl-6', week: 'w1', level: 'kindergarten', title: 'Program: Hello World', link: 'https://youtu.be/AbIzSvyvX2s',
+    },
   ];
 
   // Level options for dropdown field

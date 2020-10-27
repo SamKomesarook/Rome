@@ -171,8 +171,14 @@ button:focus {
     border: 1px dotted white;
 }
 
-button:hover:enabled, button:focus, .control-container:focus-within, div[role=button]:hover {
+button:hover:enabled {
+    cursor: pointer;
     filter: brightness(90%);
+}
+
+button:disabled {
+    cursor: default;
+    filter: brightness(40%);
 }
 
 .std-btn {
