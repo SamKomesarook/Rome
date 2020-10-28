@@ -83,55 +83,19 @@ class RVisitor extends RomeVisitor {
         while (leftValue < rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       } else if (compareKeyword === 'greater') {
         while (leftValue > rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       } else if (compareKeyword === 'equal') {
         while (leftValue == rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       }
     } else if (condInput[0] === 'not') {
@@ -139,55 +103,19 @@ class RVisitor extends RomeVisitor {
         while (leftValue >= rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       } else if (compareKeyword === 'greater') {
         while (leftValue <= rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       } else if (compareKeyword === 'equal') {
         while (leftValue != rightValue) {
           this.display.commands.unshift(ctx.expressions());
           this.display.commands = this.display.commands.flat(Infinity);
-		  // replace this with memory
-		  /*
-          if (calculation === 'add') {
-            leftValue += 1;
-          } else {
-            leftValue -= 1;
-          }
-          runningTime += 1;
-          if (runningTime > upperBound) {
-            this.errorReporter.generalError('Loop boundary exceeded, please change your parameters to make sure the loop does not run over 12 times.');
-            return;
-          }
-		  */
+		  leftValue = parseInt(memoryCell.content);
         }
       }
     }
