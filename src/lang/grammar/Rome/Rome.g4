@@ -95,7 +95,7 @@ expressions: expression NEWLINE;
 
 conditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT |floatargs) # Cond;
 
-whileConditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) WS (ADD | MINUS) # whileCond;
+whileConditional: (IS | NOT) WS (LESS | GRE | EQL) WS (intargs| STRLIT) # whileCond;
 
 stylingExpressions: stylingExpression NEWLINE;
 
