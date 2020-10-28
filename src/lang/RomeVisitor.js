@@ -2,7 +2,6 @@ import { RomeVisitor } from './grammar/Rome/RomeVisitor';
 import { USBToggle } from '../components/computer/Peripherals';
 import { NumContext } from './grammar/Rome/RomeParser';
 
-// TODO some updates use setDisplay. Should we?
 class RVisitor extends RomeVisitor {
   constructor(staticDisplay, errorReporter) {
     super();
@@ -15,6 +14,7 @@ class RVisitor extends RomeVisitor {
       return;
     }
     if (ctx.children) {
+      // eslint-disable-next-line consistent-return
       return ctx.children.map((child) => {
         if (child.children && child.children.length !== 0) {
           return child.accept(this);
@@ -236,6 +236,9 @@ class RVisitor extends RomeVisitor {
     const { type } = this.staticDisplay.memory[this.staticDisplay.selected];
     const { dataTypeSize } = this.staticDisplay;
 
+    const OUT_OF_MEMORY = 'Out of memory';
+    const WRONG_TYPE = 'Wrong memory type for writing';
+
     if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
       this.errorReporter.generalError('Memory cell not empty');
       return;
@@ -250,7 +253,7 @@ class RVisitor extends RomeVisitor {
     }
 
     if (isNaN(arg) && (type === 'integer' || type === 'long' || type === 'float')) {
-      this.errorReporter.generalError('Wrong memory type for writing');
+      this.errorReporter.generalError(WRONG_TYPE);
       return;
     }
     if (!isNaN(arg)) {
@@ -260,36 +263,47 @@ class RVisitor extends RomeVisitor {
       if ((type === 'integer' && (number > 65535 || number < -65535))
       || (type === 'long' && (number > 4294967295 || number < -4294967295))
       || (type === 'float' && (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER))) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
-        this.errorReporter.generalError('Out of memory');
+        this.errorReporter.generalError(OUT_OF_MEMORY);
         return;
       }
       if ((type === 'integer' || type === 'long') && dec !== null) {
-        this.errorReporter.generalError('Wrong memory type for writing');
+        this.errorReporter.generalError(WRONG_TYPE);
         return;
       }
       if (type === 'float') {
         if (dec === null) {
           arg += '.00';
         } else if (dec.length > 1) {
-          this.errorReporter.generalError('Wrong memory type for writing');
+          this.errorReporter.generalError(WRONG_TYPE);
           return;
         }
       }
     }
 
-    if (type === 'character' || type === 'string') {
-      if (arg[0] === '"' && arg[arg.length - 1] === '"') {
-        const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-        const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
-        const numOfUsableMemoryCells = this.staticDisplay.memorySize - numOfSpecialKeys;
-        // Check if the memory has enough space to accomodate the input
-        if ((type === 'character' && arg.length - 2 > 1)
-        || (type === 'string' && arg.length - 2 > (numOfUsableMemoryCells * dataTypeSize.string - pos * dataTypeSize.string))) {
-          this.errorReporter.generalError('Out of memory');
-          return;
-        }
-      } else {
-        this.errorReporter.generalError('Wrong memory type for writing');
+    if (type === 'string') {
+      if ((arg[0] !== '"' || arg[arg.length - 1] !== '"') && (arg[0] !== '“' || arg[arg.length - 1] !== '”')) {
+        this.errorReporter.generalError(WRONG_TYPE);
+        return;
+      }
+
+      const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+      const numOfSpecialKeys = this.staticDisplay.specialKeys.length;
+      const numUsableCells = this.staticDisplay.memorySize - numOfSpecialKeys;
+      const availableLength = numUsableCells * dataTypeSize.string - pos * dataTypeSize.string;
+      // Check if the memory has enough space to accomodate the input
+      if (arg.length - 2 > availableLength) {
+        this.errorReporter.generalError(OUT_OF_MEMORY);
+        return;
+      }
+    }
+
+    if (type === 'character') {
+      if ((arg[0] !== "'" || arg[arg.length - 1] !== "'") && (arg[0] !== '‘' || arg[arg.length - 1] !== '’')) {
+        this.errorReporter.generalError(WRONG_TYPE);
+        return;
+      }
+      if (arg.length - 2 > 1) {
+        this.errorReporter.generalError(OUT_OF_MEMORY);
         return;
       }
     }
@@ -392,6 +406,50 @@ class RVisitor extends RomeVisitor {
     this.staticDisplay.importIO = true;
   }
 
+  visitMath(ctx) {
+    this.staticDisplay.importMath = true;
+  }
+
+  visitRandom(ctx) {
+    // check whether math package is imported
+    if (!this.staticDisplay.importMath) {
+      this.errorReporter.generalError('Require import(math) for random number function');
+      return;
+    }
+
+    // check if there is memory
+    if (this.staticDisplay.memory[this.staticDisplay.selected].content !== '') {
+      this.errorReporter.generalError('Memory cell not empty');
+      return;
+    }
+
+    // set memory type as integer
+    this.staticDisplay.memory[this.staticDisplay.selected].type = 'integer';
+
+    let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
+    if (typeof arg === 'object') {
+      arg = arg[0];
+    }
+
+    // convert the argument to integer
+    const number = parseInt(arg);
+
+    // check whether argument less than 0
+    if (number < 0) {
+      this.errorReporter.generalError('Please input a positive number for random number function');
+      return;
+    }
+
+    // check whether argument less than 65535 which generates random number bigger than 65535
+    if (number > 65535) { // 9007199254740991, this is the MAX_SAFE_INTEGER provided by JavaScript
+      this.errorReporter.generalError('Please input a number which is not bigger than 65535, otherwise the random number will be out of memory');
+      return;
+    }
+
+    const randNum = Math.floor(Math.random() * (number+1));
+    this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
+  }
+
   visitName(ctx) {
     let arg = this.visitChildren(ctx)[2]; // TODO no need to visit all children, just the args
     if (typeof arg === 'object') {
@@ -425,21 +483,15 @@ class RVisitor extends RomeVisitor {
   }
 
   visitBold(ctx) {
-    const isBold = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isBold ? 'bold' : '';
-    this.staticDisplay.consoleStyle.bold = newValue;
+    this.staticDisplay.consoleStyle.fontWeight = 'bold';
   }
 
   visitItalic(ctx) {
-    const isItalic = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isItalic ? 'italic' : '';
-    this.staticDisplay.consoleStyle.italic = newValue;
+    this.staticDisplay.consoleStyle.fontStyle = 'italic';
   }
 
   visitUnderline(ctx) {
-    const isUnderline = (this.visitChildren(ctx)[2] === 'true');
-    const newValue = isUnderline ? 'underline' : '';
-    this.staticDisplay.consoleStyle.underline = newValue;
+    this.staticDisplay.consoleStyle.textDecorationLine = 'underline';
   }
 }
 

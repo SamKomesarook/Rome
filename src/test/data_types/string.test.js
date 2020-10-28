@@ -209,7 +209,7 @@ describe('test string', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, STRLIT}");
+    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER, FLOAT, CHARACTER, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

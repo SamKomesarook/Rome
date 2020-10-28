@@ -49,14 +49,15 @@ DisplayContext.DEFAULT = () => {
     selected: 0, // The key of the selected memory
     commands: [], // The saved list of commands while the program is reading user input
     importIO: false, // If the user has imported the IO package
+    importMath: false, // If the user has imported the math package
     consoleStyle: {
       bgColor: '', // Style: background color
       txtColor: '', // Style: text color
       txtSize: '', // Style: text size
       txtAlign: '', // Style: text alignment
-      bold: '', // Style: bold font
-      italic: '', // Style: italic font
-      underline: '', // Style: underline font
+      fontWeight: '', // Style: e.g. bold font
+      fontStyle: '', // Style: e.g. italic font
+      textDecorationLine: '', // Style: e.g. underline font
     },
     dataTypeSize: { // The available space taken of each data types
       character: 1,

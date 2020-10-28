@@ -25,6 +25,7 @@ NAME: 'name';
 
 IMP: 'import';
 IO: 'IO';
+MATH: 'math';
 
 IF: 'if';
 IS: 'is';
@@ -34,6 +35,7 @@ LESS: 'less';
 GRE: 'greater';
 AND: 'and';
 OR: 'or';
+RANDOM: 'rand';
 
 MOVE: 'move';
 RIGHT: 'next';
@@ -63,15 +65,14 @@ NEWLINE: '\n';
 
 WS: ' ';
 
-BOOLEAN_PROP: 'true' | 'false';
-
 IDENTIFIER: [a-zA-Z]+;
 
 NUMBER: '-'?('0' .. '9')+;
 
 FLOAT: '-'?('0' .. '9')+ '.' ('0' .. '9')+;
 
-STRLIT: '"' ~ ["\r\n]* '"';
+CHARACTER : '\'' ~ ["\r\n]* '\'' | '\u2018' ~ ["\r\n]* '\u2019';
+STRLIT: '"' ~ ["\r\n]* '"' | '\u201C' ~ ["\r\n]* '\u201D';
 
 ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
@@ -79,7 +80,9 @@ ONE_LINE_COMMENT: '#' (~ '\n')* '\n'? -> skip ;
 
 strargs : STRLIT #Str ;
 
-imp:  IMP '(' IO ')' # Io ;
+imp:  IMP '(' IO ')' # Io
+    | IMP '(' MATH ')' # Math
+    ;
 
 mem: MEM '(' (intargs | strargs) ')';
 
@@ -103,9 +106,9 @@ stylingExpression: PAINT '(' COLOR ')' 	# Paint
 	| TEXT_COLOR '(' COLOR ')' 			# TextColor
 	| TEXT_SIZE '(' SIZE ')'			# TextSize
 	| TEXT_ALIGN '(' ALIGN_PROP ')'		# TextAlign
-	| BOLD '(' BOOLEAN_PROP ')'			# Bold
-	| ITALIC '(' BOOLEAN_PROP ')'		# Italic
-	| UNDERLINE '(' BOOLEAN_PROP ')'	# Underline 
+	| BOLD 								# Bold
+	| ITALIC 							# Italic
+	| UNDERLINE 						# Underline 
 	;
 	
 // NOTE :: For multiple conds, add this: ((AND | OR) WS conditional)*
@@ -117,9 +120,10 @@ expression:
 	| IF '(' conditional ')' '{' NEWLINE expressions* '}'	# If
 	| LOOP '(' intargs ')' '{' NEWLINE expressions* '}'	# Loop
 	| WHILE '(' whileConditional ')' '{' NEWLINE expressions* '}'	# While	
-	| WRITE '(' (intargs | STRLIT) ')'					# Write
+	| WRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Write
 	| KREAD													# Kread
-	| SWRITE '(' (intargs | floatargs | STRLIT) ')'					# Swrite
+	| SWRITE '(' (intargs | floatargs | STRLIT | CHARACTER) ')'					# Swrite
 	| NAME '(' (STRLIT |  mem) ')' 						# Name
 	| STYLE '{' NEWLINE stylingExpressions* '}'			# Style
+	| RANDOM '(' intargs ')'					# Random
 	;

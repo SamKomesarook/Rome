@@ -24,6 +24,12 @@ RomeVisitor.prototype.visitIo = function(ctx) {
 };
 
 
+// Visit a parse tree produced by RomeParser#Math.
+RomeVisitor.prototype.visitMath = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by RomeParser#mem.
 RomeVisitor.prototype.visitMem = function(ctx) {
   return this.visitChildren(ctx);
@@ -182,6 +188,12 @@ RomeVisitor.prototype.visitName = function(ctx) {
 
 // Visit a parse tree produced by RomeParser#Style.
 RomeVisitor.prototype.visitStyle = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by RomeParser#Random.
+RomeVisitor.prototype.visitRandom = function(ctx) {
   return this.visitChildren(ctx);
 };
 

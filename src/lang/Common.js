@@ -1,9 +1,11 @@
+import { TerminalNodeImpl } from 'antlr4/tree/Tree';
+import antlr4 from 'antlr4';
 import { RVisitor } from './RomeVisitor';
 import { MVisitor } from './MachineVisitor';
-import { KreadContext } from './grammar/Rome/RomeParser';
-import { ReadContext } from './grammar/Machine/MachineParser';
-
-const antlr4 = require('antlr4');
+import { RomeLexer } from './grammar/Rome/RomeLexer';
+import { RomeParser, KreadContext } from './grammar/Rome/RomeParser';
+import { MachineLexer } from './grammar/Machine/MachineLexer';
+import { MachineParser, ReadContext } from './grammar/Machine/MachineParser';
 
 class ErrorReporter extends antlr4.error.ErrorListener {
   constructor(display) {
@@ -50,7 +52,42 @@ const processInstrs = (staticDisplay, errorReporter = new ErrorReporter(staticDi
   }
 };
 
+const compile = (staticDisplay) => {
+  const chars = new antlr4.InputStream(staticDisplay.text);
+  const lexer = (staticDisplay.machine)
+    ? new MachineLexer(chars)
+    : new RomeLexer(chars);
+  const tokens = new antlr4.CommonTokenStream(lexer);
+  const parser = (staticDisplay.machine)
+    ? new MachineParser(tokens)
+    : new RomeParser(tokens);
+  const errorReporter = new ErrorReporter(staticDisplay);
+  parser.buildParseTrees = true;
+  parser.removeErrorListeners();
+  parser.addErrorListener(errorReporter);
+
+  const tree = parser.r();
+
+  if (tree.exception === null && parser._syntaxErrors === 0) {
+    try {
+      for (const child of tree.children) {
+        if (child.constructor !== TerminalNodeImpl) {
+          staticDisplay.commands.push(child);
+        }
+      }
+      // eslint-disable-next-line no-param-reassign
+      staticDisplay.errors = false;
+      processInstrs(staticDisplay, errorReporter);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  return staticDisplay;
+};
+
 export {
   processInstrs,
   ErrorReporter,
+  compile,
 };
