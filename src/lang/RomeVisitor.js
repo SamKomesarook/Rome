@@ -46,7 +46,7 @@ class RVisitor extends RomeVisitor {
     }
     for (let i = 0; i < upperBound; i++) {
       this.staticDisplay.commands.unshift(ctx.expressions());
-      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity); // TODO is the assignment really necessary?
+      this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
     }
   }
 
@@ -242,7 +242,6 @@ class RVisitor extends RomeVisitor {
     }
     // TODO is this necessary?
     // TODO check for IO in outside methods
-    // TODO check for memory number to determine if animations are needed
   }
 
   visitSwrite(ctx) {
@@ -319,6 +318,11 @@ class RVisitor extends RomeVisitor {
     this.staticDisplay.memory[this.staticDisplay.selected].name = arg;
   }
 
+  visitStyle(ctx) {
+    this.staticDisplay.commands.unshift(ctx.stylingExpressions());
+    this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
+  }
+
   visitPaint(ctx) {
     const newValue = this.visitChildren(ctx)[2];
     this.staticDisplay.consoleStyle.bgColor = newValue;
@@ -352,6 +356,4 @@ class RVisitor extends RomeVisitor {
   }
 }
 
-export {
-  RVisitor,
-};
+export default RVisitor;
