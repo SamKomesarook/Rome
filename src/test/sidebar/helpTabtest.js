@@ -1,6 +1,5 @@
 import webdriver, { Key } from 'selenium-webdriver';
 import TestConfig from '../TestConfig';
-const { Key } = require('selenium-webdriver');
 
 const testFirstEntry = 'test first entry of help tab';
 const testSelectSet = 'test select set';
@@ -32,8 +31,8 @@ describe('test help tab', () => {
     const helpContent = await TestConfig.getElementByXpath(driver, '//*[@id="help"]/div[2]');
     const helpContentInfo = await helpContent.getText();
 
-    expect(selectedKeyword).toEqual('general');
-    expect(helpContentInfo).toEqual('All program must have start and end command.\n\nPlease select syntax keywords in the selection box for specification.');
+    expect(selectedKeyword).toEqual('start');
+    expect(helpContentInfo).toContain('Indicates the start of the program.\nAll programs must begin with this command.');
   }, 35000);
 
   test(testSelectSet, async () => {
@@ -49,6 +48,6 @@ describe('test help tab', () => {
     const helpContentInfo = await helpContent.getText();
 
     expect(selectedKeyword).toEqual('set');
-    expect(helpContentInfo).toEqual('Sets the type that can be written to the memory cell. the args could be `integer`, `long`, `float`, `character` or `string`.\n\nExample:\nstart\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend');
+    expect(helpContentInfo).toContain('Sets the type that can be written to the memory cell.');
   }, 35000);
 });
