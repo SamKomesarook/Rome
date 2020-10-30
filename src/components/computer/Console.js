@@ -100,10 +100,22 @@ const Console = () => {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
         executeClear(inputValue);
+      } else if (inputValue === '') {
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+          ],
+        }));
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
-          consoleHistory: [...prevDisplay.consoleHistory, inputValue],
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+            `ERROR: "${inputValue}" is not recognized as a command.`,
+          ],
         }));
       }
       inputRef.current.value = '';
