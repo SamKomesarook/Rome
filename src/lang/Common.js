@@ -14,13 +14,13 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-    this.display.consoleHistory.push('ERROR: '+msg);
+    this.display.consoleHistory.push(`ERROR: ${msg}`);
     this.display.errors = true;
     this.display.running = false;
   }
 
   generalError(msg) {
-    this.display.consoleHistory.push('ERROR: '+msg);
+    this.display.consoleHistory.push(`ERROR: ${msg}`);
     this.display.errors = true;
     this.display.running = false;
   }
