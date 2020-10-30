@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import Cookies from 'js-cookie';
 import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs, compile, ErrorReporter } from '../../lang/Common';
 import { USBToggle } from './Peripherals';
@@ -7,6 +8,7 @@ import DebugControl from './DebugControl';
 const Console = () => {
   const [display, setDisplay] = useContext(DisplayContext);
   const inputRef = useRef();
+  const [ifLoad, setIfLoad] = useState(false);
 
   const executeStart = (inputValue) => {
     // Create a deep copy of default display with some updated values
@@ -40,6 +42,17 @@ const Console = () => {
       ...prevDisplay,
       consoleHistory: [],
     }));
+  };
+
+  const executeSave = (inputValue) => {
+    const staticDisplay = DisplayContext.createCustomClone({
+      ...DisplayContext.DEFAULT(),
+      text: display.text,
+    });
+
+    // Render new display information
+    setDisplay(DisplayContext.createCustomClone(staticDisplay));
+    Cookies.set('save', staticDisplay.text, { expires: 5 });
   };
 
   const executeWriteToMemory = (inputValue) => {
@@ -82,6 +95,8 @@ const Console = () => {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
         executeClear(inputValue);
+      } else if (inputValue === 'save') {
+        executeSave(inputValue);
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
