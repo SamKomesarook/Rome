@@ -46,7 +46,7 @@ describe('test integer', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual('> Out of memory');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -64,7 +64,7 @@ describe('test integer', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual('> Out of memory');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Out of memory');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -102,7 +102,7 @@ describe('test integer', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual('> Wrong memory type for writing');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Wrong memory type for writing');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -120,7 +120,7 @@ describe('test integer', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual('> Wrong memory type for writing');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Wrong memory type for writing');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });
