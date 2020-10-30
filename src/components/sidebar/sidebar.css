@@ -173,11 +173,17 @@ aside:hover .sidebar-item-text {
 
 #about-title {
     display: flex;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    color: #8fbcbb;
+}
+
+#about-company {
+    color: #d8dee9;
+    font-size: 2.15rem;
 }
 
 #image-container {
@@ -188,15 +194,24 @@ aside:hover .sidebar-item-text {
 
 .about-heading {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: italic;
-    margin-top: 4rem;
+    margin-top: 2rem;
+    text-decoration: underline;
 }
 
 .about-paragraph {
     text-align: center;
     margin-top: 1rem;
     line-height: 1.25rem;
+}
+
+.about-name {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: italic;
+    margin-top: 2rem;
+    color: #88c0d0;
 }
 
 .heart-animation {
