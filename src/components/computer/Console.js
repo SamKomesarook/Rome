@@ -100,10 +100,22 @@ const Console = () => {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
         executeClear(inputValue);
+      } else if (inputValue === '') {
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+          ],
+        }));
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
-          consoleHistory: [...prevDisplay.consoleHistory, inputValue],
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+            `ERROR: "${inputValue}" is not recognized as a command.`,
+          ],
         }));
       }
       inputRef.current.value = '';
@@ -111,12 +123,15 @@ const Console = () => {
   };
 
   const consoleHistoryList = display.consoleHistory.map((record) => {
-    if (record.substring(0, 5) === 'ERROR'){
-	  return <div>>&nbsp;<span style={{color:"red"}}>{`${record}`}</span></div>
-    }else{
-      return <div>{`> ${record}`}</div>
-	}
-	
+    if (record.substring(0, 5) === 'ERROR') {
+      return (
+        <div>
+          {'> '}
+          <span style={{ color: 'red' }}>{record}</span>
+        </div>
+      );
+    }
+    return <div>{`> ${record}`}</div>;
   });
 
   return (
@@ -136,7 +151,7 @@ const Console = () => {
       >
         {consoleHistoryList}
         <div className="hflex">
-          <span>>&nbsp;</span>
+          <span>{'> '}</span>
           <textarea
             id="console-input"
             ref={inputRef}
