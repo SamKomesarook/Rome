@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import DistanceLearningContent from './DistanceLearningContent';
