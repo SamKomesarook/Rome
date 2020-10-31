@@ -302,7 +302,7 @@ class RVisitor extends RomeVisitor {
       return;
     }
 
-    const randNum = Math.floor(Math.random() * (number+1));
+    const randNum = Math.floor(Math.random() * (number + 1));
     this.staticDisplay.memory[this.staticDisplay.selected].content = randNum;
   }
 
@@ -319,6 +319,9 @@ class RVisitor extends RomeVisitor {
   }
 
   visitStyle(ctx) {
+    if (!this.staticDisplay.importIO) {
+      this.errorReporter.generalError("Unknown function 'style'");
+    }
     this.staticDisplay.commands.unshift(ctx.stylingExpressions());
     this.staticDisplay.commands = this.staticDisplay.commands.flat(Infinity);
   }
