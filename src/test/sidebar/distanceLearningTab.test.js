@@ -48,8 +48,8 @@ describe('test distance learing tab', () => {
     expect(serachText).toEqual('');
     expect(level).toEqual('all');
     expect(week).toEqual('all');
-    expect(title1).toEqual('Why are there Four Firefoxes?');
-    expect(title2).toEqual('Where do Browser Styles Come From?');
+    expect(title1).toEqual('Rome Intro');
+    expect(title2).toEqual('Sidebar');
   }, 40000);
 
   test(testSearchInput1, async () => {
@@ -57,12 +57,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const searchArea = await TestConfig.getElementById(driver, 'dis-search');
-    await searchArea.sendKeys('fox');
+    await searchArea.sendKeys('intro');
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title1 = await link1.getText();
 
-    expect(title1).toEqual('Why are there Four Firefoxes?');
+    expect(title1).toEqual('Rome Intro');
   }, 40000);
 
   test(testSearchInput2, async () => {
@@ -70,12 +70,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const searchArea = await TestConfig.getElementById(driver, 'dis-search');
-    await searchArea.sendKeys('browser');
+    await searchArea.sendKeys('sidebar');
 
     const link2 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title2 = await link2.getText();
 
-    expect(title2).toEqual('Where do Browser Styles Come From?');
+    expect(title2).toEqual('Sidebar');
   }, 40000);
 
   test(testLevelList, async () => {
@@ -83,12 +83,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const levelList = await TestConfig.getElementById(driver, 'levels');
-    await levelList.sendKeys('Toddler');
+    await levelList.sendKeys('Kindergarten');
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title1 = await link1.getText();
 
-    expect(title1).toEqual('Why are there Four Firefoxes?');
+    expect(title1).toEqual('Rome Intro');
   }, 40000);
 
   test(testWeekList, async () => {
@@ -96,12 +96,12 @@ describe('test distance learing tab', () => {
     await content.click();
 
     const weekList = await TestConfig.getElementById(driver, 'weeks');
-    await weekList.sendKeys('3');
+    await weekList.sendKeys('1');
 
     const link1 = await TestConfig.getElementByXpath(driver, '//*[@id="distance-learning"]/div[2]/button');
     const title1 = await link1.getText();
 
-    expect(title1).toEqual('Where do Browser Styles Come From?');
+    expect(title1).toEqual('Rome Intro');
   }, 40000);
 
   test(testVideo1, async () => {

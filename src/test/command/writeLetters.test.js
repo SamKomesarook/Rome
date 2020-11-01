@@ -58,7 +58,7 @@ describe('test write string', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual('> Wrong memory type for writing');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Wrong memory type for writing');
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 
@@ -90,7 +90,7 @@ describe('test write string', () => {
     const memoryCell0 = await TestConfig.getElementById(driver, 'memory-0');
     const memoryCell0Res = await memoryCell0.getText();
 
-    expect(secondConsoleRecordRes).toEqual("> mismatched input ')' expecting {'memory', NUMBER, FLOAT, CHARACTER, STRLIT}");
+    expect(secondConsoleRecordRes).toEqual("> ERROR: mismatched input ')' expecting {'memory', NUMBER, FLOAT, CHARACTER, STRLIT}");
     expect(memoryCell0Res).toEqual('');
   }, 35000);
 });

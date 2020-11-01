@@ -42,7 +42,6 @@
     }
 }
 
-
 .login-input {
     margin-top: 15%;
     margin-bottom: 10%;
@@ -61,17 +60,7 @@
     /* also need animation and -moz-animation */
     -webkit-animation: shake .5s linear;
     -moz-animation: shake .5s linear;
-    margin-top: 15%;
-    margin-bottom: 10%;
-    color: grey;
-    width: 100%;
-    font-size: 24px;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    text-align: center;
     border-bottom: solid 1px red;
-    font-family: inherit
 }
 
 .login-btn {

@@ -6,7 +6,7 @@ import DebugControl from './DebugControl';
 
 const Console = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const executeStart = (inputValue) => {
     // Create a deep copy of default display with some updated values
@@ -45,25 +45,43 @@ const Console = () => {
   const executeWriteToMemory = (inputValue) => {
     // Create a deep copy of display
     const staticDisplay = DisplayContext.createCustomClone(display);
+    const errorReporter = new ErrorReporter(staticDisplay);
 
     // Save recent command to console history
     staticDisplay.consoleHistory.push(inputValue);
     staticDisplay.reading = false;
 
-    if (staticDisplay.memory[staticDisplay.selected].content.length === 0) {
-    // Get the keys of special memory cells
+    const pos = staticDisplay.memory[staticDisplay.selected].key;
+    const numOfSpecialKeys = staticDisplay.specialKeys.length;
+    const numUsableCells = staticDisplay.memorySize - numOfSpecialKeys;
+    const stringSize = staticDisplay.dataTypeSize.string;
+    const availableLength = numUsableCells * stringSize - pos * stringSize;
+
+    // Check if the memory has enough space to accomodate the input
+    if (inputValue.length > availableLength) {
+      errorReporter.generalError('Out of memory');
+    } else if (staticDisplay.memory[staticDisplay.selected].content.length !== 0) {
+      errorReporter.generalError('Memory cell not empty');
+    } else {
+      // Get the keys of special memory cells
       const usbMemoryKey = staticDisplay.specialKeys.find((element) => element.specialContent === 'usb').key;
       if (staticDisplay.selected === usbMemoryKey) {
         USBToggle();
       } else {
-        staticDisplay.memory[staticDisplay.selected].content = inputRef.current.value;
-        staticDisplay.memory[staticDisplay.selected].type = 'string';
+        const base = Math.floor(inputValue.length / stringSize);
+
+        // Ensure one memory cell only contains the defined number of letter
+        for (let i = 0; i < base + 1; i++) {
+          staticDisplay.memory[pos + i * 1].content = inputValue.substr(i * stringSize, stringSize);
+          staticDisplay.memory[pos + i * 1].type = 'string';
+          if (i > 0) {
+            staticDisplay.selected += 1;
+          }
+        }
       }
-      staticDisplay.reading = false;
+
+      // Continue execute the remaining commands
       processInstrs(staticDisplay);
-    } else {
-      const errorReporter = new ErrorReporter(staticDisplay);
-      errorReporter.generalError('Memory cell not empty');
     }
 
     // Render new display information
@@ -82,19 +100,39 @@ const Console = () => {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
         executeClear(inputValue);
+      } else if (inputValue === '') {
+        setDisplay((prevDisplay) => ({
+          ...prevDisplay,
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+          ],
+        }));
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
-          consoleHistory: [...prevDisplay.consoleHistory, inputValue],
+          consoleHistory: [
+            ...prevDisplay.consoleHistory,
+            inputValue,
+            `ERROR: "${inputValue}" is not recognized as a command.`,
+          ],
         }));
       }
       inputRef.current.value = '';
     }
   };
 
-  const consoleHistoryList = display.consoleHistory.map((record) => (
-    <div>{`> ${record}`}</div>
-  ));
+  const consoleHistoryList = display.consoleHistory.map((record) => {
+    if (record.substring(0, 5) === 'ERROR') {
+      return (
+        <div>
+          {'> '}
+          <span style={{ color: 'red' }}>{record}</span>
+        </div>
+      );
+    }
+    return <div>{`> ${record}`}</div>;
+  });
 
   return (
     <div id="console-wrapper">
@@ -105,15 +143,15 @@ const Console = () => {
           color: `${display.consoleStyle.txtColor}`,
           fontSize: `${display.consoleStyle.txtSize}`,
           textAlign: `${display.consoleStyle.txtAlign}`,
-          fontWeight: `${display.consoleStyle.bold}`,
-          fontStyle: `${display.consoleStyle.italic}`,
-          textDecorationLine: `${display.consoleStyle.underline}`,
+          fontWeight: `${display.consoleStyle.fontWeight}`,
+          fontStyle: `${display.consoleStyle.fontStyle}`,
+          textDecorationLine: `${display.consoleStyle.textDecorationLine}`,
         }}
         className="code highlightable-input"
       >
         {consoleHistoryList}
         <div className="hflex">
-          <span>>&nbsp;</span>
+          <span>{'> '}</span>
           <textarea
             id="console-input"
             ref={inputRef}

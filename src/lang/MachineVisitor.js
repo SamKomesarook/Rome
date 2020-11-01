@@ -60,4 +60,5 @@ class MVisitor extends MachineVisitor {
     }
   }
 }
-export { MVisitor };
+
+export default MVisitor;

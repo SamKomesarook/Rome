@@ -122,7 +122,7 @@ const Help = ({ isActive }) => {
     : ' hidden';
 
   const optionList = DATA.map((item) => (
-    <option value={item.keyword}>{item.keyword}</option>
+    <option value={item.keyword} key={item.keyword}>{item.keyword}</option>
   ));
 
   return (

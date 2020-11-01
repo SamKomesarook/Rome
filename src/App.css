@@ -61,14 +61,16 @@ Ref: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
     -o-transition: all 0.30s ease-in-out;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 3px solid var(--border-line-editable);
-    background-color: var(--bg-editable);
+    border: 3px solid var(--border-line);
+    border-radius: 7px;
+    /* background-color: var(--bg-secondary); */
+    background-color: var(--bg-editable-pane);
 }
 
-.highlightable-input:focus-within {
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    padding: 3px 0px 3px 3px;
-    margin: 5px 1px 3px 0px;
+.highlightable-input:focus-within, .highlightable-input:focus {
+    border: 3px solid #88c0d0;
+    border-radius: 7px;
+    box-shadow: 0 0 4px #aac3ca;
 }
 
 input, textarea {
@@ -155,23 +157,28 @@ select.control > option {
 
 /** BUTTON **/
 
-button {
+button, div[role=button] {
     border: none;
     text-align: center;
     font-family: inherit;
     font-size: inherit;
     letter-spacing: 0.7px;
     outline: none;
+    cursor: pointer;
 }
 
-button:hover:enabled, div[role=button]:hover {
+button:focus {
+    border: 1px dotted white;
+}
+
+button:hover:enabled {
     cursor: pointer;
     filter: brightness(90%);
 }
 
 button:disabled {
     cursor: default;
-    filter: brightness(125%);
+    filter: brightness(40%);
 }
 
 .std-btn {

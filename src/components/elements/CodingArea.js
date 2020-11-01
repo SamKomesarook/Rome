@@ -16,7 +16,7 @@ const CodingArea = () => {
   }
 
   return (
-    <div id="coding-area-wrapper" className="code">
+    <div id="coding-area-wrapper" className="code highlightable-input">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
@@ -38,7 +38,7 @@ const CodingArea = () => {
         loop
         showCursor={false}
       >
-        <textarea id="coding-area" className="highlightable-input" onChange={handleChange.bind(this)} spellCheck={false} />
+        <textarea id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
       </Typed>
     </div>
   );

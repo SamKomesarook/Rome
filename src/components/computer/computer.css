@@ -16,6 +16,7 @@
     background-color: var(--bg-secondary);
     padding: 0.5rem;
     display: grid;
+    align-content: center;
 }
 
 .memory-cell:first-child {
@@ -65,15 +66,14 @@
     padding: 0.2rem;
     height: 3.5rem;
     border-radius: 10px;
-    /* border: 3px solid black; */
-    box-shadow: 0 0 2.5px #071219;
+    box-shadow: 0 0 2.5px var(--dark-shadow);
     background-color: var(--bg-secondary);
     color: #ababab;
 }
 
 .app-active {
-    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-    background-size: 400% 400%;
+    background: linear-gradient(-45deg, #ffd600, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 500% 500%;
     position: relative;
     animation: change 10s ease-in-out infinite;
     padding: 0.2rem;
@@ -105,7 +105,6 @@
 #console {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
     color: white;
     margin: 0;
     padding: 1rem;
@@ -114,6 +113,10 @@
     flex-grow: 1;
     position: relative;
     z-index: 1;
+}
+
+#console:focus-within {
+    border-top: 3px solid #81a1c1;
 }
 
 #console > div {
@@ -159,17 +162,20 @@
     position: absolute;
     top: -2rem;
     display: flex;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-editable-pane);
+    align-items: flex-start;
     height: 3rem;
     border-radius: 5px;
 }
 
-#debug-control div[role="button"] {
-    padding: 0.2rem 0.5rem;
+#debug-control button {
+    padding: 0.2rem 0.3rem;
+    background-color: transparent;
 }
 
 #debug-control svg {
     height: 1.5rem;
+    color: var(--bg-contrast-primary);
 }
 
 /** MEDIA QUERIES **/

@@ -1,7 +1,7 @@
 import { TerminalNodeImpl } from 'antlr4/tree/Tree';
 import antlr4 from 'antlr4';
-import { RVisitor } from './RomeVisitor';
-import { MVisitor } from './MachineVisitor';
+import RVisitor from './RomeVisitor';
+import MVisitor from './MachineVisitor';
 import { RomeLexer } from './grammar/Rome/RomeLexer';
 import { RomeParser, KreadContext } from './grammar/Rome/RomeParser';
 import { MachineLexer } from './grammar/Machine/MachineLexer';
@@ -14,13 +14,13 @@ class ErrorReporter extends antlr4.error.ErrorListener {
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-    this.display.consoleHistory.push(msg);
+    this.display.consoleHistory.push(`ERROR: ${msg}`);
     this.display.errors = true;
     this.display.running = false;
   }
 
   generalError(msg) {
-    this.display.consoleHistory.push(msg);
+    this.display.consoleHistory.push(`ERROR: ${msg}`);
     this.display.errors = true;
     this.display.running = false;
   }
