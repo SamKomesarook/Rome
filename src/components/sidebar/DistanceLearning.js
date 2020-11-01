@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import DistanceLearningContent from './DistanceLearningContent';
@@ -31,7 +32,7 @@ const DistanceLearning = ({ isActive }) => {
     { id: 'toddler', name: 'Toddler' },
     { id: 'primary', name: 'Primary' },
     { id: 'kindergarten', name: 'Kindergarten' },
-    { id: 'junior', name: 'Junior' },
+    { id: 'elementary', name: 'Elementary' },
   ];
 
   // Week options for dropdown field
