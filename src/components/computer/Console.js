@@ -1,5 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
-import Cookies from 'js-cookie';
+import React, { useContext, useRef } from 'react';
 import { DisplayContext } from '../../state/DisplayState';
 import { processInstrs, compile, ErrorReporter } from '../../lang/Common';
 import { USBToggle } from './Peripherals';
@@ -41,17 +40,6 @@ const Console = () => {
       ...prevDisplay,
       consoleHistory: [],
     }));
-  };
-
-  const executeSave = (inputValue) => {
-    const staticDisplay = DisplayContext.createCustomClone({
-      ...DisplayContext.DEFAULT(),
-      text: display.text,
-    });
-
-    // Render new display information
-    setDisplay(DisplayContext.createCustomClone(staticDisplay));
-    Cookies.set('save', staticDisplay.text, { expires: 5 });
   };
 
   const executeWriteToMemory = (inputValue) => {
@@ -112,8 +100,6 @@ const Console = () => {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
         executeClear(inputValue);
-      } else if (inputValue === 'save') {
-        executeSave(inputValue);
       } else {
         setDisplay((prevDisplay) => ({
           ...prevDisplay,
