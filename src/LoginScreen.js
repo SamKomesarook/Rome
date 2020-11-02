@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import bcrypt from 'bcryptjs';
 import Cookies from 'js-cookie';
 import App from './App';
@@ -6,73 +6,60 @@ import './LoginScreen.css';
 
 const data = require('./hash/hash.json');
 
-// read from json
+// Read from json
 const hashValue = data.find((hash) => hash.id === 1);
 
-function LoginScreen() {
-  // password
-  const [password, setPassword] = useState('');
-  const setInput = (e) => setPassword(e.target.value);
+const LoginScreen = () => {
+  const passwordRef = useRef();
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isInvalidInput, setInvalidInput] = useState(false);
 
-  // login button
-  // set the state to false
-  const [log, setLog] = React.useState(false);
-  const [popUp, setPopUp] = React.useState(false);
-  // read from cookie
-  const readCookie = () => {
-    const user = Cookies.get('user');
-    if (user) {
-      setLog(true);
+  const handleLogin = () => {
+    setInvalidInput(false);
+    const check = bcrypt.compareSync(passwordRef.current.value, hashValue.value);
+    if (check) {
+      // Set cookie with 1 day expiry
+      Cookies.set('user', hashValue.value, { expires: 1 });
+      setLoggedIn(true);
+    } else {
+      setInvalidInput(true);
     }
   };
 
   React.useEffect(() => {
-    readCookie();
+    // Read from cookie
+    if (Cookies.get('user')) {
+      setLoggedIn(true);
+    }
   }, []);
 
-  const login = () => {
-    // const hash = fs.readFileSync('hash.txt');
-    const check = bcrypt.compareSync(password, hashValue.value);
-    if (check) {
-      setLog(true);
-      // set cookie with 1 day expiry
-      Cookies.set('user', hashValue.value, { expires: 1 });
-    } else {
-      setPopUp(true);
-    }
-  };
-
-  if (log) {
+  if (isLoggedIn) {
     return (
       <App />
     );
   }
 
-  const isMain = 'login-screen';
-
   return (
     <div className="login-container">
-      <div className={isMain}>
+      <div className="login-screen">
         Welcome to Rome.
         <input
           name="password-field"
           type="password"
-          className={!popUp ? 'login-input' : 'login-input-invalid'}
-          value={password}
-          onChange={setInput}
+          className={`login-input ${isInvalidInput ? 'login-input-invalid' : ''}`}
           placeholder="password"
+          ref={passwordRef}
         />
         <button
           type="submit"
-          onClick={login}
+          onClick={handleLogin}
           className="login-btn"
         >
           Go
         </button>
       </div>
-
     </div>
   );
-}
+};
 
 export default LoginScreen;

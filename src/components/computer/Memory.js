@@ -12,13 +12,13 @@ const Memory = () => {
   const memoryCellList = (memorySize) => {
     const tempMemoryCellList = [];
     for (let i = 0; i < memorySize; i++) {
-      tempMemoryCellList.push(<MemoryCell id={i} />);
+      tempMemoryCellList.push(<MemoryCell id={i} key={i} />);
     }
     return tempMemoryCellList;
   };
 
   return (
-    <div className={`memory-section noselect ${isElementHiddenClass}`}>
+    <div className={`memory-section noselect code ${isElementHiddenClass}`}>
       {memoryCellList(display.memorySize)}
     </div>
   );

@@ -75,7 +75,7 @@ describe('test rand()', () => {
     const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     expect(memoryCell0Res).toEqual('');
-    expect(secondConsoleRecordRes).toEqual('> Please input a positive number for random number function');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Please input a positive number for random number function');
   }, 35000);
 
   test(testRandString, async () => {
@@ -93,7 +93,7 @@ describe('test rand()', () => {
     const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     expect(memoryCell0Res).toEqual('');
-    expect(secondConsoleRecordRes).toEqual("> mismatched input 'abc' expecting {'memory', NUMBER}");
+    expect(secondConsoleRecordRes).toEqual("> ERROR: mismatched input 'abc' expecting {'memory', NUMBER}");
   }, 35000);
 
   test(testRandWithoutImport, async () => {
@@ -111,6 +111,6 @@ describe('test rand()', () => {
     const secondConsoleRecordRes = await secondConsoleRecord.getText();
 
     expect(memoryCell0Res).toEqual('');
-    expect(secondConsoleRecordRes).toEqual('> Require import(math) for random number function');
+    expect(secondConsoleRecordRes).toEqual('> ERROR: Require import(math) for random number function');
   }, 35000);
 });
