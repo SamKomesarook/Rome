@@ -28,7 +28,8 @@ const CodingArea = () => {
   return (
     <div ref={codingAreaWrapperRef} id="coding-area-wrapper" className="code">
       <Typed
-        strings={['start\nmove(next)\nmove(last)\nend',
+        strings={[
+          'start\nmove(next)\nmove(last)\nend',
           'start\nset(string)\nwrite("hello!")\nend',
           'start\nset(integer)\nwrite(4)\nend',
           'start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend',
@@ -39,7 +40,8 @@ const CodingArea = () => {
           'start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("is not less than 3!")\n}\nend',
           'start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("is greater than 3!")\n}\nend',
           'start\nimport(IO)\nkeyboardRead\nend',
-          'start\nimport(IO)\nconsoleWrite("hello!")\nend']}
+          'start\nimport(IO)\nconsoleWrite("hello!")\nend'
+        ]}
         typeSpeed={40}
         backSpeed={30}
         attr="placeholder"
