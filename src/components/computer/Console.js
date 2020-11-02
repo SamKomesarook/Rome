@@ -51,11 +51,11 @@ const Console = () => {
     staticDisplay.consoleHistory.push(inputValue);
     staticDisplay.reading = false;
 
-    const pos = staticDisplay.memory[staticDisplay.selected].key;
+    const initPos = staticDisplay.memory[staticDisplay.selected].key;
     const numOfSpecialKeys = staticDisplay.specialKeys.length;
     const numUsableCells = staticDisplay.memorySize - numOfSpecialKeys;
     const stringSize = staticDisplay.dataTypeSize.string;
-    const availableLength = numUsableCells * stringSize - pos * stringSize;
+    const availableLength = numUsableCells * stringSize - initPos * stringSize;
 
     // Check if the memory has enough space to accomodate the input
     if (inputValue.length > availableLength) {
@@ -68,13 +68,14 @@ const Console = () => {
       if (staticDisplay.selected === usbMemoryKey) {
         USBToggle();
       } else {
-        const base = Math.floor(inputValue.length / stringSize);
+        const requiredCells = inputValue.length / stringSize;
 
         // Ensure one memory cell only contains the defined number of letter
-        for (let i = 0; i < base + 1; i++) {
-          staticDisplay.memory[pos + i * 1].content = inputValue.substr(i * stringSize, stringSize);
-          staticDisplay.memory[pos + i * 1].type = 'string';
-          if (i > 0) {
+        for (let i = 0; i < requiredCells + 1; i++) {
+          const curPos = initPos + i;
+          staticDisplay.memory[curPos].content = inputValue.substr(i * stringSize, stringSize);
+          staticDisplay.memory[curPos].type = 'string';
+          if (i + 1 < requiredCells) {
             staticDisplay.selected += 1;
           }
         }
