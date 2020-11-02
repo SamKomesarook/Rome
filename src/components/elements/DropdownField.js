@@ -5,7 +5,8 @@ const DropdownField = ({
   id, label, options, handleChange,
 }) => {
   const optionTags = options.map((option) => (
-    <option value={option.id}>{option.name}</option>
+    // eslint-disable-next-line react/no-array-index-key
+    <option value={option.id} key={option.id}>{option.name}</option>
   ));
 
   return (

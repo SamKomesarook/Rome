@@ -31,13 +31,15 @@ html, body {
     width: 100%;
     --bg-primary: #384047;
     --bg-secondary: #1E272E;
-    --border-line: #9583FF;
-    --border-line-light: #4d5864;
+    --bg-editable-pane: #222;
+    --border-line: #5e81ac;
+    /* --border-line-light: #4d5864; */
     --border-line-dark: #3c3c3c;
     --bg-contrast-primary: #ececec;
     --bg-contrast-secondary: #b6b6b6;
     --border-line-editable: #81b1ff;
     --bg-editable: #262d33;
+    --dark-shadow: #071219;
     --grey: #ccc;
     --blue: #2196F3;
     --baby-blue: #4873FF;
