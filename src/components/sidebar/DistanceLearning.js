@@ -13,7 +13,7 @@ const DistanceLearning = ({ isActive }) => {
       id: 'dl-2', week: 'w1', level: 'kindergarten', title: 'Sidebar', link: 'https://youtu.be/2YlKh2BORyc',
     },
     {
-      id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/Stop + Comment', link: 'https://youtu.be/_HxupX7lKKU',
+      id: 'dl-3', week: 'w1', level: 'kindergarten', title: 'Start/End + Comment', link: 'https://youtu.be/_HxupX7lKKU',
     },
     {
       id: 'dl-4', week: 'w1', level: 'kindergarten', title: 'History + IO Area', link: 'https://youtu.be/MK1MASGa0cM',
@@ -23,6 +23,12 @@ const DistanceLearning = ({ isActive }) => {
     },
     {
       id: 'dl-6', week: 'w1', level: 'kindergarten', title: 'Program: Hello World', link: 'https://youtu.be/AbIzSvyvX2s',
+    },
+    {
+      id: 'dl-7', week: 'w1', level: 'kindergarten', title: 'Program: Personalized Greeting', link: 'https://youtu.be/jYCoijtANVg',
+    },
+    {
+      id: 'dl-8', week: 'w1', level: 'kindergarten', title: 'Style', link: 'https://youtu.be/M4SpLNmZtgQ',
     },
   ];
 

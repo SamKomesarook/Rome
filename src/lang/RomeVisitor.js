@@ -175,15 +175,16 @@ class RVisitor extends RomeVisitor {
           this.staticDisplay.memory[this.staticDisplay.selected].content = arg.slice(1, -1);
           return;
         case 'string': {
-          const strVal = arg.slice(1, -1);
-          const pos = this.staticDisplay.memory[this.staticDisplay.selected].key;
-          const base = Math.floor(strVal.length / dataTypeSize.string);
+          const inputValue = arg.slice(1, -1);
+          const initPos = this.staticDisplay.memory[this.staticDisplay.selected].key;
+          const requiredCells = inputValue.length / dataTypeSize.string;
 
           // Ensure one memory cell only contains the defined number of letter
-          for (let i = 0; i < base + 1; i++) {
-            this.staticDisplay.memory[pos + i * 1].content = strVal.substr(i * dataTypeSize.string, dataTypeSize.string);
-            this.staticDisplay.memory[pos + i * 1].type = 'string';
-            if (i > 0) {
+          for (let i = 0; i < requiredCells + 1; i++) {
+            const curPos = initPos + i;
+            this.staticDisplay.memory[curPos].content = inputValue.substr(i * dataTypeSize.string, dataTypeSize.string);
+            this.staticDisplay.memory[curPos].type = 'string';
+            if (i + 1 < requiredCells) {
               this.staticDisplay.selected += 1;
             }
           }
