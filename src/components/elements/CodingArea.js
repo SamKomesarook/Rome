@@ -22,7 +22,9 @@ const CodingArea = () => {
     // Because of Typed library, CodingAreaRef cannot be assigned directly, thus, this workaround
     const codingArea = codingAreaWrapperRef.current.children[0].children[0];
     const savedCode = Cookies.get('history');
-    codingArea.value = savedCode;
+    if (savedCode) { // Only load when there is saved code
+      codingArea.value = savedCode;
+    }
   }, [codingAreaWrapperRef]);
 
   return (
