@@ -22,6 +22,10 @@ const CodingArea = () => {
     const savedCode = Cookies.get('history');
     if (savedCode) { // Only load when there is saved code
       codingArea.value = savedCode;
+      setDisplay((prevDisplay) => ({
+        ...prevDisplay,
+        text: savedCode,
+      }));
     }
   }, []);
 
