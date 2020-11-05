@@ -96,7 +96,18 @@ const Console = () => {
       if (display.reading) {
         executeWriteToMemory(inputValue);
       } else if (inputValue === 'start') {
-        executeStart(inputValue);
+        if (display.running) {
+          setDisplay((prevDisplay) => ({
+            ...prevDisplay,
+            consoleHistory: [
+              ...prevDisplay.consoleHistory,
+              inputValue,
+              'ERROR: program still running',
+            ],
+          }));
+        } else {
+          executeStart(inputValue);
+        }
       } else if (inputValue === 'reset') {
         executeReset(inputValue);
       } else if (inputValue === 'consoleClear') {
