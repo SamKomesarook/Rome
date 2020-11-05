@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import React, { useContext, useRef, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { DisplayContext } from '../../state/DisplayState';
@@ -28,7 +27,7 @@ const CodingArea = () => {
   }, [codingAreaWrapperRef]);
 
   return (
-    <div id="coding-area-wrapper" className="code highlightable-input">
+    <div ref={codingAreaWrapperRef} id="coding-area-wrapper" className="code highlightable-input">
       <textarea id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
     </div>
   );
