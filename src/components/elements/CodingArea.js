@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Typed from 'react-typed';
 import { DisplayContext } from '../../state/DisplayState';
 
 const CodingArea = () => {
