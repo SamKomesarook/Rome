@@ -4,7 +4,7 @@ import { DisplayContext } from '../../state/DisplayState';
 
 const CodingArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
-  const codingAreaWrapperRef = useRef(null);
+  const codingAreaRef = useRef(null);
 
   function handleChange(event) {
     event.preventDefault();
@@ -18,17 +18,16 @@ const CodingArea = () => {
   }
 
   useEffect(() => {
-    // Because of Typed library, CodingAreaRef cannot be assigned directly, thus, this workaround
-    const codingArea = codingAreaWrapperRef.current.children[0].children[0];
+    const codingArea = codingAreaRef.current;
     const savedCode = Cookies.get('history');
     if (savedCode) { // Only load when there is saved code
       codingArea.value = savedCode;
     }
-  }, [codingAreaWrapperRef]);
+  }, []);
 
   return (
-    <div ref={codingAreaWrapperRef} id="coding-area-wrapper" className="code highlightable-input">
-      <textarea id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
+    <div id="coding-area-wrapper" className="code highlightable-input">
+      <textarea ref={codingAreaRef} id="coding-area" onChange={handleChange.bind(this)} spellCheck={false} />
     </div>
   );
 };
