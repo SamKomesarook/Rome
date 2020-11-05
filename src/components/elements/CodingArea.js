@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import Typed from 'react-typed';
+import Cookies from 'js-cookie';
 import { DisplayContext } from '../../state/DisplayState';
 
 const CodingArea = () => {
   const [display, setDisplay] = useContext(DisplayContext);
+  const codingAreaWrapperRef = useRef(null);
 
   function handleChange(event) {
     event.preventDefault();
@@ -13,10 +15,20 @@ const CodingArea = () => {
       ...prevDisplay,
       text: value,
     }));
+    Cookies.set('history', value, { expires: 3 });
   }
 
+  useEffect(() => {
+    // Because of Typed library, CodingAreaRef cannot be assigned directly, thus, this workaround
+    const codingArea = codingAreaWrapperRef.current.children[0].children[0];
+    const savedCode = Cookies.get('history');
+    if (savedCode) { // Only load when there is saved code
+      codingArea.value = savedCode;
+    }
+  }, [codingAreaWrapperRef]);
+
   return (
-    <div id="coding-area-wrapper" className="code highlightable-input">
+    <div ref={codingAreaWrapperRef} id="coding-area-wrapper" className="code highlightable-input">
       <Typed
         strings={[
           'start\nmove(next)\nmove(last)\nend',
@@ -30,7 +42,7 @@ const CodingArea = () => {
           'start\nset(integer)\nwrite(3)\nif(not less 3){\nmove(next)\nset(string)\nwrite("is not less than 3!")\n}\nend',
           'start\nset(integer)\nwrite(3)\nif(is greater 3){\nmove(next)\nset(string)\nwrite("is greater than 3!")\n}\nend',
           'start\nimport(IO)\nkeyboardRead\nend',
-          'start\nimport(IO)\nconsoleWrite("hello!")\nend',
+          'start\nimport(IO)\nconsoleWrite("hello!")\nend'
         ]}
         typeSpeed={40}
         backSpeed={30}
