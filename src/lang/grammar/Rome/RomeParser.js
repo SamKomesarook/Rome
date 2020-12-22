@@ -1,4 +1,4 @@
-// Generated from Rome.g4 by ANTLR 4.8
+// Generated from Rome.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 var RomeListener = require('./RomeListener').RomeListener;
@@ -137,7 +137,7 @@ var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "'('", "')'", "'{'", "'}'", "'start'", "'end'", 
                      "'set'", "'integer'", "'long'", "'character'", "'string'", 
-                     "'float'", "'free'", "'memory'", "'keyboardRead'", 
+                     "'float'", "'clear'", "'memory'", "'keyboardRead'", 
                      "'consoleWrite'", "'write'", "'name'", "'import'", 
                      "'IO'", "'math'", "'if'", "'is'", "'not'", "'equal'", 
                      "'less'", "'greater'", "'and'", "'or'", "'rand'", "'move'", 
@@ -2429,5 +2429,3 @@ RomeParser.prototype.expression = function() {
 
 
 exports.RomeParser = RomeParser;
-exports.KreadContext = KreadContext;
-exports.NumContext = NumContext;
