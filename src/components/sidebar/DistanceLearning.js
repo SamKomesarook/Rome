@@ -30,6 +30,15 @@ const DistanceLearning = ({ isActive }) => {
     {
       id: 'dl-8', week: 'w1', level: 'kindergarten', title: 'Style', link: 'https://youtu.be/M4SpLNmZtgQ',
     },
+    {
+      id: 'dl-9', week: 'w2', level: 'elementary', title: 'Computer Memory', link: 'https://youtu.be/w4t6F-lsuX4',
+    },
+    {
+      id: 'dl-10', week: 'w2', level: 'elementary', title: 'Set + Types', link: 'https://youtu.be/wUbTFbgooR0',
+    },
+    {
+      id: 'dl-11', week: 'w2', level: 'elementary', title: 'Write + Clear', link: 'https://youtu.be/3JwbKyFVu_k',
+    },
   ];
 
   // Level options for dropdown field
@@ -46,8 +55,6 @@ const DistanceLearning = ({ isActive }) => {
     { id: 'all', name: 'All' },
     { id: 'w1', name: '1' },
     { id: 'w2', name: '2' },
-    { id: 'w3', name: '3' },
-    { id: 'w4', name: '4' },
   ];
 
   const [searchInput, setSearchInput] = useState('');
