@@ -16,7 +16,7 @@ CHAR: 'character';
 STR: 'string';
 FLO: 'float';
 
-FREE: 'free';
+FREE: 'clear';
 MEM: 'memory';
 KREAD: 'keyboardRead';
 SWRITE: 'consoleWrite';

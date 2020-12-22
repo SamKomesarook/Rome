@@ -63,9 +63,9 @@ const Help = ({ isActive }) => {
       }],
       example: ['start\nset(string)\nwrite("hello")\nset(integer)\nwrite(4)\nend'],
     }, {
-      keyword: 'free',
+      keyword: 'clear',
       content: 'Remove content saved in selected memory cell.',
-      example: ['start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend'],
+      example: ['start\nset(string)\nwrite("hello")\clear\nwrite("world!")\nend'],
     }, {
       keyword: 'import',
       content: 'Import a library within the arguments.',
@@ -95,7 +95,7 @@ const Help = ({ isActive }) => {
         name: 'style',
         desc: 'Style the console window.\nunderline - Make the text underlined in console window.\nitalic - Make the text italisized in console window.\nbold - Make the text bold in console window.\ntext_align : left, center, or right - Set the alignment of the text in console window.\ntext_size : xx-large, x-large, larger, large, medium, small, smaller, x-small or xx-small - Set the size of the text in console window.\ntext_color : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Set the color of the text in console window.\npaint : black, white, blue, brown, gray, grey, green, orange, pink, purple, red, yellow - Paint the background color of the console window.',
       }],
-    },{
+    }, {
       keyword: 'rand',
       content: 'Writes a random number from 0-n(excluded) into the currently selected memory cell.',
       argument: [{
@@ -103,7 +103,7 @@ const Help = ({ isActive }) => {
         desc: 'The number range for selecting random number',
       }],
       example: ['start\n#Import math package for random number function\nimport(math)\nrand(10)\nend'],
-    }, 
+    },
   ];
 
   const [keyword, setKeyword] = useState('start');

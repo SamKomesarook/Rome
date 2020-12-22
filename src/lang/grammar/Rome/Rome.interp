@@ -12,7 +12,7 @@ null
 'character'
 'string'
 'float'
-'free'
+'clear'
 'memory'
 'keyboardRead'
 'consoleWrite'
