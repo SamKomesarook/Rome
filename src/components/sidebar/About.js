@@ -15,7 +15,7 @@ const About = ({ isActive }) => {
       <div id="about-content">
         <div id="about-title">
           <span>
-            <span id="about-company">Rome-Education</span>
+            <span id="about-company">Rome Education</span>
             &nbsp;+&nbsp;
             <span id="about-company">Julia Brown Schools</span>
             &nbsp;+&nbsp;
