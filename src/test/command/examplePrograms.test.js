@@ -5,7 +5,7 @@ const testMoveNext = 'test the sample code: start\nmove(next)\nmove(last)\nend';
 const testMoveLast = 'test the sample code: start\nmove(next)\nmove(last)\nend';
 const testSetString = 'test the sample code: start\nset(string)\nwrite("hello!")\nend';
 const testSetInteger = 'test the sample code: start\nset(integer)\nwrite(4)\nend';
-const testFree = 'test the sample code: start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend';
+const testFree = 'test the sample code: start\nset(string)\nwrite("hello")\nclear\nwrite("world!")\nend';
 const testLoop = 'test the sample code: start\nloop(3){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
 const testMemoryAccess = 'test the sample code: start\nset(integer)\nwrite(3)\nmove(next)\nloop(memory(1)){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
 const testNameAndMemoryAccess = 'test the sample code: start\nset(integer)\nwrite(3)\nname("first")\nmove(next)\nloop(memory("first")){\nset(string)\nwrite("data")\nmove(next)\n}\nend';
@@ -127,7 +127,7 @@ describe('test example programs', () => {
 
   test(testFree, async () => {
     const codingArea = await TestConfig.getElementById(driver, 'coding-area');
-    await codingArea.sendKeys('start\nset(string)\nwrite("hello")\nfree\nwrite("world!")\nend');
+    await codingArea.sendKeys('start\nset(string)\nwrite("hello")\nclear\nwrite("world!")\nend');
 
     const consoleInput = await TestConfig.getElementById(driver, 'console-input');
     await consoleInput.sendKeys('start');

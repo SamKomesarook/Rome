@@ -19,7 +19,7 @@ const Feedback = ({ isActive }) => {
         setStatus('success');
       }, (error) => {
         setStatus('fail');
-        window.location.href = `mailto:rome-education@protonmail.com?subject=Feedback for Rome&body=User's name: ${nameRef.current.value}%0d%0aFeedback:%0d%0a${contentRef.current.value}`;
+        window.location.href = `mailto:sam@aecomposite.com?subject=Rome Feedback&body=User's name: ${nameRef.current.value}%0d%0aFeedback:%0d%0a${contentRef.current.value}`;
       });
   };
 
